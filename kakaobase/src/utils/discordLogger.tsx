@@ -23,7 +23,7 @@ export const sendDiscordLog = async (
   filenameHint?: string
 ) => {
   if (!DISCORD_LOG_ENABLED) {
-    console.log(`[DISCORD LOGGER] Disabled via .env`);
+    console.log(`[DISCORD LOGGER] Disabled via local`);
     return;
   }
 
@@ -32,7 +32,7 @@ export const sendDiscordLog = async (
   const filename = `${type.toLowerCase()}-${filenameHint || uuid}.txt`;
   const filePath = path.join(TEMP_LOG_DIR, filename);
 
-  const fullLog = `[${timestamp}] (${type})\nEnvironment: ${process.env.NODE_ENV}\n\n${content}`;
+  const fullLog = `[${timestamp}] (${type})\nEnvironment: prod\n\n${content}`;
 
   try {
     await fs.mkdir(TEMP_LOG_DIR, { recursive: true });
