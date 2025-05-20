@@ -4,9 +4,6 @@ import path from 'path';
 import { randomUUID } from 'crypto';
 import FormData from 'form-data';
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config(); // .env 파일 로딩
 
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL!;
 const DISCORD_LOG_ENABLED = process.env.DISCORD_LOG_ENABLED === 'true';
