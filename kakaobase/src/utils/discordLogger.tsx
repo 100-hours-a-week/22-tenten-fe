@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { randomUUID } from 'crypto';
 import axios from 'axios';
+import FormData from 'form-data'
 
 const DISCORD_LOG_ENABLED = process.env.DISCORD_LOG_ENABLED === 'true';
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL!;
@@ -12,8 +13,7 @@ type LogType = 'BUILD' | 'API' | 'SSR' | 'CLIENT';
 export const sendDiscordLog = async (
   type: LogType,
   content: string,
-  filenameHint?: string
-) => {
+  filenameHint?: string) => {
   if (!DISCORD_LOG_ENABLED) return;
 
   const timestamp = new Date().toISOString();
@@ -30,16 +30,13 @@ export const sendDiscordLog = async (
     const fileBuffer = await fs.readFile(filePath);
 
     const formData = new FormData();
-    formData.append('file', new Blob([fileBuffer]), filename);
-    formData.append(
-      'payload_json',
-      JSON.stringify({
-        content: `🚨 **[${type}] 에러 발생 - ${timestamp}**`,
-      })
-    );
-
+    formData.append('file', fs.createReadStream(filePath)); 
+    formData.append('payload_json', JSON.stringify({
+      content: `🚨 **[${type}] 에러 발생 - ${timestamp}**`,
+    }));
+    
     await axios.post(DISCORD_WEBHOOK_URL, formData, {
-      headers: formData.getHeaders?.() || {},
+      headers: formData.getHeaders(),
       maxBodyLength: Infinity,
     });
 
