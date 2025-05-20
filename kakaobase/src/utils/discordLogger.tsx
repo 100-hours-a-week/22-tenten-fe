@@ -3,6 +3,7 @@ import path from 'path';
 import { randomUUID } from 'crypto';
 import axios from 'axios';
 
+const DISCORD_LOG_ENABLED = process.env.DISCORD_LOG_ENABLED === 'true';
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL!;
 const TEMP_LOG_DIR = path.resolve(process.cwd(), 'logs');
 
@@ -13,6 +14,8 @@ export const sendDiscordLog = async (
   content: string,
   filenameHint?: string
 ) => {
+  if (!DISCORD_LOG_ENABLED) return;
+
   const timestamp = new Date().toISOString();
   const uuid = randomUUID();
   const filename = `${type.toLowerCase()}-${filenameHint || uuid}.txt`;
