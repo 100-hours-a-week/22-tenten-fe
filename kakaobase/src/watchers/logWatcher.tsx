@@ -1,14 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import readline from 'readline';
 import { sendDiscordLog } from '../utils/discordLogger';
 
-const LOG_FILE_PATH = path.resolve(__dirname, '~/.pm2/logs/dev-release-fe-error.log');
-
+const LOG_FILE_PATH = path.join(os.homedir(), '.pm2/logs/dev-release-fe-error.log');
 let lastFileSize = 0;
 
-function watchLogFile() {
+async function watchLogFile() {
+  if (!fs.existsSync(LOG_FILE_PATH)) {
+    console.error(`❌ 로그 파일 없음: ${LOG_FILE_PATH}`);
+    return;
+  }
+
   console.log(`[WATCHING] ${LOG_FILE_PATH}`);
+
   fs.watchFile(LOG_FILE_PATH, { interval: 1000 }, async (curr, prev) => {
     if (curr.size <= lastFileSize) return;
 
@@ -18,7 +24,6 @@ function watchLogFile() {
     });
 
     const rl = readline.createInterface({ input: stream });
-
     let newLogs = '';
     for await (const line of rl) {
       newLogs += line + '\n';
@@ -26,11 +31,23 @@ function watchLogFile() {
 
     lastFileSize = curr.size;
 
-    if (newLogs.includes('Error') || newLogs.includes('Exception') || newLogs.includes('Unhandled')) {
-      console.log(`[ERROR DETECTED]\n${newLogs}`);
-      await sendDiscordLog('API', newLogs, 'pm2-error');
+    const lowerLogs = newLogs.toLowerCase();
+    if (
+      lowerLogs.includes('error') ||
+      lowerLogs.includes('exception') ||
+      lowerLogs.includes('unhandled')
+    ) {
+      console.log(`[ERROR DETECTED]`);
+      console.log(newLogs);
+
+      try {
+        await sendDiscordLog('API', newLogs, 'pm2-error');
+      } catch (e) {
+        console.error('❌ Discord 전송 실패 (logWatcher):', e);
+      }
     }
   });
 }
 
 watchLogFile();
+
