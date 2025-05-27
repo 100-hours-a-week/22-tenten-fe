@@ -38,7 +38,7 @@ export default function useLoginForm() {
 
     try {
       const response = await login(requestBody);
-      document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=strict; max-age=1800`; //30분
+      document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=lax; max-age=1800`; //30분
       localStorage.setItem('myCourse', response.data.class_name);
       localStorage.setItem('nickname', response.data.nickname);
 
@@ -55,6 +55,7 @@ export default function useLoginForm() {
       router.push('/');
     } catch (e: any) {
       const errorCode = e?.response?.data?.error;
+      console.log(e);
       if (errorCode === 'invalid_password') {
         setError('password', {
           type: 'manual',
