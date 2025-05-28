@@ -8,7 +8,8 @@ export default function useTokenCheck() {
     const accessToken = getClientCookie('accessToken');
     if (!accessToken) {
       try {
-        await refreshToken();
+        const response = await refreshToken();
+        document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=lax; max-age=1800`; //30분
       } catch (e: any) {
         console.log(e);
         if (
