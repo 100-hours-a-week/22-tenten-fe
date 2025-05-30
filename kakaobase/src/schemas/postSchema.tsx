@@ -11,9 +11,7 @@ export const postSchema = z
       .optional()
       .refine(
         (val) =>
-          !val ||
-          val.startsWith('https://www.youtube.com/') ||
-          val.startsWith('https://youtu.be/'),
+          !val || val.includes('youtube.com/') || val.includes('youtu.be/'),
         {
           message: '유튜브 링크 형식이 올바르지 않습니다.',
         }
