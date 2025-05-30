@@ -3,8 +3,6 @@ import api from './api';
 interface LoginRequest {
   email: string;
   password: string;
-  device_id: string;
-  user_agent: string;
 }
 
 interface LoginResponse {
@@ -21,10 +19,9 @@ export async function login(payload: LoginRequest): Promise<LoginResponse> {
   return response.data;
 }
 
-export async function refreshLogin() {
+export async function refreshToken() {
   try {
     const response = await api.post('auth/tokens/refresh');
-    document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=strict; max-age=3600`;
     return response.data;
   } catch (e: unknown) {
     if (e instanceof Error) throw e;

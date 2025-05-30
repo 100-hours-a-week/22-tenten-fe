@@ -1,4 +1,5 @@
 import postToS3 from '@/apis/imageS3';
+import { refreshToken } from '@/apis/login';
 import { postPost } from '@/apis/post';
 import { queryClient } from '@/app/providers';
 import { getClientCookie } from '@/lib/getClientCookie';
@@ -62,10 +63,12 @@ export const usePostEditorForm = () => {
       router.push(`/`);
     } catch (e: any) {
       if (e.response.data.error === 'unauthorized') {
-        router.push('/login');
-        alert('로그인이 필요합니다.');
+        refreshToken();
       } else {
-        console.log('게시글 업로드 실패:', e);
+        alert(
+          '게시글 업로드 실패 : 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.'
+        );
+        router.push('/');
       }
     } finally {
       setLoading(false);

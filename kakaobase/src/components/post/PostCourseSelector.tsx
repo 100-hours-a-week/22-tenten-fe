@@ -1,19 +1,16 @@
 'use client';
 
 import useCourseSelectHook from '@/hooks/post/useCourseSelectHook';
-import { getClientCookie } from '@/lib/getClientCookie';
-import { useRouter } from 'next/navigation';
+import useTokenCheck from '@/hooks/user/useTokenCheckHook';
 import { useEffect, useState } from 'react';
 
 export default function PostCourseSelector() {
   const { course, myCourseLabel, handleChange } = useCourseSelectHook();
   const [myCourse, setMyCourse] = useState<string | null>(null);
-  const router = useRouter();
+  const { checkUnauthorized } = useTokenCheck();
 
   useEffect(() => {
-    if (!getClientCookie('accessToken')) {
-      router.push('/login');
-    }
+    checkUnauthorized();
     if (typeof window !== 'undefined') {
       setMyCourse(localStorage.getItem('myCourse'));
     }
