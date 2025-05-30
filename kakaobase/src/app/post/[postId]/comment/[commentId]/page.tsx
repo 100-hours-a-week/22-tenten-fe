@@ -6,7 +6,7 @@ import CommentInput from '@/components/inputs/CommentInput';
 import ListRouter from '@/components/post/ListRouter';
 import PostCard from '@/components/post/PostCard';
 import PostList from '@/components/post/list/PostList';
-import usePostDetail from '@/hooks/post/usePostCardDetail';
+import usePostDetail from '@/hooks/post/usePostDetailHook';
 import { getClientCookie } from '@/lib/getClientCookie';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

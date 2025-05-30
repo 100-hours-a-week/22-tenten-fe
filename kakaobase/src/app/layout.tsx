@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { pretendard } from './fonts';
 import { Providers } from './providers';
 import Image from 'next/image';
 
@@ -19,9 +18,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`bg-animated-gradient sm:bg-animated-gradient ${pretendard.className}`}
-      >
+      <body className={`bg-animated-gradient sm:bg-animated-gradient`}>
         <Providers>
           <div className="flex w-screen">
             <div className="hidden lg:flex flex-col items-center justify-center w-[48%] active:animate-bounce">
