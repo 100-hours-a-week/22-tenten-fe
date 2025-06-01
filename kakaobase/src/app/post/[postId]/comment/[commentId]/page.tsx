@@ -5,17 +5,14 @@ import MiddleBar from '@/components/common/MiddleBar';
 import CommentInput from '@/components/inputs/CommentInput';
 import ListRouter from '@/components/post/ListRouter';
 import PostCard from '@/components/post/PostCard';
-import PostList from '@/components/post/list/PostList';
+import useTokenCheck from '@/hooks/user/useTokenCheckHook';
 import usePostDetail from '@/hooks/post/usePostDetailHook';
-import { getClientCookie } from '@/lib/getClientCookie';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Page({ params }: { params: { commentId: number } }) {
-  const router = useRouter();
+  const { checkUnauthorized } = useTokenCheck();
   useEffect(() => {
-    const accessToken = getClientCookie('accessToken');
-    if (!accessToken) router.push('/login');
+    checkUnauthorized();
   }, []);
 
   const id = Number(params.commentId);

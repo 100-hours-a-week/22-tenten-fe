@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import LoadingSmall from '../loading/LoadingSmall';
 
 interface SubmitButtonProps {
@@ -16,8 +15,6 @@ export default function SubmitButton({
   onClick,
   isLoading,
 }: SubmitButtonProps) {
-  const router = useRouter();
-
   return (
     <button type={type} disabled={disabled} onClick={onClick}>
       <div

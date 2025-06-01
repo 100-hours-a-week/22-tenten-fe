@@ -5,6 +5,7 @@ import { mapToPostEntity } from '@/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/apis/comment';
 import { PostEntity } from '@/stores/postType';
+import { refreshToken } from '@/apis/login';
 
 export default function usePostDetail({ id }: { id: number }) {
   const [post, setPost] = useState<PostEntity>();
@@ -31,7 +32,7 @@ export default function usePostDetail({ id }: { id: number }) {
     } catch (e: any) {
       setError(e as Error);
       if (e.response.data.error === 'unauthorized') {
-        router.push('/login');
+        refreshToken();
       } else {
         alert('문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
         router.push('/');
