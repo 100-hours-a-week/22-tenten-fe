@@ -1,13 +1,13 @@
 'use client';
-import { refreshToken } from '@/apis/login';
 import Header from '@/components/common/header/Header';
 import Loading from '@/components/common/loading/Loading';
 import MiddleBar from '@/components/common/MiddleBar';
 import CommentInput from '@/components/inputs/CommentInput';
 import ListRouter from '@/components/post/ListRouter';
 import PostCard from '@/components/post/PostCard';
-import usePostDetail from '@/hooks/post/usePostCardDetail';
+import usePostDetail from '@/hooks/post/usePostDetailHook';
 import useTokenCheck from '@/hooks/user/useTokenCheckHook';
+
 import { useEffect } from 'react';
 
 export default function Page({ params }: { params: { postId: number } }) {

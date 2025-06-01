@@ -52,7 +52,7 @@ export default function PostCard({ post }: { post: PostEntity }) {
                       {post.content}
                     </div>
                   )}
-              <div className="flex justify-center content-center w-full overflow-hidden rounded-lg">
+              <div className="flex w-full overflow-hidden rounded-lg">
                 {post.type === 'post' &&
                   'imageUrl' in post &&
                   post.imageUrl && (
@@ -64,7 +64,6 @@ export default function PostCard({ post }: { post: PostEntity }) {
                       height={0}
                       priority
                       sizes="100vw"
-                      unoptimized
                     />
                   )}
                 {post.type === 'post' &&
