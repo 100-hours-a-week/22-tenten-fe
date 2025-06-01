@@ -16,6 +16,6 @@ app.prepare().then(() => {
       handle(req, res);
     })
     .listen(3000, () => {
-      console.log('✅ HTTPS 개발 서버 시작됨: https://localhost:3000');
+      console.log('HTTPS 개발 서버 시작됨: https://localhost:3000');
     });
 });
