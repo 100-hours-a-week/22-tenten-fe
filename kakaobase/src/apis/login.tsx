@@ -11,6 +11,7 @@ interface LoginResponse {
     access_token: string;
     class_name: string;
     nickname: string;
+    image_url: string;
   };
 }
 

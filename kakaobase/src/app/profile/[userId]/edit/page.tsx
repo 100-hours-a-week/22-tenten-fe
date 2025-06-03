@@ -1,7 +1,15 @@
+import Header from '@/components/common/header/Header';
+import NavBar from '@/components/common/NavBar';
+import Wrapper from '@/components/profile/edit/Wrapper';
+
 export default function Page() {
   return (
     <div>
-      <div>프로필 편집 (깃허브, 프로필 이미지) 페이지입니다.</div>
+      <div>
+        <Header label="프로필 편집" />
+        <Wrapper />
+        <NavBar />
+      </div>
     </div>
   );
 }
