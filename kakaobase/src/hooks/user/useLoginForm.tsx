@@ -34,6 +34,7 @@ export default function useLoginForm() {
       document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=lax; max-age=1800`; //30분
       localStorage.setItem('myCourse', response.data.class_name);
       localStorage.setItem('nickname', response.data.nickname);
+      localStorage.setItem('profile', response.data.image_url);
 
       if (autoLogin) {
         localStorage.setItem('autoLogin', 'true');
