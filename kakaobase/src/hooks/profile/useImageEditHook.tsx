@@ -16,6 +16,7 @@ export default function useImageEditHook() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    checkUnauthorized();
     setPreviewUrl(localStorage.getItem('profile'));
   }, []);
 
