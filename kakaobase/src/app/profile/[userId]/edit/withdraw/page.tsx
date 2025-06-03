@@ -1,7 +1,15 @@
+import Header from '@/components/common/header/Header';
+import NavBar from '@/components/common/NavBar';
+import Wrapper from '@/components/profile/withdraw/Wrapper';
+
 export default function Page() {
   return (
     <div>
-      <div>회원 탈퇴 페이지입니다.</div>
+      <div>
+        <Header label="회원 탈퇴" />
+        <Wrapper />
+        <NavBar />
+      </div>
     </div>
   );
 }
