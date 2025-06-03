@@ -2,7 +2,7 @@ import api from './api';
 
 interface EmailVerification {
   email: string;
-  purpose: 'sign-up' | 'password-reset';
+  purpose: 'sign-up' | 'password-change' | 'unregister';
 }
 
 export default async function sendEmail({ email, purpose }: EmailVerification) {
