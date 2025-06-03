@@ -1,8 +1,15 @@
 import { useEmailAuth } from '@/hooks/auth/useEmailAuth';
 import SubmitButtonSmall from '../common/button/SubmitButtonSmall';
 import UserInput from '../inputs/UserInput';
+import { useEffect } from 'react';
 
-export default function EmailAuthStep() {
+export default function EmailAuthStep({
+  setVerified,
+  setEmailRef,
+}: {
+  setVerified?: (isValid: boolean) => void;
+  setEmailRef?: (email: string) => void;
+}) {
   const {
     code,
     setCode,
@@ -17,7 +24,19 @@ export default function EmailAuthStep() {
     codeError,
     timer,
     codeButtonLabel,
+    isVerified,
   } = useEmailAuth();
+
+  useEffect(() => {
+    if (setVerified) {
+      setVerified(isVerified);
+    }
+  }, [isVerified, setVerified]);
+
+  useEffect(() => {
+    setEmail('');
+    setCode('');
+  }, [setEmail, setCode]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -34,6 +53,7 @@ export default function EmailAuthStep() {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
+            setEmailRef?.(e.target.value);
             validateEmail(e.target.value);
           }}
           className="whitespace-pre-line"
