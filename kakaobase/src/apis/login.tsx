@@ -12,6 +12,7 @@ interface LoginResponse {
     class_name: string;
     nickname: string;
     image_url: string;
+    member_id: string;
   };
 }
 
