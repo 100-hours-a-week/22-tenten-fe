@@ -35,6 +35,7 @@ export default function useLoginForm() {
       localStorage.setItem('myCourse', response.data.class_name);
       localStorage.setItem('nickname', response.data.nickname);
       localStorage.setItem('profile', response.data.image_url);
+      localStorage.setItem('userId', response.data.member_id);
 
       if (autoLogin) {
         localStorage.setItem('autoLogin', 'true');
