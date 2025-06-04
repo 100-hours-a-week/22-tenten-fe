@@ -32,32 +32,48 @@ function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
   );
 }
 
-function LoginProfile() {
+function LoginProfile({ path }: { path: string }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [userId, setUserId] = useState('');
+  const pathName = usePathname();
+  const router = useRouter();
+
+  const isActive = pathName.includes(path);
 
   useEffect(() => {
-    const url = localStorage.getItem('profileImage') || '';
+    const url = localStorage.getItem('profile') || '';
     setImageUrl(url);
+    const id = localStorage.getItem('userId') || '';
+    setUserId(id);
   }, []);
 
-  if (imageUrl === null) return null; // hydration mismatch 방지
-  if (imageUrl === '') {
-    return (
-      <div className="flex">
-        <NavItem icon={User} />
-      </div>
-    );
+  function navMyProfile() {
+    router.push(`/profile/${userId}`);
   }
 
+  if (imageUrl === null) return null; // hydration mismatch 방지
+
   return (
-    <div className="flex">
-      <Image
-        src={imageUrl}
-        width={12}
-        height={12}
-        alt="profile"
-        className="w-6 h-6 rounded-md transition-colors cursor-pointer"
-      />
+    <div className="flex" onClick={navMyProfile}>
+      {imageUrl === '' || imageUrl === 'null' ? (
+        <User
+          className={clsx(
+            'w-6 h-6 transition-colors cursor-pointer',
+            isActive ? 'text-myBlue' : 'text-iconColor'
+          )}
+        />
+      ) : (
+        <Image
+          src={imageUrl}
+          width={12}
+          height={12}
+          alt="profile"
+          className={clsx(
+            'w-6 h-6 transition-colors cursor-pointer rounded-md',
+            isActive ? 'text-myBlue' : 'text-iconColor'
+          )}
+        />
+      )}
     </div>
   );
 }
@@ -90,7 +106,11 @@ export default function NavBar() {
         </button>
         <div className="flex gap-12">
           {/* <NavItem icon={Bell} path="/alarm" /> */}
-          {hasToken ? <LoginProfile /> : <NavItem icon={User} path="/login" />}
+          {hasToken ? (
+            <LoginProfile path="/profile" />
+          ) : (
+            <NavItem icon={User} path="/login" />
+          )}
         </div>
       </div>
     </div>
