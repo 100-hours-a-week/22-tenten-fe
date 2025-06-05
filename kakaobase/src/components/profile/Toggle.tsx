@@ -27,9 +27,8 @@ function Button({
   );
 }
 
-export default function Toggle() {
+export default function Toggle({ isMe }: { isMe: boolean }) {
   const [type, setType] = useState<profilePageList>('게시글');
-  const [isMe, setIsMe] = useState(true);
 
   return (
     <div className="flex gap-2 bg-containerColor px-1 py-1 rounded-full">
