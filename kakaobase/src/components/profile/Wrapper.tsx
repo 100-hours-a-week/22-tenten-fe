@@ -26,9 +26,10 @@ export default function Wrapper() {
     router.push(`${userId}/edit`);
   }
   return (
-    <div className="flex flex-col items-center self-center text-textColor min-h-0 mb-[4rem] mt-[5rem] gap-4 ">
+    <div className="flex flex-col items-center text-textColor min-h-0 mb-[4rem] mt-[5rem] gap-[1.25rem]">
       <UserInfo />
       <CountInfo />
+
       {isMe ? (
         <div className="flex gap-4">
           <SubmitButton text="프로필 편집" onClick={navEdit} />
@@ -44,6 +45,7 @@ export default function Wrapper() {
           />
         </div>
       )}
+
       <div className="flex flex-col gap-2 items-center min-h-0">
         <Toggle isMe={isMe} />
         <div
