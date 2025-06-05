@@ -1,23 +1,7 @@
-'use client';
-import { useEffect, useState } from 'react';
+import { useToast } from '@/app/ToastContext';
 
-export default function Toast({
-  show,
-  label,
-}: {
-  show: boolean;
-  label: string;
-}) {
-  const [isOpen, setOpen] = useState(false);
-
-  async function handleToast() {
-    setOpen(true);
-    setTimeout(() => setOpen(false), 2000);
-  }
-
-  useEffect(() => {
-    handleToast();
-  }, [show]);
+export default function Toast() {
+  const { isOpen, label } = useToast();
 
   if (!isOpen) return null;
 
