@@ -4,11 +4,13 @@ import { passwordConfirmSchema } from '@/schemas/passwordConfirmSchema';
 import { z } from 'zod';
 import changePassword from '@/apis/changePassword';
 import { useState } from 'react';
+import { useToast } from '@/app/ToastContext';
 
 export type PasswordFormData = z.infer<typeof passwordConfirmSchema>;
 
 export const usePasswordStep = () => {
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
   const methods = useForm<PasswordFormData>({
     resolver: zodResolver(passwordConfirmSchema),
     mode: 'all',
@@ -26,9 +28,9 @@ export const usePasswordStep = () => {
         email: email,
         password: methods.getValues('password'),
       });
-      alert('비밀번호 변경 완료');
+      showToast('비밀번호 변경 성공! ✌️');
     } catch (e: any) {
-      console.log(e);
+      showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
     } finally {
       setLoading(false);
     }

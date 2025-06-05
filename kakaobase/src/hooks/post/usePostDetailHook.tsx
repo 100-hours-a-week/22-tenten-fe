@@ -6,11 +6,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/apis/comment';
 import { PostEntity } from '@/stores/postType';
 import { refreshToken } from '@/apis/login';
+import { useToast } from '@/app/ToastContext';
 
 export default function usePostDetail({ id }: { id: number }) {
   const [post, setPost] = useState<PostEntity>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const { showToast } = useToast();
   const path = usePathname();
   const router = useRouter();
 
@@ -33,8 +35,9 @@ export default function usePostDetail({ id }: { id: number }) {
       setError(e as Error);
       if (e.response.data.error === 'unauthorized') {
         refreshToken();
+        showToast('로그인이 필요합니다. 😭');
       } else {
-        alert('문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
         router.push('/');
       }
     } finally {

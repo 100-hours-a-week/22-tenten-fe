@@ -30,7 +30,7 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
         queryClient.invalidateQueries({ queryKey: ['recomments'] });
       }
       setOpen(false);
-      showToast('삭제 완료!');
+      showToast('삭제 완료! ✌️');
       if (path.includes('post') && type === 'post')
         router.push('/'); //게시글 상세에서 게시글 지우기
       else if (path.includes('comment') && type === 'comment') router.back(); //댓글 상세에서 댓글 지우기
@@ -39,7 +39,7 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
       if (e.response.data.error === 'unauthorized') {
         refreshToken();
       } else {
-        showToast('문제 발생! 잠시 후 다시 시도해 주세요.');
+        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
         router.push('/');
       }
       console.log(e);
