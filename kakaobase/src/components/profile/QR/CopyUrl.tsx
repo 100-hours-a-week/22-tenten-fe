@@ -1,3 +1,4 @@
+import Toast from '@/components/common/Toast';
 import { useState } from 'react';
 
 export default function CopyUrl({ url }: { url: string }) {
@@ -22,8 +23,9 @@ export default function CopyUrl({ url }: { url: string }) {
         className="text-xs text-myBlue hover:underline"
         onClick={handleCopy}
       >
-        {copied ? '복사 완료!' : '복사'}
+        복사
       </button>
+      {copied && <Toast show={copied} label="복사 완료!" />}
     </div>
   );
 }
