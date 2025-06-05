@@ -6,7 +6,6 @@ import UserInfo from './UserInfo';
 import { useEffect, useState } from 'react';
 import Toggle from './Toggle';
 import PostList from '../post/list/PostList';
-import ListRouter from '../post/ListRouter';
 
 export default function Wrapper() {
   const router = useRouter();

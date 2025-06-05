@@ -21,3 +21,43 @@ export async function deleteFollow({ id }: { id: number }) {
     console.log(e);
   }
 }
+
+//팔로워 목록 조회
+export async function getFollowers({
+  userId,
+  limit,
+  cursor,
+}: {
+  userId: number;
+  limit: number;
+  cursor: number;
+}) {
+  try {
+    const response = await api.get(
+      `/users/${userId}/followers?limit=${limit}&cursor=${cursor}`
+    );
+    return response.data;
+  } catch (e: unknown) {
+    if (e instanceof Error) throw e;
+  }
+}
+
+//팔로잉 목록 조회
+export async function getFollowings({
+  userId,
+  limit,
+  cursor,
+}: {
+  userId: number;
+  limit: number;
+  cursor: number;
+}) {
+  try {
+    const response = await api.get(
+      `/users/${userId}/followings?limit=${limit}&cursor=${cursor}`
+    );
+    return response.data;
+  } catch (e: unknown) {
+    if (e instanceof Error) throw e;
+  }
+}
