@@ -42,7 +42,6 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
         showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
         router.push('/');
       }
-      console.log(e);
     }
   }
   function closeModal() {

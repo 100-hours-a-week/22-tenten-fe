@@ -42,14 +42,11 @@ export default function useImageEditHook() {
       } //이미지 잘 옴
 
       setPreviewUrl(imageUrl);
-      console.log('미리보기 이미지 수정 완료');
       localStorage.setItem('profile', imageUrl);
-      console.log('로컬 스토리지에 프로필 저장 완료');
 
       await editProfile({ imageUrl }); //이거 지금 안 됨
       showToast('프로필 이미지 저장 완료! ✌️');
     } catch (e: any) {
-      console.log('이미지 등록 안 됨', e.response);
       methods.setError('imageFile', {
         message: '프로필 이미지 저장 실패 😭',
       });
