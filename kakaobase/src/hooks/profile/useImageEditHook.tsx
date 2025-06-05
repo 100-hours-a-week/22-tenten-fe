@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import postToS3 from '@/apis/imageS3';
 import editProfile from '@/apis/editProfile';
 import { refreshToken } from '@/apis/login';
+import { useToast } from '@/app/ToastContext';
 
 export type imageData = z.infer<typeof profileImageSchema>;
 
@@ -14,6 +15,7 @@ export default function useImageEditHook() {
   const { checkUnauthorized } = useTokenCheck();
   const [loading, setLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   useEffect(() => {
     checkUnauthorized();
@@ -40,24 +42,20 @@ export default function useImageEditHook() {
       } //이미지 잘 옴
 
       setPreviewUrl(imageUrl);
-      console.log('미리보기 이미지 수정 완료');
       localStorage.setItem('profile', imageUrl);
-      console.log('로컬 스토리지에 프로필 저장 완료');
 
       await editProfile({ imageUrl }); //이거 지금 안 됨
-      alert('프로필 이미지 저장 완료');
+      showToast('프로필 이미지 저장 완료! ✌️');
     } catch (e: any) {
-      console.log('이미지 등록 안 됨', e.response);
       methods.setError('imageFile', {
-        message: '프로필 이미지 저장 실패',
+        message: '프로필 이미지 저장 실패 😭',
       });
       if (e.response?.data.error === 'unauthorized') {
         //로그인 했는데 이거 뜸
         refreshToken();
+        showToast('로그인이 필요합니다. 😭');
       } else {
-        alert(
-          '프로필 이미지 업로드 실패 : 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.'
-        );
+        showToast('프로필 이미지 업로드 실패! 잠시 후 다시 시도해 주세요. 😭');
       }
     } finally {
       setLoading(false);

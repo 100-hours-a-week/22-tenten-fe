@@ -1,4 +1,5 @@
 import signup from '@/apis/signup';
+import { useToast } from '@/app/ToastContext';
 import { courseMap } from '@/lib/courseMap';
 import { signupStep2Schema } from '@/schemas/signupStep2Schema';
 import { useSignupStore } from '@/stores/signupStore';
@@ -14,6 +15,7 @@ export const useSignupForm = () => {
   const step1Info = useSignupStore((state) => state.step1);
   const step2Info = useSignupStore((state) => state.step2);
   const setStep2Info = useSignupStore((state) => state.setStep2);
+  const { showToast } = useToast();
 
   const methods = useForm<SignupStep2Data>({
     resolver: zodResolver(signupStep2Schema),
@@ -45,12 +47,12 @@ export const useSignupForm = () => {
         github_url: step2Info.githubUrl,
       };
 
-      const response = await signup(request);
-      console.log(response);
+      await signup(request);
 
+      showToast('회원 가입 성공! ✌️');
       router.push('/login');
     } catch (e: any) {
-      console.log(e.response);
+      showToast('회원 가입 실패! 잠시 후 다시 시도해 주세요. 😭');
     }
   };
 

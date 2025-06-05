@@ -1,5 +1,6 @@
 import { postComment } from '@/apis/comment';
 import { queryClient } from '@/app/providers';
+import { useToast } from '@/app/ToastContext';
 import { useParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -9,6 +10,7 @@ export default function useCommentForm() {
   const param = useParams();
   const postId = Number(param.postId);
   const commentId = Number(param.commentId);
+  const { showToast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
@@ -29,7 +31,7 @@ export default function useCommentForm() {
         queryClient.invalidateQueries({ queryKey: ['comments'] });
       }
     } catch (e: any) {
-      console.log(e);
+      showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
     } finally {
       setComment('');
     }

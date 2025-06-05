@@ -5,6 +5,7 @@ import { loginSchema } from '@/schemas/loginSchema';
 import sendEmail from '@/apis/sendEmail';
 import { usePathname } from 'next/navigation';
 import postCodeVerification from '@/apis/verifyCode';
+import { useToast } from '@/app/ToastContext';
 
 export const useEmailAuth = () => {
   const pathName = usePathname();
@@ -13,6 +14,7 @@ export const useEmailAuth = () => {
   const [isEmailValid, setEmailValid] = useState(false);
   const [isCodeValid, setCodeValid] = useState(false);
   const [codeButtonLabel, setCodeButtonLabel] = useState('인증');
+  const { showToast } = useToast();
 
   const {
     verificationAttempts,
@@ -51,9 +53,10 @@ export const useEmailAuth = () => {
       setCodeValid(true);
     } catch (e: any) {
       timer.stop();
-      console.log(e);
       if (e.response.data.error === 'resource_alread_exists') {
         setError('*이미 가입된 이메일입니다.');
+      } else {
+        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
       }
     }
   };
@@ -71,7 +74,6 @@ export const useEmailAuth = () => {
       setCodeButtonLabel('완료');
       timer.stop();
     } catch (e: any) {
-      console.log(e.response);
       if (e.response.data.error === 'email_code_invalid') {
         incrementAttempt();
         setCodeError(
@@ -81,6 +83,8 @@ export const useEmailAuth = () => {
       } else if (e.response.data.error === 'email_code_fail_logout') {
         setCodeError(`*인증에 실패하였습니다. 잠시 후 시도해 주세요.`);
         setVerified(false);
+      } else {
+        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
       }
     }
   };

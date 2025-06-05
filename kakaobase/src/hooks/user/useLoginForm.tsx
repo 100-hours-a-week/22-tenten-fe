@@ -5,12 +5,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { login } from '@/apis/login';
 import { useUserStore } from '@/stores/userStore';
+import { useToast } from '@/app/ToastContext';
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function useLoginForm() {
   const router = useRouter();
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { showToast } = useToast();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -50,15 +52,13 @@ export default function useLoginForm() {
       router.push('/');
     } catch (e: any) {
       const errorCode = e?.response?.data?.error;
-      console.log(e);
       if (errorCode === 'invalid_password') {
         setError('password', {
           type: 'manual',
           message: '이메일 또는 비밀번호를 확인해 주세요.',
         });
       } else {
-        if (errorCode === undefined) alert(e);
-        else alert(errorCode);
+        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
       }
     }
   };

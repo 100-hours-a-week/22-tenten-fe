@@ -26,7 +26,6 @@ export default async function getPosts({
       },
     });
 
-    console.log(response.data.data);
     return response.data.data.map((p: any) => mapToPostEntity(p, 'post'));
   } catch (e: unknown) {
     if (e instanceof Error) throw e;

@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import useTokenCheck from '../user/useTokenCheckHook';
+import { useToast } from '@/app/ToastContext';
 
 export type NewPostData = z.infer<typeof postSchema>;
 
@@ -19,6 +20,7 @@ export const usePostEditorForm = () => {
   const content = usePostStore((state) => state.content);
   const youtubeUrl = usePostStore((state) => state.youtubeUrl);
   const imageUrl = usePostStore((state) => state.imageUrl);
+  const { showToast } = useToast();
   const [isLoading, setLoading] = useState(false);
   const { checkUnauthorized } = useTokenCheck();
 
@@ -53,16 +55,15 @@ export const usePostEditorForm = () => {
           youtube_url: data.youtubeUrl,
         }
       );
-
       await queryClient.invalidateQueries({ queryKey: ['posts'] });
+      showToast('게시글 등록 성공! ✌️');
       router.push(`/`);
     } catch (e: any) {
       if (e.response.data.error === 'unauthorized') {
         refreshToken();
+        showToast('로그인이 필요합니다. 😭');
       } else {
-        alert(
-          '게시글 업로드 실패 : 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.'
-        );
+        showToast('게시글 업로드 실패! 잠시 후 다시 시도해 주세요. 😭');
         router.push('/');
       }
     } finally {
