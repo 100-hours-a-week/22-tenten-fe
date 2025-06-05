@@ -16,8 +16,10 @@ export function UserProfile({ post }: { post: PostEntity }) {
   return (
     <div
       className="flex w-8 h-7 rounded-lg bg-innerContainerColor justify-center items-center cursor-pointer"
-      onClick={(e) => e.stopPropagation()}
-      //onClick={navProfile}
+      onClick={(e) => {
+        e.stopPropagation();
+        navProfile();
+      }}
     >
       {post.userProfileUrl ? (
         <Image
@@ -64,7 +66,10 @@ export function UserInfo({ post }: { post: PostEntity }) {
       <div className="flex gap-2 items-center min-w-0">
         <div
           className="cursor-pointer font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap"
-          // onClick={navProfile}
+          onClick={(e) => {
+            e.stopPropagation();
+            navProfile();
+          }}
         >
           {post.nickname}
         </div>
