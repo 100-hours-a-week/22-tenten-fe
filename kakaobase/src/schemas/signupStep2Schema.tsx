@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { githubUrlSchema } from './githubSchema';
+import { githubSchema } from './githubSchema';
 
 export const courseEnum = z.enum([
   '클라우드 네이티브 제주 1기',
@@ -27,5 +27,5 @@ export const signupStep2Schema = z.object({
     courseEnum,
     { message: '수강 과정을 선택해 주세요.' }
   ),
-  githubUrl: githubUrlSchema,
+  githubUrl: githubSchema,
 });
