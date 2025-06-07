@@ -7,7 +7,7 @@ export default function CopyUrl({ url }: { url: string }) {
     if (!url) return;
     try {
       await navigator.clipboard.writeText(url);
-      showToast('복사 완료!');
+      showToast('복사 완료! ✌️');
     } catch (err) {
       showToast('복사 실패 😭');
     }

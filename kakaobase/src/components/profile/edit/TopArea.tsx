@@ -3,6 +3,8 @@
 import ReadOnlyUserInfo from './ReadOnlyUserInfo';
 import ImageInput from './ImageInput';
 import useImageEditHook from '@/hooks/profile/useImageEditHook';
+import { useUserStore } from '@/stores/userStore';
+import { courseMapReverse } from '@/lib/courseMap';
 
 export default function TopArea() {
   const {
@@ -13,6 +15,7 @@ export default function TopArea() {
     setValue,
     previewUrl,
   } = useImageEditHook();
+  const { name, nickname, course } = useUserStore();
 
   return (
     <div className="flex flex-col w-full">
@@ -28,8 +31,8 @@ export default function TopArea() {
           image={previewUrl}
         />
         <div className="flex flex-col gap-3">
-          <ReadOnlyUserInfo label="이름" value="daisy.kim(김도현)" />
-          <ReadOnlyUserInfo label="과정명" value="카카오테크 부트캠프 2기" />
+          <ReadOnlyUserInfo label="이름" value={`${nickname} / ${name}`} />
+          <ReadOnlyUserInfo label="과정명" value={courseMapReverse[course]} />
         </div>
       </div>
     </div>

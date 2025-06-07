@@ -5,9 +5,10 @@ import { z } from 'zod';
 import useTokenCheck from '../user/useTokenCheckHook';
 import { useEffect, useState } from 'react';
 import postToS3 from '@/apis/imageS3';
-import editProfile from '@/apis/editProfile';
+import { editProfile } from '@/apis/editProfile';
 import { refreshToken } from '@/apis/login';
 import { useToast } from '@/app/ToastContext';
+import { useUserStore } from '@/stores/userStore';
 
 export type imageData = z.infer<typeof profileImageSchema>;
 
@@ -16,10 +17,11 @@ export default function useImageEditHook() {
   const [loading, setLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const { showToast } = useToast();
+  const { profileImageUrl, setUserInfo } = useUserStore();
 
   useEffect(() => {
     checkUnauthorized();
-    setPreviewUrl(localStorage.getItem('profile'));
+    setPreviewUrl(profileImageUrl);
   }, []);
 
   const methods = useForm<imageData>({
@@ -39,19 +41,14 @@ export default function useImageEditHook() {
       let imageUrl = '';
       if (data.imageFile) {
         imageUrl = await postToS3(data.imageFile, 'profile_image');
-      } //이미지 잘 옴
-
+      }
       setPreviewUrl(imageUrl);
-      localStorage.setItem('profile', imageUrl);
+      setUserInfo({ profileImageUrl: imageUrl });
 
-      await editProfile({ imageUrl }); //이거 지금 안 됨
+      await editProfile({ imageUrl });
       showToast('프로필 이미지 저장 완료! ✌️');
     } catch (e: any) {
-      methods.setError('imageFile', {
-        message: '프로필 이미지 저장 실패 😭',
-      });
       if (e.response?.data.error === 'unauthorized') {
-        //로그인 했는데 이거 뜸
         refreshToken();
         showToast('로그인이 필요합니다. 😭');
       } else {
