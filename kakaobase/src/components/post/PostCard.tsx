@@ -7,6 +7,7 @@ import { extractYoutubeVideoId } from '@/lib/formatYoutube';
 import { PostEntity } from '@/stores/postType';
 import clsx from 'clsx';
 import summaryCondition from '@/lib/summaryCondition';
+import Linkify from 'react-linkify';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
@@ -41,17 +42,30 @@ export default function PostCard({ post }: { post: PostEntity }) {
           <div className="w-full flex flex-col gap-2 text-textColor">
             <UserInfo post={post} />
             <div>
-              {!path.includes('post')
-                ? post.content && (
-                    <div className="w-full text-sm overflow-hidden cursor-pointer line-clamp-2 text-ellipsis break-all">
-                      {post.content}
-                    </div>
-                  )
-                : post.content && (
-                    <div className="w-full text-sm overflow-hidden cursor-pointer break-all">
-                      {post.content}
-                    </div>
+              {post.content && (
+                <div
+                  className={clsx(
+                    'w-full text-sm overflow-hidden cursor-pointer break-all whitespace-pre-wrap',
+                    !path.includes('post') && 'line-clamp-2 text-ellipsis'
                   )}
+                >
+                  <Linkify
+                    componentDecorator={(href, text, key) => (
+                      <a
+                        key={key}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-myBlue"
+                      >
+                        {text}
+                      </a>
+                    )}
+                  >
+                    {post.content}
+                  </Linkify>
+                </div>
+              )}
               <div className="flex w-full overflow-hidden rounded-lg">
                 {post.type === 'post' &&
                   'imageUrl' in post &&
