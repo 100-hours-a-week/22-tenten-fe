@@ -35,18 +35,11 @@ export default function useLoginForm() {
       const response = await login(requestBody);
       document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=lax; max-age=1800`; //30분
       localStorage.setItem('myCourse', response.data.class_name);
-      localStorage.setItem('nickname', response.data.nickname);
-      localStorage.setItem('profile', response.data.image_url);
-      localStorage.setItem('userId', response.data.member_id);
 
-      if (autoLogin) {
-        localStorage.setItem('autoLogin', 'true');
-      } else {
-        localStorage.setItem('autoLogin', 'false');
-      }
       setUserInfo({
         course: response.data.class_name,
         nickname: response.data.nickname,
+        userId: Number(response.data.member_id),
         autoLogin: autoLogin,
       });
       router.push('/');
