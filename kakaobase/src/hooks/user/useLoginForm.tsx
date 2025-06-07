@@ -57,6 +57,8 @@ export default function useLoginForm() {
           type: 'manual',
           message: '이메일 또는 비밀번호를 확인해 주세요.',
         });
+      } else if (errorCode === 'resource_not_found') {
+        setError('email', { message: '가입되지 않은 이메일입니다.' });
       } else {
         showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
       }
