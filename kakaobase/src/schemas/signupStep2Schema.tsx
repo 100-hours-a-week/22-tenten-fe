@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { githubSchema } from './githubSchema';
 
 export const courseEnum = z.enum([
   '클라우드 네이티브 제주 1기',
@@ -26,10 +27,5 @@ export const signupStep2Schema = z.object({
     courseEnum,
     { message: '수강 과정을 선택해 주세요.' }
   ),
-  githubUrl: z
-    .string()
-    .min(1, { message: '*자신의 깃허브 프로필 url을 입력해 주세요.' })
-    .startsWith('https://github.com/', {
-      message: '*깃허브 url 형식이 올바르지 않습니다.',
-    }),
+  githubUrl: githubSchema,
 });
