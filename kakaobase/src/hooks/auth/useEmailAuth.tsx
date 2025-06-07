@@ -73,6 +73,7 @@ export const useEmailAuth = () => {
       setCodeValid(false);
       setCodeButtonLabel('완료');
       timer.stop();
+      showToast('이메일 인증 성공! ✌️');
     } catch (e: any) {
       if (e.response.data.error === 'email_code_invalid') {
         incrementAttempt();

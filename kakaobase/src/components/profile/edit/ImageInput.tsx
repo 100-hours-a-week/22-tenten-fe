@@ -23,7 +23,6 @@ export default function ImageInput({
     const file = e.target.files?.[0];
     if (file) {
       setValue('imageFile', file, { shouldValidate: true });
-      const url = URL.createObjectURL(file);
       handleSubmit(onSubmit)();
     }
   }
