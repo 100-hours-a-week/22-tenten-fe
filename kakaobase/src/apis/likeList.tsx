@@ -1,6 +1,7 @@
 import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
+//게시글 좋아요 목록
 export async function getPostLikes({ postId }: { postId: number }) {
   try {
     const response = await api.get(`/posts/${postId}/likes`, {
@@ -13,6 +14,7 @@ export async function getPostLikes({ postId }: { postId: number }) {
   }
 }
 
+//댓글 좋아요 목록
 export async function getCommentLikes({ postId }: { postId: number }) {
   try {
     const response = await api.get(`/comments/${postId}/likes`, {
@@ -25,6 +27,7 @@ export async function getCommentLikes({ postId }: { postId: number }) {
   }
 }
 
+//대댓글 좋아요 목록
 export async function getRecommentLikes({ postId }: { postId: number }) {
   try {
     const response = await api.get(`/recomments/${postId}/likes`, {
