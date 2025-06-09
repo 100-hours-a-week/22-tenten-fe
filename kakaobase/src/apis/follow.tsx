@@ -1,3 +1,4 @@
+import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
 //팔로우 요청 api
@@ -30,13 +31,18 @@ export async function getFollowers({
 }: {
   userId: number;
   limit: number;
-  cursor: number;
+  cursor?: number;
 }) {
+  const params: Record<string, any> = { limit };
+  if (cursor !== undefined) params.cursor = cursor;
   try {
-    const response = await api.get(
-      `/users/${userId}/followers?limit=${limit}&cursor=${cursor}`
-    );
-    return response.data;
+    const response = await api.get(`/users/${userId}/followers`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${getClientCookie('accessToken')}`,
+      },
+    });
+    return response.data.data;
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }
@@ -50,13 +56,18 @@ export async function getFollowings({
 }: {
   userId: number;
   limit: number;
-  cursor: number;
+  cursor?: number;
 }) {
+  const params: Record<string, any> = { limit };
+  if (cursor !== undefined) params.cursor = cursor;
   try {
-    const response = await api.get(
-      `/users/${userId}/followings?limit=${limit}&cursor=${cursor}`
-    );
-    return response.data;
+    const response = await api.get(`/users/${userId}/followings`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${getClientCookie('accessToken')}`,
+      },
+    });
+    return response.data.data;
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }
