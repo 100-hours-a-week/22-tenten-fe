@@ -1,6 +1,6 @@
 import Header from '@/components/common/header/Header';
 import NavBar from '@/components/common/NavBar';
-import UserList from '@/components/likeFollow/UserList';
+import UserLikeList from '@/components/social/UserLikeList';
 
 export default function Page({
   params,
@@ -10,7 +10,7 @@ export default function Page({
   return (
     <div className="flex flex-col h-screen">
       <Header label="좋아요 목록" />
-      <UserList postId={params.postId} postType={params.postType} />
+      <UserLikeList postId={params.postId} postType={params.postType} />
       <NavBar />
     </div>
   );
