@@ -12,6 +12,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { getClientCookie } from '@/lib/getClientCookie';
 import { useEffect, useState } from 'react';
+import { useUserStore } from '@/stores/userStore';
 
 function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
   const pathName = usePathname();
@@ -33,29 +34,21 @@ function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
 }
 
 function LoginProfile({ path }: { path: string }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [userId, setUserId] = useState('');
   const pathName = usePathname();
   const router = useRouter();
+  const { userId, profileImageUrl } = useUserStore();
 
   const isActive = pathName.includes(path);
-
-  useEffect(() => {
-    const url = localStorage.getItem('profile') || '';
-    setImageUrl(url);
-    const id = localStorage.getItem('userId') || '';
-    setUserId(id);
-  }, []);
 
   function navMyProfile() {
     router.push(`/profile/${userId}`);
   }
 
-  if (imageUrl === null) return null; // hydration mismatch 방지
+  if (profileImageUrl === null) return null; // hydration mismatch 방지
 
   return (
     <div className="flex" onClick={navMyProfile}>
-      {imageUrl === '' || imageUrl === 'null' ? (
+      {profileImageUrl === '' || profileImageUrl === 'null' ? (
         <User
           className={clsx(
             'w-6 h-6 transition-colors cursor-pointer',
@@ -64,7 +57,7 @@ function LoginProfile({ path }: { path: string }) {
         />
       ) : (
         <Image
-          src={imageUrl}
+          src={profileImageUrl}
           width={12}
           height={12}
           alt="profile"

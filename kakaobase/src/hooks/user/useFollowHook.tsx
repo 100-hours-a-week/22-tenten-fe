@@ -1,18 +1,24 @@
+import { deleteFollow, postFollow } from '@/apis/follow';
+import { useToast } from '@/app/ToastContext';
 import { useState } from 'react';
 
-export function useFollowToggle(initial: boolean) {
+export function useFollowToggle(initial: boolean, id: number) {
   const [following, setFollowing] = useState(initial);
+  const { showToast } = useToast();
 
   const toggleFollow = async () => {
     try {
       if (following) {
-        // 언팔로우 API 호출
+        await deleteFollow({ id });
+        showToast('언팔로우 성공! ✌️');
       } else {
-        // 팔로우 API 호출
+        postFollow({ id });
+        showToast('팔로우 성공! ✌️');
       }
       setFollowing(!following);
     } catch (e) {
-      console.error('팔로우 토글 실패', e);
+      if (following) showToast('언팔로우 실패 😭');
+      else showToast('팔로우 실패 😭');
     }
   };
 

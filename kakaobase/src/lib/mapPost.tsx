@@ -17,7 +17,7 @@ export function mapToPostEntity(post: any, type: PostType): PostEntity {
     content: post.content ?? '',
     likeCount: post.like_count,
     isLiked: post.is_liked,
-    isFollowing: post.user.is_following,
+    isFollowing: post.user.is_followed,
     createdAt: post.created_at,
   };
 
