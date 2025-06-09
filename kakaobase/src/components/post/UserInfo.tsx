@@ -73,9 +73,9 @@ export function UserInfo({ post }: { post: PostEntity }) {
         >
           {post.nickname}
         </div>
-        {/* {post.isMine ? null : (
-          <FollowButtonSmall isFollowing={post.isFollowing} />
-        )} */}
+        {post.isMine ? null : (
+          <FollowButtonSmall isFollowing={post.isFollowing} id={post.userId} />
+        )}
       </div>
       <div
         className="flex gap-2 align-center justify-center flex-shrink-0"
