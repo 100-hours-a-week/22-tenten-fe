@@ -2,10 +2,10 @@
 
 import LoadingSmall from '../common/loading/LoadingSmall';
 import UserItem from './UserItem';
-import useFollowListHook from '@/hooks/social/useFollowListHook';
+import useFollowingsHook from '@/hooks/social/useFollowingsHook';
 
-export default function UserFollowList({ userId }: { userId: number }) {
-  const { data, hasNextPage, isFetching } = useFollowListHook({ userId });
+export default function UserFollowingList({ userId }: { userId: number }) {
+  const { data, hasNextPage, isFetching } = useFollowingsHook({ userId });
   return (
     <div className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2">
       {data?.pages.flat().map((item) => (
