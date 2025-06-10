@@ -1,0 +1,18 @@
+import { getFollowers } from '@/apis/follow';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+export default function useFollowingsHook({ userId }: { userId: number }) {
+  return useInfiniteQuery({
+    queryKey: ['followings', userId],
+    queryFn: async ({ pageParam }: { pageParam?: number }) => {
+      const response = await getFollowers({
+        userId: userId,
+        limit: 30,
+        cursor: pageParam,
+      });
+      return response;
+    },
+    getNextPageParam: (lastPage) => lastPage.at(-1),
+    initialPageParam: undefined,
+  });
+}

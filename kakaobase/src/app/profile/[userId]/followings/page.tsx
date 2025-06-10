@@ -1,12 +1,12 @@
 import Header from '@/components/common/header/Header';
 import NavBar from '@/components/common/NavBar';
-import UserFollowList from '@/components/social/UserFollowList';
+import UserFollowingList from '@/components/social/UserFollowingList';
 
 export default function Page({ params }: { params: { userId: number } }) {
   return (
     <div className="flex flex-col h-screen">
       <Header label="팔로잉 목록" />
-      <UserFollowList userId={params.userId} />
+      <UserFollowingList userId={params.userId} />
       <NavBar />
     </div>
   );
