@@ -26,7 +26,6 @@ export default function useUserInfoHook({ userId }: { userId: number }) {
           githubUrl: response.github_url,
         });
       }
-      console.log(response);
       return response;
     },
   });
