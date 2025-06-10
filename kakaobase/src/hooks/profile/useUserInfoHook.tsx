@@ -1,4 +1,4 @@
-import getUserInfo from '@/apis/profile';
+import { getUserInfo } from '@/apis/profile';
 import { useUserStore } from '@/stores/userStore';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';

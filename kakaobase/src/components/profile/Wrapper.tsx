@@ -2,13 +2,14 @@
 import SubmitButton from '../common/button/SubmitButton';
 import CountInfo from './CountInfo';
 import UserInfo from './UserInfo';
-import Toggle from './Toggle';
-import PostList from '../post/list/PostList';
+import Toggle, { profileListType } from './Toggle';
 import HandleButton from '../common/button/HandleButton';
 import ProfileModal from './QR/ProfileModal';
 import useUserInfoHook from '@/hooks/profile/useUserInfoHook';
 import Loading from '../common/loading/Loading';
 import { useFollowToggle } from '@/hooks/user/useFollowHook';
+import { useState } from 'react';
+import ListRouter from './ListRouter';
 
 export default function Wrapper({ userId }: { userId: number }) {
   const { data, isLoading, handleModal, navEdit, isOpen } = useUserInfoHook({
@@ -18,6 +19,7 @@ export default function Wrapper({ userId }: { userId: number }) {
     data?.is_followed ?? false,
     userId
   );
+  const [type, setType] = useState<profileListType>('게시글');
 
   if (isLoading) {
     return (
@@ -51,13 +53,13 @@ export default function Wrapper({ userId }: { userId: number }) {
         </div>
       )}
 
-      <div className="flex flex-col gap-2 items-center min-h-0">
-        <Toggle isMe={data.is_me} />
+      <div className="flex w-full flex-col gap-2 items-center min-h-0">
+        <Toggle isMe={data.is_me} type={type} setType={setType} />
         <div
           data-scroll-area
-          className="flex overflow-y-auto flex-grow flex-col"
+          className="flex w-full overflow-y-auto flex-grow flex-col"
         >
-          <PostList />
+          <ListRouter type={type} userId={userId} />
         </div>
       </div>
       <ProfileModal isOpen={isOpen} onClose={handleModal} />
