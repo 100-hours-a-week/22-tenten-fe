@@ -44,11 +44,9 @@ function LoginProfile({ path }: { path: string }) {
     router.push(`/profile/${userId}`);
   }
 
-  if (profileImageUrl === null) return null; // hydration mismatch 방지
-
   return (
     <div className="flex" onClick={navMyProfile}>
-      {profileImageUrl === '' || profileImageUrl === 'null' ? (
+      {profileImageUrl === '' || profileImageUrl === null ? (
         <User
           className={clsx(
             'w-6 h-6 transition-colors cursor-pointer',

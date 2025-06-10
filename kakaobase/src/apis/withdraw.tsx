@@ -8,7 +8,6 @@ export default async function withdraw() {
         Authorization: `Bearer ${getClientCookie('accessToken')}`,
       },
     });
-    console.log(response);
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }

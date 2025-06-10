@@ -29,8 +29,7 @@ export default function useGithubEditHook() {
     checkUnauthorized();
     try {
       setLoading(true);
-      const response = await editGithub({ url: data.githubUrl });
-      console.log(response);
+      await editGithub({ url: data.githubUrl });
       setUserInfo({ githubUrl: data.githubUrl });
       showToast('깃허브 링크 변경 완료! ✌️');
     } catch (e: any) {
