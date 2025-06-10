@@ -10,7 +10,10 @@ export default function FollowButtonSmall({
   const { following, toggleFollow } = useFollowToggle(isFollowing, id);
   return (
     <button
-      onClick={toggleFollow}
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleFollow();
+      }}
       className={`h-4 px-2 min-w-fit align-center rounded-full flex justify-center ${
         following
           ? 'bg-myLightBlue text-textOnLight'
