@@ -1,46 +1,41 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import SubmitButton from '../common/button/SubmitButton';
 import CountInfo from './CountInfo';
 import UserInfo from './UserInfo';
-import { useEffect, useState } from 'react';
 import Toggle from './Toggle';
 import PostList from '../post/list/PostList';
 import HandleButton from '../common/button/HandleButton';
 import ProfileModal from './QR/ProfileModal';
+import useUserInfoHook from '@/hooks/profile/useUserInfoHook';
+import Loading from '../common/loading/Loading';
+import { useFollowToggle } from '@/hooks/user/useFollowHook';
 
-export default function Wrapper() {
-  const router = useRouter();
-  const [userId, setUserId] = useState('');
-  const [isMe, setIsMe] = useState(true);
-  const [isFollowing, setFollowing] = useState(false);
-  const [isOpen, setOpen] = useState(false);
-  const chatRoomId = 1;
-
-  function handleModal() {
-    setOpen((prev) => !prev);
-  }
-  function handleFollow() {
-    setFollowing((prev) => !prev);
-  }
-  function navEdit() {
-    router.push(`${userId}/edit`);
-  }
-  function navChatRoom() {
-    router.push(`/chat/${chatRoomId}`);
-  }
-
-  useEffect(() => {
-    const id = localStorage.getItem('userId');
-    if (id) setUserId(id);
+export default function Wrapper({ userId }: { userId: number }) {
+  const { data, isLoading, handleModal, navEdit, isOpen } = useUserInfoHook({
+    userId,
   });
+  const { following, toggleFollow } = useFollowToggle(
+    data?.is_followed ?? false,
+    userId
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex mt-20 justify-center">
+        <Loading />
+      </div>
+    );
+  }
+  if (!data) {
+    return <div>데이터 없음</div>;
+  }
 
   return (
     <div className="flex flex-col items-center text-textColor min-h-0 mb-[4rem] mt-[5rem] gap-[1.25rem]">
-      <UserInfo />
-      <CountInfo />
+      <UserInfo data={data} />
+      <CountInfo data={data} />
 
-      {isMe ? (
+      {data.is_me ? (
         <div className="flex gap-4">
           <SubmitButton text="프로필 편집" onClick={navEdit} />
           <SubmitButton text="프로필 공유" onClick={handleModal} />
@@ -48,17 +43,16 @@ export default function Wrapper() {
       ) : (
         <div className="flex gap-4">
           <HandleButton
-            isActive={isFollowing}
+            isActive={following}
             activeLabel="언팔로우"
             idleLabel="팔로우"
-            onClick={handleFollow}
+            onClick={toggleFollow}
           />
-          <SubmitButton text="채팅하기" onClick={navChatRoom} />
         </div>
       )}
 
       <div className="flex flex-col gap-2 items-center min-h-0">
-        <Toggle isMe={isMe} />
+        <Toggle isMe={data.is_me} />
         <div
           data-scroll-area
           className="flex overflow-y-auto flex-grow flex-col"
