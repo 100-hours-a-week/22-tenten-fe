@@ -1,16 +1,15 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 
-type profilePageList = '게시글' | '댓글' | '좋아요';
+export type profileListType = '게시글' | '댓글' | '좋아요';
 
 function Button({
   label,
   type,
   setType,
 }: {
-  label: profilePageList;
-  type: profilePageList;
-  setType: (type: profilePageList) => void;
+  label: profileListType;
+  type: profileListType;
+  setType: (type: profileListType) => void;
 }) {
   return (
     <div
@@ -27,9 +26,15 @@ function Button({
   );
 }
 
-export default function Toggle({ isMe }: { isMe: boolean }) {
-  const [type, setType] = useState<profilePageList>('게시글');
-
+export default function Toggle({
+  isMe,
+  type,
+  setType,
+}: {
+  isMe: boolean;
+  type: profileListType;
+  setType: (type: profileListType) => void;
+}) {
   return (
     <div className="flex gap-2 bg-containerColor px-1 py-1 rounded-full">
       <Button label="게시글" type={type} setType={setType} />

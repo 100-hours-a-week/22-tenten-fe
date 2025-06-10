@@ -81,7 +81,6 @@ export async function likeRecomment({ id }: idParam) {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -96,7 +95,6 @@ export async function deleteRecommentLike({ id }: idParam) {
         Authorization: `Bearer ${getClientCookie('accessToken')}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);

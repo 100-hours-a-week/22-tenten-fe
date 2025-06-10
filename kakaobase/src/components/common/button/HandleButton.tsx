@@ -14,7 +14,7 @@ export default function HandleButton({
       <div
         className={`flex items-center justify-center w-[9rem] h-[1.75rem] rounded-lg ${
           isActive
-            ? 'bg-myLightBlue text-textOnLight cursor-not-allowed'
+            ? 'bg-myLightBlue text-textOnLight'
             : 'bg-myBlue text-textOnBlue'
         }`}
       >

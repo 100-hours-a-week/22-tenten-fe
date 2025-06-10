@@ -1,10 +1,16 @@
 import { deleteFollow, postFollow } from '@/apis/follow';
 import { useToast } from '@/app/ToastContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function useFollowToggle(initial: boolean, id: number) {
   const [following, setFollowing] = useState(initial);
   const { showToast } = useToast();
+
+  useEffect(() => {
+    if (initial !== undefined) {
+      setFollowing(initial);
+    }
+  }, [initial]);
 
   const toggleFollow = async () => {
     try {

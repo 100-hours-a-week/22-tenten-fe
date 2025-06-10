@@ -1,4 +1,5 @@
-import { useParams, useRouter } from 'next/navigation';
+import { ProfileEntity } from '@/dto/user/profileDto';
+import { useRouter } from 'next/navigation';
 
 function CountItem({
   label,
@@ -6,7 +7,7 @@ function CountItem({
   onClick,
 }: {
   label: string;
-  count: string;
+  count: number;
   onClick?: () => void;
 }) {
   return (
@@ -20,21 +21,27 @@ function CountItem({
   );
 }
 
-export default function CountInfo() {
-  const param = useParams();
-  const userId = Number(param.userId);
+export default function CountInfo({ data }: { data: ProfileEntity }) {
   const router = useRouter();
   function navFollowers() {
-    router.push(`${userId}/followers`);
+    router.push(`${data.id}/followers`);
   }
   function navFollowings() {
-    router.push(`${userId}/followings`);
+    router.push(`${data.id}/followings`);
   }
   return (
     <div className="flex gap-12">
-      <CountItem label="게시글" count="10" />
-      <CountItem label="팔로워" count="12" onClick={navFollowers} />
-      <CountItem label="팔로잉" count="14" onClick={navFollowings} />
+      <CountItem label="게시글" count={data.post_count} />
+      <CountItem
+        label="팔로워"
+        count={data.follower_count}
+        onClick={navFollowers}
+      />
+      <CountItem
+        label="팔로잉"
+        count={data.following_count}
+        onClick={navFollowings}
+      />
     </div>
   );
 }
