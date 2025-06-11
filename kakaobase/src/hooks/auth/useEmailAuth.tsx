@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuthStore } from '@/stores/emailAuthStore';
 import { useAuthTimer } from './useAuthTimer';
 import { loginSchema } from '@/schemas/loginSchema';
-import sendEmail from '@/apis/sendEmail';
+import sendEmail from '@/apis/auth/sendEmail';
 import { usePathname } from 'next/navigation';
 import verifyEmailCode from '@/apis/auth/verifyEmailCode';
 import { useToast } from '@/app/ToastContext';
@@ -38,7 +38,7 @@ export const useEmailAuth = () => {
     return result.success;
   };
 
-  const sendCode = async () => {
+  const onSubmitEmail = async () => {
     setEmail(email);
     try {
       timer.start();
@@ -98,7 +98,7 @@ export const useEmailAuth = () => {
     error,
     isEmailValid,
     validateEmail,
-    sendCode,
+    onSubmitEmail,
     handleVerificationCode,
     codeError,
     timer,

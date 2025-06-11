@@ -18,7 +18,7 @@ export default function EmailAuthStep({
     error,
     isEmailValid,
     validateEmail,
-    sendCode,
+    onSubmitEmail,
     handleVerificationCode,
     isCodeValid,
     codeError,
@@ -61,7 +61,7 @@ export default function EmailAuthStep({
         <SubmitButtonSmall
           label="전송"
           disabled={!isEmailValid}
-          onClick={sendCode}
+          onClick={onSubmitEmail}
           type="button"
         />
       </div>
