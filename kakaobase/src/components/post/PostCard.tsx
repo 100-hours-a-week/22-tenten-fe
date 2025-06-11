@@ -2,27 +2,27 @@
 import Image from 'next/image';
 import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { extractYoutubeVideoId } from '@/lib/formatYoutube';
-import { PostEntity } from '@/stores/postType';
+import { Comment, PostEntity } from '@/stores/postType';
 import clsx from 'clsx';
 import summaryCondition from '@/lib/summaryCondition';
 import Linkify from 'react-linkify';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
-  const params = useParams();
-
-  const postId = Number(params.postId);
-
   const path = usePathname();
+
+  function isComment(post: PostEntity): post is Comment {
+    return post.type === 'comment';
+  }
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
       sessionStorage.setItem('scrollPosition', String(window.scrollY));
       router.push(`/post/${post.id}`);
-    } else if (post.type === 'comment') {
-      router.push(`/post/${postId}/comment/${post.id}`);
+    } else if (isComment(post)) {
+      router.push(`/post/${post.postId}/comment/${post.id}`);
     }
   }
   return (

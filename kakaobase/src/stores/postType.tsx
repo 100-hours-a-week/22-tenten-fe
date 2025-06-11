@@ -23,6 +23,7 @@ export interface Post extends BasePost {
 
 export interface Comment extends BasePost {
   commentCount: number;
+  postId: number;
 }
 
 export interface Recomment extends BasePost {}
