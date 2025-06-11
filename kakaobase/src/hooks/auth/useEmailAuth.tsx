@@ -4,7 +4,7 @@ import { useAuthTimer } from './useAuthTimer';
 import { loginSchema } from '@/schemas/loginSchema';
 import sendEmail from '@/apis/sendEmail';
 import { usePathname } from 'next/navigation';
-import verifyEmailCode from '@/apis/auth/verifyCode';
+import verifyEmailCode from '@/apis/auth/verifyEmailCode';
 import { useToast } from '@/app/ToastContext';
 
 export const useEmailAuth = () => {
