@@ -4,7 +4,7 @@ import { useAuthTimer } from './useAuthTimer';
 import { loginSchema } from '@/schemas/loginSchema';
 import sendEmail from '@/apis/sendEmail';
 import { usePathname } from 'next/navigation';
-import postCodeVerification from '@/apis/verifyCode';
+import verifyEmailCode from '@/apis/auth/verifyCode';
 import { useToast } from '@/app/ToastContext';
 
 export const useEmailAuth = () => {
@@ -61,11 +61,11 @@ export const useEmailAuth = () => {
     }
   };
 
-  const verifyCode = async () => {
+  const handleVerificationCode = async () => {
     if (code.length !== 6) return;
 
     try {
-      await postCodeVerification({ email, code });
+      await verifyEmailCode({ email, code });
       setCode(code);
       setVerified(true);
       setCodeError('');
@@ -99,7 +99,7 @@ export const useEmailAuth = () => {
     isEmailValid,
     validateEmail,
     sendCode,
-    verifyCode,
+    handleVerificationCode,
     codeError,
     timer,
     isVerified,

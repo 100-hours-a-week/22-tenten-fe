@@ -1,11 +1,11 @@
-import api from './api';
+import api from '../api';
 
 interface codeVerification {
   email: string;
   code: string;
 }
 
-export default async function postCodeVerification({
+export default async function verifyEmailCode({
   email,
   code,
 }: codeVerification) {

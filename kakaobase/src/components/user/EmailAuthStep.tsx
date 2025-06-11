@@ -19,7 +19,7 @@ export default function EmailAuthStep({
     isEmailValid,
     validateEmail,
     sendCode,
-    verifyCode,
+    handleVerificationCode,
     isCodeValid,
     codeError,
     timer,
@@ -80,7 +80,7 @@ export default function EmailAuthStep({
         />
         <SubmitButtonSmall
           label={codeButtonLabel}
-          onClick={verifyCode}
+          onClick={handleVerificationCode}
           disabled={!isCodeValid}
           type="button"
         />
