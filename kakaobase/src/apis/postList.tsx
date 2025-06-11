@@ -1,5 +1,5 @@
 import api from './api';
-import type { Post } from '@/stores/postType';
+import type { Post } from '@/dto/post/post';
 import { getClientCookie } from '@/lib/getClientCookie';
 import { mapToPostEntity } from '@/lib/mapPost';
 

@@ -1,5 +1,5 @@
 import { getMyPosts } from '@/apis/profile';
-import { PostEntity } from '@/stores/postType';
+import { PostEntity } from '@/dto/post/post';
 import {
   InfiniteData,
   useInfiniteQuery,

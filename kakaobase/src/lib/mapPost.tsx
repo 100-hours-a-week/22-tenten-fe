@@ -4,7 +4,7 @@ import {
   Comment,
   Recomment,
   PostType,
-} from '@/stores/postType';
+} from '@/dto/post/post';
 
 export function mapToPostEntity(post: any, type: PostType): PostEntity {
   const base = {

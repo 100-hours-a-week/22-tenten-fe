@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useDeleteHook } from '@/hooks/post/useDeleteHook';
 import DeleteModal from '../common/DeleteSemiModal';
 import { useEffect, useState } from 'react';
-import { PostEntity } from '@/stores/postType';
+import { PostEntity } from '@/dto/post/post';
 
 export function UserProfile({ post }: { post: PostEntity }) {
   const router = useRouter();
