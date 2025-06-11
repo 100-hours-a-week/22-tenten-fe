@@ -1,9 +1,9 @@
 'use client';
-import { ProfileEntity } from '@/types/user/profileDto';
+import { Profile } from '@/types/user/Profile';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 
-export default function UserInfo({ data }: { data: ProfileEntity }) {
+export default function UserInfo({ data }: { data: Profile }) {
   return (
     <div className="flex bg-containerColor px-8 py-4 mt-4 rounded-xl flex flex-col items-center gap-4 w-full max-w-sm">
       {data.image_url === '' || data.image_url === null ? (

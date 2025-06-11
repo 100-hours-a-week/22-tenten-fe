@@ -1,4 +1,4 @@
-import { ProfileEntity } from '@/types/user/profileDto';
+import { Profile } from '@/types/user/Profile';
 import { useRouter } from 'next/navigation';
 
 function CountItem({
@@ -21,7 +21,7 @@ function CountItem({
   );
 }
 
-export default function CountInfo({ data }: { data: ProfileEntity }) {
+export default function CountInfo({ data }: { data: Profile }) {
   const router = useRouter();
   function navFollowers() {
     router.push(`${data.id}/followers`);

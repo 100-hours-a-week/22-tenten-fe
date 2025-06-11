@@ -1,4 +1,4 @@
-export interface ProfileEntity {
+export interface Profile {
   class_name: string;
   follower_count: number;
   following_count: number;

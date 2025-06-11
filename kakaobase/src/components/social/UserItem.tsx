@@ -1,10 +1,10 @@
 'use client';
-import { userEntity } from '@/types/user/userDto';
+import { UserBasic } from '@/types/user/UserBasic';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-export default function UserItem({ data }: { data: userEntity }) {
+export default function UserItem({ data }: { data: UserBasic }) {
   const userId = 1;
   const router = useRouter();
   function navProfile() {

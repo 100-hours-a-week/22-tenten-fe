@@ -1,4 +1,4 @@
-export interface userEntity {
+export interface UserBasic {
   id: number;
   image_url: string;
   name: string;
