@@ -23,7 +23,6 @@ export default async function getComments(
       },
     });
 
-    console.log(response.data.data);
     return response.data.data.comments.map((p: any) =>
       mapToPostEntity(p, 'comment')
     );

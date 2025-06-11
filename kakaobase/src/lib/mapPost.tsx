@@ -35,6 +35,7 @@ export function mapToPostEntity(post: any, type: PostType): PostEntity {
     return {
       ...base,
       commentCount: post.recomment_count,
+      postId: post.post_id,
     } as Comment;
   }
 
