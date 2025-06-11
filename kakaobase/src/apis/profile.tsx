@@ -30,6 +30,7 @@ export async function getMyPosts({
     const params: Record<string, any> = { limit };
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/posts`, {
+      params,
       headers: {
         Authorization: `Bearer ${getClientCookie('accessToken')}`,
       },
@@ -54,6 +55,7 @@ export async function getMyComments({
     const params: Record<string, any> = { limit };
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/comments`, {
+      params,
       headers: {
         Authorization: `Bearer ${getClientCookie('accessToken')}`,
       },
@@ -79,6 +81,7 @@ export async function getMyLikes({
     const params: Record<string, any> = { limit };
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/liked-posts`, {
+      params,
       headers: {
         Authorization: `Bearer ${getClientCookie('accessToken')}`,
       },
