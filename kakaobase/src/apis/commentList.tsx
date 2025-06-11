@@ -1,4 +1,4 @@
-import { Post } from '@/dto/post/post';
+import { Post } from '@/types/post/post';
 import api from './api';
 import { getClientCookie } from '@/lib/getClientCookie';
 import { mapToPostEntity } from '@/lib/mapPost';

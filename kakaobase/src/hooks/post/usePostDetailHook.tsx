@@ -4,7 +4,7 @@ import { PostType } from '@/lib/postType';
 import { mapToPostEntity } from '@/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/apis/comment';
-import { PostEntity } from '@/dto/post/post';
+import { PostEntity } from '@/types/post/post';
 import { refreshToken } from '@/apis/login';
 import { useToast } from '@/app/ToastContext';
 

@@ -1,5 +1,5 @@
 import { useLikeToggle } from '@/hooks/user/useLikeHook';
-import { PostEntity } from '@/dto/post/post';
+import { PostEntity } from '@/types/post/post';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';

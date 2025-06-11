@@ -1,7 +1,7 @@
 import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 import { GetPostsParams } from './postList';
-import { Post } from '@/dto/post/post';
+import { Post } from '@/types/post/post';
 import { mapToPostEntity } from '@/lib/mapPost';
 
 //대댓글 목록 조회

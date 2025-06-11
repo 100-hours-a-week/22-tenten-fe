@@ -4,7 +4,7 @@ import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import { usePathname, useRouter } from 'next/navigation';
 import { extractYoutubeVideoId } from '@/lib/formatYoutube';
-import { Comment, PostEntity } from '@/dto/post/post';
+import { Comment, PostEntity } from '@/types/post/post';
 import clsx from 'clsx';
 import summaryCondition from '@/lib/summaryCondition';
 import Linkify from 'react-linkify';

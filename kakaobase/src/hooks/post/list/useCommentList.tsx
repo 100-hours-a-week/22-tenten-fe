@@ -1,5 +1,5 @@
 import getComments from '@/apis/commentList';
-import { PostEntity } from '@/dto/post/post';
+import { PostEntity } from '@/types/post/post';
 import {
   InfiniteData,
   useInfiniteQuery,

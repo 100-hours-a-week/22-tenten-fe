@@ -1,5 +1,5 @@
 'use client';
-import { userEntity } from '@/dto/user/userDto';
+import { userEntity } from '@/types/user/userDto';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

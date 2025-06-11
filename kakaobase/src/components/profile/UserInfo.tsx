@@ -1,5 +1,5 @@
 'use client';
-import { ProfileEntity } from '@/dto/user/profileDto';
+import { ProfileEntity } from '@/types/user/profileDto';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 

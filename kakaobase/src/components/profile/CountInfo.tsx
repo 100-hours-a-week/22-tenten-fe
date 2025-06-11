@@ -1,4 +1,4 @@
-import { ProfileEntity } from '@/dto/user/profileDto';
+import { ProfileEntity } from '@/types/user/profileDto';
 import { useRouter } from 'next/navigation';
 
 function CountItem({

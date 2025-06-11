@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Post, Comment } from '@/dto/post/post';
+import type { Post, Comment } from '@/types/post/post';
 
 interface PostStore {
   // 게시글/댓글/대댓글 전역 상태
