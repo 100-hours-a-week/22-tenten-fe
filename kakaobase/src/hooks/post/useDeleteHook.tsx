@@ -3,7 +3,7 @@ import { deletePost } from '@/apis/post';
 import { deleteRecomment } from '@/apis/recomment';
 import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';
-import { PostType } from '@/lib/postType';
+import { useUserStore } from '@/stores/userStore';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -12,14 +12,11 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
   const path = usePathname();
   const [isOpened, setOpen] = useState(false);
   const { showToast } = useToast();
+  const { selectedCourse } = useUserStore();
   async function deletePostExecute() {
-    const postType =
-      typeof window !== 'undefined'
-        ? (localStorage.getItem('currCourse') as PostType) || 'ALL'
-        : 'ALL';
     try {
       if (type === 'post') {
-        await deletePost({ postType, id });
+        await deletePost({ postType: selectedCourse, id });
         queryClient.invalidateQueries({ queryKey: ['posts'] });
       } else if (type === 'comment') {
         await deleteComment({ id });
@@ -38,6 +35,7 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
       showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
     }
   }
+
   function closeModal() {
     setOpen(false);
   }

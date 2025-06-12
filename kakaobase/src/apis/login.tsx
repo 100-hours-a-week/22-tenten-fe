@@ -1,3 +1,4 @@
+import { Course } from '@/lib/Course';
 import api from './api';
 
 interface LoginRequest {
@@ -8,7 +9,7 @@ interface LoginRequest {
 interface LoginResponse {
   message: string;
   data: {
-    class_name: string;
+    class_name: Course;
     nickname: string;
     member_id: string;
     image_url: string;

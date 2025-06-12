@@ -12,12 +12,12 @@ export type imageData = z.infer<typeof profileImageSchema>;
 
 export default function useImageEditHook() {
   const [loading, setLoading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const { imageUrl, setUserInfo } = useUserStore();
+  const [previewUrl, setPreviewUrl] = useState<string>(imageUrl);
   const { showToast } = useToast();
-  const { profileImageUrl, setUserInfo } = useUserStore();
 
   useEffect(() => {
-    setPreviewUrl(profileImageUrl);
+    setPreviewUrl(imageUrl);
   }, []);
 
   const methods = useForm<imageData>({
@@ -37,7 +37,7 @@ export default function useImageEditHook() {
         imageUrl = await postToS3(data.imageFile, 'profile_image');
       }
       setPreviewUrl(imageUrl);
-      setUserInfo({ profileImageUrl: imageUrl });
+      setUserInfo({ imageUrl: imageUrl });
 
       await editProfile({ imageUrl });
       showToast('프로필 이미지 저장 완료! ✌️');

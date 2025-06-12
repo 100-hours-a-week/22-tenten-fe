@@ -34,8 +34,7 @@ function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
 function LoginProfile({ path }: { path: string }) {
   const pathName = usePathname();
   const router = useRouter();
-  const { userId, profileImageUrl } = useUserStore();
-
+  const { userId, imageUrl } = useUserStore();
   const isActive = pathName.includes(path);
 
   function navMyProfile() {
@@ -44,7 +43,7 @@ function LoginProfile({ path }: { path: string }) {
 
   return (
     <div className="flex" onClick={navMyProfile}>
-      {profileImageUrl === '' || profileImageUrl === null ? (
+      {imageUrl === '' || imageUrl === null ? (
         <User
           className={clsx(
             'w-6 h-6 transition-colors cursor-pointer',
@@ -53,7 +52,7 @@ function LoginProfile({ path }: { path: string }) {
         />
       ) : (
         <Image
-          src={profileImageUrl}
+          src={imageUrl}
           width={12}
           height={12}
           alt="profile"
