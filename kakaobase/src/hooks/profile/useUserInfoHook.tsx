@@ -2,19 +2,13 @@ import { getUserInfo } from '@/apis/profile';
 import { useUserStore } from '@/stores/userStore';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import useTokenCheck from '../user/useTokenCheckHook';
+import { useState } from 'react';
 
 export default function useUserInfoHook({ userId }: { userId: number }) {
   const router = useRouter();
-  const { checkUnauthorized } = useTokenCheck();
 
   const { setUserInfo } = useUserStore();
   const [isOpen, setOpen] = useState(false);
-
-  useEffect(() => {
-    checkUnauthorized();
-  }, []);
 
   const methods = useQuery({
     queryKey: ['user', userId],

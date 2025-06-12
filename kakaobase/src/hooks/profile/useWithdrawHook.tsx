@@ -1,19 +1,13 @@
 import withdraw from '@/apis/withdraw';
-import { useEffect, useState } from 'react';
-import useTokenCheck from '../user/useTokenCheckHook';
+import { useState } from 'react';
 import { useToast } from '@/app/ToastContext';
 import { useRouter } from 'next/navigation';
 
 export default function useWithdrawHook() {
-  const { checkUnauthorized } = useTokenCheck();
   const [isVerified, setVerified] = useState(false);
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
   const router = useRouter();
-
-  useEffect(() => {
-    checkUnauthorized();
-  });
 
   async function deleteUser() {
     try {

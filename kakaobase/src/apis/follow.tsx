@@ -1,18 +1,9 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
 //팔로우 요청 api
 export async function postFollow({ id }: { id: number }) {
   try {
-    await api.post(
-      `/users/${id}/follows`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${getClientCookie('accessToken')}`,
-        },
-      }
-    );
+    await api.post(`/users/${id}/follows`);
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }
@@ -21,11 +12,7 @@ export async function postFollow({ id }: { id: number }) {
 //팔로우 취소 api
 export async function deleteFollow({ id }: { id: number }) {
   try {
-    await api.delete(`/users/${id}/follows`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    await api.delete(`/users/${id}/follows`);
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }
@@ -46,9 +33,6 @@ export async function getFollowers({
   try {
     const response = await api.get(`/users/${userId}/followers`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data;
   } catch (e: unknown) {
@@ -71,9 +55,6 @@ export async function getFollowings({
   try {
     const response = await api.get(`/users/${userId}/followings`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data;
   } catch (e: unknown) {

@@ -1,15 +1,10 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 import { mapToPostEntity } from '@/lib/mapPost';
 
 //프로필 정보 조회
 export async function getUserInfo({ userId }: { userId: number }) {
   try {
-    const response = await api.get(`/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    const response = await api.get(`/users/${userId}`);
     return response.data.data;
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
@@ -31,9 +26,6 @@ export async function getMyPosts({
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/posts`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data.map((p: any) => mapToPostEntity(p, 'post'));
   } catch (e: unknown) {
@@ -56,9 +48,6 @@ export async function getMyComments({
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/comments`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
 
     return response.data.data.map((p: any) => mapToPostEntity(p, 'comment'));
@@ -82,9 +71,6 @@ export async function getMyLikes({
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/users/${userId}/liked-posts`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data.map((p: any) => mapToPostEntity(p, 'post'));
   } catch (e: unknown) {
