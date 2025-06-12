@@ -6,13 +6,13 @@ import {
   UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import useCourseSelectHook from '../useCourseSelectHook';
+import { useUserStore } from '@/stores/userStore';
 
 export default function usePostList(): UseInfiniteQueryResult<
   InfiniteData<PostEntity[]>,
   Error
 > {
-  const { course } = useCourseSelectHook();
+  const { selectedCourse } = useUserStore();
 
   useEffect(() => {
     const targetId = sessionStorage.getItem('scrollToPostId');
@@ -28,12 +28,12 @@ export default function usePostList(): UseInfiniteQueryResult<
   }, []);
 
   return useInfiniteQuery({
-    queryKey: ['posts', course],
+    queryKey: ['posts', selectedCourse],
     queryFn: async ({ pageParam }: { pageParam?: number }) => {
       const response = await getPosts({
         limit: 6,
         cursor: pageParam,
-        course: course,
+        course: selectedCourse,
       });
       return response;
     },

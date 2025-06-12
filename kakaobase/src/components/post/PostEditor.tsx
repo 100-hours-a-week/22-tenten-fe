@@ -11,6 +11,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
+import { useUserStore } from '@/stores/userStore';
 
 function HelperText({ errorMessage }: { errorMessage: string }) {
   return <div className="text-redHeart text-xs h-4">{errorMessage}</div>;
@@ -23,14 +24,7 @@ function ContentInput({
   register: UseFormRegister<NewPostData>;
   errors: FieldErrors<NewPostData>;
 }) {
-  const [nickname, setNickname] = useState<string | null>(null);
-
-  useEffect(() => {
-    const nick = localStorage.getItem('nickname') || '';
-    setNickname(nick);
-  }, []);
-
-  if (nickname === null) return null;
+  const { nickname } = useUserStore();
 
   return (
     <div className="w-full">

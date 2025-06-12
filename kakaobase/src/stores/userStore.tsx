@@ -1,14 +1,15 @@
+import { Course } from '@/lib/Course';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface UserState {
   userId: number;
-  email: string;
   name: string;
   nickname: string;
-  course: string;
+  course: Course;
+  selectedCourse: Course;
   githubUrl: string;
-  profileImageUrl: string;
+  imageUrl: string;
   setUserInfo: (user: Partial<UserState>) => void;
   reset: () => void;
 }
@@ -16,28 +17,36 @@ export const useUserStore = create<UserState>()(
   persist(
     (set) => ({
       userId: 0,
-      email: '',
       name: '',
       nickname: '',
-      course: '',
+      course: 'ALL',
+      selectedCourse: 'ALL',
       githubUrl: '',
-      profileImageUrl: '',
+      imageUrl: '',
       setUserInfo: (user) => set((state) => ({ ...state, ...user })),
       reset: () =>
         set({
           userId: 0,
-          email: '',
           name: '',
           nickname: '',
-          course: '',
+          course: 'ALL',
+          selectedCourse: 'ALL',
           githubUrl: '',
-          profileImageUrl: '',
+          imageUrl: '',
         }),
     }),
     {
-      name: 'user-storage', // localStorage key
+      name: 'user-storage',
       storage: createJSONStorage(() => localStorage),
-      // whitelist: ['userId','email',…],  // 선택적으로 저장할 필드 지정 가능
+      partialize: (state) => ({
+        userId: state.userId,
+        name: state.name,
+        nickname: state.nickname,
+        course: state.course,
+        selectedCourse: state.selectedCourse,
+        githubUrl: state.githubUrl,
+        imageUrl: state.imageUrl,
+      }),
     }
   )
 );
