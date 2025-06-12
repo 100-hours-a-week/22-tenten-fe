@@ -12,7 +12,7 @@ import { useState } from 'react';
 import ListRouter from './ListRouter';
 
 export default function Wrapper({ userId }: { userId: number }) {
-  const { data, isLoading, handleModal, navEdit, isOpen } = useUserInfoHook({
+  const { data, isPending, handleModal, navEdit, isOpen } = useUserInfoHook({
     userId,
   });
   const { following, toggleFollow } = useFollowToggle(
@@ -21,7 +21,7 @@ export default function Wrapper({ userId }: { userId: number }) {
   );
   const [type, setType] = useState<profileListType>('게시글');
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex mt-20 justify-center">
         <Loading />

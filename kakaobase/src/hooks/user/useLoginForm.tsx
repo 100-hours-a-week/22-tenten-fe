@@ -11,7 +11,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function useLoginForm() {
   const router = useRouter();
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { setUserInfo } = useUserStore();
   const { showToast } = useToast();
 
   const loginForm = useForm<LoginFormData>({
@@ -33,13 +33,13 @@ export default function useLoginForm() {
 
     try {
       const response = await login(requestBody);
-      localStorage.setItem('myCourse', response.data.class_name);
 
       setUserInfo({
         course: response.data.class_name,
+        selectedCourse: response.data.class_name,
         nickname: response.data.nickname,
         userId: Number(response.data.member_id),
-        profileImageUrl: response.data.image_url,
+        imageUrl: response.data.image_url,
       });
       router.push('/');
     } catch (e: any) {

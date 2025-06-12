@@ -1,8 +1,8 @@
-import { PostType } from '@/lib/postType';
+import { Course } from '@/lib/Course';
 import api from './api';
 
 interface postParams {
-  postType: PostType;
+  postType: Course;
   id?: number;
 }
 
