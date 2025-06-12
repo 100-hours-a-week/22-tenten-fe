@@ -9,7 +9,6 @@ export interface UserState {
   course: string;
   githubUrl: string;
   profileImageUrl: string;
-  autoLogin: boolean;
   setUserInfo: (user: Partial<UserState>) => void;
   reset: () => void;
 }
@@ -23,7 +22,6 @@ export const useUserStore = create<UserState>()(
       course: '',
       githubUrl: '',
       profileImageUrl: '',
-      autoLogin: false,
       setUserInfo: (user) => set((state) => ({ ...state, ...user })),
       reset: () =>
         set({
@@ -34,7 +32,6 @@ export const useUserStore = create<UserState>()(
           course: '',
           githubUrl: '',
           profileImageUrl: '',
-          autoLogin: false,
         }),
     }),
     {

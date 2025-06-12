@@ -3,8 +3,7 @@ import SubmitButton from '@/components/common/button/SubmitButton';
 import EmailAuthStep from '@/components/user/EmailAuthStep';
 import PasswordStep from '@/components/user/PasswordStep';
 import { usePasswordStep } from '@/hooks/user/usePasswordStep';
-import useTokenCheck from '@/hooks/user/useTokenCheckHook';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Wrapper() {
   const {
@@ -17,11 +16,6 @@ export default function Wrapper() {
 
   const [isVerified, setVerified] = useState(false);
   const [email, setEmail] = useState('');
-  const { checkUnauthorized } = useTokenCheck();
-
-  useEffect(() => {
-    checkUnauthorized();
-  });
 
   return (
     <div className="flex justify-center items-center animate-slide-in">

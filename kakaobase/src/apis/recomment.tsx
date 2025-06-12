@@ -1,4 +1,3 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 import { GetPostsParams } from './postList';
 import { Post } from '@/types/post/post';
@@ -15,9 +14,6 @@ export async function getRecomments(
     if (cursor !== undefined) params.cursor = cursor;
     const response = await api.get(`/comments/${commentId}/recomments`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data.recomments.map((p: any) =>
       mapToPostEntity(p, 'recomment')
@@ -31,11 +27,7 @@ export async function getRecomments(
 //대댓글 삭제
 export async function deleteRecomment({ id }: { id: number }) {
   try {
-    const response = await api.delete(`recomments/${id}`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    const response = await api.delete(`recomments/${id}`);
     return response.data;
   } catch (e: unknown) {
     if (e instanceof Error) throw e;

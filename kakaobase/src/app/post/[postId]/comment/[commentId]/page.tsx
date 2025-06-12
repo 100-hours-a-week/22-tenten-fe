@@ -5,16 +5,9 @@ import MiddleBar from '@/components/common/MiddleBar';
 import CommentInput from '@/components/inputs/CommentInput';
 import ListRouter from '@/components/post/ListRouter';
 import PostCard from '@/components/post/PostCard';
-import useTokenCheck from '@/hooks/user/useTokenCheckHook';
 import usePostDetail from '@/hooks/post/usePostDetailHook';
-import { useEffect } from 'react';
 
 export default function Page({ params }: { params: { commentId: number } }) {
-  const { checkUnauthorized } = useTokenCheck();
-  useEffect(() => {
-    checkUnauthorized();
-  }, []);
-
   const id = Number(params.commentId);
   const { post, loading } = usePostDetail({ id });
 

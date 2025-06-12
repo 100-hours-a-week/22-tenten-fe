@@ -25,7 +25,7 @@ export default function useLoginForm() {
   });
   const { setError } = loginForm;
 
-  const onSubmit = async (data: LoginFormData, autoLogin: boolean) => {
+  const onSubmit = async (data: LoginFormData) => {
     const requestBody = {
       email: data.email,
       password: data.password,
@@ -33,14 +33,13 @@ export default function useLoginForm() {
 
     try {
       const response = await login(requestBody);
-      document.cookie = `accessToken=${response.data.access_token}; path=/; secure; samesite=lax; max-age=1800`; //30분
       localStorage.setItem('myCourse', response.data.class_name);
 
       setUserInfo({
         course: response.data.class_name,
         nickname: response.data.nickname,
         userId: Number(response.data.member_id),
-        autoLogin: autoLogin,
+        profileImageUrl: response.data.image_url,
       });
       router.push('/');
     } catch (e: any) {

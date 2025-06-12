@@ -1,4 +1,3 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
 export default async function changePassword({
@@ -9,15 +8,10 @@ export default async function changePassword({
   password: string;
 }) {
   try {
-    const response = await api.put(
-      'users/password',
-      { email, new_password: password },
-      {
-        headers: {
-          Authorization: `Bearer ${getClientCookie('accessToken')}`,
-        },
-      }
-    );
+    await api.put('users/password', {
+      email,
+      new_password: password,
+    });
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }

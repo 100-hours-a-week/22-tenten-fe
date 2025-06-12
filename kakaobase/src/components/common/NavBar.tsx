@@ -10,8 +10,6 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { getClientCookie } from '@/lib/getClientCookie';
-import { useEffect, useState } from 'react';
 import { useUserStore } from '@/stores/userStore';
 
 function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
@@ -71,14 +69,6 @@ function LoginProfile({ path }: { path: string }) {
 
 export default function NavBar() {
   const router = useRouter();
-  const [hasToken, setHasToken] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const accessToken = getClientCookie('accessToken');
-    setHasToken(!!accessToken);
-  }, []);
-
-  if (hasToken === null) return null; // hydration mismatch 방지
 
   return (
     <div className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md">
@@ -97,11 +87,7 @@ export default function NavBar() {
         </button>
         <div className="flex gap-12">
           {/* <NavItem icon={Bell} path="/alarm" /> */}
-          {hasToken ? (
-            <LoginProfile path="/profile" />
-          ) : (
-            <NavItem icon={User} path="/login" />
-          )}
+          <LoginProfile path="/profile" />
         </div>
       </div>
     </div>

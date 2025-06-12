@@ -8,7 +8,7 @@ export default function UserItem({ data }: { data: UserBasic }) {
   const userId = 1;
   const router = useRouter();
   function navProfile() {
-    router.push(`/profile/${userId}`);
+    router.push(`/profile/${data.id}`);
   }
   return (
     <div

@@ -1,4 +1,3 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
 //게시글 좋아요 목록
@@ -16,9 +15,6 @@ export async function getPostLikes({
   try {
     const response = await api.get(`/posts/${postId}/likes`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data;
   } catch (e: unknown) {
@@ -41,9 +37,6 @@ export async function getCommentLikes({
   try {
     const response = await api.get(`/comments/${postId}/likes`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data;
   } catch (e: unknown) {
@@ -66,9 +59,6 @@ export async function getRecommentLikes({
   try {
     const response = await api.get(`/recomments/${postId}/likes`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
     return response.data.data;
   } catch (e: unknown) {
