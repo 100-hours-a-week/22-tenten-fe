@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import useTokenCheck from '../user/useTokenCheckHook';
 import { useState } from 'react';
 import { useToast } from '@/app/ToastContext';
 import { useUserStore } from '@/stores/userStore';
@@ -11,7 +10,6 @@ import { editGithub } from '@/apis/editProfile';
 export type githubData = z.infer<typeof githubSchema>;
 
 export default function useGithubEditHook() {
-  const { checkUnauthorized } = useTokenCheck();
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
   const { githubUrl, setUserInfo } = useUserStore();
@@ -26,7 +24,6 @@ export default function useGithubEditHook() {
   });
 
   const onSubmit = async (data: githubData) => {
-    checkUnauthorized();
     try {
       setLoading(true);
       await editGithub({ url: data.githubUrl });

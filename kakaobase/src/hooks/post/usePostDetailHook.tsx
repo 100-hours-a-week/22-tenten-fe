@@ -5,7 +5,6 @@ import { mapToPostEntity } from '@/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/apis/comment';
 import { PostEntity } from '@/stores/postType';
-import { refreshToken } from '@/apis/login';
 import { useToast } from '@/app/ToastContext';
 
 export default function usePostDetail({ id }: { id: number }) {
@@ -34,7 +33,6 @@ export default function usePostDetail({ id }: { id: number }) {
     } catch (e: any) {
       setError(e as Error);
       if (e.response.data.error === 'unauthorized') {
-        refreshToken();
         showToast('로그인이 필요합니다. 😭');
       } else {
         showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');

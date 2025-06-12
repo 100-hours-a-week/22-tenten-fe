@@ -1,4 +1,3 @@
-import { getClientCookie } from '@/lib/getClientCookie';
 import api from './api';
 
 interface idParam {
@@ -8,15 +7,7 @@ interface idParam {
 //게시글 좋아요 등록
 export async function likePost({ id }: idParam) {
   try {
-    const response = await api.post(
-      `/posts/${id}/likes`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${getClientCookie('accessToken')}`,
-        },
-      }
-    );
+    const response = await api.post(`/posts/${id}/likes`);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -26,11 +17,7 @@ export async function likePost({ id }: idParam) {
 //게시글 좋아요 취소
 export async function deletePostLike({ id }: idParam) {
   try {
-    const response = await api.delete(`/posts/${id}/likes`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    const response = await api.delete(`/posts/${id}/likes`);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -40,15 +27,7 @@ export async function deletePostLike({ id }: idParam) {
 //댓글 좋아요 등록
 export async function likeComment({ id }: idParam) {
   try {
-    const response = await api.post(
-      `/comments/${id}/likes`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${getClientCookie('accessToken')}`,
-        },
-      }
-    );
+    const response = await api.post(`/comments/${id}/likes`);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -58,11 +37,7 @@ export async function likeComment({ id }: idParam) {
 //댓글 좋아요 취소
 export async function deleteCommentLike({ id }: idParam) {
   try {
-    const response = await api.delete(`/comments/${id}/likes`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    const response = await api.delete(`/comments/${id}/likes`, {});
     return response.data;
   } catch (e) {
     console.log(e);
@@ -72,15 +47,7 @@ export async function deleteCommentLike({ id }: idParam) {
 //대댓글 좋아요 등록
 export async function likeRecomment({ id }: idParam) {
   try {
-    const response = await api.post(
-      `/recomments/${id}/likes`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${getClientCookie('accessToken')}`,
-        },
-      }
-    );
+    const response = await api.post(`/recomments/${id}/likes`);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -90,11 +57,7 @@ export async function likeRecomment({ id }: idParam) {
 //대댓글 좋아요 취소
 export async function deleteRecommentLike({ id }: idParam) {
   try {
-    const response = await api.delete(`/recomments/${id}/likes`, {
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
-    });
+    const response = await api.delete(`/recomments/${id}/likes`);
     return response.data;
   } catch (e) {
     console.log(e);

@@ -1,16 +1,13 @@
 'use client';
 
 import useCourseSelectHook from '@/hooks/post/useCourseSelectHook';
-import useTokenCheck from '@/hooks/user/useTokenCheckHook';
 import { useEffect, useState } from 'react';
 
 export default function PostCourseSelector() {
   const { course, myCourseLabel, handleChange } = useCourseSelectHook();
   const [myCourse, setMyCourse] = useState<string | null>(null);
-  const { checkUnauthorized } = useTokenCheck();
 
   useEffect(() => {
-    checkUnauthorized();
     if (typeof window !== 'undefined') {
       setMyCourse(localStorage.getItem('myCourse'));
     }

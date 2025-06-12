@@ -1,5 +1,4 @@
 import { deleteComment } from '@/apis/comment';
-import { refreshToken } from '@/apis/login';
 import { deletePost } from '@/apis/post';
 import { deleteRecomment } from '@/apis/recomment';
 import { queryClient } from '@/app/providers';
@@ -36,12 +35,7 @@ export function useDeleteHook({ id, type }: { id: number; type: string }) {
       else if (path.includes('comment') && type === 'comment') router.back(); //댓글 상세에서 댓글 지우기
       //얘도 나중에 바꿔야 함
     } catch (e: any) {
-      if (e.response.data.error === 'unauthorized') {
-        refreshToken();
-      } else {
-        showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
-        router.push('/');
-      }
+      showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
     }
   }
   function closeModal() {

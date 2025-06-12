@@ -6,17 +6,8 @@ import CommentInput from '@/components/inputs/CommentInput';
 import ListRouter from '@/components/post/ListRouter';
 import PostCard from '@/components/post/PostCard';
 import usePostDetail from '@/hooks/post/usePostDetailHook';
-import useTokenCheck from '@/hooks/user/useTokenCheckHook';
-
-import { useEffect } from 'react';
 
 export default function Page({ params }: { params: { postId: number } }) {
-  const { checkUnauthorized } = useTokenCheck();
-
-  useEffect(() => {
-    checkUnauthorized();
-  }, []);
-
   const id = Number(params.postId);
   const { post, loading } = usePostDetail({ id });
 
