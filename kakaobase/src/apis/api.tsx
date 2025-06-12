@@ -1,4 +1,3 @@
-import { useToast } from '@/app/ToastContext';
 import axios from 'axios';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 
@@ -30,7 +29,6 @@ api.interceptors.response.use(
     error: AxiosError & { config?: AxiosRequestConfig & { _retry?: boolean } }
   ) => {
     const origReq = error.config!;
-    const { showToast } = useToast();
     if (error.response?.status === 401 && !origReq._retry) {
       if (isRefreshing) {
         //토큰 재발급 중
@@ -49,7 +47,6 @@ api.interceptors.response.use(
         return api(origReq); //기존 api 요청 재시도
       } catch (refreshError) {
         processQueue(refreshError);
-        showToast('로그인이 필요합니다. 😭');
         window.location.href = '/login';
         return Promise.reject(refreshError);
       } finally {
