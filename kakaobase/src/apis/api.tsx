@@ -29,6 +29,13 @@ api.interceptors.response.use(
     error: AxiosError & { config?: AxiosRequestConfig & { _retry?: boolean } }
   ) => {
     const origReq = error.config!;
+
+    if (origReq.url?.includes('/auth/tokens/refresh')) {
+      // 리프레시 실패 시 바로 로그인 페이지로 이동
+      window.location.href = '/login';
+      return Promise.reject(error);
+    }
+
     if (error.response?.status === 401 && !origReq._retry) {
       if (isRefreshing) {
         //토큰 재발급 중
