@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
+import GoogleAnalytics from '@/lib/GoogleAnalytics';
 
 export const metadata: Metadata = {
   title: 'Kakaobase',
@@ -19,6 +20,11 @@ export default async function RootLayout({
   return (
     <html lang="ko">
       <body className={`bg-animated-gradient sm:bg-animated-gradient`}>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
+          <GoogleAnalytics
+            googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
+          />
+        )}
         <Providers>
           <div className="flex w-screen">
             <div className="hidden lg:flex flex-col items-center justify-center w-[48%] active:animate-bounce">
