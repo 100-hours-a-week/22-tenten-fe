@@ -1,4 +1,4 @@
-import { Course } from '@/lib/Course';
+import { Course } from '@/types/shared/Course';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 

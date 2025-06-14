@@ -1,7 +1,7 @@
 import postToS3 from '@/apis/imageS3';
 import { postPost } from '@/apis/post';
 import { queryClient } from '@/app/providers';
-import { Course } from '@/lib/Course';
+import { Course } from '@/types/shared/Course';
 import { postSchema } from '@/schemas/postSchema';
 import { usePostStore } from '@/stores/postStore';
 import { zodResolver } from '@hookform/resolvers/zod';

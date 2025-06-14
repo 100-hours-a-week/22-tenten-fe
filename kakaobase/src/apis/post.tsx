@@ -1,4 +1,4 @@
-import { Course } from '@/lib/Course';
+import { Course } from '@/types/shared/Course';
 import api from './api';
 
 interface postParams {
