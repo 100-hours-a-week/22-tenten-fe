@@ -3,6 +3,7 @@
 import UserItem from './UserItem';
 import useLikeListHook from '@/hooks/social/useLikeListHook';
 import LoadingSmall from '../common/loading/LoadingSmall';
+import useScrollHook from '@/hooks/useScrollHook';
 
 export default function UserLikeList({
   postId,
@@ -11,17 +12,34 @@ export default function UserLikeList({
   postId: number;
   postType: string;
 }) {
-  const { data, isFetching, hasNextPage } = useLikeListHook({
+  const {
+    data,
+    isPending,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  } = useLikeListHook({
     postId,
     postType,
   });
+  const { observerRef } = useScrollHook({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  });
 
   return (
-    <div className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2">
+    <div
+      className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2"
+      data-scroll-area
+    >
       {data?.pages.flat().map((item) => (
         <UserItem key={item.id} data={item} />
       ))}
-      {isFetching && <LoadingSmall />}
+      {isPending && <LoadingSmall />}
+      {hasNextPage && <div className="h-[1px]" ref={observerRef} />}
       {!hasNextPage && (
         <div className="flex justify-center text-xs">
           {' '}

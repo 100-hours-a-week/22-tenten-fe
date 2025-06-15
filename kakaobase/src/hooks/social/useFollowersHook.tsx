@@ -7,12 +7,12 @@ export default function useFollowersHook({ userId }: { userId: number }) {
     queryFn: async ({ pageParam }: { pageParam?: number }) => {
       const response = await getFollowers({
         userId: userId,
-        limit: 30,
+        limit: 28,
         cursor: pageParam,
       });
       return response;
     },
-    getNextPageParam: (lastPage) => lastPage.at(-1),
+    getNextPageParam: (lastPage) => lastPage.at(-1).id,
     initialPageParam: undefined,
   });
 }

@@ -19,7 +19,7 @@ export default function useLikeListHook({
         //게시글
         const response = await getPostLikes({
           postId: postId,
-          limit: 15,
+          limit: 22,
           cursor: pageParam,
         });
         return response;
@@ -27,7 +27,7 @@ export default function useLikeListHook({
         //댓글
         const response = await getCommentLikes({
           postId: postId,
-          limit: 15,
+          limit: 22,
           cursor: pageParam,
         });
         return response;
@@ -35,7 +35,7 @@ export default function useLikeListHook({
         //대댓글
         const response = await getRecommentLikes({
           postId: postId,
-          limit: 15,
+          limit: 22,
           cursor: pageParam,
         });
         return response;
