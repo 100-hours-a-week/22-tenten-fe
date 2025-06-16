@@ -3,16 +3,34 @@
 import useFollowersHook from '@/hooks/social/useFollowersHook';
 import LoadingSmall from '../common/loading/LoadingSmall';
 import UserItem from './UserItem';
+import useScrollHook from '@/hooks/useScrollHook';
 
 export default function UserFollowerList({ userId }: { userId: number }) {
-  const { data, hasNextPage, isFetching } = useFollowersHook({ userId });
+  const {
+    data,
+    hasNextPage,
+    isPending,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  } = useFollowersHook({ userId });
+  const { observerRef } = useScrollHook({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    refetch,
+  });
 
   return (
-    <div className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2">
+    <div
+      className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2"
+      data-scroll-area
+    >
       {data?.pages.flat().map((item) => (
         <UserItem key={item.id} data={item} />
       ))}
-      {isFetching && <LoadingSmall />}
+      {isPending && <LoadingSmall />}
+      {isFetchingNextPage && <div className="h-[1px]" ref={observerRef} />}
       {!hasNextPage && (
         <div className="flex justify-center text-xs">
           {' '}
