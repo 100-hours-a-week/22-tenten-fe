@@ -1,4 +1,5 @@
 import HeaderMain from '@/components/common/header/HeaderMain';
+import LoginModal from '@/components/common/LoginModal';
 import NavBar from '@/components/common/NavBar';
 import ListRouter from '@/components/post/ListRouter';
 import PostCourseSelector from '@/components/post/PostCourseSelector';
@@ -6,6 +7,7 @@ import PostCourseSelector from '@/components/post/PostCourseSelector';
 export default function Home() {
   return (
     <main className="flex flex-col h-screen scroll-none">
+      <LoginModal />
       <HeaderMain />
       <PostCourseSelector />
       <div

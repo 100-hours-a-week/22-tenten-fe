@@ -1,4 +1,5 @@
 import { deleteFollow, postFollow } from '@/apis/follow';
+import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';
 import { useEffect, useState } from 'react';
 
@@ -21,7 +22,9 @@ export function useFollowToggle(initial: boolean, id: number) {
         postFollow({ id });
         showToast('팔로우 성공! ✌️');
       }
-      setFollowing(!following);
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      queryClient.invalidateQueries({ queryKey: ['comments'] });
+      queryClient.invalidateQueries({ queryKey: ['recomments'] });
     } catch (e) {
       if (following) showToast('언팔로우 실패 😭');
       else showToast('팔로우 실패 😭');
