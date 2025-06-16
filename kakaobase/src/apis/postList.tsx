@@ -1,6 +1,5 @@
 import api from './api';
 import type { Post } from '@/stores/postType';
-import { getClientCookie } from '@/lib/getClientCookie';
 import { mapToPostEntity } from '@/lib/mapPost';
 
 export interface GetPostsParams {
@@ -21,12 +20,8 @@ export default async function getPosts({
 
     const response = await api.get(`/posts/${course}`, {
       params,
-      headers: {
-        Authorization: `Bearer ${getClientCookie('accessToken')}`,
-      },
     });
 
-    console.log(response.data.data);
     return response.data.data.map((p: any) => mapToPostEntity(p, 'post'));
   } catch (e: unknown) {
     if (e instanceof Error) throw e;

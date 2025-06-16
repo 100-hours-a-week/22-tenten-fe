@@ -1,18 +1,33 @@
-import { useState } from 'react';
+import { deleteFollow, postFollow } from '@/apis/follow';
+import { queryClient } from '@/app/providers';
+import { useToast } from '@/app/ToastContext';
+import { useEffect, useState } from 'react';
 
-export function useFollowToggle(initial: boolean) {
+export function useFollowToggle(initial: boolean, id: number) {
   const [following, setFollowing] = useState(initial);
+  const { showToast } = useToast();
+
+  useEffect(() => {
+    if (initial !== undefined) {
+      setFollowing(initial);
+    }
+  }, [initial]);
 
   const toggleFollow = async () => {
     try {
       if (following) {
-        // 언팔로우 API 호출
+        await deleteFollow({ id });
+        showToast('언팔로우 성공! ✌️');
       } else {
-        // 팔로우 API 호출
+        postFollow({ id });
+        showToast('팔로우 성공! ✌️');
       }
-      setFollowing(!following);
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      queryClient.invalidateQueries({ queryKey: ['comments'] });
+      queryClient.invalidateQueries({ queryKey: ['recomments'] });
     } catch (e) {
-      console.error('팔로우 토글 실패', e);
+      if (following) showToast('언팔로우 실패 😭');
+      else showToast('팔로우 실패 😭');
     }
   };
 

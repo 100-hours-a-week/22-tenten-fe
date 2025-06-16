@@ -22,7 +22,7 @@ export default function PostList() {
   });
 
   return (
-    <div className="flex flex-col py-4">
+    <div className="flex flex-col py-2">
       {status === 'pending' && <LoadingSmall />}
       {data?.pages.flat().map((post) => (
         <PostCard key={post.id} post={post} />

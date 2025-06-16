@@ -10,8 +10,7 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { getClientCookie } from '@/lib/getClientCookie';
-import { useEffect, useState } from 'react';
+import { useUserStore } from '@/stores/userStore';
 
 function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
   const pathName = usePathname();
@@ -32,46 +31,43 @@ function NavItem({ icon: Icon, path }: { icon: LucideIcon; path?: string }) {
   );
 }
 
-function LoginProfile() {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+function LoginProfile({ path }: { path: string }) {
+  const pathName = usePathname();
+  const router = useRouter();
+  const { userId, imageUrl } = useUserStore();
+  const isActive = pathName.includes(path);
 
-  useEffect(() => {
-    const url = localStorage.getItem('profileImage') || '';
-    setImageUrl(url);
-  }, []);
-
-  if (imageUrl === null) return null; // hydration mismatch 방지
-  if (imageUrl === '') {
-    return (
-      <div className="flex">
-        <NavItem icon={User} />
-      </div>
-    );
+  function navMyProfile() {
+    router.push(`/profile/${userId}`);
   }
 
   return (
-    <div className="flex">
-      <Image
-        src={imageUrl}
-        width={12}
-        height={12}
-        alt="profile"
-        className="w-6 h-6 rounded-md transition-colors cursor-pointer"
-      />
+    <div className="flex" onClick={navMyProfile}>
+      {imageUrl === '' || imageUrl === null ? (
+        <User
+          className={clsx(
+            'w-6 h-6 transition-colors cursor-pointer',
+            isActive ? 'text-myBlue' : 'text-iconColor'
+          )}
+        />
+      ) : (
+        <Image
+          src={imageUrl}
+          width={12}
+          height={12}
+          alt="profile"
+          className={clsx(
+            'w-6 h-6 transition-colors cursor-pointer rounded-md',
+            isActive ? 'text-myBlue' : 'text-iconColor'
+          )}
+        />
+      )}
     </div>
   );
 }
 
 export default function NavBar() {
   const router = useRouter();
-  const [hasToken, setHasToken] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const accessToken = getClientCookie('accessToken');
-    setHasToken(!!accessToken);
-  }, []);
-
-  if (hasToken === null) return null; // hydration mismatch 방지
 
   return (
     <div className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md">
@@ -90,7 +86,7 @@ export default function NavBar() {
         </button>
         <div className="flex gap-12">
           {/* <NavItem icon={Bell} path="/alarm" /> */}
-          {hasToken ? <LoginProfile /> : <NavItem icon={User} path="/login" />}
+          <LoginProfile path="/profile" />
         </div>
       </div>
     </div>

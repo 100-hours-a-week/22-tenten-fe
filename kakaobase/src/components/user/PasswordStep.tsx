@@ -9,18 +9,26 @@ interface PasswordStepProps {
   register: UseFormRegister<PasswordStepFormData>;
   errors: FieldErrors<PasswordStepFormData>;
   trigger: UseFormTrigger<PasswordStepFormData>;
+  passwordLabel: string;
+  confirmLabel: string;
+  passwordPlaceholder: string;
+  confirmPlaceholder: string;
 }
 
 export default function PasswordStep({
   register,
   errors,
   trigger,
+  passwordLabel,
+  confirmLabel,
+  passwordPlaceholder,
+  confirmPlaceholder,
 }: PasswordStepProps) {
   return (
     <div className="flex flex-col gap-6">
       <UserInput
-        label="비밀번호"
-        placeholder="비밀번호를 입력하세요."
+        label={passwordLabel}
+        placeholder={passwordPlaceholder}
         type="password"
         errorMessage={errors.password?.message || ''}
         {...register('password', {
@@ -30,8 +38,8 @@ export default function PasswordStep({
         })}
       />
       <UserInput
-        label="비밀번호 확인"
-        placeholder="비밀번호를 한 번 더입력하세요."
+        label={confirmLabel}
+        placeholder={confirmPlaceholder}
         type="password"
         errorMessage={errors.confirm?.message || ''}
         {...register('confirm')}

@@ -24,7 +24,7 @@ export default function SubmitButton({
             : 'bg-myBlue text-textOnBlue'
         }`}
       >
-        {isLoading ? <LoadingSmall /> : <div className="text-xs">{text}</div>}
+        {isLoading ? <LoadingSmall /> : <div className="text-sm">{text}</div>}
       </div>
     </button>
   );

@@ -1,37 +1,52 @@
+import { Course } from '@/lib/Course';
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface UserState {
   userId: number;
-  email: string;
   name: string;
   nickname: string;
-  course: string;
+  course: Course;
+  selectedCourse: Course;
   githubUrl: string;
-  profileImageUrl: string;
-  autoLogin: boolean;
+  imageUrl: string;
   setUserInfo: (user: Partial<UserState>) => void;
   reset: () => void;
 }
-
-export const useUserStore = create<UserState>((set) => ({
-  userId: 0,
-  email: '',
-  name: '',
-  nickname: '',
-  course: '',
-  githubUrl: '',
-  profileImageUrl: '',
-  autoLogin: false,
-  setUserInfo: (user) => set((state) => ({ ...state, ...user })),
-  reset: () =>
-    set({
+export const useUserStore = create<UserState>()(
+  persist(
+    (set) => ({
       userId: 0,
-      email: '',
       name: '',
       nickname: '',
-      course: '',
+      course: 'ALL',
+      selectedCourse: 'ALL',
       githubUrl: '',
-      profileImageUrl: '',
-      autoLogin: false,
+      imageUrl: '',
+      setUserInfo: (user) => set((state) => ({ ...state, ...user })),
+      reset: () =>
+        set({
+          userId: 0,
+          name: '',
+          nickname: '',
+          course: 'ALL',
+          selectedCourse: 'ALL',
+          githubUrl: '',
+          imageUrl: '',
+        }),
     }),
-}));
+    {
+      name: 'user-storage',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({
+        userId: state.userId,
+        name: state.name,
+        nickname: state.nickname,
+        course: state.course,
+        selectedCourse: state.selectedCourse,
+        githubUrl: state.githubUrl,
+        imageUrl: state.imageUrl,
+      }),
+    }
+  )
+);

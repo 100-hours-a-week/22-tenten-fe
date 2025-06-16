@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { imageSchema } from './imageSchema';
 
 export const postSchema = z
   .object({
@@ -16,12 +17,7 @@ export const postSchema = z
           message: '유튜브 링크 형식이 올바르지 않습니다.',
         }
       ),
-    imageFile: z
-      .instanceof(File)
-      .optional()
-      .refine((file) => !file || /\.(png|jpeg|jpg|webp)$/i.test(file.name), {
-        message: '이미지 파일 형식은 png, jpg, jpeg, webp만 가능합니다.',
-      }),
+    imageFile: imageSchema,
   })
   .superRefine((data, ctx) => {
     const { youtubeUrl, imageFile, content } = data;

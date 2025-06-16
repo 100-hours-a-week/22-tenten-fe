@@ -2,26 +2,27 @@
 import Image from 'next/image';
 import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { extractYoutubeVideoId } from '@/lib/formatYoutube';
-import { PostEntity } from '@/stores/postType';
+import { Comment, PostEntity } from '@/stores/postType';
 import clsx from 'clsx';
 import summaryCondition from '@/lib/summaryCondition';
+import Linkify from 'react-linkify';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
-  const params = useParams();
-
-  const postId = Number(params.postId);
-
   const path = usePathname();
+
+  function isComment(post: PostEntity): post is Comment {
+    return post.type === 'comment';
+  }
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
       sessionStorage.setItem('scrollPosition', String(window.scrollY));
       router.push(`/post/${post.id}`);
-    } else if (post.type === 'comment') {
-      router.push(`/post/${postId}/comment/${post.id}`);
+    } else if (isComment(post)) {
+      router.push(`/post/${post.postId}/comment/${post.id}`);
     }
   }
   return (
@@ -41,17 +42,30 @@ export default function PostCard({ post }: { post: PostEntity }) {
           <div className="w-full flex flex-col gap-2 text-textColor">
             <UserInfo post={post} />
             <div>
-              {!path.includes('post')
-                ? post.content && (
-                    <div className="w-full text-sm overflow-hidden cursor-pointer line-clamp-2 text-ellipsis break-all">
-                      {post.content}
-                    </div>
-                  )
-                : post.content && (
-                    <div className="w-full text-sm overflow-hidden cursor-pointer break-all">
-                      {post.content}
-                    </div>
+              {post.content && (
+                <div
+                  className={clsx(
+                    'w-full text-sm overflow-hidden cursor-pointer break-all whitespace-pre-wrap',
+                    !path.includes('post') && 'line-clamp-2 text-ellipsis'
                   )}
+                >
+                  <Linkify
+                    componentDecorator={(href, text, key) => (
+                      <a
+                        key={key}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-myBlue"
+                      >
+                        {text}
+                      </a>
+                    )}
+                  >
+                    {post.content}
+                  </Linkify>
+                </div>
+              )}
               <div className="flex w-full overflow-hidden rounded-lg">
                 {post.type === 'post' &&
                   'imageUrl' in post &&

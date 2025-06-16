@@ -1,6 +1,7 @@
 'use client';
 
-import { Image, Youtube } from 'lucide-react';
+import { Image as ImageIcon, Youtube } from 'lucide-react';
+import Image from 'next/image';
 import SubmitButton from '../common/button/SubmitButton';
 import { NewPostData, usePostEditorForm } from '@/hooks/post/usePostEditorForm';
 import { useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
+import { useUserStore } from '@/stores/userStore';
 
 function HelperText({ errorMessage }: { errorMessage: string }) {
   return <div className="text-redHeart text-xs h-4">{errorMessage}</div>;
@@ -22,14 +24,7 @@ function ContentInput({
   register: UseFormRegister<NewPostData>;
   errors: FieldErrors<NewPostData>;
 }) {
-  const [nickname, setNickname] = useState<string | null>(null);
-
-  useEffect(() => {
-    const nick = localStorage.getItem('nickname') || '';
-    setNickname(nick);
-  }, []);
-
-  if (nickname === null) return null;
+  const { nickname } = useUserStore();
 
   return (
     <div className="w-full">
@@ -99,7 +94,7 @@ function ImageInput({
         htmlFor="image-upload"
         className="flex gap-2 items-center cursor-pointer"
       >
-        <Image className="w-4 h-4" />
+        <ImageIcon className="w-4 h-4" />
         <div className="text-xs px-4 py-1 bg-myLightBlue w-40 text-center rounded-full text-textOnLight">
           이미지 업로드
         </div>
@@ -121,10 +116,12 @@ function ImageInput({
       {/* 이미지 미리보기 */}
       {previewUrl && (
         <div className="mt-2 flex flex-col gap-2">
-          <img
+          <Image
             src={previewUrl}
             alt="미리보기"
-            className="rounded-sm max-w-full"
+            className="rounded-sm w-full"
+            width={0}
+            height={0}
           />
           <button
             type="button"

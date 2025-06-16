@@ -23,7 +23,15 @@ export default function SignupStep1Form() {
       <div className="bg-containerColor m-8 px-8 py-12 rounded-xl flex flex-col items-center gap-6 w-full max-w-md">
         <div className="flex flex-col gap-6 w-full">
           <EmailAuthStep />
-          <PasswordStep register={register} errors={errors} trigger={trigger} />
+          <PasswordStep
+            register={register}
+            errors={errors}
+            trigger={trigger}
+            passwordLabel="비밀번호"
+            passwordPlaceholder="비밀번호를 입력하세요."
+            confirmLabel="비밀번호 확인"
+            confirmPlaceholder="비밀번호를 한 번 더 입력하세요."
+          />
         </div>
         <div>
           <CheckBoxInput
