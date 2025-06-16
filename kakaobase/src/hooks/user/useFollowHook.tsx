@@ -22,6 +22,7 @@ export function useFollowToggle(initial: boolean, id: number) {
         postFollow({ id });
         showToast('팔로우 성공! ✌️');
       }
+      setFollowing((prev) => !prev);
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       queryClient.invalidateQueries({ queryKey: ['comments'] });
       queryClient.invalidateQueries({ queryKey: ['recomments'] });

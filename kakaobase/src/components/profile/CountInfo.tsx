@@ -11,12 +11,11 @@ function CountItem({
   onClick?: () => void;
 }) {
   return (
-    <div
-      className="flex flex-col items-center cursor-pointer"
-      onClick={onClick}
-    >
+    <div className="flex flex-col items-center cursor-pointer">
       <div className="font-bold text-lg">{label}</div>
-      <div className="text-sm">{count}</div>
+      <div className="text-sm" onClick={onClick}>
+        {count}
+      </div>
     </div>
   );
 }
