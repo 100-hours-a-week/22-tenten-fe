@@ -23,10 +23,7 @@ export default function UserInfo({ data }: { data: Profile }) {
       </div>
       <div className="flex flex-col items-center text-xs">
         <div>{data.class_name}</div>
-        <a
-          href="https://github.com/okiidokim"
-          className="cursor-pointer underline"
-        >
+        <a href={data.github_url} className="cursor-pointer underline">
           {data.github_url}
         </a>
       </div>
