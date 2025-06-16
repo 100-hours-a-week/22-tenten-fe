@@ -12,7 +12,10 @@ export default function useFollowersHook({ userId }: { userId: number }) {
       });
       return response;
     },
-    getNextPageParam: (lastPage) => lastPage.at(-1).id,
+    getNextPageParam: (lastPage) => {
+      const lastItem = lastPage.at(-1);
+      return lastItem ? lastItem.id : undefined;
+    },
     initialPageParam: undefined,
   });
 }
