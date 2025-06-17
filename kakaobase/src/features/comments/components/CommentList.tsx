@@ -1,9 +1,9 @@
 'use client';
 
-import PostCard from '../PostCard';
-import LoadingSmall from '../../common/loading/LoadingSmall';
+import PostCard from '../../../components/post/PostCard';
+import LoadingSmall from '../../../components/common/loading/LoadingSmall';
 import useScrollHook from '@/hooks/useScrollHook';
-import useCommentList from '@/hooks/post/list/useCommentList';
+import useCommentList from '@/features/comments/hooks/useCommentList';
 import { useParams } from 'next/navigation';
 
 export default function CommentList() {

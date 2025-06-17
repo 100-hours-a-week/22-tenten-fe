@@ -1,6 +1,6 @@
 'use client';
 
-import UserInput from '../../../components/inputs/UserInput';
+import UserInput from '../../../components/user/UserInput';
 import SubmitButton from '../../../components/common/button/SubmitButton';
 import useLoginForm from '../hooks/useLoginForm';
 

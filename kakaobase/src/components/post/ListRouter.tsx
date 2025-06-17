@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import RecommentList from './list/RecommentList';
-import CommentList from './list/CommentList';
+import RecommentList from '../../features/comments/components/RecommentList';
+import CommentList from '../../features/comments/components/CommentList';
 import PostList from '../../features/posts/components/PostList';
 
 export default function ListRouter() {

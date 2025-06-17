@@ -1,8 +1,8 @@
-import api from '../../../lib/api';
+import api from '@/lib/api';
 import type { Post } from '@/types/post/post';
 import { mapToPostEntity } from '@/lib/mapPost';
 
-export interface GetPostsParams {
+export interface PostsParams {
   limit?: number;
   cursor?: number;
   course?: string;
@@ -12,7 +12,7 @@ export default async function getPosts({
   limit,
   cursor,
   course,
-}: GetPostsParams): Promise<Post[]> {
+}: PostsParams): Promise<Post[]> {
   try {
     const params: Record<string, any> = {};
     if (limit !== undefined) params.limit = limit;

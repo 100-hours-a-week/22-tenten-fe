@@ -1,12 +1,12 @@
-import api from '../lib/api';
-import { GetPostsParams } from '../features/posts/api/postList';
+import api from '../../../lib/api';
+import { PostsParams } from '@/features/posts/api/postList';
 import { Post } from '@/types/post/post';
 import { mapToPostEntity } from '@/lib/mapPost';
 
 //대댓글 목록 조회
 export async function getRecomments(
   commentId: number,
-  { limit, cursor }: GetPostsParams
+  { limit, cursor }: PostsParams
 ): Promise<Post[]> {
   try {
     const params: Record<string, any> = {};

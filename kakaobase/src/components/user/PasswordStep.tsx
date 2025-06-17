@@ -1,4 +1,4 @@
-import UserInput from '../inputs/UserInput';
+import UserInput from './UserInput';
 import { FieldErrors, UseFormRegister, UseFormTrigger } from 'react-hook-form';
 import { z } from 'zod';
 import { passwordConfirmSchema } from '@/schemas/passwordConfirmSchema';

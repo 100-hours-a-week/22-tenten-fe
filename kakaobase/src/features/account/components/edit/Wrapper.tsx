@@ -1,6 +1,6 @@
 'use client';
 import SubmitButtonSmall from '@/components/common/button/SubmitButtonSmall';
-import UserInput from '@/components/inputs/UserInput';
+import UserInput from '@/components/user/UserInput';
 import RoutingButtons from './RoutingButtons';
 import TopArea from './TopArea';
 import useGithubEditHook from '../../hooks/useGithubEditHook';

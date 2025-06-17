@@ -1,4 +1,4 @@
-import { postComment } from '@/apis/comment';
+import { postComment } from '@/features/comments/api/comment';
 import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';
 import { useParams, usePathname } from 'next/navigation';

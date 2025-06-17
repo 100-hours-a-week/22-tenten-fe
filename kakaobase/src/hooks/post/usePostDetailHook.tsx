@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { getPost } from '@/features/posts/api/post';
 import { mapToPostEntity } from '@/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
-import { getComment } from '@/apis/comment';
+import { getComment } from '@/features/comments/api/comment';
 import { PostEntity } from '@/types/post/post';
 import { useToast } from '@/app/ToastContext';
 import { useUserStore } from '@/stores/userStore';
-
 export default function usePostDetail({ id }: { id: number }) {
   const [post, setPost] = useState<PostEntity>();
   const [loading, setLoading] = useState(true);

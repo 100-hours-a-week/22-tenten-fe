@@ -1,6 +1,6 @@
 import { useEmailAuth } from '@/hooks/auth/useEmailAuth';
 import SubmitButtonSmall from '../common/button/SubmitButtonSmall';
-import UserInput from '../inputs/UserInput';
+import UserInput from './UserInput';
 import { useEffect } from 'react';
 
 export default function EmailAuthStep({

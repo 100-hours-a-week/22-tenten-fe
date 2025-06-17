@@ -1,6 +1,6 @@
-import { deleteComment } from '@/apis/comment';
+import { deleteComment } from '@/features/comments/api/comment';
 import { deletePost } from '@/features/posts/api/post';
-import { deleteRecomment } from '@/apis/recomment';
+import { deleteRecomment } from '@/features/comments/api/recomment';
 import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';
 import { useUserStore } from '@/stores/userStore';

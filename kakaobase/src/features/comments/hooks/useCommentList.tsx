@@ -1,4 +1,4 @@
-import getComments from '@/apis/commentList';
+import getComments from '@/features/comments/api/commentList';
 import { PostEntity } from '@/types/post/post';
 import {
   InfiniteData,

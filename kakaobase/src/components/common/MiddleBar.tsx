@@ -6,7 +6,7 @@ export default function MiddleBar() {
     <div className="py-4 px-6 border-y-[1px] border-textOpacity50 flex items-center">
       <div className="flex gap-4 text-textColor">
         <div className="font-bold text-lg">
-          {path.includes('comment') ? '대댓글' : '답글'}
+          {path.includes('comment') ? '대댓글' : '댓글'}
         </div>
       </div>
     </div>

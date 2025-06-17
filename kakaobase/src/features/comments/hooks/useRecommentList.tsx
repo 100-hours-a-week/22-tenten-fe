@@ -1,4 +1,4 @@
-import { getRecomments } from '@/apis/recomment';
+import { getRecomments } from '@/features/comments/api/recomment';
 import { PostEntity } from '@/types/post/post';
 import {
   InfiniteData,

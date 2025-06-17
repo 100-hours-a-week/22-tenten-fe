@@ -3,10 +3,10 @@ import Image from 'next/image';
 import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import { usePathname, useRouter } from 'next/navigation';
-import { extractYoutubeVideoId } from '@/lib/formatYoutube';
+import { extractYoutubeVideoId } from '@/features/posts/lib/formatYoutube';
 import { Comment, PostEntity } from '@/types/post/post';
 import clsx from 'clsx';
-import summaryCondition from '@/lib/summaryCondition';
+import summaryCondition from '@/features/posts/lib/summaryCondition';
 import Linkify from 'react-linkify';
 
 export default function PostCard({ post }: { post: PostEntity }) {

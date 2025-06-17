@@ -1,4 +1,4 @@
-import useCommentForm from '@/hooks/post/comment/useCommentForm';
+import useCommentForm from '@/features/comments/hooks/useCommentForm';
 import { Send } from 'lucide-react';
 
 export default function CommentInput() {
