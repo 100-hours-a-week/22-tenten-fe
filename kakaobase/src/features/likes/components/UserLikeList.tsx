@@ -1,7 +1,7 @@
 'use client';
 
 import UserItem from '../../../components/user/UserItem';
-import useLikeListHook from '@/hooks/user/useLikeListHook';
+import useLikeListHook from '../hooks/useLikeListHook';
 import LoadingSmall from '../../../components/common/loading/LoadingSmall';
 import useScrollHook from '@/hooks/useScrollHook';
 

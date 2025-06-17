@@ -2,7 +2,7 @@
 import SubmitButton from '@/components/common/button/SubmitButton';
 import EmailAuthStep from '@/components/user/EmailAuthStep';
 import PasswordStep from '@/components/user/PasswordStep';
-import { usePasswordStep } from '@/hooks/user/usePasswordStep';
+import { usePasswordStep } from '@/hooks/auth/usePasswordStep';
 import { useState } from 'react';
 
 export default function Wrapper() {

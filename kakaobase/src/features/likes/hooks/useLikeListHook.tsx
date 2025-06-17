@@ -2,7 +2,7 @@ import {
   getCommentLikes,
   getPostLikes,
   getRecommentLikes,
-} from '@/apis/likeList';
+} from '@/features/likes/api/likeList';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function useLikeListHook({

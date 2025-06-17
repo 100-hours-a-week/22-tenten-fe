@@ -1,4 +1,4 @@
-import { useLikeToggle } from '@/hooks/user/useLikeHook';
+import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/types/post/post';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';

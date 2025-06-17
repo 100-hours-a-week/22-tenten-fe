@@ -5,7 +5,7 @@ import {
   likeComment,
   likePost,
   likeRecomment,
-} from '@/apis/like';
+} from '@/features/likes/api/like';
 import { useState } from 'react';
 
 export function useLikeToggle(
