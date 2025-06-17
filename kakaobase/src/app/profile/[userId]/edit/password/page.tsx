@@ -1,6 +1,6 @@
 import Header from '@/components/common/header/Header';
 import NavBar from '@/components/common/NavBar';
-import Wrapper from '@/components/profile/password/Wrapper';
+import Wrapper from '@/features/account/components/password/Wrapper';
 
 export default function Page() {
   return (

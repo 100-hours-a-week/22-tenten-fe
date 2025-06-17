@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { passwordConfirmSchema } from '@/schemas/passwordConfirmSchema';
 import { z } from 'zod';
-import changePassword from '@/apis/changePassword';
+import changePassword from '@/features/account/api/changePassword';
 import { useState } from 'react';
 import { useToast } from '@/app/ToastContext';
 
