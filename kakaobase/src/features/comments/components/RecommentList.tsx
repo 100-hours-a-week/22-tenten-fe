@@ -1,8 +1,8 @@
 'use client';
 
-import PostCard from '../../../components/post/PostCard';
-import LoadingSmall from '../../../components/common/loading/LoadingSmall';
-import useScrollHook from '@/hooks/useScrollHook';
+import PostCard from '../../../entities/feeds/components/PostCard';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import useScrollHook from '@/shared/hooks/useScrollHook';
 import useRecommentList from '@/features/comments/hooks/useRecommentList';
 import { useParams } from 'next/navigation';
 

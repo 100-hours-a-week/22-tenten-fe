@@ -1,5 +1,5 @@
 import { getRecomments } from '@/features/comments/api/recomment';
-import { PostEntity } from '@/types/post/post';
+import { PostEntity } from '@/entities/feeds/types/post';
 import {
   InfiniteData,
   useInfiniteQuery,

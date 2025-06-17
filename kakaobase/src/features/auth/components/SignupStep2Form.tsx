@@ -1,8 +1,8 @@
 'use client';
 
-import SubmitButton from '../../../components/common/button/SubmitButton';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
 import CourseSelector from './CourseSelector';
-import UserInput from '../../../components/user/UserInput';
+import UserInput from '../../../entities/users/components/UserInput';
 import useSignupForm from '../hooks/useSingupStep2';
 
 export default function SignupStep2Form() {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { imageSchema } from '../../../schemas/imageSchema';
+import { imageSchema } from '../../../entities/images/schemas/imageSchema';
 
 export const postSchema = z
   .object({

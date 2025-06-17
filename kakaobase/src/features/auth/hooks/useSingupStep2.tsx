@@ -1,6 +1,6 @@
 import signup from '@/features/auth/api/signup';
 import { useToast } from '@/app/ToastContext';
-import { courseMap } from '@/lib/courseMap';
+import { courseMap } from '@/shared/lib/courseMap';
 import { signupStep2Schema } from '@/features/auth/schemas/signupStep2Schema';
 import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { zodResolver } from '@hookform/resolvers/zod';

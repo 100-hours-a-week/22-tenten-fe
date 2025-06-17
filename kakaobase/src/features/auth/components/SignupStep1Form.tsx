@@ -1,9 +1,9 @@
 'use client';
 
-import { usePasswordStep } from '@/hooks/auth/usePasswordStep';
-import SubmitButton from '@/components/common/button/SubmitButton';
-import EmailAuthStep from '@/components/user/EmailAuthStep';
-import PasswordStep from '@/components/user/PasswordStep';
+import { usePasswordStep } from '@/features/auth/hooks/usePasswordStep';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
+import EmailAuthStep from '@/features/authEmail/components/EmailAuthStep';
+import PasswordStep from '@/features/auth/components/PasswordStep';
 import useSignupStep1 from '../hooks/useSignupStep1';
 import { useState } from 'react';
 import CheckBoxInput from './CheckBoxInput';

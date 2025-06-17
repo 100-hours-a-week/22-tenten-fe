@@ -1,9 +1,9 @@
 'use client';
 
-import useFollowersHook from '@/features/follows/hooks/useFollowersHook';
-import LoadingSmall from '../../../components/common/loading/LoadingSmall';
-import UserItem from '../../../components/user/UserItem';
-import useScrollHook from '@/hooks/useScrollHook';
+import useFollowersHook from '../hooks/useFollowersHook';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import useScrollHook from '@/shared/hooks/useScrollHook';
+import UserItem from '@/entities/users/components/UserItem';
 
 export default function UserFollowerList({ userId }: { userId: number }) {
   const {

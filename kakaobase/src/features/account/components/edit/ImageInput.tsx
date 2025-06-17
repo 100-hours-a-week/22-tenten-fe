@@ -1,4 +1,4 @@
-import LoadingSmall from '@/components/common/loading/LoadingSmall';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
 import { imageData } from '../../hooks/useImageEditHook';
 import { CirclePlus } from 'lucide-react';
 import Image from 'next/image';

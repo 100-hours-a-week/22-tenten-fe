@@ -1,8 +1,8 @@
 'use client';
-import SubmitButton from '@/components/common/button/SubmitButton';
-import EmailAuthStep from '@/components/user/EmailAuthStep';
-import PasswordStep from '@/components/user/PasswordStep';
-import { usePasswordStep } from '@/hooks/auth/usePasswordStep';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
+import EmailAuthStep from '@/features/authEmail/components/EmailAuthStep';
+import PasswordStep from '@/features/auth/components/PasswordStep';
+import { usePasswordStep } from '@/features/auth/hooks/usePasswordStep';
 import { useState } from 'react';
 
 export default function Wrapper() {

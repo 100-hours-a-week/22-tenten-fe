@@ -1,12 +1,12 @@
 import getPosts from '@/features/posts/api/postList';
-import { PostEntity } from '@/types/post/post';
+import { PostEntity } from '@/entities/feeds/types/post';
 import {
   InfiniteData,
   useInfiniteQuery,
   UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 
 export default function usePostList(): UseInfiniteQueryResult<
   InfiniteData<PostEntity[]>,

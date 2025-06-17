@@ -1,8 +1,8 @@
 'use client';
 
-import useScrollHook from '@/hooks/useScrollHook';
-import LoadingSmall from '../../../../components/common/loading/LoadingSmall';
-import PostCard from '../../../../components/post/PostCard';
+import useScrollHook from '@/shared/hooks/useScrollHook';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import PostCard from '../../../../entities/feeds/components/PostCard';
 import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
 
 export default function CommentList({ userId }: { userId: number }) {

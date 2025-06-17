@@ -2,7 +2,7 @@
 
 import { Image as ImageIcon, Youtube } from 'lucide-react';
 import Image from 'next/image';
-import SubmitButton from '../../../components/common/button/SubmitButton';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
 import {
   NewPostData,
   usePostEditorForm,
@@ -14,7 +14,7 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 
 function HelperText({ errorMessage }: { errorMessage: string }) {
   return <div className="text-redHeart text-xs h-4">{errorMessage}</div>;

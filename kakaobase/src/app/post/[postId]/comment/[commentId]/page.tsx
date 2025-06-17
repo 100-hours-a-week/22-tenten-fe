@@ -1,11 +1,11 @@
 'use client';
-import Header from '@/components/common/header/Header';
-import Loading from '@/components/common/loading/Loading';
-import MiddleBar from '@/components/common/MiddleBar';
+import Header from '@/shared/ui/header/Header';
+import Loading from '@/shared/ui/loading/Loading';
+import MiddleBar from '@/shared/ui/MiddleBar';
 import CommentInput from '@/features/comments/components/CommentInput';
-import ListRouter from '@/components/post/ListRouter';
-import PostCard from '@/components/post/PostCard';
-import usePostDetail from '@/hooks/post/usePostDetailHook';
+import ListRouter from '@/entities/feeds/components/ListRouter';
+import PostCard from '@/entities/feeds/components/PostCard';
+import usePostDetail from '@/entities/feeds/hooks/usePostDetailHook';
 
 export default function Page({ params }: { params: { commentId: number } }) {
   const id = Number(params.commentId);

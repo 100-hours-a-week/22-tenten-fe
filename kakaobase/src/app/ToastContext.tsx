@@ -30,7 +30,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setLabel(message);
     setIsOpen(true);
 
-    setTimeout(() => setIsOpen(false), 2000);
+    setTimeout(() => setIsOpen(false), 4000);
   }, []);
 
   const hideToast = useCallback(() => {

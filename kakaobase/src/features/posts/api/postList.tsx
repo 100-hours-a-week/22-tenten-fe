@@ -1,6 +1,6 @@
-import api from '@/lib/api';
-import type { Post } from '@/types/post/post';
-import { mapToPostEntity } from '@/lib/mapPost';
+import api from '@/shared/lib/api';
+import type { Post } from '@/entities/feeds/types/post';
+import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 
 export interface PostsParams {
   limit?: number;

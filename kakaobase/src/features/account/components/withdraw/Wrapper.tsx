@@ -1,6 +1,6 @@
 'use client';
-import SubmitButton from '@/components/common/button/SubmitButton';
-import EmailAuthStep from '@/components/user/EmailAuthStep';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
+import EmailAuthStep from '@/features/authEmail/components/EmailAuthStep';
 import useWithdrawHook from '../../hooks/useWithdrawHook';
 
 export default function Wrapper() {

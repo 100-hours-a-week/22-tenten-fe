@@ -3,8 +3,8 @@
 import ReadOnlyUserInfo from './ReadOnlyUserInfo';
 import ImageInput from './ImageInput';
 import useImageEditHook from '../../hooks/useImageEditHook';
-import { useUserStore } from '@/stores/userStore';
-import { courseMapReverse } from '@/lib/courseMap';
+import { useUserStore } from '@/entities/users/stores/userStore';
+import { courseMapReverse } from '@/shared/lib/courseMap';
 
 export default function TopArea() {
   const {

@@ -1,7 +1,7 @@
-import api from '../../../lib/api';
+import api from '../../../shared/lib/api';
 import { PostsParams } from '@/features/posts/api/postList';
-import { Post } from '@/types/post/post';
-import { mapToPostEntity } from '@/lib/mapPost';
+import { Post } from '@/entities/feeds/types/post';
+import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 
 //대댓글 목록 조회
 export async function getRecomments(

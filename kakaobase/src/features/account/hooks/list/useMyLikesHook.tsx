@@ -1,5 +1,5 @@
 import { getMyLikes } from '@/features/account/api/profile';
-import { PostEntity } from '@/types/post/post';
+import { PostEntity } from '@/entities/feeds/types/post';
 import {
   InfiniteData,
   useInfiniteQuery,

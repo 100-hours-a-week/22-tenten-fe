@@ -1,5 +1,5 @@
-import Header from '@/components/common/header/Header';
-import NavBar from '@/components/common/NavBar';
+import Header from '@/shared/ui/header/Header';
+import NavBar from '@/shared/ui/NavBar';
 import UserLikeList from '@/features/likes/components/UserLikeList';
 
 export default function Page({

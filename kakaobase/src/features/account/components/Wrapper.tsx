@@ -1,13 +1,13 @@
 'use client';
-import SubmitButton from '../../../components/common/button/SubmitButton';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
 import CountInfo from './CountInfo';
 import UserInfo from './UserInfo';
 import Toggle, { profileListType } from './list/Toggle';
 import ListRouter from './list/ListRouter';
 import ProfileModal from './QR/ProfileModal';
 import useUserInfoHook from '../hooks/useUserInfoHook';
-import HandleButton from '../../../components/common/button/HandleButton';
-import Loading from '../../../components/common/loading/Loading';
+import FollowButtonLarge from '@/features/follows/components/FollowButtonLarge';
+import Loading from '@/shared/ui/loading/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 
@@ -44,12 +44,7 @@ export default function Wrapper({ userId }: { userId: number }) {
         </div>
       ) : (
         <div className="flex gap-4">
-          <HandleButton
-            isActive={following}
-            activeLabel="언팔로우"
-            idleLabel="팔로우"
-            onClick={toggleFollow}
-          />
+          <FollowButtonLarge isActive={following} onClick={toggleFollow} />
         </div>
       )}
 

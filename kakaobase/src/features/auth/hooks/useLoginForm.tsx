@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { login } from '@/features/auth/api/login';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 import { useToast } from '@/app/ToastContext';
 
 type LoginFormData = z.infer<typeof loginSchema>;

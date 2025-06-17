@@ -1,6 +1,6 @@
-import { Post } from '@/types/post/post';
-import api from '@/lib/api';
-import { mapToPostEntity } from '@/lib/mapPost';
+import { Post } from '@/entities/feeds/types/post';
+import api from '@/shared/lib/api';
+import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 import { PostsParams } from '@/features/posts/api/postList';
 
 export default async function getComments(

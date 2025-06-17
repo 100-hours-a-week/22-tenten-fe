@@ -3,10 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useEffect, useState } from 'react';
-import postToS3 from '@/apis/imageS3';
+import postToS3 from '@/entities/images/api/imageS3';
 import { editProfile } from '@/features/account/api/editProfile';
 import { useToast } from '@/app/ToastContext';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 
 export type imageData = z.infer<typeof profileImageSchema>;
 

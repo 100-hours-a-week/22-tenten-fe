@@ -1,4 +1,4 @@
-import postToS3 from '@/apis/imageS3';
+import postToS3 from '@/entities/images/api/imageS3';
 import { postPost } from '@/features/posts/api/post';
 import { queryClient } from '@/app/providers';
 import { postSchema } from '@/features/posts/schemas/postSchema';
@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useToast } from '@/app/ToastContext';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 
 export type NewPostData = z.infer<typeof postSchema>;
 

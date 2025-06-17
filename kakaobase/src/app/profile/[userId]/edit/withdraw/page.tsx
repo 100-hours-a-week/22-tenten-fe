@@ -1,5 +1,5 @@
-import Header from '@/components/common/header/Header';
-import NavBar from '@/components/common/NavBar';
+import Header from '@/shared/ui/header/Header';
+import NavBar from '@/shared/ui/NavBar';
 import Wrapper from '@/features/account/components/withdraw/Wrapper';
 
 export default function Page() {

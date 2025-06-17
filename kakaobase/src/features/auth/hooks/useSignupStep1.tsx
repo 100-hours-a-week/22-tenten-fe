@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/emailAuthStore';
+import { useAuthStore } from '@/features/authEmail/stores/emailAuthStore';
 import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { useRouter } from 'next/navigation';
 

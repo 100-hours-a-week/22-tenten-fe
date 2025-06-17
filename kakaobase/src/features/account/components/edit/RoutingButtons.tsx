@@ -1,4 +1,4 @@
-import SubmitButton from '@/components/common/button/SubmitButton';
+import SubmitButton from '@/shared/ui/button/SubmitButton';
 import { useRouter } from 'next/navigation';
 
 export default function RoutingButtons() {

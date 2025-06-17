@@ -1,4 +1,4 @@
-import { deleteFollow, postFollow } from '@/features/follows/api/follow';
+import { deleteFollow, postFollow } from '../api/follow';
 import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';
 import { useEffect, useState } from 'react';

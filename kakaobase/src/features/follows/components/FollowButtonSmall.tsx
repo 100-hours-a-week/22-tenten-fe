@@ -1,4 +1,4 @@
-import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
+import { useFollowToggle } from '../hooks/useFollowHook';
 
 export default function FollowButtonSmall({
   isFollowing,

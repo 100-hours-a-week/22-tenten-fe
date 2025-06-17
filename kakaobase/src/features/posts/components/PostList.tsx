@@ -1,9 +1,9 @@
 'use client';
 
-import PostCard from '../../../components/post/PostCard';
+import PostCard from '../../../entities/feeds/components/PostCard';
 import usePostList from '@/features/posts/hooks/usePostList';
-import useScrollHook from '@/hooks/useScrollHook';
-import LoadingSmall from '../../../components/common/loading/LoadingSmall';
+import useScrollHook from '@/shared/hooks/useScrollHook';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
 
 export default function PostList() {
   const {

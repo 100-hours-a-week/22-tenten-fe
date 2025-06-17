@@ -1,6 +1,6 @@
-import { Course } from '@/types/shared/Course';
-import { courseMapReverse } from '@/lib/courseMap';
-import { useUserStore } from '@/stores/userStore';
+import { Course } from '@/shared/types/Course';
+import { courseMapReverse } from '@/shared/lib/courseMap';
+import { useUserStore } from '@/entities/users/stores/userStore';
 
 export default function useCourseSelectHook() {
   const { course, selectedCourse, setUserInfo } = useUserStore();

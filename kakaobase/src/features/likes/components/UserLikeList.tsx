@@ -1,9 +1,9 @@
 'use client';
 
-import UserItem from '../../../components/user/UserItem';
+import UserItem from '../../../entities/users/components/UserItem';
 import useLikeListHook from '../hooks/useLikeListHook';
-import LoadingSmall from '../../../components/common/loading/LoadingSmall';
-import useScrollHook from '@/hooks/useScrollHook';
+import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import useScrollHook from '@/shared/hooks/useScrollHook';
 
 export default function UserLikeList({
   postId,

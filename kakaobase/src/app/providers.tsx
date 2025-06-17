@@ -2,7 +2,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import { ToastProvider } from './ToastContext';
-import Toast from '@/components/common/Toast';
+import Toast from '@/shared/ui/Toast';
 
 export const queryClient = new QueryClient({
   defaultOptions: {

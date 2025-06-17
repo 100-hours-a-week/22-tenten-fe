@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
 import { useToast } from '@/app/ToastContext';
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/entities/users/stores/userStore';
 import { githubSchema } from '../schemas/profileSchema';
 import { editGithub } from '@/features/account/api/editProfile';
 

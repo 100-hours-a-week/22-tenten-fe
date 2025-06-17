@@ -1,5 +1,5 @@
-import Header from '@/components/common/header/Header';
-import NavBar from '@/components/common/NavBar';
+import Header from '@/shared/ui/header/Header';
+import NavBar from '@/shared/ui/NavBar';
 
 export default function Page() {
   return (
