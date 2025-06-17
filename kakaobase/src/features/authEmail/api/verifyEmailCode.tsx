@@ -1,4 +1,4 @@
-import api from '@/shared/lib/api';
+import api from '@/shared/api/api';
 
 interface codeVerification {
   email: string;

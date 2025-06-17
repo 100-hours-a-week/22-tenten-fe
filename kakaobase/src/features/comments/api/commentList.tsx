@@ -1,5 +1,5 @@
 import { Post } from '@/entities/feeds/types/post';
-import api from '@/shared/lib/api';
+import api from '@/shared/api/api';
 import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 import { PostsParams } from '@/features/posts/api/postList';
 

@@ -1,4 +1,4 @@
-import api from '@/shared/lib/api';
+import api from '@/shared/api/api';
 
 export async function editProfile({ imageUrl }: { imageUrl: string }) {
   try {

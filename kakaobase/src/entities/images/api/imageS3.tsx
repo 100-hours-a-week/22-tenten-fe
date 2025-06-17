@@ -1,4 +1,4 @@
-import api from '../../../shared/lib/api';
+import api from '../../../shared/api/api';
 
 export default async function postToS3(
   file: File,

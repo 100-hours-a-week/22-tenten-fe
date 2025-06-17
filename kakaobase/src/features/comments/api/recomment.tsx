@@ -1,4 +1,4 @@
-import api from '../../../shared/lib/api';
+import api from '../../../shared/api/api';
 import { PostsParams } from '@/features/posts/api/postList';
 import { Post } from '@/entities/feeds/types/post';
 import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';

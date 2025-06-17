@@ -1,5 +1,5 @@
 import { deleteFollow, postFollow } from '../api/follow';
-import { queryClient } from '@/app/providers';
+import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/app/ToastContext';
 import { useEffect, useState } from 'react';
 

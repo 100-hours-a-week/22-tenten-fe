@@ -1,4 +1,4 @@
-import api from '@/shared/lib/api';
+import api from '@/shared/api/api';
 import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 
 //프로필 정보 조회

@@ -1,4 +1,4 @@
-import api from '@/shared/lib/api';
+import api from '@/shared/api/api';
 import type { Post } from '@/entities/feeds/types/post';
 import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 
