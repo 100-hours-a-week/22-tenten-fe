@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../lib/api';
 import { GetPostsParams } from './postList';
 import { Post } from '@/types/post/post';
 import { mapToPostEntity } from '@/lib/mapPost';

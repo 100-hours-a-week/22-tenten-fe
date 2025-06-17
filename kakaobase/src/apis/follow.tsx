@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../lib/api';
 
 //팔로우 요청 api
 export async function postFollow({ id }: { id: number }) {

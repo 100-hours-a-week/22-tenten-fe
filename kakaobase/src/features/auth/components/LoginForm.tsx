@@ -1,8 +1,8 @@
 'use client';
 
-import UserInput from '../inputs/UserInput';
-import SubmitButton from '../common/button/SubmitButton';
-import useLoginForm from '@/hooks/user/useLoginForm';
+import UserInput from '../../../components/inputs/UserInput';
+import SubmitButton from '../../../components/common/button/SubmitButton';
+import useLoginForm from '../hooks/useLoginForm';
 
 export default function LoginForm() {
   const {

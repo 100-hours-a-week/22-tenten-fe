@@ -1,5 +1,5 @@
 import Header from '@/components/common/header/Header';
-import LoginForm from '@/components/user/LoginForm';
+import LoginForm from '@/features/auth/components/LoginForm';
 
 export default function Page() {
   return (

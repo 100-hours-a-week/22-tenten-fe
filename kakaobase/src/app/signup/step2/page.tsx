@@ -1,5 +1,5 @@
 import Header from '@/components/common/header/Header';
-import SignupStep2Form from '@/components/user/SignupStep2Form';
+import SignupStep2Form from '@/features/auth/components/SignupStep2Form';
 
 export default function Page() {
   return (

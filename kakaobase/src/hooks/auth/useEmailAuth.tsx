@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/emailAuthStore';
 import { useAuthTimer } from './useAuthTimer';
-import { loginSchema } from '@/schemas/loginSchema';
+import { loginSchema } from '@/features/auth/schemas/loginSchema';
 import sendEmail from '@/apis/auth/sendEmail';
 import { usePathname } from 'next/navigation';
 import verifyEmailCode from '@/apis/auth/verifyEmailCode';

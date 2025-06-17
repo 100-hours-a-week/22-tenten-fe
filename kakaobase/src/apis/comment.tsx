@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../lib/api';
 
 //댓글 삭제
 export async function deleteComment({ id }: { id: number }) {

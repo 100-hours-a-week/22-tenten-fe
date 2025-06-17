@@ -1,4 +1,4 @@
-import api from './api';
+import api from '../lib/api';
 
 //게시글 좋아요 목록
 export async function getPostLikes({

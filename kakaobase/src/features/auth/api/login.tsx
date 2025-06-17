@@ -1,5 +1,5 @@
 import { Course } from '@/types/shared/Course';
-import api from './api';
+import api from '@/lib/api';
 
 interface LoginRequest {
   email: string;

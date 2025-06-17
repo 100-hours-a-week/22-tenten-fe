@@ -1,8 +1,8 @@
 import { useAuthStore } from '@/stores/emailAuthStore';
-import { useSignupStore } from '@/stores/signupStore';
+import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { useRouter } from 'next/navigation';
 
-export const useSignupStep1 = () => {
+export default function useSignupStep1() {
   const { isVerified, email } = useAuthStore();
   const { setStep1 } = useSignupStore();
   const router = useRouter();
@@ -16,4 +16,4 @@ export const useSignupStep1 = () => {
     isVerified,
     onSubmitStep1,
   };
-};
+}

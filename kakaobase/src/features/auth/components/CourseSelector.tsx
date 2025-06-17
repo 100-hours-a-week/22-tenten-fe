@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { courseEnum } from '@/schemas/signupStep2Schema';
+import { courseEnum } from '@/features/auth/schemas/signupStep2Schema';
 
 interface UserInputProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;

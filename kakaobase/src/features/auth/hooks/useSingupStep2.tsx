@@ -1,8 +1,8 @@
-import signup from '@/apis/signup';
+import signup from '@/features/auth/api/signup';
 import { useToast } from '@/app/ToastContext';
 import { courseMap } from '@/lib/courseMap';
-import { signupStep2Schema } from '@/schemas/signupStep2Schema';
-import { useSignupStore } from '@/stores/signupStore';
+import { signupStep2Schema } from '@/features/auth/schemas/signupStep2Schema';
+import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 export type SignupStep2Data = z.infer<typeof signupStep2Schema>;
 
-export const useSignupForm = () => {
+export default function useSignupForm() {
   const router = useRouter();
   const step1Info = useSignupStore((state) => state.step1);
   const step2Info = useSignupStore((state) => state.step2);
@@ -57,4 +57,4 @@ export const useSignupForm = () => {
   };
 
   return { ...methods, onSubmitStep2, step1Info, step2Info };
-};
+}

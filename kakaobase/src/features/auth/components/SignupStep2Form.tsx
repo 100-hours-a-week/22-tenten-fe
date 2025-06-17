@@ -1,9 +1,9 @@
 'use client';
 
-import SubmitButton from '../common/button/SubmitButton';
-import CourseSelector from '../inputs/CourseSelector';
-import UserInput from '../inputs/UserInput';
-import { useSignupForm } from '@/hooks/user/useSingupStep2';
+import SubmitButton from '../../../components/common/button/SubmitButton';
+import CourseSelector from './CourseSelector';
+import UserInput from '../../../components/inputs/UserInput';
+import useSignupForm from '../hooks/useSingupStep2';
 
 export default function SignupStep2Form() {
   const {

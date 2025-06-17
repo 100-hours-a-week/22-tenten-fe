@@ -1,5 +1,5 @@
 import { Post } from '@/types/post/post';
-import api from './api';
+import api from '../lib/api';
 import { mapToPostEntity } from '@/lib/mapPost';
 import { GetPostsParams } from './postList';
 
