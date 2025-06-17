@@ -1,9 +1,11 @@
 import { ShieldAlert, Trash2, User } from 'lucide-react';
 import FollowButtonSmall from '@/features/follows/components/FollowButtonSmall';
-import formatDate from '@/entities/feeds/lib/formatDate';
+import formatDate from '../lib/formatDate';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useDeleteHook } from '@/entities/feeds/hooks/useDeleteHook';
+import { usePostDeleteHook } from '../../../features/posts/hooks/usePostDeleteHook';
+import { useCommentDeleteHook } from '../../../features/comments/hooks/useCommentDeleteHook';
+import { useRecommentDeleteHook } from '../../../features/comments/hooks/useRecommentDeleteHook';
 import DeleteModal from '@/entities/feeds/components/DeleteModal';
 import { useEffect, useState } from 'react';
 import { PostEntity } from '@/entities/feeds/types/post';
@@ -39,17 +41,28 @@ export function UserProfile({ post }: { post: PostEntity }) {
 
 export function UserInfo({ post }: { post: PostEntity }) {
   const id = Number(post.id);
-  const type = post.type;
   const router = useRouter();
+  const [isOpen, setOpen] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
+  const { deletePostExecute } = usePostDeleteHook({ id });
+  const { deleteCommentExecute } = useCommentDeleteHook({ id });
+  const { deleteRecommentExecute } = useRecommentDeleteHook({ id });
+
   function navProfile() {
     router.push(`/profile/${post.userId}`);
   }
-  const { isOpened, openModal, closeModal, deletePostExecute } = useDeleteHook({
-    id,
-    type,
-  });
-
-  const [isNarrow, setIsNarrow] = useState(false);
+  function closeModal() {
+    setOpen(false);
+  }
+  function openModal() {
+    setOpen(true);
+  }
+  function deleteFeed() {
+    if (post.type === 'post') deletePostExecute();
+    else if (post.type === 'comment') deleteCommentExecute();
+    else deleteRecommentExecute();
+    closeModal();
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -84,8 +97,8 @@ export function UserInfo({ post }: { post: PostEntity }) {
         <div className="flex self-center text-xs">
           {formatDate(post.createdAt, isNarrow)}
         </div>
-        {post.isMine ? (
-          !isOpened ? (
+        {post.isMine &&
+          (!isOpen ? (
             <Trash2
               width={16}
               height={16}
@@ -93,19 +106,8 @@ export function UserInfo({ post }: { post: PostEntity }) {
               onClick={openModal}
             />
           ) : (
-            <DeleteModal
-              closeFunction={closeModal}
-              okFunction={deletePostExecute}
-            />
-          )
-        ) : // <ShieldAlert
-        //   width={16}
-        //   height={16}
-        //   className="self-center cursor-pointer"
-        //   onClick={() => router.push('/report')}
-        // />
-        //mvp 때 신고 페이지를 구현하지 않아 주석 처리
-        null}
+            <DeleteModal closeFunction={closeModal} okFunction={deleteFeed} />
+          ))}
       </div>
     </div>
   );

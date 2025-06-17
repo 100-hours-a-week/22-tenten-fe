@@ -5,7 +5,7 @@ import MiddleBar from '@/shared/ui/MiddleBar';
 import CommentInput from '@/features/comments/components/CommentInput';
 import ListRouter from '@/entities/feeds/components/ListRouter';
 import PostCard from '@/entities/feeds/components/PostCard';
-import usePostDetail from '@/entities/feeds/hooks/usePostDetailHook';
+import usePostDetail from '@/features/posts/hooks/usePostDetailHook';
 
 export default function Page({ params }: { params: { postId: number } }) {
   const id = Number(params.postId);

@@ -5,11 +5,11 @@ import MiddleBar from '@/shared/ui/MiddleBar';
 import CommentInput from '@/features/comments/components/CommentInput';
 import ListRouter from '@/entities/feeds/components/ListRouter';
 import PostCard from '@/entities/feeds/components/PostCard';
-import usePostDetail from '@/entities/feeds/hooks/usePostDetailHook';
+import useCommentDetail from '@/features/comments/hooks/useCommentDetailHook';
 
 export default function Page({ params }: { params: { commentId: number } }) {
   const id = Number(params.commentId);
-  const { post, loading } = usePostDetail({ id });
+  const { post, loading } = useCommentDetail({ id });
 
   if (loading) return <Loading />;
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;

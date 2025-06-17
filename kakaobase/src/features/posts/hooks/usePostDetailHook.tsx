@@ -1,31 +1,24 @@
 import { useEffect, useState } from 'react';
-import { getPost } from '@/features/posts/api/post';
+import { getPost } from '../api/post';
 import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
-import { usePathname, useRouter } from 'next/navigation';
-import { getComment } from '@/features/comments/api/comment';
+import { useRouter } from 'next/navigation';
 import { PostEntity } from '@/entities/feeds/types/post';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
+
 export default function usePostDetail({ id }: { id: number }) {
   const [post, setPost] = useState<PostEntity>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { selectedCourse } = useUserStore();
   const { showToast } = useToast();
-  const path = usePathname();
   const router = useRouter();
 
   const fetchPost = async () => {
-    let response = [];
     try {
       setLoading(true);
-      if (path.includes('comment')) {
-        response = await getComment({ id });
-        setPost(mapToPostEntity(response.data.data, 'comment'));
-      } else {
-        response = await getPost({ postType: selectedCourse, id });
-        setPost(mapToPostEntity(response, 'post'));
-      }
+      const response = await getPost({ postType: selectedCourse, id });
+      setPost(mapToPostEntity(response, 'post'));
     } catch (e: any) {
       setError(e as Error);
       if (e.response.data.error === 'unauthorized') {
