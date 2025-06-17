@@ -21,6 +21,7 @@ export default function UserItem({ data }: { data: UserBasic }) {
           height={28}
           src={data.image_url}
           alt="프로필 이미지"
+          className="aspect-square rounded-md"
         />
       ) : (
         <User

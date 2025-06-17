@@ -1,6 +1,6 @@
 import Header from '@/components/common/header/Header';
 import NavBar from '@/components/common/NavBar';
-import UserFollowerList from '@/components/social/UserFollowerList';
+import UserFollowerList from '@/features/follows/components/UserFollowerList';
 
 export default function Page({ params }: { params: { userId: number } }) {
   return (

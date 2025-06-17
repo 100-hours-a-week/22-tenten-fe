@@ -1,35 +1,25 @@
 'use client';
 
-import UserItem from './UserItem';
-import useLikeListHook from '@/hooks/social/useLikeListHook';
-import LoadingSmall from '../common/loading/LoadingSmall';
 import useScrollHook from '@/hooks/useScrollHook';
+import LoadingSmall from '../../../components/common/loading/LoadingSmall';
+import UserItem from '../../../components/user/UserItem';
+import useFollowingsHook from '@/features/follows/hooks/useFollowingsHook';
 
-export default function UserLikeList({
-  postId,
-  postType,
-}: {
-  postId: number;
-  postType: string;
-}) {
+export default function UserFollowingList({ userId }: { userId: number }) {
   const {
     data,
-    isPending,
     hasNextPage,
+    isPending,
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = useLikeListHook({
-    postId,
-    postType,
-  });
+  } = useFollowingsHook({ userId });
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
     refetch,
   });
-
   return (
     <div
       className="flex flex-col my-[6rem] p-2 bg-containerColor rounded-lg flex-grow self-center w-full max-w-sm animate-slide-in overflow-y-auto gap-2"
@@ -38,11 +28,10 @@ export default function UserLikeList({
       {data?.pages.flat().map((item) => (
         <UserItem key={item.id} data={item} />
       ))}
+      {hasNextPage && <div ref={observerRef} className="h-[1px]" />}
       {isPending && <LoadingSmall />}
-      {hasNextPage && <div className="h-[1px]" ref={observerRef} />}
       {!hasNextPage && (
         <div className="flex justify-center text-xs">
-          {' '}
           더이상 표시할 유저가 없습니다.
         </div>
       )}

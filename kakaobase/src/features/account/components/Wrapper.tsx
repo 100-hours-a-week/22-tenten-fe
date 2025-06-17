@@ -8,7 +8,7 @@ import ProfileModal from './QR/ProfileModal';
 import useUserInfoHook from '../hooks/useUserInfoHook';
 import HandleButton from '../../../components/common/button/HandleButton';
 import Loading from '../../../components/common/loading/Loading';
-import { useFollowToggle } from '@/hooks/user/useFollowHook';
+import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 
 export default function Wrapper({ userId }: { userId: number }) {
@@ -33,7 +33,7 @@ export default function Wrapper({ userId }: { userId: number }) {
   }
 
   return (
-    <div className="flex flex-col items-center text-textColor min-h-0 mb-[4rem] mt-[5rem] gap-[1.25rem]">
+    <div className="flex flex-col items-center text-textColor min-h-0 mb-16 mt-20 gap-5">
       <UserInfo data={data} />
       <CountInfo data={data} />
 

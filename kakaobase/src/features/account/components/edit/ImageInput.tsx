@@ -41,7 +41,7 @@ export default function ImageInput({
             width={64}
             height={64}
             alt="프로필 이미지"
-            className="block rounded-lg"
+            className="block rounded-lg aspect-square"
           />
         )}
         <div className="w-full aspect-[1/1] bg-textOpacity50 absolute flex rounded-lg justify-center">

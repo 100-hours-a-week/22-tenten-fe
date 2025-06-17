@@ -3,7 +3,7 @@
 import useScrollHook from '@/hooks/useScrollHook';
 import LoadingSmall from '../../../../components/common/loading/LoadingSmall';
 import PostCard from '../../../../components/post/PostCard';
-import useMyLikesHook from '../../hooks/list/usemyLikesHook';
+import useMyLikesHook from '../../hooks/list/useMyLikesHook';
 
 export default function LikeList({ userId }: { userId: number }) {
   const {

@@ -27,7 +27,7 @@ export function UserProfile({ post }: { post: PostEntity }) {
           width={32}
           height={32}
           alt="프로필"
-          className="rounded-lg"
+          className="rounded-lg aspect-square"
           priority
         />
       ) : (

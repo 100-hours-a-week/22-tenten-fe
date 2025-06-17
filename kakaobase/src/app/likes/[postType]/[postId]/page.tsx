@@ -1,6 +1,6 @@
 import Header from '@/components/common/header/Header';
 import NavBar from '@/components/common/NavBar';
-import UserLikeList from '@/components/social/UserLikeList';
+import UserLikeList from '@/features/likes/components/UserLikeList';
 
 export default function Page({
   params,

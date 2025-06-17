@@ -1,4 +1,4 @@
-import { getFollowers } from '@/apis/follow';
+import { getFollowers } from '@/features/follows/api/follow';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function useFollowersHook({ userId }: { userId: number }) {
