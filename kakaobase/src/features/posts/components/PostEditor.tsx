@@ -2,8 +2,11 @@
 
 import { Image as ImageIcon, Youtube } from 'lucide-react';
 import Image from 'next/image';
-import SubmitButton from '../common/button/SubmitButton';
-import { NewPostData, usePostEditorForm } from '@/hooks/post/usePostEditorForm';
+import SubmitButton from '../../../components/common/button/SubmitButton';
+import {
+  NewPostData,
+  usePostEditorForm,
+} from '@/features/posts/hooks/usePostEditorForm';
 import { useEffect, useState } from 'react';
 import {
   FieldErrors,

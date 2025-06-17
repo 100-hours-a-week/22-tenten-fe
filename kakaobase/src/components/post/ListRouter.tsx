@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import RecommentList from './list/RecommentList';
 import CommentList from './list/CommentList';
-import PostList from './list/PostList';
+import PostList from '../../features/posts/components/PostList';
 
 export default function ListRouter() {
   const path = usePathname();

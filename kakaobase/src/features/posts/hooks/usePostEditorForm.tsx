@@ -1,9 +1,7 @@
 import postToS3 from '@/apis/imageS3';
-import { postPost } from '@/apis/post';
+import { postPost } from '@/features/posts/api/post';
 import { queryClient } from '@/app/providers';
-import { Course } from '@/types/shared/Course';
-import { postSchema } from '@/schemas/postSchema';
-import { usePostStore } from '@/stores/postStore';
+import { postSchema } from '@/features/posts/schemas/postSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -16,9 +14,6 @@ export type NewPostData = z.infer<typeof postSchema>;
 
 export const usePostEditorForm = () => {
   const router = useRouter();
-  const content = usePostStore((state) => state.content);
-  const youtubeUrl = usePostStore((state) => state.youtubeUrl);
-  const imageUrl = usePostStore((state) => state.imageUrl);
   const { showToast } = useToast();
   const [isLoading, setLoading] = useState(false);
   const { selectedCourse } = useUserStore();
@@ -68,10 +63,6 @@ export const usePostEditorForm = () => {
   return {
     ...methods,
     onSubmit,
-    imageUrl,
-    youtubeUrl,
-    content,
-    setValue: methods.setValue,
     isLoading,
   };
 };

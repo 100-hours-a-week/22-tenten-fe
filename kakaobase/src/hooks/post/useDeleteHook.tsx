@@ -1,5 +1,5 @@
 import { deleteComment } from '@/apis/comment';
-import { deletePost } from '@/apis/post';
+import { deletePost } from '@/features/posts/api/post';
 import { deleteRecomment } from '@/apis/recomment';
 import { queryClient } from '@/app/providers';
 import { useToast } from '@/app/ToastContext';

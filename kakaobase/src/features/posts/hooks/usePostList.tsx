@@ -1,4 +1,4 @@
-import getPosts from '@/apis/postList';
+import getPosts from '@/features/posts/api/postList';
 import { PostEntity } from '@/types/post/post';
 import {
   InfiniteData,

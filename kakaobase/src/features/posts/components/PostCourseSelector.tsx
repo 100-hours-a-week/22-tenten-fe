@@ -1,6 +1,6 @@
 'use client';
 
-import useCourseSelectHook from '@/hooks/post/useCourseSelectHook';
+import useCourseSelectHook from '../hooks/useCourseSelectHook';
 
 export default function PostCourseSelector() {
   const { course, selectedCourse, handleCurrentCourse, courseLabel } =

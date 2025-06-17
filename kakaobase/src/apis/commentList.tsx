@@ -1,7 +1,7 @@
 import { Post } from '@/types/post/post';
 import api from '../lib/api';
 import { mapToPostEntity } from '@/lib/mapPost';
-import { GetPostsParams } from './postList';
+import { GetPostsParams } from '../features/posts/api/postList';
 
 export default async function getComments(
   id: number,

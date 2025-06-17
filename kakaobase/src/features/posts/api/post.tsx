@@ -1,5 +1,5 @@
 import { Course } from '@/types/shared/Course';
-import api from '../lib/api';
+import api from '../../../lib/api';
 
 interface postParams {
   postType: Course;

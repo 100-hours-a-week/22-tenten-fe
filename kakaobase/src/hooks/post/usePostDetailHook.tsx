@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPost } from '@/apis/post';
+import { getPost } from '@/features/posts/api/post';
 import { mapToPostEntity } from '@/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/apis/comment';
