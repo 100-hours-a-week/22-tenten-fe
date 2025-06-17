@@ -1,5 +1,5 @@
 import { ShieldAlert, Trash2, User } from 'lucide-react';
-import FollowButtonSmall from '../user/FollowButtonSmall';
+import FollowButtonSmall from '@/features/follows/components/FollowButtonSmall';
 import formatDate from '@/lib/formatDate';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
