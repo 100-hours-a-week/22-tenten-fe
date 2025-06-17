@@ -1,4 +1,4 @@
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 
 export default function CopyUrl({ url }: { url: string }) {
   const { showToast } = useToast();

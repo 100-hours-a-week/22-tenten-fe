@@ -1,6 +1,6 @@
 import { deleteFollow, postFollow } from '../api/follow';
 import { queryClient } from '@/shared/api/queryClient';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useEffect, useState } from 'react';
 
 export function useFollowToggle(initial: boolean, id: number) {

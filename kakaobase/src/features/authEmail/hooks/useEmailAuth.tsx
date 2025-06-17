@@ -5,7 +5,7 @@ import { loginSchema } from '@/features/auth/schemas/loginSchema';
 import sendEmail from '../api/sendEmail';
 import verifyEmailCode from '../api/verifyEmailCode';
 import { usePathname } from 'next/navigation';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 
 export const useEmailAuth = () => {
   const pathName = usePathname();

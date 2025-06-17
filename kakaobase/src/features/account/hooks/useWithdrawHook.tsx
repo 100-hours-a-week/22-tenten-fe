@@ -1,6 +1,6 @@
 import withdraw from '@/features/account/api/withdraw';
 import { useState } from 'react';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useRouter } from 'next/navigation';
 
 export default function useWithdrawHook() {

@@ -7,6 +7,7 @@ import React, {
   useCallback,
   ReactNode,
 } from 'react';
+import Toast from '../ui/Toast';
 
 interface ToastContextType {
   showToast: (message: string) => void;
@@ -40,6 +41,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast, hideToast, label, isOpen }}>
       {children}
+      <Toast />
     </ToastContext.Provider>
   );
 }

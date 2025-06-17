@@ -1,8 +1,8 @@
 import { deleteComment } from '@/features/comments/api/comment';
 import { deletePost } from '@/features/posts/api/post';
 import { deleteRecomment } from '@/features/comments/api/recomment';
-import { queryClient } from '@/app/providers';
-import { useToast } from '@/app/ToastContext';
+import { queryClient } from '@/shared/api/queryClient';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';

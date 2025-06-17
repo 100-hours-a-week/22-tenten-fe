@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import postToS3 from '@/entities/images/api/imageS3';
 import { editProfile } from '@/features/account/api/editProfile';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 
 export type imageData = z.infer<typeof profileImageSchema>;

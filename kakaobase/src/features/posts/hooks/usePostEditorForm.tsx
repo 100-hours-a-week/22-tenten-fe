@@ -1,13 +1,13 @@
 import postToS3 from '@/entities/images/api/imageS3';
 import { postPost } from '@/features/posts/api/post';
-import { queryClient } from '@/app/providers';
+import { queryClient } from '@/shared/api/queryClient';
 import { postSchema } from '@/features/posts/schemas/postSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 
 export type NewPostData = z.infer<typeof postSchema>;

@@ -4,7 +4,7 @@ import { passwordConfirmSchema } from '@/features/auth/schemas/passwordConfirmSc
 import { z } from 'zod';
 import changePassword from '@/features/account/api/changePassword';
 import { useState } from 'react';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 
 export type PasswordFormData = z.infer<typeof passwordConfirmSchema>;
 

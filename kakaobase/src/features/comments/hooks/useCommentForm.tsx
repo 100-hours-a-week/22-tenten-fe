@@ -1,6 +1,6 @@
 import { postComment } from '@/features/comments/api/comment';
-import { queryClient } from '@/app/providers';
-import { useToast } from '@/app/ToastContext';
+import { queryClient } from '@/shared/api/queryClient';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 

@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState } from 'react';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { githubSchema } from '../schemas/profileSchema';
 import { editGithub } from '@/features/account/api/editProfile';

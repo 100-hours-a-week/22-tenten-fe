@@ -1,5 +1,5 @@
 import signup from '@/features/auth/api/signup';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { courseMap } from '@/shared/lib/courseMap';
 import { signupStep2Schema } from '@/features/auth/schemas/signupStep2Schema';
 import { useSignupStore } from '@/features/auth/stores/signupStore';

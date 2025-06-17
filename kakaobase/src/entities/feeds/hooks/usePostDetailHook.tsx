@@ -4,7 +4,7 @@ import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
 import { usePathname, useRouter } from 'next/navigation';
 import { getComment } from '@/features/comments/api/comment';
 import { PostEntity } from '@/entities/feeds/types/post';
-import { useToast } from '@/app/ToastContext';
+import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 export default function usePostDetail({ id }: { id: number }) {
   const [post, setPost] = useState<PostEntity>();
