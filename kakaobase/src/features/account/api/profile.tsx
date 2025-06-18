@@ -1,5 +1,5 @@
 import api from '@/shared/api/api';
-import { mapToPostEntity } from '@/entities/feeds/lib/mapPost';
+import { mapToPostEntity } from '@/features/feeds/lib/mapPost';
 
 //프로필 정보 조회
 export async function getUserInfo({ userId }: { userId: number }) {

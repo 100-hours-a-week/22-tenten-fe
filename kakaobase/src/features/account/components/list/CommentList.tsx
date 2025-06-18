@@ -2,7 +2,7 @@
 
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
-import PostCard from '../../../../entities/feeds/components/PostCard';
+import PostCard from '../../../feeds/components/PostCard';
 import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
 
 export default function CommentList({ userId }: { userId: number }) {

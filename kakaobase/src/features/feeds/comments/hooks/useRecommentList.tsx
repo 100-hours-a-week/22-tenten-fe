@@ -1,4 +1,4 @@
-import { getMyLikes } from '@/features/account/api/profile';
+import { getRecomments } from '../api/recomment';
 import { PostEntity } from '@/features/feeds/types/post';
 import {
   InfiniteData,
@@ -6,16 +6,21 @@ import {
   UseInfiniteQueryResult,
 } from '@tanstack/react-query';
 
-export default function useMyLikesHook({
-  userId,
+export default function useRecommentList({
+  commentId,
 }: {
-  userId: number;
+  commentId: number;
 }): UseInfiniteQueryResult<InfiniteData<PostEntity[]>, Error> {
-  return useInfiniteQuery({
-    queryKey: ['liked-posts', userId],
+  return useInfiniteQuery<
+    PostEntity[],
+    Error,
+    InfiniteData<PostEntity[]>,
+    ['recomments', number],
+    number | undefined
+  >({
+    queryKey: ['recomments', commentId],
     queryFn: async ({ pageParam }: { pageParam?: number }) => {
-      const response = await getMyLikes({
-        userId: userId,
+      const response = await getRecomments(commentId, {
         limit: 6,
         cursor: pageParam,
       });

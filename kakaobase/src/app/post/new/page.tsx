@@ -1,6 +1,6 @@
 'use client';
 import Header from '@/shared/ui/header/Header';
-import PostEditor from '@/features/posts/components/PostEditor';
+import PostEditor from '@/features/feeds/posts/components/PostEditor';
 
 export default function Page() {
   return (

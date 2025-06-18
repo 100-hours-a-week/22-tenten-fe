@@ -1,14 +1,17 @@
-import { useAuthStore } from '@/features/authEmail/stores/emailAuthStore';
 import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function useSignupStep1() {
-  const { isVerified, email } = useAuthStore();
-  const { setStep1 } = useSignupStore();
+  const { isVerified, setSignupStep1Info, clear } = useSignupStore();
   const router = useRouter();
 
+  useEffect(() => {
+    clear();
+  }, []);
+
   const onSubmitStep1 = (password: string) => {
-    setStep1({ email, password });
+    setSignupStep1Info({ password: password });
     router.push('/signup/step2');
   };
 

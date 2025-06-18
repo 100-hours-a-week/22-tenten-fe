@@ -2,7 +2,7 @@
 
 import { usePasswordStep } from '@/features/auth/hooks/usePasswordStep';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
-import EmailAuthStep from '@/features/authEmail/components/EmailAuthStep';
+import EmailAuthStep from '@/features/auth/components/EmailAuthStep';
 import PasswordStep from '@/features/auth/components/PasswordStep';
 import useSignupStep1 from '../hooks/useSignupStep1';
 import { useState } from 'react';

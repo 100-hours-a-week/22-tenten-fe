@@ -2,10 +2,10 @@
 import Header from '@/shared/ui/header/Header';
 import Loading from '@/shared/ui/loading/Loading';
 import MiddleBar from '@/shared/ui/MiddleBar';
-import CommentInput from '@/features/comments/components/CommentInput';
-import ListRouter from '@/entities/feeds/components/ListRouter';
-import PostCard from '@/entities/feeds/components/PostCard';
-import useCommentDetail from '@/features/comments/hooks/useCommentDetailHook';
+import CommentInput from '@/features/feeds/comments/components/CommentInput';
+import ListRouter from '@/features/feeds/components/ListRouter';
+import PostCard from '@/features/feeds/components/PostCard';
+import useCommentDetail from '@/features/feeds/comments/hooks/useCommentDetailHook';
 
 export default function Page({ params }: { params: { commentId: number } }) {
   const id = Number(params.commentId);

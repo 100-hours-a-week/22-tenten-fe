@@ -1,8 +1,8 @@
 import HeaderMain from '@/shared/ui/header/HeaderMain';
 import LoginModal from '@/shared/ui/LoginModal';
 import NavBar from '@/shared/ui/NavBar';
-import ListRouter from '@/entities/feeds/components/ListRouter';
-import PostCourseSelector from '@/features/posts/components/PostCourseSelector';
+import ListRouter from '@/features/feeds/components/ListRouter';
+import PostCourseSelector from '@/features/feeds/posts/components/PostCourseSelector';
 
 export default function Home() {
   return (

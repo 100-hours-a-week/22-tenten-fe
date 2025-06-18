@@ -2,7 +2,7 @@
 
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
-import PostCard from '../../../../entities/feeds/components/PostCard';
+import PostCard from '../../../feeds/components/PostCard';
 import useMyPostsHook from '../../hooks/list/useMyPostsHook';
 
 export default function PostList({ userId }: { userId: number }) {
