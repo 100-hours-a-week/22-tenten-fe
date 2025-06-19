@@ -1,5 +1,5 @@
 'use client';
-import Header from '@/shared/ui/header/Header';
+import Header from '@/widgets/header/Header';
 import Loading from '@/shared/ui/loading/Loading';
 import MiddleBar from '@/shared/ui/MiddleBar';
 import CommentInput from '@/features/feeds/comments/components/CommentInput';

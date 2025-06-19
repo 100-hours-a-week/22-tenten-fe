@@ -1,13 +1,13 @@
-import HeaderMain from '@/shared/ui/header/HeaderMain';
-import LoginModal from '@/shared/ui/LoginModal';
-import NavBar from '@/shared/ui/NavBar';
+import HeaderMain from '@/widgets/header/HeaderMain';
+import RequireLoginModal from '@/widgets/modal/RequireLoginModal';
+import NavBar from '@/widgets/navbar/NavBar';
 import ListRouter from '@/features/feeds/components/ListRouter';
 import PostCourseSelector from '@/features/feeds/posts/components/PostCourseSelector';
 
 export default function Home() {
   return (
     <main className="flex flex-col h-screen scroll-none">
-      <LoginModal />
+      <RequireLoginModal />
       <HeaderMain />
       <PostCourseSelector />
       <div

@@ -1,5 +1,5 @@
-import Header from '@/shared/ui/header/Header';
-import NavBar from '@/shared/ui/NavBar';
+import Header from '@/widgets/header/Header';
+import NavBar from '@/widgets/navbar/NavBar';
 import WithdrawWrapper from '@/features/account/components/withdraw/WithdrawWrapper';
 
 export default function Page() {

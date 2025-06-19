@@ -1,4 +1,4 @@
-import Header from '@/shared/ui/header/Header';
+import Header from '@/widgets/header/Header';
 import SignupStep2Form from '@/features/auth/components/SignupStep2Form';
 
 export default function Page() {

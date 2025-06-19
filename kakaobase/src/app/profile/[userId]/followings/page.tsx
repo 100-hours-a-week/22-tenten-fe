@@ -1,5 +1,5 @@
-import Header from '@/shared/ui/header/Header';
-import NavBar from '@/shared/ui/NavBar';
+import Header from '@/widgets/header/Header';
+import NavBar from '@/widgets/navbar/NavBar';
 import UserFollowingList from '@/features/follows/components/UserFollowingList';
 
 export default function Page({ params }: { params: { userId: number } }) {

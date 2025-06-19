@@ -1,5 +1,5 @@
-import Header from '@/shared/ui/header/Header';
-import NavBar from '@/shared/ui/NavBar';
+import Header from '@/widgets/header/Header';
+import NavBar from '@/widgets/navbar/NavBar';
 import Wrapper from '@/features/account/components/Wrapper';
 
 export default function Page({ params }: { params: { userId: number } }) {
