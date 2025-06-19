@@ -1,7 +1,7 @@
 'use client';
 
 import useFollowersHook from '../hooks/useFollowersHook';
-import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import UserItem from '@/entities/users/ui/UserItem';
 

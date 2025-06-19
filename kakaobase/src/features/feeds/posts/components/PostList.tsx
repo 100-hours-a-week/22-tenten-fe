@@ -3,7 +3,7 @@
 import PostCard from '../../components/PostCard';
 import usePostList from '../hooks/usePostList';
 import useScrollHook from '@/shared/hooks/useScrollHook';
-import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import LoadingSmall from '@/shared/ui/LoadingSmall';
 
 export default function PostList() {
   const {

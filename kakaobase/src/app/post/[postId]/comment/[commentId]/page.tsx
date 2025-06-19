@@ -1,7 +1,7 @@
 'use client';
 import Header from '@/widgets/header/Header';
-import Loading from '@/shared/ui/loading/Loading';
-import MiddleBar from '@/shared/ui/MiddleBar';
+import Loading from '@/shared/ui/Loading';
+import MiddleBar from '@/features/feeds/components/MiddleBar';
 import CommentInput from '@/features/feeds/comments/components/CommentInput';
 import ListRouter from '@/features/feeds/components/ListRouter';
 import PostCard from '@/features/feeds/components/PostCard';

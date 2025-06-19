@@ -1,4 +1,4 @@
-import LoadingSmall from '../loading/LoadingSmall';
+import LoadingSmall from '../LoadingSmall';
 
 interface SubmitButtonProps {
   onClick?: () => void;

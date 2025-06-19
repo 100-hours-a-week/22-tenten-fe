@@ -1,7 +1,7 @@
 'use client';
 
 import useScrollHook from '@/shared/hooks/useScrollHook';
-import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
+import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/components/PostCard';
 import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
 
