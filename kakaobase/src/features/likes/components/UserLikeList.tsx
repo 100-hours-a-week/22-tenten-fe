@@ -1,6 +1,6 @@
 'use client';
 
-import UserItem from '../../../entities/users/components/UserItem';
+import UserItem from '../../../entities/users/ui/UserItem';
 import useLikeListHook from '../hooks/useLikeListHook';
 import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';

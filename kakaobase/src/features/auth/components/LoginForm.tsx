@@ -1,6 +1,6 @@
 'use client';
 
-import UserInput from '../../../entities/users/components/UserInput';
+import UserInput from '../../../entities/users/ui/UserInput';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import useLoginForm from '../hooks/useLoginForm';
 

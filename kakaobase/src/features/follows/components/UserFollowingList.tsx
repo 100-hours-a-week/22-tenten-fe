@@ -2,7 +2,7 @@
 
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
-import UserItem from '@/entities/users/components/UserItem';
+import UserItem from '@/entities/users/ui/UserItem';
 import useFollowingsHook from '../hooks/useFollowingsHook';
 
 export default function UserFollowingList({ userId }: { userId: number }) {

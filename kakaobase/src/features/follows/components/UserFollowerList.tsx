@@ -3,7 +3,7 @@
 import useFollowersHook from '../hooks/useFollowersHook';
 import LoadingSmall from '@/shared/ui/loading/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
-import UserItem from '@/entities/users/components/UserItem';
+import UserItem from '@/entities/users/ui/UserItem';
 
 export default function UserFollowerList({ userId }: { userId: number }) {
   const {

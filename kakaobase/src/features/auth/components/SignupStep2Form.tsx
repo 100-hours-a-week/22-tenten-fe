@@ -2,7 +2,7 @@
 
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import CourseSelector from './CourseSelector';
-import UserInput from '../../../entities/users/components/UserInput';
+import UserInput from '../../../entities/users/ui/UserInput';
 import useSignupForm from '../hooks/useSingupStep2';
 
 export default function SignupStep2Form() {
