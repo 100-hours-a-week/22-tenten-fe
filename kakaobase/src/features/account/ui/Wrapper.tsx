@@ -6,7 +6,7 @@ import Toggle, { profileListType } from './list/Toggle';
 import ListRouter from './list/ListRouter';
 import ProfileModal from './QR/ProfileModal';
 import useUserInfoHook from '../hooks/useUserInfoHook';
-import FollowButtonLarge from '@/features/follows/components/FollowButtonLarge';
+import FollowButtonLarge from '@/features/follows/ui/FollowButtonLarge';
 import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';

@@ -1,14 +1,14 @@
 import { Trash2, User } from 'lucide-react';
-import FollowButtonSmall from '@/features/follows/components/FollowButtonSmall';
+import FollowButtonSmall from '@/features/follows/ui/FollowButtonSmall';
 import formatDate from '../lib/formatDate';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { usePostDeleteHook } from '../posts/hooks/usePostDeleteHook';
 import { useCommentDeleteHook } from '../comments/hooks/useCommentDeleteHook';
 import { useRecommentDeleteHook } from '../comments/hooks/useRecommentDeleteHook';
-import DeleteModal from '@/features/feeds/components/DeleteModal';
+import DeleteModal from './DeleteModal';
 import { useEffect, useState } from 'react';
-import { PostEntity } from '@/features/feeds/types/post';
+import { PostEntity } from '../types/post';
 
 export function UserProfile({ post }: { post: PostEntity }) {
   const router = useRouter();

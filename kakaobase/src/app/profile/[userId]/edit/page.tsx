@@ -1,6 +1,6 @@
 import Header from '@/widgets/header/Header';
 import NavBar from '@/widgets/navbar/NavBar';
-import EditWrapper from '@/features/account/components/edit/EditWrapper';
+import EditWrapper from '@/features/account/ui/edit/EditWrapper';
 
 export default function Page() {
   return (

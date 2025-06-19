@@ -1,7 +1,7 @@
 'use client';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
-import EmailAuthStep from '@/features/auth/components/EmailAuthStep';
-import PasswordStep from '@/features/auth/components/PasswordStep';
+import EmailAuthStep from '@/features/auth/ui/EmailAuthStep';
+import PasswordStep from '@/features/auth/ui/PasswordStep';
 import { usePasswordStep } from '@/features/auth/hooks/usePasswordStep';
 import { useState } from 'react';
 

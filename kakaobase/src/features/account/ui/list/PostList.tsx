@@ -2,10 +2,10 @@
 
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
-import PostCard from '../../../feeds/components/PostCard';
-import useMyLikesHook from '../../hooks/list/useMyLikesHook';
+import PostCard from '../../../feeds/ui/PostCard';
+import useMyPostsHook from '../../hooks/list/useMyPostsHook';
 
-export default function LikeList({ userId }: { userId: number }) {
+export default function PostList({ userId }: { userId: number }) {
   const {
     data,
     hasNextPage,
@@ -13,7 +13,7 @@ export default function LikeList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyLikesHook({ userId });
+  } = useMyPostsHook({ userId });
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
@@ -23,6 +23,7 @@ export default function LikeList({ userId }: { userId: number }) {
 
   if (!data && !isPending)
     return <div className="flex text-xs">게시글이 없습니다.</div>;
+
   return (
     <div className="flex flex-col py-2">
       {isPending && <LoadingSmall />}

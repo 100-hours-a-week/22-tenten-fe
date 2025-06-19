@@ -1,19 +1,19 @@
 'use client';
 
+import PostCard from '../../ui/PostCard';
+import usePostList from '../hooks/usePostList';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
-import PostCard from '../../../feeds/components/PostCard';
-import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
 
-export default function CommentList({ userId }: { userId: number }) {
+export default function PostList() {
   const {
     data,
+    status,
+    fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    fetchNextPage,
     refetch,
-    isPending,
-  } = useMyCommentsHook({ userId });
+  } = usePostList();
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
@@ -21,20 +21,17 @@ export default function CommentList({ userId }: { userId: number }) {
     refetch,
   });
 
-  if (!data && !isPending)
-    return <div className="flex text-xs">댓글이 없습니다.</div>;
-
   return (
     <div className="flex flex-col py-2">
-      {isPending && <LoadingSmall />}
+      {status === 'pending' && <LoadingSmall />}
       {data?.pages.flat().map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
-      {!hasNextPage && !isPending && (
+      {!hasNextPage && status !== 'pending' && (
         <div className="text-center text-xs font-bold mb-8">
-          마지막 댓글입니다.
+          마지막 게시글입니다.
         </div>
       )}
     </div>

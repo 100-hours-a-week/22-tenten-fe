@@ -1,8 +1,8 @@
 import HeaderMain from '@/widgets/header/HeaderMain';
 import RequireLoginModal from '@/widgets/modal/RequireLoginModal';
 import NavBar from '@/widgets/navbar/NavBar';
-import ListRouter from '@/features/feeds/components/ListRouter';
-import PostCourseSelector from '@/features/feeds/posts/components/PostCourseSelector';
+import ListRouter from '@/features/feeds/ui/ListRouter';
+import PostCourseSelector from '@/features/feeds/posts/ui/PostCourseSelector';
 
 export default function Home() {
   return (

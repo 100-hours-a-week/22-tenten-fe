@@ -1,6 +1,6 @@
 import Header from '@/widgets/header/Header';
 import NavBar from '@/widgets/navbar/NavBar';
-import Wrapper from '@/features/account/components/Wrapper';
+import Wrapper from '@/features/account/ui/Wrapper';
 
 export default function Page({ params }: { params: { userId: number } }) {
   return (

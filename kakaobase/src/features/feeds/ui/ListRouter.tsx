@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import RecommentList from '../comments/components/RecommentList';
-import CommentList from '../comments/components/CommentList';
-import PostList from '../posts/components/PostList';
+import RecommentList from '../comments/ui/RecommentList';
+import CommentList from '../comments/ui/CommentList';
+import PostList from '../posts/ui/PostList';
 
 export default function ListRouter() {
   const path = usePathname();

@@ -1,6 +1,6 @@
 import Header from '@/widgets/header/Header';
 import NavBar from '@/widgets/navbar/NavBar';
-import WithdrawWrapper from '@/features/account/components/withdraw/WithdrawWrapper';
+import WithdrawWrapper from '@/features/account/ui/withdraw/WithdrawWrapper';
 
 export default function Page() {
   return (

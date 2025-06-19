@@ -1,6 +1,6 @@
 'use client';
 
-import PostCard from '../../components/PostCard';
+import PostCard from '../../ui/PostCard';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import useCommentList from '../hooks/useCommentList';
