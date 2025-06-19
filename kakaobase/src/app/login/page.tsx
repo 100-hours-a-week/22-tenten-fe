@@ -1,10 +1,10 @@
-import Header from '@/components/common/header/Header';
-import LoginForm from '@/components/user/LoginForm';
+import HeaderMain from '@/widgets/header/HeaderMain';
+import LoginForm from '@/features/auth/ui/LoginForm';
 
 export default function Page() {
   return (
     <div>
-      <Header label="로그인" />
+      <HeaderMain />
       <LoginForm />
     </div>
   );
