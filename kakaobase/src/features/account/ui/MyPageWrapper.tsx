@@ -11,7 +11,7 @@ import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 
-export default function Wrapper({ userId }: { userId: number }) {
+export default function MyPageWrapper({ userId }: { userId: number }) {
   const { data, isPending, handleModal, navEdit, isOpen } = useUserInfoHook({
     userId,
   });
