@@ -12,9 +12,6 @@ NEXT_PUBLIC_GOOGLE_ANALYTICS=$(jq -r .googleAnalytics imageDetail.json)
 aws ecr get-login-password --region "$AWS_REGION" | \
   sudo docker login --username AWS --password-stdin "$ECR_REPO"
 
-#이전 이미지 삭제
-sudo docker rmi "$FE_IMAGE_LATEST"
-
 # 📦 이미지 정보 읽기
 FE_IMAGE_LATEST=$(jq -r .frontendImage imageDetail.json)
 echo "Pulling FE image: $FE_IMAGE_LATEST"
