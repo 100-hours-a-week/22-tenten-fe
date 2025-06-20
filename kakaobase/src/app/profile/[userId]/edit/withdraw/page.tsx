@@ -1,13 +1,13 @@
-import Header from '@/components/common/header/Header';
-import NavBar from '@/components/common/NavBar';
-import Wrapper from '@/components/profile/withdraw/Wrapper';
+import Header from '@/widgets/header/Header';
+import NavBar from '@/widgets/navbar/NavBar';
+import WithdrawWrapper from '@/features/account/ui/withdraw/WithdrawWrapper';
 
 export default function Page() {
   return (
     <div>
       <div>
         <Header label="회원 탈퇴" />
-        <Wrapper />
+        <WithdrawWrapper />
         <NavBar />
       </div>
     </div>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
-import GoogleAnalytics from '@/lib/GoogleAnalytics';
+import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
 
 export const metadata: Metadata = {
   title: 'Kakaobase',

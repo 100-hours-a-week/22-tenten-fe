@@ -1,6 +1,6 @@
 'use client';
-import Header from '@/components/common/header/Header';
-import PostEditor from '@/components/post/PostEditor';
+import Header from '@/widgets/header/Header';
+import PostEditor from '@/features/feeds/posts/ui/PostEditor';
 
 export default function Page() {
   return (

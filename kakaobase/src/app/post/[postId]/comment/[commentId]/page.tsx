@@ -1,22 +1,22 @@
 'use client';
-import Header from '@/components/common/header/Header';
-import Loading from '@/components/common/loading/Loading';
-import MiddleBar from '@/components/common/MiddleBar';
-import CommentInput from '@/components/inputs/CommentInput';
-import ListRouter from '@/components/post/ListRouter';
-import PostCard from '@/components/post/PostCard';
-import usePostDetail from '@/hooks/post/usePostDetailHook';
+import Header from '@/widgets/header/Header';
+import Loading from '@/shared/ui/Loading';
+import MiddleBar from '@/features/feeds/ui/MiddleBar';
+import CommentInput from '@/features/feeds/comments/ui/CommentInput';
+import ListRouter from '@/features/feeds/ui/ListRouter';
+import PostCard from '@/features/feeds/ui/PostCard';
+import useCommentDetail from '@/features/feeds/comments/hooks/useCommentDetailHook';
 
 export default function Page({ params }: { params: { commentId: number } }) {
   const id = Number(params.commentId);
-  const { post, loading } = usePostDetail({ id });
+  const { post, loading } = useCommentDetail({ id });
 
   if (loading) return <Loading />;
   if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div className="flex flex-col h-screen">
-      <Header label="답글 상세" />
+      <Header label="댓글 상세" />
       <div
         className="overflow-y-auto flex flex-col min-h-0 my-[4.5rem]"
         data-scroll-area
