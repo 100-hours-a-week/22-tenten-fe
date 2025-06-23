@@ -31,6 +31,7 @@ export default function useCommentForm() {
       } else {
         await postComment({ postId, content: comment });
         queryClient.invalidateQueries({ queryKey: ['comments'] });
+        queryClient.invalidateQueries({ queryKey: ['post', postId] });
       }
       setComment('');
     } catch (e: any) {

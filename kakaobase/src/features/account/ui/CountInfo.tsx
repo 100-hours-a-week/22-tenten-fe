@@ -12,7 +12,7 @@ function CountItem({
 }) {
   return (
     <div className="flex flex-col items-center cursor-pointer">
-      <div className="font-bold text-lg">{label}</div>
+      <div className="font-bold text-md">{label}</div>
       <div className="text-sm" onClick={onClick}>
         {count}
       </div>
@@ -29,7 +29,7 @@ export default function CountInfo({ data }: { data: Profile }) {
     router.push(`${data.id}/followings`);
   }
   return (
-    <div className="flex gap-12">
+    <div className="flex gap-8">
       <CountItem label="게시글" count={data.post_count} />
       <CountItem
         label="팔로워"

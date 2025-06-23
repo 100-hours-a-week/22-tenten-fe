@@ -20,7 +20,7 @@ export default function usePostList(): UseInfiniteQueryResult<
 
     const el = document.querySelector(`[data-post-id="${targetId}"]`);
     if (el) {
-      el.scrollIntoView({ behavior: 'instant', block: 'start' });
+      el.scrollIntoView({ behavior: 'auto', block: 'start' });
     }
 
     sessionStorage.removeItem('scrollToPostId');

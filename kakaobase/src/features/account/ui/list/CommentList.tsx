@@ -25,7 +25,7 @@ export default function CommentList({ userId }: { userId: number }) {
     return <div className="flex text-xs">댓글이 없습니다.</div>;
 
   return (
-    <div className="flex flex-col py-2">
+    <div className="flex flex-col py-2 w-full">
       {isPending && <LoadingSmall />}
       {data?.pages.flat().map((post) => (
         <PostCard key={post.id} post={post} />
