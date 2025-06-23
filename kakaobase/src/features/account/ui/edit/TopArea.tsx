@@ -4,7 +4,7 @@ import ReadOnlyUserInfo from './ReadOnlyUserInfo';
 import ImageInput from './ImageInput';
 import useImageEditHook from '../../hooks/useImageEditHook';
 import { useUserStore } from '@/entities/users/stores/userStore';
-import { courseMapReverse } from '@/shared/lib/courseMap';
+import { courseMapEngToKor } from '@/shared/lib/courseMap';
 
 export default function TopArea() {
   const {
@@ -32,7 +32,7 @@ export default function TopArea() {
         />
         <div className="flex flex-col gap-3">
           <ReadOnlyUserInfo label="이름" value={`${nickname} / ${name}`} />
-          <ReadOnlyUserInfo label="과정명" value={courseMapReverse[course]} />
+          <ReadOnlyUserInfo label="과정명" value={courseMapEngToKor[course]} />
         </div>
       </div>
     </div>

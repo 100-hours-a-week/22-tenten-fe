@@ -33,27 +33,25 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
   }
 
   return (
-    <div className="flex flex-col items-center text-textColor min-h-0 mb-16 mt-20 gap-5">
-      <UserInfo data={data} />
-      <CountInfo data={data} />
+    <div
+      data-scroll-area
+      className="flex w-full overflow-y-auto flex-grow flex-col"
+    >
+      <div className="flex flex-col items-center text-textColor min-h-0 mb-16 mt-20 gap-4">
+        <UserInfo data={data} />
+        {data.is_me ? (
+          <div className="flex gap-4">
+            <SubmitButton text="프로필 편집" onClick={navEdit} />
+            <SubmitButton text="프로필 공유" onClick={handleModal} />
+          </div>
+        ) : (
+          <div className="flex gap-4">
+            <FollowButtonLarge isActive={following} onClick={toggleFollow} />
+          </div>
+        )}
 
-      {data.is_me ? (
-        <div className="flex gap-4">
-          <SubmitButton text="프로필 편집" onClick={navEdit} />
-          <SubmitButton text="프로필 공유" onClick={handleModal} />
-        </div>
-      ) : (
-        <div className="flex gap-4">
-          <FollowButtonLarge isActive={following} onClick={toggleFollow} />
-        </div>
-      )}
-
-      <div className="flex w-full flex-col gap-2 items-center min-h-0">
-        <Toggle isMe={data.is_me} type={type} setType={setType} />
-        <div
-          data-scroll-area
-          className="flex w-full overflow-y-auto flex-grow flex-col"
-        >
+        <div className="flex w-full flex-col gap-2 items-center min-h-0">
+          <Toggle isMe={data.is_me} type={type} setType={setType} />
           <ListRouter type={type} userId={userId} />
         </div>
       </div>
