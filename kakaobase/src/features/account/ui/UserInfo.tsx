@@ -8,8 +8,8 @@ import CountInfo from './CountInfo';
 export default function UserInfo({ data }: { data: Profile }) {
   const imgWidth = 60;
   return (
-    <div className="flex flex-col gap-4 mt-4 px-9 pt-8 pb-6 rounded-xl bg-containerColor items-center max-w-sm">
-      <div className="flex gap-4">
+    <div className="flex flex-col gap-4 mt-4 px-9 pt-6 pb-4 rounded-xl bg-containerColor items-center w-full">
+      <div className="flex gap-4 w-full">
         {data.image_url === '' || data.image_url === null ? (
           <User
             width={imgWidth}

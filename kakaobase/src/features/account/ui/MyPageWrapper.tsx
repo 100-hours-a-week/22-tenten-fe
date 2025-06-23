@@ -35,10 +35,15 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
   return (
     <div
       data-scroll-area
-      className="flex w-full overflow-y-auto flex-grow flex-col"
+      className="flex w-full overflow-y-auto flex-grow flex-col w-full"
     >
-      <div className="flex flex-col items-center text-textColor min-h-0 mb-16 mt-20 gap-4">
-        <UserInfo data={data} />
+      <div className="flex flex-col items-center text-textColor mb-16 mt-20 gap-4">
+        <div className="w-full">
+          <div className="mx-6">
+            <UserInfo data={data} />
+          </div>
+        </div>
+
         {data.is_me ? (
           <div className="flex gap-4">
             <SubmitButton text="프로필 편집" onClick={navEdit} />
@@ -50,7 +55,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
           </div>
         )}
 
-        <div className="flex w-full flex-col gap-2 items-center min-h-0">
+        <div className="flex w-full flex-col items-center min-h-0">
           <Toggle isMe={data.is_me} type={type} setType={setType} />
           <ListRouter type={type} userId={userId} />
         </div>
