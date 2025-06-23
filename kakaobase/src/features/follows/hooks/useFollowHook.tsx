@@ -19,7 +19,7 @@ export function useFollowToggle(initial: boolean, id: number) {
         await deleteFollow({ id });
         showToast('언팔로우 성공! ✌️');
       } else {
-        postFollow({ id });
+        await postFollow({ id });
         showToast('팔로우 성공! ✌️');
       }
       setFollowing((prev) => !prev);

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import PostCard from '../../ui/PostCard';
 import usePostList from '../hooks/usePostList';
 import useScrollHook from '@/shared/hooks/useScrollHook';
@@ -14,6 +15,7 @@ export default function PostList() {
     isFetchingNextPage,
     refetch,
   } = usePostList();
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
