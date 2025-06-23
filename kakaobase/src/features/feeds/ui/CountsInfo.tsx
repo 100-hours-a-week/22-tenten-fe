@@ -49,7 +49,7 @@ function LikeInfo({
   );
 }
 
-export default function CountsInfo({ post }: { post: PostEntity }) {
+export default function CountsInfo({ post, handleRecomments }: { post: PostEntity; handleRecomments? : ()=>void }) {
   const { isLiked, likeCount, toggleLike } = useLikeToggle(
     post.isLiked,
     post.likeCount,
@@ -75,10 +75,13 @@ export default function CountsInfo({ post }: { post: PostEntity }) {
         onClickFunction={toggleLike}
         onClickNav={navLikeList}
       />
-      {(post.type === 'post' || post.type === 'comment') && (
+      {(post.type === 'post' || post.type ==='comment') && (
         <CommentInfo
           commentCount={'commentCount' in post ? post.commentCount : 0}
         />
+      )}
+      {(post.type === 'comment') && (
+        <div onClick={(e) => {e.stopPropagation(); handleRecomments();}}>대댓글 보기/닫기</div>
       )}
     </div>
   );

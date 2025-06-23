@@ -9,6 +9,8 @@ import { UserProfile, UserInfo } from './UserInfo';
 import extractYoutubeVideoId from '../posts/lib/formatYoutube';
 import summaryCondition from '../posts/lib/summaryCondition';
 import { Comment, PostEntity } from '@/features/feeds/types/post';
+import { useState } from 'react';
+import RecommentList from '../comments/ui/RecommentList';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
@@ -26,17 +28,22 @@ export default function PostCard({ post }: { post: PostEntity }) {
       router.push(`/post/${post.postId}/comment/${post.id}`);
     }
   }
+
+  const [isOpen, setOpen] = useState<boolean>(false);
+  function handleRecomments() {
+    setOpen((prev) => !prev);
+  }
+
   return (
-    <div className="flex" data-post-id={post.id} onClick={navDetail}>
-      <div className="flex mx-6 w-full my-2">
+    <div className="flex flex-col w-full" data-post-id={post.id}>
+      <div className="flex mx-6 my-2">
         <div
           className={clsx(
             'flex w-full bg-containerColor p-4 gap-2 cursor-pointer rounded-2xl',
-            (path === '/' ||
-              (!path.includes('comment') && post.type === 'comment') ||
-              post.type === 'recomment') &&
+            (path === '/' &&
               'hover:-translate-y-1 hover:shadow-md transition-transform duration-100'
-          )}
+          ))}
+          onClick={navDetail}
         >
           <UserProfile post={post} />
           <div className="w-full flex flex-col gap-2 text-textColor">
@@ -106,10 +113,11 @@ export default function PostCard({ post }: { post: PostEntity }) {
                   {summaryCondition({ summary: post.youtubeSummary })}
                 </div>
               )}
-            <CountsInfo post={post} />
+            <CountsInfo post={post} handleRecomments={handleRecomments}/>
           </div>
         </div>
       </div>
-    </div>
+      {isOpen && <RecommentList commentId={post.id}/>}
+      </div>
   );
 }

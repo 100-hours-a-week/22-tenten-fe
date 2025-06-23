@@ -5,6 +5,7 @@ import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import useCommentList from '../hooks/useCommentList';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
 export default function CommentList() {
   const params = useParams();
