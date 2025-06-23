@@ -1,16 +1,19 @@
 import { deleteComment } from '../api/comment';
 import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/shared/hooks/ToastContext';
-import { usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 export function useCommentDeleteHook({ id }: { id: number }) {
   const router = useRouter();
   const path = usePathname();
+  const params = useParams();
+  const postId = Number(params.postId);
   const { showToast } = useToast();
 
   async function deleteCommentExecute() {
     try {
       await deleteComment({ id });
+      queryClient.invalidateQueries({ queryKey: ['post', postId] });
       queryClient.invalidateQueries({ queryKey: ['comments'] });
       showToast('삭제 완료! ✌️');
       if (path.includes('comment')) router.back(); //댓글 상세에서 댓글 지우기

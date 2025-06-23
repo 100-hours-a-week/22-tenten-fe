@@ -9,10 +9,10 @@ import usePostDetail from '@/features/feeds/posts/hooks/usePostDetailHook';
 
 export default function Page({ params }: { params: { postId: number } }) {
   const id = Number(params.postId);
-  const { post, loading } = usePostDetail({ id });
+  const { data, isPending } = usePostDetail({ id });
 
-  if (loading) return <Loading />;
-  if (!post) return <div>게시글을 찾을 수 없습니다.</div>;
+  if (isPending) return <Loading />;
+  if (!data) return <div>게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div className="flex flex-col h-screen">
@@ -22,7 +22,7 @@ export default function Page({ params }: { params: { postId: number } }) {
         data-scroll-area
       >
         <div className="my-4">
-          <PostCard post={post} />
+          <PostCard post={data} />
         </div>
         <MiddleBar />
         <ListRouter />
