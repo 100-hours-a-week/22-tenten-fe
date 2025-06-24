@@ -19,7 +19,7 @@ export default function SignupStep1Form() {
   const [agree, setAgree] = useState(false);
 
   return (
-    <div className="flex justify-center items-center animate-slide-in">
+    <div className="flex h-screen justify-center items-center animate-slide-in">
       <div className="bg-containerColor m-8 px-8 py-12 rounded-xl flex flex-col items-center gap-6 w-full max-w-md">
         <div className="flex flex-col gap-6 w-full">
           <EmailAuthStep />

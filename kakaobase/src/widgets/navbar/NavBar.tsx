@@ -8,7 +8,7 @@ export default function NavBar() {
   const router = useRouter();
 
   return (
-    <div className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md">
+    <div className="flex sticky w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md">
       <div className="h-16 bg-bgColor flex justify-between items-end px-8 py-5 w-full z-50">
         <div className="flex gap-12">
           <NavItem icon={House} path="/" />

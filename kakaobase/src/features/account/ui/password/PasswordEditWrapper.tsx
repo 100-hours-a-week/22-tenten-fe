@@ -18,7 +18,7 @@ export default function PasswordEditWrapper() {
   const [email, setEmail] = useState('');
 
   return (
-    <div className="flex justify-center items-center animate-slide-in">
+    <div className="flex h-screen justify-center items-center animate-slide-in">
       <div className="bg-containerColor px-8 py-10 rounded-xl flex flex-col gap-8 items-center w-full max-w-sm">
         <div className="flex flex-col gap-6 w-full">
           <EmailAuthStep setVerified={setVerified} setEmailRef={setEmail} />

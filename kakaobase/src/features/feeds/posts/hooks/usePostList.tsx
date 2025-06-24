@@ -24,7 +24,6 @@ export default function usePostList(): UseInfiniteQueryResult<
     }
 
     sessionStorage.removeItem('scrollToPostId');
-    sessionStorage.removeItem('scrollPosition');
   }, []);
 
   return useInfiniteQuery({

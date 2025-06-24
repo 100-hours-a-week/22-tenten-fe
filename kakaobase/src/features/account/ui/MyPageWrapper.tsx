@@ -23,7 +23,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
 
   if (isPending) {
     return (
-      <div className="flex mt-20 justify-center">
+      <div className="flex justify-center">
         <Loading />
       </div>
     );
@@ -37,7 +37,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
       data-scroll-area
       className="flex w-full overflow-y-auto flex-grow flex-col w-full"
     >
-      <div className="flex flex-col items-center text-textColor mb-16 mt-20 gap-4">
+      <div className="flex flex-col items-center text-textColor gap-4">
         <div className="w-full">
           <div className="mx-6">
             <UserInfo data={data} />
