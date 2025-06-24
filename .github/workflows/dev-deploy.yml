@@ -76,7 +76,7 @@ jobs:
               "FRONTEND_IMAGE_BASE=${{ secrets.ECR_REGISTRY }}/${{ secrets.FRONTEND_REPO }}",
               "aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}/${{ secrets.FRONTEND_REPO }}",
               "docker rmi $FRONTEND_IMAGE_BASE:latest",
-              FE_IMAGE_LATEST=$FRONTEND_IMAGE_BASE:latest",
+              FE_IMAGE_LATEST=$FRONTEND_IMAGE_BASE:latest,
               "docker pull $FE_IMAGE_LATEST",
               "docker stop next-dev || true",
               "docker rm next-dev || true",
