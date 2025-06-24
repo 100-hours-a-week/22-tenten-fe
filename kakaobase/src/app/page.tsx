@@ -9,10 +9,7 @@ export default function Home() {
     <main className="flex flex-col h-screen scroll-none">
       <RequireLoginModal />
       <HeaderMain />
-      <div
-        className="flex overflow-y-auto flex-grow flex-col mb-12"
-        data-scroll-area
-      >
+      <div className="flex overflow-y-auto flex-grow flex-col" data-scroll-area>
         <PostCourseSelector />
         <ListRouter />
       </div>

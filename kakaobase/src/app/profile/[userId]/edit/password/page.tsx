@@ -4,12 +4,10 @@ import PasswordEditWrapper from '@/features/account/ui/password/PasswordEditWrap
 
 export default function Page() {
   return (
-    <div>
-      <div>
-        <Header label="비밀번호 변경" />
-        <PasswordEditWrapper />
-        <NavBar />
-      </div>
+    <div className="flex flex-col h-screen">
+      <Header label="비밀번호 변경" />
+      <PasswordEditWrapper />
+      <NavBar />
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default function PostCourseSelector() {
   };
 
   return (
-    <div className="shadow-sm px-6 pt-4 mt-20 bg-bgColor text-textColor">
+    <div className="shadow-sm px-6 pt-4 bg-bgColor text-textColor">
       <div
         className="flex gap-2 bg-containerColor px-1 py-1 rounded-full
                       overflow-x-scroll overflow-y-hidden scrollbar-hide flex-nowrap"

@@ -85,7 +85,6 @@ export default function CountsInfo({
   function navLikeList(e: React.MouseEvent<HTMLElement>) {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
-      sessionStorage.setItem('scrollPosition', String(window.scrollY));
     }
     e.stopPropagation();
     router.push(`/likes/${post.type}/${post.id}`);

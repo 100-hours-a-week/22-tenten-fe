@@ -24,7 +24,6 @@ export default function PostCard({ post }: { post: PostEntity }) {
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
-      sessionStorage.setItem('scrollPosition', String(window.scrollY));
       router.push(`/post/${post.id}`);
     }
   }

@@ -13,6 +13,8 @@ export default function NavItemProfile() {
 
   function navMyProfile() {
     router.push(`/profile/${userId}`);
+    const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
+    sc?.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
