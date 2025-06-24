@@ -26,9 +26,7 @@ export default function RecommentList({ commentId }: { commentId: number }) {
   return (
     <div className="flex flex-col ml-12">
       {data?.pages.flat().map((post) => (
-        <div className="flex">
-          <PostCard key={post.id} post={post} />
-        </div>
+        <PostCard key={post.id} post={post} />
       ))}
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
