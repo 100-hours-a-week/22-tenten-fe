@@ -8,6 +8,7 @@ export function useRecommentDeleteHook({ id }: { id: number }) {
     try {
       await deleteRecomment({ id });
       queryClient.invalidateQueries({ queryKey: ['recomments'] });
+      queryClient.invalidateQueries({ queryKey: ['comments'] });
       showToast('삭제 완료! ✌️');
     } catch (e: any) {
       showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
