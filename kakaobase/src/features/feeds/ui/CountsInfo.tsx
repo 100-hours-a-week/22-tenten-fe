@@ -2,13 +2,21 @@ import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/features/feeds/types/post';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { commentFormStateStore } from '../comments/stores/commentFormStateStore';
+import useCommentOrRecomment from '../comments/hooks/useCommentOrRecomment';
+
+const iconSize = 16;
 
 function CommentInfo({ commentCount }: { commentCount: number }) {
   return (
     <div className="flex gap-1 justify-center">
-      <MessageCircle width={24} height={24} className="cursor-pointer" />
-      <div className="w-12 self-center">{commentCount}</div>
+      <MessageCircle
+        width={iconSize}
+        height={iconSize}
+        className="cursor-pointer"
+      />
+      <div className="w-6 self-center">{commentCount}</div>
     </div>
   );
 }
@@ -25,10 +33,10 @@ function LikeInfo({
   onClickNav: (e: React.MouseEvent<HTMLElement>) => void;
 }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 items-center">
       <Heart
-        width={24}
-        height={24}
+        width={iconSize}
+        height={iconSize}
         onClick={(e) => {
           e.stopPropagation();
           onClickFunction(e);
@@ -38,7 +46,7 @@ function LikeInfo({
         className="cursor-pointer"
       />
       <div
-        className="flex w-12 self-center"
+        className="flex w-6 self-center"
         onClick={(e) => {
           onClickNav(e);
         }}
@@ -49,7 +57,15 @@ function LikeInfo({
   );
 }
 
-export default function CountsInfo({ post }: { post: PostEntity }) {
+export default function CountsInfo({
+  post,
+  handleRecommentVisibility,
+  isOpen,
+}: {
+  post: PostEntity;
+  handleRecommentVisibility?: () => void;
+  isOpen?: boolean;
+}) {
   const { isLiked, likeCount, toggleLike } = useLikeToggle(
     post.isLiked,
     post.likeCount,
@@ -57,18 +73,33 @@ export default function CountsInfo({ post }: { post: PostEntity }) {
     post.type
   );
 
+  const { handleRecomment } = useCommentOrRecomment({
+    post,
+    handleRecommentVisibility,
+    isOpen,
+  });
+
+  const { isWritingRecomment, commentId } = commentFormStateStore();
+
   const router = useRouter();
   function navLikeList(e: React.MouseEvent<HTMLElement>) {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
-      sessionStorage.setItem('scrollPosition', String(window.scrollY));
     }
     e.stopPropagation();
     router.push(`/likes/${post.type}/${post.id}`);
   }
 
+  useEffect(() => {
+    return () => {
+      if (isWritingRecomment) {
+        handleRecomment();
+      }
+    };
+  }, []);
+
   return (
-    <div className="flex gap-2 text-sm">
+    <div className="flex text-sm items-center">
       <LikeInfo
         likeCount={likeCount}
         condition={isLiked}
@@ -79,6 +110,20 @@ export default function CountsInfo({ post }: { post: PostEntity }) {
         <CommentInfo
           commentCount={'commentCount' in post ? post.commentCount : 0}
         />
+      )}
+      {post.type === 'comment' && (
+        <div className="text-xs flex gap-4 ">
+          <div onClick={handleRecomment}>
+            {isWritingRecomment && commentId === post.id ? '취소' : '답글 달기'}
+          </div>
+          <div
+            onClick={() => {
+              handleRecommentVisibility?.();
+            }}
+          >
+            {isOpen ? '숨기기' : '대댓글 보기'}
+          </div>
+        </div>
       )}
     </div>
   );

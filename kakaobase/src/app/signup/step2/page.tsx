@@ -3,11 +3,9 @@ import SignupStep2Form from '@/features/auth/ui/SignupStep2Form';
 
 export default function Page() {
   return (
-    <div className="overflow-y-auto">
+    <div className="flex flex-col h-screen">
       <Header label="회원가입" />
-      <div className="mt-20">
-        <SignupStep2Form />
-      </div>
+      <SignupStep2Form />
     </div>
   );
 }

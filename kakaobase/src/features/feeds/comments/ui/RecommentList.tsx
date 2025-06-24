@@ -6,12 +6,11 @@ import useScrollHook from '@/shared/hooks/useScrollHook';
 import useRecommentList from '../hooks/useRecommentList';
 import { useParams } from 'next/navigation';
 
-export default function RecommentList() {
+export default function RecommentList({ commentId }: { commentId: number }) {
   const params = useParams();
-  const commentId = Number(params.commentId);
   const {
     data,
-    status,
+    isPending,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -25,20 +24,16 @@ export default function RecommentList() {
   });
 
   return (
-    <div className="flex flex-col py-4">
+    <div className="flex flex-col ml-12">
       {data?.pages.flat().map((post) => (
-        <PostCard key={post.id} post={post} />
+        <div className="flex">
+          <PostCard key={post.id} post={post} />
+        </div>
       ))}
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
 
-      {!hasNextPage && status === 'pending' ? (
-        <LoadingSmall />
-      ) : (
-        <div className="text-center text-xs font-bold mb-8">
-          마지막 대댓글입니다.
-        </div>
-      )}
+      {!hasNextPage && isPending && <LoadingSmall />}
     </div>
   );
 }

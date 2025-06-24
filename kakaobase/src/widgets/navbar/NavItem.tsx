@@ -15,8 +15,14 @@ export default function NavItem({
 
   const isActive = pathName === path;
 
+  const handleClick = () => {
+    if (path) router.push(path);
+    const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
+    sc?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <button onClick={path ? () => router.push(path) : undefined}>
+    <button onClick={path ? () => handleClick() : undefined}>
       <Icon
         className={clsx(
           'w-6 h-6 transition-colors cursor-pointer',
