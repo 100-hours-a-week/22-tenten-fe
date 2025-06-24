@@ -2,7 +2,7 @@ import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/features/feeds/types/post';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { commentFormStateStore } from '../comments/stores/commentFormStateStore';
 import useCommentOrRecomment from '../comments/hooks/useCommentOrRecomment';
 
@@ -90,6 +90,14 @@ export default function CountsInfo({
     e.stopPropagation();
     router.push(`/likes/${post.type}/${post.id}`);
   }
+
+  useEffect(() => {
+    return () => {
+      if (isWritingRecomment) {
+        handleRecomment();
+      }
+    };
+  }, []);
 
   return (
     <div className="flex text-sm items-center">

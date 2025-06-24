@@ -16,17 +16,17 @@ export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
   const path = usePathname();
 
+  const [isOpen, setOpen] = useState<boolean>(false);
+  function handleRecommentVisibility() {
+    setOpen((prev) => !prev);
+  }
+
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
       sessionStorage.setItem('scrollPosition', String(window.scrollY));
       router.push(`/post/${post.id}`);
     }
-  }
-
-  const [isOpen, setOpen] = useState<boolean>(false);
-  function handleRecommentVisibility() {
-    setOpen((prev) => !prev);
   }
 
   return (
