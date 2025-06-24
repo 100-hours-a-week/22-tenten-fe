@@ -35,7 +35,7 @@ export default function CommentInput() {
         </div>
       </div>
       <div
-        className={`mr-6 ml-2 rounded-full p-2 flex justify-center items-center ${
+        className={`mr-4 ml-2 rounded-full p-2 flex justify-center items-center ${
           comment.trim() && 'hover:bg-containerColor'
         }`}
       >

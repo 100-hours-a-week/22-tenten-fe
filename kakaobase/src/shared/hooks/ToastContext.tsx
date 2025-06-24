@@ -11,6 +11,7 @@ import Toast from '../ui/Toast';
 
 interface ToastContextType {
   showToast: (message: string) => void;
+  openToast: (message: string) => void;
   hideToast: () => void;
   label: string;
   isOpen: boolean;
@@ -19,6 +20,7 @@ interface ToastContextType {
 const ToastContext = createContext<ToastContextType>({
   showToast: () => {},
   hideToast: () => {},
+  openToast: () => {},
   label: '',
   isOpen: false,
 });
@@ -31,7 +33,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setLabel(message);
     setIsOpen(true);
 
-    setTimeout(() => setIsOpen(false), 4000);
+    setTimeout(() => setIsOpen(false), 3000);
+  }, []);
+
+  const openToast = useCallback((message: string) => {
+    setLabel(message);
+    setIsOpen(true);
   }, []);
 
   const hideToast = useCallback(() => {
@@ -39,7 +46,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <ToastContext.Provider value={{ showToast, hideToast, label, isOpen }}>
+    <ToastContext.Provider
+      value={{ showToast, openToast, hideToast, label, isOpen }}
+    >
       {children}
       <Toast />
     </ToastContext.Provider>

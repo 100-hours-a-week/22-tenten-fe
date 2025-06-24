@@ -5,9 +5,8 @@ import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import useRecommentList from '../hooks/useRecommentList';
 import { useParams } from 'next/navigation';
-import { ArrowRightToLine } from 'lucide-react';
 
-export default function RecommentList({commentId} : {commentId : number}) {
+export default function RecommentList({ commentId }: { commentId: number }) {
   const params = useParams();
   const {
     data,
@@ -27,16 +26,14 @@ export default function RecommentList({commentId} : {commentId : number}) {
   return (
     <div className="flex flex-col ml-12">
       {data?.pages.flat().map((post) => (
-        <div className='flex'>
+        <div className="flex">
           <PostCard key={post.id} post={post} />
         </div>
       ))}
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
 
-      {!hasNextPage && isPending && (
-        <LoadingSmall />
-      )}
+      {!hasNextPage && isPending && <LoadingSmall />}
     </div>
   );
 }

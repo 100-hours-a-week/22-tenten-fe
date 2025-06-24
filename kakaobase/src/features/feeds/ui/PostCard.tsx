@@ -8,7 +8,7 @@ import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import extractYoutubeVideoId from '../posts/lib/formatYoutube';
 import summaryCondition from '../posts/lib/summaryCondition';
-import { Comment, PostEntity } from '@/features/feeds/types/post';
+import { PostEntity } from '@/features/feeds/types/post';
 import { useState } from 'react';
 import RecommentList from '../comments/ui/RecommentList';
 
@@ -16,21 +16,16 @@ export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
   const path = usePathname();
 
-  function isComment(post: PostEntity): post is Comment {
-    return post.type === 'comment';
-  }
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
       sessionStorage.setItem('scrollPosition', String(window.scrollY));
       router.push(`/post/${post.id}`);
-    } else if (isComment(post)) {
-      router.push(`/post/${post.postId}/comment/${post.id}`);
     }
   }
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  function handleRecomments() {
+  function handleRecommentVisibility() {
     setOpen((prev) => !prev);
   }
 
@@ -40,9 +35,9 @@ export default function PostCard({ post }: { post: PostEntity }) {
         <div
           className={clsx(
             'flex w-full bg-containerColor p-4 gap-2 cursor-pointer rounded-2xl',
-            (path === '/' &&
+            path === '/' &&
               'hover:-translate-y-1 hover:shadow-md transition-transform duration-100'
-          ))}
+          )}
           onClick={navDetail}
         >
           <UserProfile post={post} />
@@ -113,11 +108,15 @@ export default function PostCard({ post }: { post: PostEntity }) {
                   {summaryCondition({ summary: post.youtubeSummary })}
                 </div>
               )}
-            <CountsInfo post={post} handleRecomments={handleRecomments}/>
+            <CountsInfo
+              post={post}
+              handleRecommentVisibility={handleRecommentVisibility}
+              isOpen={isOpen}
+            />
           </div>
         </div>
       </div>
-      {isOpen && <RecommentList commentId={post.id}/>}
-      </div>
+      {isOpen && <RecommentList commentId={post.id} />}
+    </div>
   );
 }
