@@ -15,9 +15,7 @@ export async function getRecomments(
     const response = await api.get(`/comments/${commentId}/recomments`, {
       params,
     });
-    return response.data.data.recomments.map((p: any) =>
-      mapToPostEntity(p, 'recomment')
-    );
+    return response.data.data.map((p: any) => mapToPostEntity(p, 'recomment'));
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
     return [];
