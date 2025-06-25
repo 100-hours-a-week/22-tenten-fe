@@ -68,27 +68,27 @@ jobs:
       - name: Deploy via SSM (Safe Script Mode)
         run: |
           aws ssm send-command \
-            --instance-ids ${{ secrets.DEV_EC2_INSTANCE_ID }} \
-            --document-name "AWS-RunShellScript" \
-            --comment "Deploy Dev Next.js container" \
-            --parameters 'commands=[
-              "set -e",
-              "FRONTEND_IMAGE_BASE=${{ secrets.ECR_REGISTRY }}/${{ secrets.FRONTEND_REPO }}",
-              "aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}/${{ secrets.FRONTEND_REPO }}",
-              "docker rmi $FRONTEND_IMAGE_BASE:latest"
-              FE_IMAGE_LATEST=$FRONTEND_IMAGE_BASE:latest",
-              "docker pull $FE_IMAGE_LATEST",
-              "docker stop next-dev || true",
-              "docker rm next-dev || true",
-              "sudo docker run -d \
-                  --name next-dev \
-                  -p 3000:3000 \
-                  --restart always \
-                  --env NODE_ENV=production \
-                  --env NEXT_PUBLIC_API_URL=${{ secrets.DEV_NEXT_PUBLIC_API_URL }} \
-                  --env NEXT_PUBLIC_GOOGLE_ANALYTICS=${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }} \
-                  --log-opt max-size=10m \
-                  --log-opt max-file=3 \
-                  $FE_IMAGE_LATEST"
-            ]' \
-            --region ${{ secrets.AWS_REGION }}
+          --instance-ids ${{ secrets.DEV_EC2_INSTANCE_ID }} \
+          --document-name "AWS-RunShellScript" \
+          --comment "Deploy Dev Next.js container" \
+          --parameters 'commands=["bash -c '\''\
+            set -e; \
+            FRONTEND_IMAGE_BASE=${{ secrets.ECR_REGISTRY }}/${{ secrets.FRONTEND_REPO }}; \
+            FE_IMAGE_LATEST=$FRONTEND_IMAGE_BASE:latest; \
+            aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $FRONTEND_IMAGE_BASE; \
+            docker rmi $FE_IMAGE_LATEST || true; \
+            docker pull $FE_IMAGE_LATEST; \
+            docker stop next-dev || true; \
+            docker rm next-dev || true; \
+            docker run -d \
+              --name next-dev \
+              -p 3000:3000 \
+              --restart always \
+              --env NODE_ENV=production \
+              --env NEXT_PUBLIC_API_URL=${{ secrets.DEV_NEXT_PUBLIC_API_URL }} \
+              --env NEXT_PUBLIC_GOOGLE_ANALYTICS=${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS }} \
+              --log-opt max-size=10m \
+              --log-opt max-file=3 \
+              $FE_IMAGE_LATEST \
+          '\''"]' \
+          --region ${{ secrets.AWS_REGION }}
