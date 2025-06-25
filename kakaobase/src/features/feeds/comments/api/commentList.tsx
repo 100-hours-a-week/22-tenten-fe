@@ -16,9 +16,7 @@ export default async function getComments(
       params,
     });
 
-    return response.data.data.comments.map((p: any) =>
-      mapToPostEntity(p, 'comment')
-    );
+    return response.data.data.map((p: any) => mapToPostEntity(p, 'comment'));
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
     return [];
