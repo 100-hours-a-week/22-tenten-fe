@@ -6,7 +6,7 @@ import {
   likePost,
   likeRecomment,
 } from '@/features/likes/api/like';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function useLikeToggle(
   initial: boolean,
@@ -16,6 +16,11 @@ export function useLikeToggle(
 ) {
   const [isLiked, setLiked] = useState(initial);
   const [likeCount, setLikeCount] = useState(likeCnt);
+
+  useEffect(() => {
+    setLiked(initial);
+    setLikeCount(likeCnt);
+  }, [initial, likeCnt]);
 
   const toggleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
