@@ -10,9 +10,10 @@ export default function NavItemProfile() {
   const router = useRouter();
   const { userId, imageUrl } = useUserStore();
   const isActive = pathName.includes('/profile');
+  const path = `/profile/${userId}`;
 
   function navMyProfile() {
-    router.push(`/profile/${userId}`);
+    router.push(path);
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     sc?.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -20,7 +21,7 @@ export default function NavItemProfile() {
   return (
     <div className="flex" onClick={navMyProfile}>
       {imageUrl === '' || imageUrl === null ? (
-        <NavItem icon={User} />
+        <NavItem icon={User} path={path} />
       ) : (
         <Image
           src={imageUrl}

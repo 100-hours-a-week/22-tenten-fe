@@ -11,8 +11,8 @@ export async function deletePost({ postType, id }: postParams) {
   try {
     const response = await api.delete(`posts/${postType}/${id}`);
     return response.data;
-  } catch (e) {
-    console.log(e);
+  } catch (e: unknown) {
+    if (e instanceof Error) throw e;
   }
 }
 

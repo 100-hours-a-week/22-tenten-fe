@@ -8,11 +8,10 @@ export default function NavItem({
   path,
 }: {
   icon: LucideIcon;
-  path?: string;
+  path: string;
 }) {
   const pathName = usePathname();
   const router = useRouter();
-
   const isActive = pathName === path;
 
   const handleClick = () => {

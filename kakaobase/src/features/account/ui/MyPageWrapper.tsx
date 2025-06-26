@@ -23,7 +23,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
 
   if (isPending) {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center h-screen">
         <Loading />
       </div>
     );

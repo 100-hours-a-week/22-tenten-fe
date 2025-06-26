@@ -17,9 +17,14 @@ const config: Config = {
           '0%': { transform: 'translateY(16px)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        'slide-out': {
+          '0%': { transform: 'translateY(0px)', opacity: '1' },
+          '100%': { transform: 'translateY(-16px)', opacity: '0' },
+        },
       },
       animation: {
         'slide-in': 'slide-in 0.5s ease-in-out',
+        'slide-out': 'slide-out 0.5s ease-in-out',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
