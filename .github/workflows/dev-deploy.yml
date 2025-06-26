@@ -26,7 +26,13 @@ jobs:
           node-version: '22.13.1'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci  
+
+      - name: Type Check
+        run: npm run type-check 
+
+      - name: Build Test
+        run: npm run build
 
   build:
     runs-on: ubuntu-latest
