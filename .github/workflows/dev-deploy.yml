@@ -143,7 +143,7 @@ jobs:
           -d "{
             \"embeds\": [{
               \"title\": \"🔔 Next.js CI/CD 결과 알림\",
-              \"description\": \"${CI_STATUS}\n${CD_STATUS}\n\n🟡 브랜치: \`${{ github.ref_name }}\`\n👤 커밋자: \`${{ github.actor }}\`\n📝 커밋 메시지: \`${COMMIT_MESSAGE}\`\n🔗 [자세히 보기](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\",
+              \"description\": \"${CI_STATUS}\n${CD_STATUS}\n\n 브랜치: \`${{ github.ref_name }}\`\n 커밋자: \`${{ github.actor }}\`\n 커밋 메시지: \`${COMMIT_MESSAGE}\`\n [자세히 보기](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\",
               \"color\": ${COLOR}
             }]
           }" \
