@@ -23,7 +23,7 @@ export default function useCommentDetail({ id }: { id: number }) {
         showToast('로그인이 필요합니다. 😭');
       } else {
         showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
-        router.push('/');
+        router.push('/main');
       }
     } finally {
       setLoading(false);

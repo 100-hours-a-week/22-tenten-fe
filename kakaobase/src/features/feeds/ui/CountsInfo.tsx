@@ -1,7 +1,7 @@
 import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/features/feeds/types/post';
 import { Heart, MessageCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { commentFormStateStore } from '../comments/stores/commentFormStateStore';
 import useCommentOrRecomment from '../comments/hooks/useCommentOrRecomment';
@@ -81,6 +81,7 @@ export default function CountsInfo({
 
   const { isWritingRecomment, commentId } = commentFormStateStore();
 
+  const path = usePathname();
   const router = useRouter();
   function navLikeList(e: React.MouseEvent<HTMLElement>) {
     if (post.type === 'post') {
@@ -111,7 +112,7 @@ export default function CountsInfo({
           commentCount={'commentCount' in post ? post.commentCount : 0}
         />
       )}
-      {post.type === 'comment' && (
+      {post.type === 'comment' && !path.includes('profile') && (
         <div className="text-xs flex gap-4 ">
           <div onClick={handleRecomment}>
             {isWritingRecomment && commentId === post.id ? '취소' : '답글 달기'}

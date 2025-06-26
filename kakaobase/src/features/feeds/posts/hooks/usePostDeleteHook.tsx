@@ -15,7 +15,7 @@ export function usePostDeleteHook({ id }: { id: number }) {
       await deletePost({ postType: selectedCourse, id });
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       showToast('삭제 완료! ✌️');
-      if (path.includes('post')) router.push('/'); //게시글 상세에서 게시글 지우기
+      if (path.includes('post')) router.push('/main'); //게시글 상세에서 게시글 지우기
     } catch (e: any) {
       showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
     }
