@@ -5,6 +5,7 @@ import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kakaobase.com'),
   title: '카카오베이스',
   description: '카카오테크 부트캠프 커뮤니티',
   keywords: [
