@@ -1,4 +1,4 @@
-import Banner from '@/features/banner/ui/Banner';
+import Banner from '@/features/main/ui/Banner';
 import PostByCourse from '@/features/main/ui/PostByCourse';
 import HeaderMain from '@/widgets/header/HeaderMain';
 import NavBar from '@/widgets/navbar/NavBar';
