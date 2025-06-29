@@ -11,8 +11,13 @@ export default function Page({ params }: { params: { postId: number } }) {
   const id = Number(params.postId);
   const { data, isPending } = usePostDetail({ id });
 
-  if (isPending) return <Loading />;
-  if (!data) return <div>게시글을 찾을 수 없습니다.</div>;
+  if (isPending)
+    return (
+      <div className="h-screen">
+        <Loading />
+      </div>
+    );
+  if (!data) return <div className="h-screen">게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div className="flex flex-col h-screen">

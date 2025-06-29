@@ -8,7 +8,7 @@ import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import extractYoutubeVideoId from '../posts/lib/formatYoutube';
 import summaryCondition from '../posts/lib/summaryCondition';
-import { PostEntity } from '@/features/feeds/types/post';
+import { Comment, PostEntity } from '@/features/feeds/types/post';
 import { useState } from 'react';
 import RecommentList from '../comments/ui/RecommentList';
 
@@ -21,10 +21,17 @@ export default function PostCard({ post }: { post: PostEntity }) {
     setOpen((prev) => !prev);
   }
 
+  function isComment(post: PostEntity): post is Comment {
+    return post.type === 'comment';
+  }
+
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
       router.push(`/post/${post.id}`);
+    }
+    if (isComment(post) && path.includes('profile')) {
+      router.push(`/post/${post.postId}`);
     }
   }
 

@@ -47,14 +47,10 @@ export const usePostEditorForm = () => {
       );
       await queryClient.invalidateQueries({ queryKey: ['posts'] });
       showToast('게시글 등록 성공! ✌️');
-      router.push(`/`);
+      router.push(`/main`);
     } catch (e: any) {
-      if (e.response.data.error === 'unauthorized') {
-        showToast('로그인이 필요합니다. 😭');
-      } else {
-        showToast('게시글 업로드 실패! 잠시 후 다시 시도해 주세요. 😭');
-        router.push('/');
-      }
+      showToast('게시글 업로드 실패! 잠시 후 다시 시도해 주세요. 😭');
+      router.push('/main');
     } finally {
       setLoading(false);
     }

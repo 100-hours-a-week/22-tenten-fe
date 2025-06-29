@@ -1,19 +1,17 @@
+import Banner from '@/features/main/ui/Banner';
+import PostByCourse from '@/features/main/ui/PostByCourse';
 import HeaderMain from '@/widgets/header/HeaderMain';
-import RequireLoginModal from '@/widgets/modal/RequireLoginModal';
 import NavBar from '@/widgets/navbar/NavBar';
-import ListRouter from '@/features/feeds/ui/ListRouter';
-import PostCourseSelector from '@/features/feeds/posts/ui/PostCourseSelector';
 
 export default function Home() {
   return (
-    <main className="flex flex-col h-screen scroll-none">
-      <RequireLoginModal />
+    <div className="flex flex-col h-screen">
       <HeaderMain />
-      <div className="flex overflow-y-auto flex-grow flex-col" data-scroll-area>
-        <PostCourseSelector />
-        <ListRouter />
+      <div className="h-screen">
+        <Banner />
+        <PostByCourse />
       </div>
       <NavBar />
-    </main>
+    </div>
   );
 }
