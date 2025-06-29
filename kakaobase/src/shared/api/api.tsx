@@ -32,8 +32,8 @@ api.interceptors.response.use(
 
     if (origReq.url?.includes('/auth/tokens/refresh')) {
       // 리프레시 실패 시 바로 로그인 페이지로 이동
-      window.location.href = '/login';
-      return Promise.reject(error);
+      window.location.href = '/unauthorized';
+      return new Promise(() => {});
     }
 
     if (error.response?.status === 401 && !origReq._retry) {
@@ -54,7 +54,7 @@ api.interceptors.response.use(
         return api(origReq); //기존 api 요청 재시도
       } catch (refreshError) {
         processQueue(refreshError);
-        window.location.href = '/login';
+        window.location.href = '/unauthorized';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
