@@ -29,7 +29,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
     );
   }
   if (!data) {
-    return <div>데이터 없음</div>;
+    return <div className="h-screen">데이터 없음</div>;
   }
 
   return (
