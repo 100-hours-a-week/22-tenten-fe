@@ -13,7 +13,11 @@ export default function NavItemProfile() {
   const path = `/profile/${userId}`;
 
   function navMyProfile() {
-    router.push(path);
+    if (userId === 0 || !userId) {
+      router.push('/unauthorized');
+    } else {
+      router.push(path);
+    }
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     sc?.scrollTo({ top: 0, behavior: 'smooth' });
   }
