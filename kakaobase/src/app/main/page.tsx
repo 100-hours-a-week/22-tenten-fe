@@ -3,7 +3,7 @@ import RequireLoginModal from '@/widgets/modal/RequireLoginModal';
 import NavBar from '@/widgets/navbar/NavBar';
 import ListRouter from '@/features/feeds/ui/ListRouter';
 import PostCourseSelector from '@/features/feeds/posts/ui/PostCourseSelector';
-import GoUp from '@/shared/ui/button/GoUp';
+import FloatingButtonGroup from '@/widgets/buttons/FloatingButtonGroup';
 
 export default function Page() {
   return (
@@ -14,7 +14,7 @@ export default function Page() {
         <PostCourseSelector />
         <ListRouter />
       </div>
-      <GoUp />
+      <FloatingButtonGroup />
       <NavBar />
     </main>
   );

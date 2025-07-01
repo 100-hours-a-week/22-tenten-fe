@@ -21,11 +21,16 @@ export default function NavItem({
   };
 
   return (
-    <button onClick={path ? () => handleClick() : undefined}>
+    <button
+      onClick={path ? () => handleClick() : undefined}
+      className={`w-full h-16 rounded-md flex items-center text-center justify-center ${
+        isActive ? 'bg-containerColor' : 'hover:bg-containerColor'
+      }`}
+    >
       <Icon
         className={clsx(
           'w-6 h-6 transition-colors cursor-pointer',
-          isActive ? 'text-myBlue' : 'text-iconColor'
+          isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
         )}
       />
     </button>
