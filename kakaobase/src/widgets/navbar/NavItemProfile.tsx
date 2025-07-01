@@ -23,7 +23,14 @@ export default function NavItemProfile() {
   }
 
   return (
-    <div className="flex" onClick={navMyProfile}>
+    <div
+      className={`w-full h-16 rounded-md flex items-center text-center justify-center ${
+        isActive
+          ? 'bg-containerColor'
+          : 'hover:bg-containerColor hover:text-textColor'
+      }`}
+      onClick={navMyProfile}
+    >
       {imageUrl === '' || imageUrl === null ? (
         <NavItem icon={User} path={path} />
       ) : (
@@ -33,8 +40,8 @@ export default function NavItemProfile() {
           height={12}
           alt="profile"
           className={clsx(
-            'w-6 h-6 transition-colors cursor-pointer rounded-md',
-            isActive ? 'text-myBlue' : 'text-iconColor'
+            'w-6 h-6 transition-colors cursor-pointer',
+            isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
           )}
         />
       )}

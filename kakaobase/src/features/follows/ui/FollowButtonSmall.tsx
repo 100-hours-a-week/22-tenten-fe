@@ -14,7 +14,7 @@ export default function FollowButtonSmall({
         e.stopPropagation();
         toggleFollow();
       }}
-      className={`h-4 px-2 min-w-fit align-center rounded-full flex justify-center ${
+      className={`h-4 px-2 min-w-fit align-center rounded-full flex items-center justify-center ${
         following
           ? 'bg-myLightBlue text-textOnLight'
           : 'bg-myBlue text-textOnBlue'
