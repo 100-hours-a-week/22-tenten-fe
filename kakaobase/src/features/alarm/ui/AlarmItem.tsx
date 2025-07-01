@@ -2,11 +2,11 @@
 
 import FollowButtonSmall from '@/features/follows/ui/FollowButtonSmall';
 import Image from 'next/image';
-import { Alarm } from '../types/Alarm';
+import { AlarmDetailEvent } from '../types/AlarmEvent';
 import formatDate from '@/features/feeds/lib/formatDate';
 
-export default function AlarmItem() {
-  const alarm = 'follow' as Alarm;
+export default function AlarmItem({ data }: { data: any }) {
+  const alarm = 'following.created' as AlarmDetailEvent;
   const userName = 'hazel.kim';
   const content = '너무 귀엽다..! 진짜ㅜㅜ';
   const isRead = false;
@@ -30,9 +30,10 @@ export default function AlarmItem() {
           <div>
             <div className="flex gap-1">
               <div className="font-bold">{userName}</div>
-              {alarm === 'comment' || alarm === 'recomment' ? (
+              {alarm === 'comment.created' || alarm === 'recomment.created' ? (
                 <div>
-                  님이 {alarm === 'comment' ? '댓글' : '대댓글'}을 남겼습니다.
+                  님이 {alarm === 'comment.created' ? '댓글' : '대댓글'}을
+                  남겼습니다.
                 </div>
               ) : (
                 <div>님이</div>
@@ -40,9 +41,11 @@ export default function AlarmItem() {
             </div>
             <div className="flex items-center gap-2 w-full text-xs">
               <div className="'w-full text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis'">
-                {alarm === 'comment' || alarm === 'recomment'
+                {alarm === 'comment.like.created' ||
+                alarm === 'recomment.like.created' ||
+                alarm === 'post.like.created'
                   ? content
-                  : alarm === 'follow'
+                  : alarm === 'following.created'
                   ? '회원님을 팔로우하기 시작했습니다.'
                   : '회원님의 게시글을 좋아합니다.'}
               </div>
@@ -52,7 +55,9 @@ export default function AlarmItem() {
             </div>
           </div>
         </div>
-        {alarm === 'follow' && <FollowButtonSmall isFollowing={false} id={1} />}
+        {alarm === 'following.created' && (
+          <FollowButtonSmall isFollowing={false} id={1} />
+        )}
       </div>
     </div>
   );
