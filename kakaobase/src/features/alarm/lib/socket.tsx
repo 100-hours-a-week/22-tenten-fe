@@ -5,7 +5,7 @@ let stompClient: Client | null = null;
 const reconnectTime = 5000; //5초
 
 export const connectStomp = (onMessage: (msg: IMessage) => void) => {
-  const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}ws`);
+  const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
 
   stompClient = new Client({
     webSocketFactory: () => socket,

@@ -2,14 +2,14 @@ import { LucideIcon } from 'lucide-react';
 
 interface AlarmActionParams {
   icon: LucideIcon;
-  fn: () => void;
+  fn: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export default function AlarmAction({ icon: Icon, fn }: AlarmActionParams) {
   return (
     <div
       className="flex w-6 h-6 bg-innerContainerColor hover:bg-myBlue hover:text-textOnBlue rounded-full items-center justify-center cursor-pointer"
-      onClick={fn}
+      onClick={(e) => fn(e)}
     >
       <Icon size={14} />
     </div>

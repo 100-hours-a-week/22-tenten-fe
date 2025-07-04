@@ -46,16 +46,19 @@ export default function useAlarmSwipe({ is_read }: { is_read: boolean }) {
     startX.current = null;
   }
 
-  function handleDelete() {
+  function handleDelete(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
     setIsDeleted(true);
     // 실제 삭제 요청 API 호출
   }
 
-  function handleClose() {
+  function handleClose(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
     setShowActions(false);
   }
 
-  function handleRead() {
+  function handleRead(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
     setRead((prev) => !prev);
     setShowActions(false);
   }
