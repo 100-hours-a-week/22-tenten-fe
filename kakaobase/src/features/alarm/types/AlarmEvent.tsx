@@ -8,7 +8,6 @@ export type AlarmDetailEvent =
 
 export type AlarmEvent =
   | 'notification.fetch'
-  | 'notification.remove'
   | 'notification.read.ack'
   | 'notification.read.nack'
   | 'notification.remove.ack'
