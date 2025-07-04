@@ -9,6 +9,7 @@ import AlarmProfile from './AlarmProfile';
 import AlarmAction from './AlarmAction';
 import AlarmNameParticle from './AlarmNameParticle';
 import useAlarmSwipe from '../hooks/useAlarmSwipe';
+import useAlarmRouting from '../hooks/useAlarmRouting';
 
 export default function AlarmItem({ data }: { data: any }) {
   const alarm = data.data;
@@ -31,9 +32,9 @@ export default function AlarmItem({ data }: { data: any }) {
     handleTouchStart,
   } = useAlarmSwipe({ is_read: alarm.is_read });
 
-  if (data === null || data.data === null || data.data.sender === null)
-    return null;
+  const { goToPost, goToProfile } = useAlarmRouting({ data: alarm });
 
+  if (data === null || alarm === null || sender === null) return null;
   if (isDeleted) return null;
 
   return (
@@ -51,7 +52,10 @@ export default function AlarmItem({ data }: { data: any }) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <div className="flex px-6 py-4 justify-between gap-2 w-full items-center">
+      <div
+        className="flex px-6 py-4 justify-between gap-2 w-full items-center"
+        onClick={event === 'following.created' ? goToProfile : goToPost}
+      >
         <div className="flex gap-2 items-center min-w-0">
           <div className="relative w-10 h-10 rounded-xl shrink-0">
             <AlarmProfile sender={sender} />
@@ -67,7 +71,7 @@ export default function AlarmItem({ data }: { data: any }) {
             </div>
             <div className="flex items-center gap-2 w-full text-xs">
               <div className="text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis">
-                <AlarmContent data={alarm} />
+                <AlarmContent data={data} />
               </div>
               <div className="shrink-0 text-textOpacity50">
                 {formatDate(alarm.timestamp, false)}
