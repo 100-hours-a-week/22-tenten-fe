@@ -1,78 +1,45 @@
 'use client';
 
 import FollowButtonSmall from '@/features/follows/ui/FollowButtonSmall';
-import Image from 'next/image';
-import { AlarmDetailEvent } from '../types/AlarmEvent';
 import formatDate from '@/features/feeds/lib/formatDate';
-import { CircleCheck, CircleX } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { CircleCheck, CircleX, Trash2 } from 'lucide-react';
 import clsx from 'clsx';
+import AlarmContent from './AlarmContent';
+import AlarmProfile from './AlarmProfile';
+import AlarmAction from './AlarmAction';
+import AlarmNameParticle from './AlarmNameParticle';
+import useAlarmSwipe from '../hooks/useAlarmSwipe';
 
 export default function AlarmItem({ data }: { data: any }) {
-  const alarm = 'following.created' as AlarmDetailEvent;
-  const userName = 'hazel.kim';
-  const content = '너무 귀엽다..! 진짜ㅜㅜ';
-  const [isRead, setRead] = useState(false);
+  if (data === null || data.data === null || data.data.sender === null)
+    return null;
 
-  const [showActions, setShowActions] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
-  const [offsetX, setOffsetX] = useState(0);
-  const startX = useRef<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const alarm = data.data;
+  const sender = data.data.sender;
+  const event = data.event;
 
-  function handleTouchStart(e: React.TouchEvent) {
-    startX.current = e.touches[0].clientX;
-  }
-
-  function handleTouchMove(e: React.TouchEvent) {
-    if (startX.current === null) return;
-    const deltaX = startX.current - e.touches[0].clientX;
-    if (deltaX > 60) {
-      setShowActions(true);
-    }
-    setOffsetX(-deltaX);
-  }
-
-  function handleTouchEnd() {
-    setOffsetX(0);
-    startX.current = null;
-  }
-
-  // 마우스 이벤트
-  function handleMouseDown(e: React.MouseEvent) {
-    startX.current = e.clientX;
-    setIsDragging(true);
-  }
-
-  function handleMouseMove(e: React.MouseEvent) {
-    if (!isDragging || startX.current === null) return;
-    const deltaX = e.clientX - startX.current;
-    if (deltaX < -60) setShowActions(true);
-    setOffsetX(deltaX);
-  }
-
-  function handleMouseUp() {
-    setIsDragging(false);
-    setOffsetX(0);
-    startX.current = null;
-  }
-
-  function handleDelete() {
-    setIsDeleted(true);
-    // 실제 삭제 요청 API 호출
-  }
-
-  function handleRead() {
-    setRead((prev) => !prev);
-    setShowActions(false);
-  }
+  const {
+    isRead,
+    showActions,
+    isDeleted,
+    offsetX,
+    handleClose,
+    handleDelete,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleRead,
+    handleTouchEnd,
+    handleTouchMove,
+    handleTouchStart,
+  } = useAlarmSwipe({ is_read: alarm.is_read });
 
   if (isDeleted) return null;
 
   return (
     <div
       className={clsx(
-        'relative transition-transform duration-200',
+        'relative transition-transform duration-200 cursor-pointer',
         isRead ? 'bg-transparent' : 'bg-containerColor',
         showActions && 'translate-x-[-60px]'
       )}
@@ -87,61 +54,37 @@ export default function AlarmItem({ data }: { data: any }) {
       <div className="flex px-6 py-4 justify-between gap-2 w-full items-center">
         <div className="flex gap-2 items-center min-w-0">
           <div className="relative w-10 h-10 rounded-xl shrink-0">
-            <Image
-              src="/logo_square.svg"
-              alt="프로필"
-              fill
-              className="object-fit flex"
-            />
+            <AlarmProfile sender={sender} />
           </div>
           <div>
-            <div className="flex gap-1">
-              <div className="font-bold">{userName}</div>
-              {alarm === 'comment.created' || alarm === 'recomment.created' ? (
-                <div>
-                  님이 {alarm === 'comment.created' ? '댓글' : '대댓글'}을
-                  남겼습니다.
-                </div>
-              ) : (
-                <div>님이</div>
-              )}
+            <div className="flex gap-1 items-center">
+              <div className="font-bold">
+                {sender.nickname === null ? '알수 없음' : sender.nickname}
+              </div>
+              <div className="text-xs overflow-hidden whitespace-pre-wrap break-all line-clamp-1 text-ellipsis">
+                <AlarmNameParticle event={event} />
+              </div>
             </div>
-            <div className="flex items-center gap-4 w-full text-xs">
-              <div className="'w-full text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis'">
-                {alarm === 'comment.like.created' ||
-                alarm === 'recomment.like.created' ||
-                alarm === 'post.like.created'
-                  ? content
-                  : alarm === 'following.created'
-                  ? '회원님을 팔로우하기 시작했습니다.'
-                  : '회원님의 게시글을 좋아합니다.'}
+            <div className="flex items-center gap-2 w-full text-xs">
+              <div className="text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis">
+                <AlarmContent data={alarm} />
               </div>
               <div className="shrink-0 text-textOpacity50">
-                {formatDate('2025.06.30', false)}
+                {formatDate(alarm.timestamp, false)}
               </div>
             </div>
           </div>
         </div>
-        {alarm === 'following.created' && (
-          <FollowButtonSmall isFollowing={false} id={1} />
+
+        {event === 'following.created' && (
+          <FollowButtonSmall isFollowing={sender.is_followed} id={sender.id} />
         )}
 
         {showActions && (
           <div className="flex gap-1">
-            {!isRead && (
-              <div
-                className="flex w-6 h-6 bg-innerContainerColor hover:bg-myBlue hover:text-textOnBlue rounded-full items-center justify-center cursor-pointer"
-                onClick={handleRead}
-              >
-                <CircleCheck size={14} />
-              </div>
-            )}
-            <div
-              className="flex w-6 h-6 bg-innerContainerColor hover:bg-myBlue hover:text-textOnBlue rounded-full items-center justify-center cursor-pointer"
-              onClick={handleDelete}
-            >
-              <CircleX size={14} />
-            </div>
+            {!isRead && <AlarmAction icon={CircleCheck} fn={handleRead} />}
+            <AlarmAction icon={Trash2} fn={handleDelete} />
+            <AlarmAction icon={CircleX} fn={handleClose} />
           </div>
         )}
       </div>
