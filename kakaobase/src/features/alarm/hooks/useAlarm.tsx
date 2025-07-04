@@ -31,9 +31,9 @@ export default function useAlarm() {
       }
     });
 
-    return () => {
-      disconnectStomp();
-    };
+    // return () => {
+    //   disconnectStomp();
+    // };
   }, []);
 
   return { alarmList };

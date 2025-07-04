@@ -10,16 +10,12 @@ export const connectStomp = (onMessage: (msg: IMessage) => void) => {
   stompClient = new Client({
     webSocketFactory: () => socket,
     reconnectDelay: reconnectTime,
-    debug: (str) => console.log('stomp debug :', str),
     onConnect: () => {
-      console.log('서버와 stomp 연결 완료');
-
       stompClient?.subscribe(
         '/user/queue/notification',
         (message: IMessage) => {
           try {
-            const parsed = JSON.parse(message.body);
-            console.log('알림 이벤트:', parsed.event);
+            const parsed = message;
             onMessage(parsed);
           } catch (err) {
             console.error('메시지 파싱 오류:', err);
