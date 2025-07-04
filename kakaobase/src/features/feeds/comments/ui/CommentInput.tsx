@@ -6,7 +6,7 @@ export default function CommentInput() {
 
   return (
     <form
-      className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
+      className="flex sticky w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();

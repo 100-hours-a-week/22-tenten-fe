@@ -17,7 +17,9 @@ export default function NavItem({
   const handleClick = () => {
     if (path) router.push(path);
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
-    sc?.scrollTo({ top: 0, behavior: 'smooth' });
+    if (path.includes('chat')) {
+      sc?.scrollTo({ top: sc.scrollHeight, behavior: 'smooth' });
+    } else sc?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

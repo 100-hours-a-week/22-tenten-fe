@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { postId: number } }) {
     <div className="flex flex-col h-screen">
       <Header label="게시글 상세" />
       <div
-        className="overflow-y-auto flex flex-col min-h-0 mb-[4rem]"
+        className="overflow-y-auto flex flex-col min-h-0 mb-[4rem] h-screen"
         data-scroll-area
       >
         <div className="my-4">
