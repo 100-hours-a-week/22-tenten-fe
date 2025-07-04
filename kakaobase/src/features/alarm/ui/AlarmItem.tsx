@@ -11,9 +11,6 @@ import AlarmNameParticle from './AlarmNameParticle';
 import useAlarmSwipe from '../hooks/useAlarmSwipe';
 
 export default function AlarmItem({ data }: { data: any }) {
-  if (data === null || data.data === null || data.data.sender === null)
-    return null;
-
   const alarm = data.data;
   const sender = data.data.sender;
   const event = data.event;
@@ -33,6 +30,9 @@ export default function AlarmItem({ data }: { data: any }) {
     handleTouchMove,
     handleTouchStart,
   } = useAlarmSwipe({ is_read: alarm.is_read });
+
+  if (data === null || data.data === null || data.data.sender === null)
+    return null;
 
   if (isDeleted) return null;
 
