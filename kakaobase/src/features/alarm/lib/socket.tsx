@@ -11,7 +11,9 @@ export const connectStomp = (onMessage: (msg: IMessage) => void) => {
     webSocketFactory: () => socket,
     reconnectDelay: reconnectTime,
     onConnect: () => {
-      stompClient?.subscribe(
+      if (!stompClient || !stompClient.connected) return;
+
+      stompClient.subscribe(
         '/user/queue/notification',
         (message: IMessage) => {
           try {
@@ -22,7 +24,7 @@ export const connectStomp = (onMessage: (msg: IMessage) => void) => {
           }
         }
       );
-      stompClient?.subscribe('/user/queue/error', (message: IMessage) => {
+      stompClient.subscribe('/user/queue/error', (message: IMessage) => {
         try {
           const parsed = JSON.parse(message.body);
           console.log('[알림 에러]', parsed.message || parsed.error);

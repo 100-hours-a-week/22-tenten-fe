@@ -1,20 +1,14 @@
-// src/hooks/useNotification.ts
 import { useEffect, useState } from 'react';
 import { connectStomp, disconnectStomp } from '../lib/socket';
 import { IMessage } from '@stomp/stompjs';
-import { AlarmEvent } from '../types/AlarmEvent';
-
-export interface NotificationData {
-  event: AlarmEvent;
-  data: any;
-}
+import { AlarmResponse } from '../types/AlarmResponse';
 
 export default function useAlarm() {
-  const [alarmList, setAlarmList] = useState<NotificationData[]>([]);
+  const [alarmList, setAlarmList] = useState<AlarmResponse[]>([]);
 
   useEffect(() => {
     connectStomp((msg: IMessage) => {
-      const parsed: NotificationData = JSON.parse(msg.body);
+      const parsed: AlarmResponse = JSON.parse(msg.body);
 
       switch (parsed.event) {
         case 'notification.fetch':
@@ -31,9 +25,9 @@ export default function useAlarm() {
       }
     });
 
-    // return () => {
-    //   disconnectStomp();
-    // };
+    return () => {
+      disconnectStomp();
+    }; //메모리 누수 방지
   }, []);
 
   return { alarmList };
