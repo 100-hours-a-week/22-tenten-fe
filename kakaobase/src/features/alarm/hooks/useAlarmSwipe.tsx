@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
+import { sendNotificationCommand } from '../lib/socket';
 
-export default function useAlarmSwipe({ is_read }: { is_read: boolean }) {
-  const [isRead, setRead] = useState(is_read);
+export default function useAlarmSwipe({ data }: { data: any }) {
+  const [isRead, setRead] = useState<boolean>(data.is_read);
   const [showActions, setShowActions] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const [offsetX, setOffsetX] = useState(0);
@@ -54,8 +55,11 @@ export default function useAlarmSwipe({ is_read }: { is_read: boolean }) {
 
   function handleDelete(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
+    sendNotificationCommand('notification.delete', {
+      id: data.id,
+      timestamp: new Date().toISOString().split('.')[0],
+    });
     setIsDeleted(true);
-    // 실제 삭제 요청 API 호출
   }
 
   function handleClose(e: React.MouseEvent<HTMLElement>) {
@@ -65,9 +69,14 @@ export default function useAlarmSwipe({ is_read }: { is_read: boolean }) {
 
   function handleRead(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
+    sendNotificationCommand('notification.read', {
+      id: data.id,
+      timestamp: new Date().toISOString().split('.')[0],
+    });
     setRead((prev) => !prev);
     setShowActions(false);
   }
+
   return {
     showActions,
     isRead,

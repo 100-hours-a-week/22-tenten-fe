@@ -31,7 +31,7 @@ export default function AlarmItem({ data }: { data: any }) {
     handleTouchEnd,
     handleTouchMove,
     handleTouchStart,
-  } = useAlarmSwipe({ is_read: alarm.is_read });
+  } = useAlarmSwipe({ data: alarm });
 
   const { goToPost, goToProfile } = useAlarmRouting({ data: alarm });
 

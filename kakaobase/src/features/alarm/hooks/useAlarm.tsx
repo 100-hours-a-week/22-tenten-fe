@@ -12,11 +12,13 @@ export default function useAlarm() {
 
       switch (parsed.event) {
         case 'notification.fetch':
-          setAlarmList(parsed.data);
+          setAlarmList(parsed.data.notifications);
           break;
         case 'notification.remove.ack':
           setAlarmList((prev) =>
-            prev.filter((n) => n.data.id !== parsed.data.id)
+            prev.filter(
+              (n) => n.data.notifications.id !== parsed.data.notifications.id
+            )
           );
           break;
         default:

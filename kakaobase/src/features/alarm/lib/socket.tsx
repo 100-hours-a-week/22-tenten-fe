@@ -1,11 +1,42 @@
+import api from '@/shared/api/api';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
 const reconnectTime = 5000; //5초
 
-export const connectStomp = (onMessage: (msg: IMessage) => void) => {
+async function tryRefreshAndReconnect(onMessage: (msg: IMessage) => void) {
+  try {
+    await api.post(`/auth/tokens/refresh`);
+    console.log('[STOMP] 토큰 재발급 성공, 소켓 재연결 시도');
+    if (onMessage) await connectStomp(onMessage);
+    return true;
+  } catch (err) {
+    console.error('[STOMP] 토큰 재발급 실패', err);
+    return false;
+  }
+}
+
+export const connectStomp = async (onMessage: (msg: IMessage) => void) => {
+  if (stompClient && stompClient.active) {
+    console.warn('[STOMP] 이미 연결 중입니다.');
+    return;
+  }
+
+  if (stompClient) {
+    await stompClient.deactivate();
+  }
+
   const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
+
+  socket.onclose = async () => {
+    console.warn('[SockJS onclose]');
+
+    const shouldReconnect = await tryRefreshAndReconnect(onMessage);
+    if (!shouldReconnect) {
+      console.warn('토큰 재발급 실패. 소켓 재연결 불가');
+    }
+  };
 
   stompClient = new Client({
     webSocketFactory: () => socket,
@@ -13,17 +44,14 @@ export const connectStomp = (onMessage: (msg: IMessage) => void) => {
     onConnect: () => {
       if (!stompClient || !stompClient.connected) return;
 
-      stompClient.subscribe(
-        '/user/queue/notification',
-        (message: IMessage) => {
-          try {
-            const parsed = message;
-            onMessage(parsed);
-          } catch (err) {
-            console.error('메시지 파싱 오류:', err);
-          }
+      stompClient.subscribe('/user/queue/notification', (message: IMessage) => {
+        try {
+          const parsed = message;
+          onMessage(parsed);
+        } catch (err) {
+          console.error('메시지 파싱 오류:', err);
         }
-      );
+      });
       stompClient.subscribe('/user/queue/error', (message: IMessage) => {
         try {
           const parsed = JSON.parse(message.body);
