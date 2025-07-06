@@ -21,6 +21,7 @@ export default function AlarmItem({ data }: { data: any }) {
     showActions,
     isDeleted,
     offsetX,
+    wasDragged,
     handleClose,
     handleDelete,
     handleMouseDown,
@@ -54,9 +55,24 @@ export default function AlarmItem({ data }: { data: any }) {
     >
       <div
         className="flex px-6 py-4 justify-between gap-2 w-full items-center"
-        onClick={event === 'following.created' ? goToProfile : goToPost}
+        onClick={(e) => {
+          if (wasDragged.current) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+
+          if (event === 'following.created') {
+            goToProfile();
+          } else {
+            goToPost();
+          }
+        }}
       >
         <div className="flex gap-2 items-center min-w-0">
+          <div
+            className={`w-2 h-2 rounded-full ${!isRead && 'bg-myBlue'}`}
+          ></div>
           <div className="relative w-10 h-10 rounded-xl shrink-0">
             <AlarmProfile sender={sender} />
           </div>
