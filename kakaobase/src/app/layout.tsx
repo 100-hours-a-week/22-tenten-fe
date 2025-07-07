@@ -58,9 +58,21 @@ export default async function RootLayout({
             googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
           />
         )}
+        <Image
+          src="/chunsik.png"
+          alt="surfing"
+          width={100}
+          height={100}
+          className="surfing hidden md:block"
+        />
+        <div className="box hidden md:block">
+          <div className="wave -one"></div>
+          <div className="wave -two"></div>
+          <div className="wave -three"></div>
+        </div>
         <Providers>
           <div className="flex w-screen">
-            <div className="hidden lg:flex flex-col items-center justify-center w-[48%] active:animate-bounce">
+            <div className="hidden lg:flex flex-col items-center justify-start mt-40 w-[48%] animate-float">
               <Image
                 src="/logo_square.svg"
                 alt="로고"
