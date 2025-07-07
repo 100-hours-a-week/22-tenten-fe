@@ -10,8 +10,9 @@ import AlarmAction from './AlarmAction';
 import AlarmNameParticle from './AlarmNameParticle';
 import useAlarmSwipe from '../hooks/useAlarmSwipe';
 import useAlarmRouting from '../hooks/useAlarmRouting';
+import { AlarmItem as AlarmItemType } from '../types/AlarmFetchResponse';
 
-export default function AlarmItem({ data }: { data: any }) {
+export default function AlarmItem({ data }: { data: AlarmItemType }) {
   const alarm = data.data;
   const sender = data.data.sender;
   const event = data.event;
@@ -96,7 +97,7 @@ export default function AlarmItem({ data }: { data: any }) {
           </div>
         </div>
 
-        {event === 'following.created' && (
+        {event === 'following.created' && sender.is_followed && (
           <FollowButtonSmall isFollowing={sender.is_followed} id={sender.id} />
         )}
 
