@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
+}
+
 /* 애니메이션 키프레임 정의 */
 @keyframes gradient-move {
   0% {
@@ -15,8 +19,112 @@
   }
 }
 
-html {
-  font-family: 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes wave {
+  2% {
+    transform: translateX(1);
+  }
+
+  25% {
+    transform: translateX(-25%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(1);
+  }
+}
+
+@keyframes move-horizontal {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(25vw, -20px); /* 위로 */
+  }
+  50% {
+    transform: translate(50vw, 0);
+  }
+  75% {
+    transform: translate(75vw, 40px); /* 아래로 */
+  }
+  100% {
+    transform: translate(100vw, 0);
+  }
+}
+
+.box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.wave {
+  background: #4880ee20;
+  border-radius: 1000% 1000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 8s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wave.-three {
+  bottom: -2.5em;
+  animation: wave 10s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+.wave.-two {
+  bottom: -1.25em;
+  animation: wave 12s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.surfing {
+  position: fixed;
+  bottom: 10rem;
+  animation: move-horizontal 3s linear infinite;
+  z-index: -1;
+}
+.box:after {
+  content: '';
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(#e8a, 1),
+    rgba(#def, 0) 80%,
+    rgba(white, 0.5)
+  );
+  z-index: 11;
+  transform: translate3d(0, 0, 0);
 }
 
 /* 그라데이션 배경 */
