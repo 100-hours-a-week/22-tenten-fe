@@ -1,10 +1,10 @@
 'use client';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
-import useAlarm from '../hooks/useAlarm';
 import AlarmItem from './AlarmItem';
+import { useAlarmStore } from '../stores/alarmStore';
 
 export default function AlarmList() {
-  const { alarmList } = useAlarm();
+  const { alarmList } = useAlarmStore();
 
   if (!alarmList || alarmList === null)
     return (
@@ -14,8 +14,8 @@ export default function AlarmList() {
     );
   return (
     <div className="flex flex-col w-full h-screen">
-      {alarmList.map((alarm, idx) => (
-        <AlarmItem data={alarm} key={idx} />
+      {alarmList.map((alarm) => (
+        <AlarmItem data={alarm} key={alarm.data.id} />
       ))}
     </div>
   );

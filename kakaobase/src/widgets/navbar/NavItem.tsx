@@ -1,5 +1,7 @@
+import { useAlarmStore } from '@/features/alarm/stores/alarmStore';
+import { cn } from '@/shared/lib/utils';
 import clsx from 'clsx';
-import { LucideIcon } from 'lucide-react';
+import { Bell, LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
@@ -13,6 +15,7 @@ export default function NavItem({
   const pathName = usePathname();
   const router = useRouter();
   const isActive = pathName === path;
+  const { cnt } = useAlarmStore();
 
   const handleClick = () => {
     if (path) router.push(path);
@@ -35,6 +38,11 @@ export default function NavItem({
           isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
         )}
       />
+      {Icon === Bell && cnt > 0 && (
+        <div className="w-4 h-4 absolute rounded-full bg-myBlue text-textOnBlue text-xs mb-5 ml-4">
+          {cnt}
+        </div>
+      )}
     </button>
   );
 }
