@@ -55,7 +55,7 @@ export default function useAlarmSwipe({ data }: { data: any }) {
 
   function handleDelete(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
-    sendNotificationCommand('notification.delete', {
+    sendNotificationCommand('notification.remove', {
       id: data.id,
       timestamp: new Date().toISOString().split('.')[0],
     });
