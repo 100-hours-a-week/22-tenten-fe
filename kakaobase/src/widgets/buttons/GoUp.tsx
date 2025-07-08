@@ -32,7 +32,7 @@ export default function GoUp() {
   return (
     <div
       onClick={goUp}
-      className="pointer-events-auto rounded-full cursor-pointer animate-slide-in duration-100 hover:-translate-y-[0.125rem] hover:shadow-md duration-100"
+      className="flex pointer-events-auto rounded-full cursor-pointer animate-slide-in duration-100 hover:-translate-y-[0.125rem] hover:shadow-md duration-100"
     >
       <div className="w-8 h-8 bg-textColor text-bgColor rounded-full flex items-center justify-center">
         <CircleArrowUp />
