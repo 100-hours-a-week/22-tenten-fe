@@ -40,7 +40,7 @@ export default function NavItemProfile() {
           height={12}
           alt="profile"
           className={clsx(
-            'w-6 h-6 transition-colors cursor-pointer',
+            'w-6 h-6 transition-colors cursor-pointer rounded-md',
             isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
           )}
         />
