@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AxiosError, AxiosRequestConfig } from 'axios';
+import Router from 'next/router';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -32,7 +33,7 @@ api.interceptors.response.use(
 
     if (origReq.url?.includes('/auth/tokens/refresh')) {
       // 리프레시 실패 시 바로 로그인 페이지로 이동
-      window.location.href = '/unauthorized';
+      Router.replace('/unauthorized');
       return new Promise(() => {});
     }
 
