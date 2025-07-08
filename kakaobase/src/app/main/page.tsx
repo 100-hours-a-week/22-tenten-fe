@@ -13,8 +13,8 @@ export default function Page() {
       <div className="flex overflow-y-auto flex-grow flex-col" data-scroll-area>
         <PostCourseSelector />
         <ListRouter />
-        <FloatingButtonGroup />
       </div>
+      <FloatingButtonGroup />
       <NavBar />
     </main>
   );
