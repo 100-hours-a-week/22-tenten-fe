@@ -8,9 +8,14 @@ export default function Page({
   params: { postId: number; postType: string };
 }) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen scroll-none">
       <Header label="좋아요 목록" />
-      <UserLikeList postId={params.postId} postType={params.postType} />
+      <div
+        className="flex overflow-y-auto flex-grow flex-col my-8 mx-6 rounded-lg bg-containerColor"
+        data-scroll-area
+      >
+        <UserLikeList postId={params.postId} postType={params.postType} />
+      </div>
       <NavBar />
     </div>
   );
