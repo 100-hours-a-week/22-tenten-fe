@@ -6,25 +6,24 @@ import Image from 'next/image';
 import CountInfo from './CountInfo';
 
 export default function UserInfo({ data }: { data: Profile }) {
-  const imgWidth = 60;
   return (
     <div className="flex flex-col gap-4 mt-4 px-9 pt-6 pb-4 rounded-xl bg-containerColor items-center w-full">
       <div className="flex gap-4 w-full">
-        {data.image_url === '' || data.image_url === null ? (
-          <User
-            width={imgWidth}
-            height={imgWidth}
-            className="rounded-xl border-innerContainerColor border-2 p-3"
-          />
-        ) : (
-          <Image
-            alt="프로필 이미지"
-            width={imgWidth}
-            height={imgWidth}
-            src={data.image_url}
-            className="rounded-xl aspect-square border-innerContainerColor border-2"
-          />
-        )}
+        <div className="relative w-16 h-16 object-fit rounded-xl aspect-square border-innerContainerColor border-2">
+          {data.image_url === '' || data.image_url === null ? (
+            <User
+              height={60}
+              className="flex object-cover justify-self-center"
+            />
+          ) : (
+            <Image
+              alt="프로필 이미지"
+              fill
+              src={data.image_url}
+              className="object-cover"
+            />
+          )}
+        </div>
         <div className="flex flex-col text-xs gap-1">
           <div className="font-bold text-sm">
             {data.name} / {data.nickname}

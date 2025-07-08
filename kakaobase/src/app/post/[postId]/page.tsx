@@ -6,10 +6,17 @@ import CommentInput from '@/features/feeds/comments/ui/CommentInput';
 import ListRouter from '@/features/feeds/ui/ListRouter';
 import PostCard from '@/features/feeds/ui/PostCard';
 import usePostDetail from '@/features/feeds/posts/hooks/usePostDetailHook';
+import { recommentFormStateStore } from '@/features/feeds/comments/stores/recommentFormStateStore';
+import { useEffect } from 'react';
 
 export default function Page({ params }: { params: { postId: number } }) {
   const id = Number(params.postId);
   const { data, isPending } = usePostDetail({ id });
+  const { clear } = recommentFormStateStore();
+
+  useEffect(() => {
+    return () => clear();
+  }, []);
 
   if (isPending)
     return (

@@ -22,7 +22,7 @@ export default function ProfileModal({ isOpen, onClose }: ShareQrModalProps) {
 
   return (
     <div className="fixed inset-0 bg-textOpacity50 z-50" onClick={onClose}>
-      <div className="flex w-screen">
+      <div className="flex w-screen px-6">
         <div className="hidden lg:flex flex-col items-center justify-center w-[48%]"></div>
         <div className="flex flex-col h-screen justify-center w-full max-w-[480px] mx-auto lg:ml-12 lg:self-start">
           <div

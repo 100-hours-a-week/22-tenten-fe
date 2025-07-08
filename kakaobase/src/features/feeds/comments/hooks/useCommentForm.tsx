@@ -1,14 +1,15 @@
 import { postComment } from '../api/comment';
 import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/shared/hooks/ToastContext';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { commentFormStateStore } from '../stores/commentFormStateStore';
+import { recommentFormStateStore } from '../stores/recommentFormStateStore';
 
 export default function useCommentForm() {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
-  const { isWritingRecomment, commentId, clear } = commentFormStateStore();
+  const { isWritingRecomment, commentId, stopRecomment } =
+    recommentFormStateStore();
   const param = useParams();
   const postId = Number(param.postId);
   const { showToast, hideToast } = useToast();
@@ -27,7 +28,7 @@ export default function useCommentForm() {
           content: comment,
           parent_id: commentId,
         });
-        clear();
+        stopRecomment();
         hideToast();
         showToast('대댓글 달기 성공! ✌️');
       } else {
