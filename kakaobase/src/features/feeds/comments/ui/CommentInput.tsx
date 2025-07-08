@@ -1,8 +1,12 @@
+import { useUserStore } from '@/entities/users/stores/userStore';
 import useCommentForm from '../hooks/useCommentForm';
 import { Send } from 'lucide-react';
 
 export default function CommentInput() {
   const { comment, handleSubmit, handleChange } = useCommentForm();
+  const { course, selectedCourse } = useUserStore();
+
+  if (selectedCourse !== 'ALL' && selectedCourse !== course) return null;
 
   return (
     <form
