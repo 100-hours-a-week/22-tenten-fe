@@ -24,7 +24,7 @@ export default function NavItemProfile() {
 
   return (
     <div
-      className={`w-full h-16 rounded-md flex items-center text-center justify-center ${
+      className={`w-full h-16 rounded-md flex items-center text-center justify-center cursor-pointer ${
         isActive
           ? 'bg-containerColor'
           : 'hover:bg-containerColor hover:text-textColor'
@@ -40,7 +40,7 @@ export default function NavItemProfile() {
           height={12}
           alt="profile"
           className={clsx(
-            'w-6 h-6 transition-colors cursor-pointer rounded-md',
+            'w-6 h-6 transition-colors rounded-md',
             isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
           )}
         />
