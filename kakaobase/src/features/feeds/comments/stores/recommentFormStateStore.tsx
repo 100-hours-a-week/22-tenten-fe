@@ -34,7 +34,6 @@ export const recommentFormStateStore = create<commentFormState>((set) => ({
     set((state) => ({
       ...state,
       isWritingRecomment: false,
-      commentId: 0,
       commentWriter: '',
     })),
 
