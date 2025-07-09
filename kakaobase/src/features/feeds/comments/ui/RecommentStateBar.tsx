@@ -8,7 +8,7 @@ export default function RecommentStateBar() {
   if (!isWritingRecomment) return null;
 
   return (
-    <div className="w-full bg-textColor opacity-40 text-containerColor flex justify-between items-center px-4 py-2 text-sm">
+    <div className="w-full bg-textColor opacity-40 text-containerColor flex justify-between items-center px-4 py-2 text-sm mb-[4.25rem]">
       <div>{commentWriter}에게 남기는 대댓글</div>
       <div
         onClick={stopRecomment}
