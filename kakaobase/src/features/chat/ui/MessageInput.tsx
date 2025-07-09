@@ -19,7 +19,7 @@ export default function MessageInput() {
       <div className="rounded-3xl ml-6 my-3 px-4 py-2 bg-containerColor w-full">
         <div className="w-full flex justify-between gap-2">
           <textarea
-            className="w-full focus:outline-none bg-transparent text-sm resize-none overflow-hidden"
+            className="w-full focus:outline-none bg-transparent text-xs resize-none overflow-hidden"
             placeholder="로로에게 무엇이 궁금한가요?"
             rows={1}
             value={message}

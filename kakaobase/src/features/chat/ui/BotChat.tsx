@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function BotChat() {
   const text = '안녕';
   return (
-    <div className="px-6 py-4 flex flex-col gap-2 w-full">
+    <div className="relative px-6 py-4 flex flex-col gap-2 w-full">
       <div className="flex gap-2 justify-start items-end">
         <div className="relative w-6 h-6">
           <Image
