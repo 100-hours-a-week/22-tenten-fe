@@ -6,7 +6,10 @@ export default function Page() {
   return (
     <div className="flex flex-col h-screen scroll-none">
       <Header label="로로 CHAT" />
-      <div className="overflow-y-auto flex flex-col h-screen" data-scroll-area>
+      <div
+        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto mb-16"
+        data-scroll-area
+      >
         <ChatList />
       </div>
       <MessageInput />

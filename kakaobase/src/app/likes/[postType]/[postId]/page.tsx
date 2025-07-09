@@ -11,7 +11,7 @@ export default function Page({
     <div className="flex flex-col h-screen scroll-none">
       <Header label="좋아요 목록" />
       <div
-        className="flex overflow-y-auto flex-grow flex-col my-8 mx-6 rounded-lg bg-containerColor"
+        className="flex overflow-y-auto flex-grow flex-col mt-8 mb-24 mx-6 rounded-lg bg-containerColor"
         data-scroll-area
       >
         <UserLikeList postId={params.postId} postType={params.postType} />

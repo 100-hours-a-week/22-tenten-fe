@@ -33,7 +33,7 @@ export default function PostList({ userId }: { userId: number }) {
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
       {!hasNextPage && !isPending && (
-        <div className="text-center text-xs font-bold mb-8">
+        <div className="text-center text-xs font-bold">
           마지막 게시글입니다.
         </div>
       )}

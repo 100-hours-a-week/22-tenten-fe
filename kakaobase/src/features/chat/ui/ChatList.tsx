@@ -12,7 +12,7 @@ export default function ChatList() {
   }, []);
 
   return (
-    <div className="flex flex-col py-4">
+    <div className="flex flex-col w-full h-screen">
       <BotChat />
       <BotChat />
       <BotChat />
