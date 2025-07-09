@@ -35,7 +35,7 @@ export default function PostCard({ post }: { post: PostEntity }) {
         <div
           className={clsx(
             'flex w-full bg-containerColor p-4 gap-2 cursor-pointer rounded-2xl',
-            path === '/' &&
+            path === '/main' &&
               'hover:-translate-y-1 hover:shadow-md transition-transform duration-100'
           )}
           onClick={navDetail}

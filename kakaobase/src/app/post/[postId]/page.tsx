@@ -30,16 +30,14 @@ export default function Page({ params }: { params: { postId: number } }) {
     <div className="flex flex-col h-screen scroll-none">
       <Header label="게시글 상세" />
       <div
-        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto"
+        className="flex-grow flex flex-col h-screen w-full overflow-y-auto"
         data-scroll-area
       >
-        <div className="flex flex-col w-full h-screen">
-          <div className="my-4">
-            <PostCard post={data} />
-          </div>
-          <MiddleBar />
-          <ListRouter />
+        <div className="my-4 w-full">
+          <PostCard post={data} />
         </div>
+        <MiddleBar />
+        <ListRouter />
       </div>
       <CommentInput />
     </div>
