@@ -35,7 +35,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
   return (
     <div
       data-scroll-area
-      className="flex w-full overflow-y-auto flex-grow flex-col w-full"
+      className="flex w-full overflow-y-auto flex-grow flex-col w-full mb-16"
     >
       <div className="flex flex-col items-center text-textColor gap-4">
         <div className="w-full">

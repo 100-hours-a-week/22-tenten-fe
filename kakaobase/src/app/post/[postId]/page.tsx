@@ -27,14 +27,19 @@ export default function Page({ params }: { params: { postId: number } }) {
   if (!data) return <div className="h-screen">게시글을 찾을 수 없습니다.</div>;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen scroll-none">
       <Header label="게시글 상세" />
-      <div className="overflow-y-auto flex flex-col h-screen" data-scroll-area>
-        <div className="my-4">
-          <PostCard post={data} />
+      <div
+        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto mb-16"
+        data-scroll-area
+      >
+        <div className="flex flex-col w-full h-screen">
+          <div className="my-4">
+            <PostCard post={data} />
+          </div>
+          <MiddleBar />
+          <ListRouter />
         </div>
-        <MiddleBar />
-        <ListRouter />
       </div>
       <CommentInput />
     </div>

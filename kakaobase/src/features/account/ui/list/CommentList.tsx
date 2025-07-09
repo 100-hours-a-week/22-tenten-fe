@@ -33,9 +33,7 @@ export default function CommentList({ userId }: { userId: number }) {
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
       {!hasNextPage && !isPending && (
-        <div className="text-center text-xs font-bold mb-8">
-          마지막 댓글입니다.
-        </div>
+        <div className="text-center text-xs font-bold">마지막 댓글입니다.</div>
       )}
     </div>
   );

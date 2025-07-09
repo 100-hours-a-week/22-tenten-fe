@@ -39,7 +39,7 @@ export default function NavItem({
         )}
       />
       {Icon === Bell && cnt > 0 && (
-        <div className="w-4 h-4 absolute rounded-full bg-myBlue text-textOnBlue text-xs mb-5 ml-4">
+        <div className="w-4 h-4 absolute rounded-full bg-myBlue text-textOnBlue text-[0.625rem] mb-5 ml-4">
           {cnt}
         </div>
       )}
