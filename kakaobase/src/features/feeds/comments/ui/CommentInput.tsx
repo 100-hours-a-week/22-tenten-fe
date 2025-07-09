@@ -8,12 +8,11 @@ export default function CommentInput() {
   const { course, selectedCourse } = useUserStore();
 
   if (selectedCourse !== 'ALL' && selectedCourse !== course) return null;
-
   return (
-    <div className="flex flex-col sticky w-full max-w-[480px] bottom-0 mx-auto lg:self-start">
+    <>
       <RecommentStateBar />
       <form
-        className="flex w-full border-t-[1px] border-textOpacity50 bg-bgColor text-textColor items-center"
+        className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
@@ -22,7 +21,7 @@ export default function CommentInput() {
         <div className="rounded-3xl ml-6 my-4 px-4 py-2 bg-containerColor w-full">
           <div className="w-full flex justify-between gap-2">
             <textarea
-              className="w-full focus:outline-none bg-transparent text-xs resize-none overflow-hidden"
+              className="w-full focus:outline-none bg-transparent text-sm resize-none overflow-hidden"
               placeholder="댓글 내용을 작성하세요."
               rows={1}
               value={comment}
@@ -58,6 +57,6 @@ export default function CommentInput() {
           />
         </div>
       </form>
-    </div>
+    </>
   );
 }
