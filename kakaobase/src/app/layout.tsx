@@ -63,9 +63,9 @@ export default async function RootLayout({
           alt="surfing"
           width={100}
           height={100}
-          className="surfing hidden md:block"
+          className="surfing hidden lg:block"
         />
-        <div className="box hidden md:block">
+        <div className="box hidden lg:block">
           <div className="wave -one"></div>
           <div className="wave -two"></div>
           <div className="wave -three"></div>
