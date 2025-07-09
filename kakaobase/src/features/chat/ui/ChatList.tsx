@@ -12,10 +12,7 @@ export default function ChatList() {
   }, []);
 
   return (
-    <div
-      className="flex flex-col w-full h-screen overflow-y-auto"
-      data-scroll-area
-    >
+    <div className="flex flex-col py-4">
       <BotChat />
       <BotChat />
       <BotChat />
@@ -34,7 +31,7 @@ export default function ChatList() {
       <BotChat />
       <BotChat />
       <BotChat />
-      <BotChat />
+      <MyChat />
     </div>
   );
 }
