@@ -37,7 +37,7 @@ export default function PostList() {
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
       {!hasNextPage && (
-        <div className="text-center text-xs font-bold">
+        <div className="text-center text-xs font-bold mb-8">
           마지막 게시글입니다.
         </div>
       )}
