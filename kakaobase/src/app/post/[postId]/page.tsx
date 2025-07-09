@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { postId: number } }) {
     <div className="flex flex-col h-screen scroll-none">
       <Header label="게시글 상세" />
       <div
-        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto mb-16"
+        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto"
         data-scroll-area
       >
         <div className="flex flex-col w-full h-screen">
