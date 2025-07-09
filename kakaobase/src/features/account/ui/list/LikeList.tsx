@@ -21,6 +21,8 @@ export default function LikeList({ userId }: { userId: number }) {
     refetch,
   });
 
+  console.log(data);
+
   if (!data && !isPending)
     return <div className="flex text-xs">게시글이 없습니다.</div>;
   return (
@@ -32,7 +34,7 @@ export default function LikeList({ userId }: { userId: number }) {
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
       {!hasNextPage && !isPending && (
-        <div className="text-center text-xs font-bold mb-8">
+        <div className="text-center text-xs font-bold">
           마지막 게시글입니다.
         </div>
       )}

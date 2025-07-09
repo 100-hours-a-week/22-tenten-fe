@@ -15,8 +15,8 @@ export default function EditWrapper() {
   } = useGithubEditHook();
 
   return (
-    <div className="flex justify-center items-center animate-slide-in flex-col h-screen">
-      <div className="flex bg-containerColor px-8 py-10 rounded-xl flex flex-col items-center gap-8 max-w-sm">
+    <div className="flex items-center justify-center mx-6 mb-16 h-screen scroll-none">
+      <div className="flex w-full px-8 pb-8 pt-6 bg-containerColor rounded-xl flex flex-col items-center gap-4 max-w-sm">
         <TopArea />
         <div className="flex items-center gap-4 w-full">
           <UserInput
