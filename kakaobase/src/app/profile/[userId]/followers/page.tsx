@@ -7,7 +7,7 @@ export default function Page({ params }: { params: { userId: number } }) {
     <div className="flex flex-col h-screen scroll-none">
       <Header label="팔로워 목록" />
       <div
-        className="flex overflow-y-auto flex-grow flex-col mt-8 mb-24 mx-6 p-2 rounded-lg bg-containerColor animate-slide-in"
+        className="flex overflow-y-auto flex-grow flex-col my-8 mx-6 p-2 rounded-lg bg-containerColor"
         data-scroll-area
       >
         <UserFollowerList userId={params.userId} />
