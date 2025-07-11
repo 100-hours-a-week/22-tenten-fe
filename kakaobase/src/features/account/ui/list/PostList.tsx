@@ -3,7 +3,7 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyPostsHook from '../../hooks/list/useMyPostsHook';
+import useMyPosts from '../../hooks/list/useMyPosts';
 
 export default function PostList({ userId }: { userId: number }) {
   const {
@@ -13,7 +13,7 @@ export default function PostList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyPostsHook({ userId });
+  } = useMyPosts({ userId });
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

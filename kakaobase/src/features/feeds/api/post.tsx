@@ -1,5 +1,6 @@
 import { Course } from '@/shared/types/Course';
 import api from '@/shared/api/api';
+import { mapToPostEntity } from '../lib/mapPost';
 
 interface postParams {
   postType: Course;
@@ -43,7 +44,7 @@ export async function postPost(
 export async function getPost({ postType, id }: postParams) {
   try {
     const response = await api.get(`/posts/${postType}/${id}`);
-    return response.data.data;
+    return mapToPostEntity(response.data.data, 'post');
   } catch (e: unknown) {
     if (e instanceof Error) throw e;
   }

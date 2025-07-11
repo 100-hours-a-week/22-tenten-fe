@@ -1,21 +1,21 @@
-import {
-  deleteCommentLike,
-  deletePostLike,
-  deleteRecommentLike,
-  likeComment,
-  likePost,
-  likeRecomment,
-} from '@/features/likes/api/like';
+import { deleteLike, postLike } from '@/features/likes/api/like';
+import { queryClient } from '@/shared/api/queryClient';
 import { useEffect, useState } from 'react';
+import { likeQueries } from '../api/likeQueries';
+import { PostType } from '@/features/feeds/types/post';
+import { useToast } from '@/shared/hooks/ToastContext';
+import { feedQueries } from '@/features/feeds/api/feedQueries';
+import { accountQueries } from '@/features/account/api/accountQueries';
 
 export function useLikeToggle(
   initial: boolean,
   likeCnt: number,
   id: number,
-  type: string
+  type: PostType
 ) {
   const [isLiked, setLiked] = useState(initial);
   const [likeCount, setLikeCount] = useState(likeCnt);
+  const { showToast } = useToast();
 
   useEffect(() => {
     setLiked(initial);
@@ -25,34 +25,27 @@ export function useLikeToggle(
   const toggleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      if (type === 'post') {
-        if (isLiked) {
-          await deletePostLike({ id });
-          setLikeCount((prev) => prev - 1);
-        } else {
-          await likePost({ id });
-          setLikeCount((prev) => prev + 1);
-        }
-      } else if (type === 'comment') {
-        if (isLiked) {
-          await deleteCommentLike({ id });
-          setLikeCount((prev) => prev - 1);
-        } else {
-          await likeComment({ id });
-          setLikeCount((prev) => prev + 1);
-        }
+      if (isLiked) {
+        await deleteLike({ feedId: id, feedType: type });
+        setLikeCount((prev) => prev - 1);
+        showToast('좋이요 삭제 완료 ✌️');
       } else {
-        if (isLiked) {
-          await deleteRecommentLike({ id });
-          setLikeCount((prev) => prev - 1);
-        } else {
-          await likeRecomment({ id });
-          setLikeCount((prev) => prev + 1);
-        }
+        await postLike({ feedId: id, feedType: type });
+        setLikeCount((prev) => prev + 1);
+        showToast('좋이요 등록 완료 ✌️');
       }
+      queryClient.invalidateQueries({
+        queryKey: likeQueries.all(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: feedQueries.all(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: accountQueries.all(),
+      });
       setLiked(!isLiked);
     } catch (e) {
-      console.error('팔로우 토글 실패', e);
+      showToast('좋이요 실패 😭');
     }
   };
 

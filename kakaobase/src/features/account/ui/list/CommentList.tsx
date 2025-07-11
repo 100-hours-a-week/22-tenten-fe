@@ -3,7 +3,7 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
+import useMyComments from '../../hooks/list/useMyComments';
 
 export default function CommentList({ userId }: { userId: number }) {
   const {
@@ -13,7 +13,7 @@ export default function CommentList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyCommentsHook({ userId });
+  } = useMyComments({ userId });
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

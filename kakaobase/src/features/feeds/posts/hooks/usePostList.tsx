@@ -1,17 +1,9 @@
-import getPosts from '../api/postList';
-import { PostEntity } from '@/features/feeds/types/post';
-import {
-  InfiniteData,
-  useInfiniteQuery,
-  UseInfiniteQueryResult,
-} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useUserStore } from '@/entities/users/stores/userStore';
+import { feedQueries } from '../../api/feedQueries';
 
-export default function usePostList(): UseInfiniteQueryResult<
-  InfiniteData<PostEntity[]>,
-  Error
-> {
+export default function usePostList() {
   const { selectedCourse } = useUserStore();
 
   useEffect(() => {
@@ -26,17 +18,7 @@ export default function usePostList(): UseInfiniteQueryResult<
     sessionStorage.removeItem('scrollToPostId');
   }, []);
 
-  return useInfiniteQuery({
-    queryKey: ['posts', selectedCourse],
-    queryFn: async ({ pageParam }: { pageParam?: number }) => {
-      const response = await getPosts({
-        limit: 6,
-        cursor: pageParam,
-        course: selectedCourse,
-      });
-      return response;
-    },
-    getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
-    initialPageParam: undefined,
-  });
+  const methods = useInfiniteQuery(feedQueries.posts(selectedCourse));
+
+  return { ...methods };
 }
