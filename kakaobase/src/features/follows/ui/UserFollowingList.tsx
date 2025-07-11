@@ -3,9 +3,12 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import UserItem from '@/entities/users/ui/UserItem';
-import useFollowingsHook from '../hooks/useFollowingsHook';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { followQueries } from '../api/followQueries';
 
 export default function UserFollowingList({ userId }: { userId: number }) {
+  const methods = useInfiniteQuery(followQueries.followings(userId));
+
   const {
     data,
     hasNextPage,
@@ -13,7 +16,8 @@ export default function UserFollowingList({ userId }: { userId: number }) {
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = useFollowingsHook({ userId });
+  } = { ...methods };
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
