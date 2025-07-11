@@ -1,6 +1,5 @@
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { getUserInfo, getMyPosts, getMyComments, getMyLikes } from './profile';
-import { PostEntity } from '@/features/feeds/types/post';
 
 export const accountQueries = {
   all: () => ['user'],
@@ -24,9 +23,6 @@ export const accountQueries = {
         const response = getUserInfo({ userId });
         return response;
       },
-      staleTime: 1000 * 60 * 5,
-      gcTime: 1000 * 60 * 30,
-      // onError, onSuccess 등도 여기서 지정 가능
     }),
 
   myPosts: (userId: number, limit = 6) =>
