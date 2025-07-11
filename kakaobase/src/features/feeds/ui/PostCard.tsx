@@ -6,11 +6,12 @@ import Linkify from 'react-linkify';
 import { usePathname, useRouter } from 'next/navigation';
 import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
-import extractYoutubeVideoId from '../posts/lib/formatYoutube';
 import summaryCondition from '../posts/lib/summaryCondition';
 import { Comment, PostEntity } from '@/features/feeds/types/post';
 import { useState } from 'react';
 import RecommentList from '../comments/ui/RecommentList';
+import YoutubeFrame from './YoutubeFrame';
+import LoadingSmall from '@/shared/ui/LoadingSmall';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
@@ -88,32 +89,19 @@ export default function PostCard({ post }: { post: PostEntity }) {
                       sizes="100vw"
                     />
                   )}
-                {post.type === 'post' &&
-                  'youtubeUrl' in post &&
-                  post.youtubeUrl &&
-                  post.youtubeSummary !== 'VIDEO_NOT_FOUND' &&
-                  post.youtubeSummary !== 'INVALID_YOUTUBE_URL' && (
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${extractYoutubeVideoId(
-                        post.youtubeUrl
-                      )}`}
-                      title="유튜브 영상"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      loading="lazy"
-                      className="w-full h-full aspect-video"
-                    ></iframe>
-                  )}
+                <YoutubeFrame post={post} />
               </div>
             </div>
             {post.type === 'post' &&
               'youtubeUrl' in post &&
               post.youtubeUrl &&
-              post.youtubeSummary && (
+              (post.youtubeSummary ? (
                 <div className="text-xs text-textColor">
                   {summaryCondition({ summary: post.youtubeSummary })}
                 </div>
-              )}
+              ) : (
+                <LoadingSmall />
+              ))}
             <CountsInfo
               post={post}
               handleRecommentVisibility={handleRecommentVisibility}
