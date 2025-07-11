@@ -9,8 +9,11 @@ export default function summaryCondition({ summary }: { summary: string }) {
     return '비공개 동영상은 요약을 제공하지 않습니다.';
   } else if (summary === 'UNSUPPORTED_SUBTITLE_LANGUAGE') {
     return '영어, 한글 자막이 없는 영상은 요약을 제공하지 않습니다.';
-  } else if (summary === 'INVALID_YOUTUBE_URL') {
-    return '영상이 존재하지 않습니다.';
+  } else if (
+    summary === 'INVALID_YOUTUBE_URL' ||
+    summary === 'YOUTUBE_VIDEO_NOT_FOUND'
+  ) {
+    return '해당 영상을 찾을 수 없습니다.';
   } else if (summary === null || summary === '') {
     return '해당 영상의 요약이 없습니다.';
   } else {
