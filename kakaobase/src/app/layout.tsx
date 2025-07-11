@@ -79,6 +79,7 @@ export default async function RootLayout({
                 width={0}
                 height={0}
                 className="w-[20rem] h-auto"
+                priority
               />
               <Image
                 src="/logo_title.svg"
