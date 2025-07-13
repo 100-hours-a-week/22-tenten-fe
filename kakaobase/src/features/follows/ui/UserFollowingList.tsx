@@ -7,8 +7,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { followQueries } from '../api/followQueries';
 
 export default function UserFollowingList({ userId }: { userId: number }) {
-  const methods = useInfiniteQuery(followQueries.followings(userId));
-
   const {
     data,
     hasNextPage,
@@ -16,7 +14,7 @@ export default function UserFollowingList({ userId }: { userId: number }) {
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = { ...methods };
+  } = useInfiniteQuery(followQueries.followings(userId));
 
   const { observerRef } = useScrollHook({
     hasNextPage,

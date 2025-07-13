@@ -12,15 +12,13 @@ export const likeQueries = {
   likes: (feedId: number, feedType: PostType) =>
     infiniteQueryOptions({
       queryKey: likeQueries.likeKey(feedId, feedType),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getLikes({
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getLikes({
           feedId,
           feedType,
           limit: 22,
           cursor: pageParam,
-        });
-        return response;
-      },
+        }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),

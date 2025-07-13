@@ -1,8 +1,4 @@
-import {
-  infiniteQueryOptions,
-  QueryFunctionContext,
-  queryOptions,
-} from '@tanstack/react-query';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { getPost } from './post';
 import { Course } from '@/shared/types/Course';
 import { getComments, getPosts, getRecomments } from './list';
@@ -21,11 +17,8 @@ export const feedQueries = {
   posts: (course: Course, limit = 6) =>
     infiniteQueryOptions({
       queryKey: feedQueries.postsKey(course),
-      queryFn: (ctx: QueryFunctionContext) => {
-        const cursor = ctx.pageParam as number | undefined;
-        const raw = getPosts({ limit, cursor, course });
-        return raw;
-      },
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getPosts({ limit, cursor: pageParam, course }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),
@@ -33,10 +26,8 @@ export const feedQueries = {
   comments: (postId: number, limit = 6) =>
     infiniteQueryOptions({
       queryKey: feedQueries.commentsKey(postId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getComments(postId, { limit, cursor: pageParam });
-        return response;
-      },
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getComments(postId, { limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),
@@ -44,10 +35,8 @@ export const feedQueries = {
   recomments: (commentId: number, limit = 6) =>
     infiniteQueryOptions({
       queryKey: feedQueries.recommentsKey(commentId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getRecomments(commentId, { limit, cursor: pageParam });
-        return response;
-      },
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getRecomments(commentId, { limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),
@@ -55,9 +44,6 @@ export const feedQueries = {
   postDetail: (postId: number, postType: Course) =>
     queryOptions({
       queryKey: feedQueries.postKey(postId),
-      queryFn: () => {
-        const response = getPost({ postType, id: postId });
-        return response;
-      },
+      queryFn: () => getPost({ postType, id: postId }),
     }),
 };

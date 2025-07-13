@@ -19,19 +19,14 @@ export const accountQueries = {
   userInfo: (userId: number) =>
     queryOptions({
       queryKey: accountQueries.userInfoKey(userId),
-      queryFn: () => {
-        const response = getUserInfo({ userId });
-        return response;
-      },
+      queryFn: () => getUserInfo({ userId }),
     }),
 
   myPosts: (userId: number, limit = 6) =>
     infiniteQueryOptions({
       queryKey: accountQueries.myPostsKey(userId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getMyPosts({ userId, limit, cursor: pageParam });
-        return response;
-      },
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getMyPosts({ userId, limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),
@@ -39,10 +34,8 @@ export const accountQueries = {
   myComments: (userId: number, limit = 6) =>
     infiniteQueryOptions({
       queryKey: accountQueries.myCommentsKey(userId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getMyComments({ userId, limit, cursor: pageParam });
-        return response;
-      },
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getMyComments({ userId, limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),

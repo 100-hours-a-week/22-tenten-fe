@@ -18,7 +18,7 @@ export default function usePostList() {
     sessionStorage.removeItem('scrollToPostId');
   }, []);
 
-  const methods = useInfiniteQuery(feedQueries.posts(selectedCourse));
+  const postsMethods = useInfiniteQuery(feedQueries.posts(selectedCourse));
 
-  return { ...methods };
+  return { ...postsMethods };
 }

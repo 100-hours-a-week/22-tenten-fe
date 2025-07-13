@@ -14,7 +14,6 @@ export default function UserLikeList({
   feedId: number;
   feedType: PostType;
 }) {
-  const methods = useInfiniteQuery(likeQueries.likes(feedId, feedType));
   const {
     data,
     isPending,
@@ -22,7 +21,7 @@ export default function UserLikeList({
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = { ...methods };
+  } = useInfiniteQuery(likeQueries.likes(feedId, feedType));
 
   const { observerRef } = useScrollHook({
     hasNextPage,

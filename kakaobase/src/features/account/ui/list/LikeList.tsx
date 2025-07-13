@@ -3,7 +3,8 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyLikes from '../../hooks/list/useMyLikes';
+import { accountQueries } from '../../api/accountQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function LikeList({ userId }: { userId: number }) {
   const {
@@ -13,7 +14,8 @@ export default function LikeList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyLikes({ userId });
+  } = useInfiniteQuery(accountQueries.myLikes(userId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

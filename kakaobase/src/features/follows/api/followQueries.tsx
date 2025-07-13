@@ -10,21 +10,19 @@ export const followQueries = {
   ],
   followingsKey: (userId: number) => [
     ...followQueries.all(),
-    'followers',
+    'followings',
     userId,
   ],
 
   followers: (userId: number) =>
     infiniteQueryOptions({
       queryKey: followQueries.followersKey(userId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getFollowers({
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getFollowers({
           userId: userId,
           limit: 28,
           cursor: pageParam,
-        });
-        return response;
-      },
+        }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),
@@ -32,14 +30,12 @@ export const followQueries = {
   followings: (userId: number) =>
     infiniteQueryOptions({
       queryKey: followQueries.followingsKey(userId),
-      queryFn: ({ pageParam }: { pageParam?: number }) => {
-        const response = getFollowings({
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        getFollowings({
           userId: userId,
           limit: 28,
           cursor: pageParam,
-        });
-        return response;
-      },
+        }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
       initialPageParam: undefined,
     }),

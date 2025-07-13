@@ -3,8 +3,9 @@
 import PostCard from '../../ui/PostCard';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
-import useRecommentList from '../hooks/useRecommentList';
 import { recommentFormStateStore } from '../stores/recommentFormStateStore';
+import { feedQueries } from '../../api/feedQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function RecommentList({ commentId }: { commentId: number }) {
   const {
@@ -14,7 +15,8 @@ export default function RecommentList({ commentId }: { commentId: number }) {
     hasNextPage,
     isFetchingNextPage,
     refetch,
-  } = useRecommentList({ commentId });
+  } = useInfiniteQuery(feedQueries.recomments(commentId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

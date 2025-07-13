@@ -7,7 +7,7 @@ export default function useUserInfo({ userId }: { userId: number }) {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
 
-  const methods = useQuery(accountQueries.userInfo(userId));
+  const userInfoMethods = useQuery(accountQueries.userInfo(userId));
 
   function handleModal() {
     setOpen((prev) => !prev);
@@ -18,7 +18,7 @@ export default function useUserInfo({ userId }: { userId: number }) {
   }
 
   return {
-    ...methods,
+    ...userInfoMethods,
     handleModal,
     navEdit,
     isOpen,
