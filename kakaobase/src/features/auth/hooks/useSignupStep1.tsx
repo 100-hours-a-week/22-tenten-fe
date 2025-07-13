@@ -1,18 +1,13 @@
 import { useSignupStore } from '@/features/auth/stores/signupStore';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function useSignupStep1() {
-  const { isVerified, setSignupStep1Info, clear } = useSignupStore();
-  const router = useRouter();
-
-  useEffect(() => {
-    clear();
-  }, []);
+  const { isVerified, setSignupStep1Info } = useSignupStore();
+  const { goSignupStep2 } = useRoutings();
 
   const onSubmitStep1 = (password: string) => {
     setSignupStep1Info({ password: password });
-    router.push('/signup/step2');
+    goSignupStep2();
   };
 
   return {

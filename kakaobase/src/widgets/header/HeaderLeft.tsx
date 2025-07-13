@@ -1,16 +1,9 @@
 'use client';
+import useRoutings from '@/shared/hooks/useRoutings';
 import { Undo2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 export default function HeaderLeft() {
-  const router = useRouter();
+  const { goBack } = useRoutings();
 
-  return (
-    <Undo2
-      onClick={() => {
-        router.back();
-      }}
-      className="cursor-pointer self-center"
-    />
-  );
+  return <Undo2 onClick={goBack} className="cursor-pointer self-center" />;
 }

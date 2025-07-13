@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import SubmitButton from '../../shared/ui/button/SubmitButton';
-import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/entities/users/stores/userStore';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function RequireLoginModal() {
   const [hydrated, setHydrated] = useState(false);
   const { userId } = useUserStore();
-  const router = useRouter();
+  const { goLogin } = useRoutings();
 
   useEffect(() => {
     setHydrated(true);
@@ -27,10 +27,7 @@ export default function RequireLoginModal() {
               <br />
               로그인해 주시길 바랍니다.
             </div>
-            <SubmitButton
-              text="로그인 하러 가기"
-              onClick={() => router.push('/login')}
-            />
+            <SubmitButton text="로그인 하러 가기" onClick={goLogin} />
           </div>
         </div>
       </div>

@@ -3,20 +3,20 @@ import { postPost } from '../api/post';
 import { queryClient } from '@/shared/api/queryClient';
 import { postSchema } from '../schemas/postSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export type NewPostData = z.infer<typeof postSchema>;
 
 export const usePostEditorForm = () => {
-  const router = useRouter();
   const { showToast } = useToast();
   const [isLoading, setLoading] = useState(false);
   const { selectedCourse } = useUserStore();
+  const { goMain } = useRoutings();
 
   const methods = useForm<NewPostData>({
     resolver: zodResolver(postSchema),
@@ -47,12 +47,11 @@ export const usePostEditorForm = () => {
       );
       await queryClient.invalidateQueries({ queryKey: ['posts'] });
       showToast('게시글 등록 성공! ✌️');
-      router.push(`/main`);
     } catch (e: any) {
       showToast('게시글 업로드 실패! 잠시 후 다시 시도해 주세요. 😭');
-      router.push('/main');
     } finally {
       setLoading(false);
+      goMain();
     }
   };
 

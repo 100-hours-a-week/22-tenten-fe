@@ -2,17 +2,17 @@ import { z } from 'zod';
 import { loginSchema } from '@/features/auth/schemas/loginSchema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { login } from '@/features/auth/api/login';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { useToast } from '@/shared/hooks/ToastContext';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function useLoginForm() {
-  const router = useRouter();
   const { setUserInfo } = useUserStore();
   const { showToast } = useToast();
+  const { goHome } = useRoutings();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -41,7 +41,7 @@ export default function useLoginForm() {
         userId: Number(response.data.member_id),
         imageUrl: response.data.image_url,
       });
-      router.push('/');
+      goHome();
     } catch (e: any) {
       const errorCode = e?.response?.data?.error;
       if (errorCode === 'invalid_password') {
@@ -60,8 +60,5 @@ export default function useLoginForm() {
   return {
     ...loginForm,
     onSubmit,
-    goToSignup: () => {
-      router.push('/signup/step1');
-    },
   };
 }

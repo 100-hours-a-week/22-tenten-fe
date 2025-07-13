@@ -5,7 +5,7 @@ import RoutingButtons from './RoutingButtons';
 import TopArea from './TopArea';
 import useGithubEditHook from '../../hooks/useGithubEditHook';
 
-export default function EditWrapper() {
+export default function EditWrapper({ userId }: { userId: number }) {
   const {
     githubUrl,
     onSubmit,
@@ -31,7 +31,7 @@ export default function EditWrapper() {
             onClick={handleSubmit(onSubmit)}
           />
         </div>
-        <RoutingButtons />
+        <RoutingButtons userId={userId} />
       </div>
     </div>
   );

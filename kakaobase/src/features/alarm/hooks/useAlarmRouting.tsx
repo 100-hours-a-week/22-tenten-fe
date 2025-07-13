@@ -1,8 +1,8 @@
-import { useRouter } from 'next/navigation';
 import { sendNotificationCommand } from '../lib/socket';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function useAlarmRouting({ data }: { data: any }) {
-  const router = useRouter();
+  const { goPostDetail, goProfile } = useRoutings();
 
   function goToPost() {
     if (!data.is_read) {
@@ -11,7 +11,7 @@ export default function useAlarmRouting({ data }: { data: any }) {
         timestamp: new Date().toISOString().split('.')[0],
       });
     }
-    router.push(`/post/${data.target_id}`);
+    goPostDetail(data.target_id);
   }
   function goToProfile() {
     if (!data.is_read) {
@@ -20,7 +20,7 @@ export default function useAlarmRouting({ data }: { data: any }) {
         timestamp: new Date().toISOString().split('.')[0],
       });
     }
-    router.push(`/profile/${data.sender.id}`);
+    goProfile(data.sender_id);
   }
   return { goToPost, goToProfile };
 }

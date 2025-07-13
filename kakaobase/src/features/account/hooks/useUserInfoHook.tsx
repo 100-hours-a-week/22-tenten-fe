@@ -1,12 +1,9 @@
 import { getUserInfo } from '@/features/account/api/profile';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function useUserInfoHook({ userId }: { userId: number }) {
-  const router = useRouter();
-
   const { setUserInfo } = useUserStore();
   const [isOpen, setOpen] = useState(false);
 
@@ -28,14 +25,9 @@ export default function useUserInfoHook({ userId }: { userId: number }) {
     setOpen((prev) => !prev);
   }
 
-  function navEdit() {
-    router.push(`${userId}/edit`);
-  }
-
   return {
     ...methods,
     handleModal,
-    navEdit,
     isOpen,
   };
 }
