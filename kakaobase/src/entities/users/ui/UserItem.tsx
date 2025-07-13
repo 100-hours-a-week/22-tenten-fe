@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function UserItem({ data }: { data: UserBasic }) {
-  const userId = 1;
   const router = useRouter();
   function navProfile() {
     router.push(`/profile/${data.id}`);
