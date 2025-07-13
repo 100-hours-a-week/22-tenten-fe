@@ -30,7 +30,11 @@ export default function ChatList() {
       {data.pages
         .flat()
         .map((chat: Chat) =>
-          chat.sender_id === 1213 ? <BotChat /> : <MyChat />
+          chat.sender_id === 1213 ? (
+            <BotChat key={chat.chat_id} />
+          ) : (
+            <MyChat key={chat.chat_id} />
+          )
         )}
     </div>
   );
