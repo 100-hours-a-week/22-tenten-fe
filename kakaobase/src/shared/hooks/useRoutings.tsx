@@ -30,6 +30,9 @@ export default function useRoutings() {
   function goPostDetail(postId: number) {
     router.push(`/post/${postId}`);
   }
+  function goSignupStep1() {
+    router.push('/signup/step1');
+  }
   function goSignupStep2() {
     router.push('/signup/step2');
   }
@@ -55,6 +58,7 @@ export default function useRoutings() {
     goPasswordEdit,
     goWithdraw,
     goPostDetail,
+    goSignupStep1,
     goSignupStep2,
     goBack,
     goMain,
