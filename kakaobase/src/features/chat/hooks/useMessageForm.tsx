@@ -1,12 +1,18 @@
+import { sendChatCommand } from '@/features/alarm/lib/socket';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useState } from 'react';
+import { useChatStore } from '../stores/chatStore';
 
 export default function useMessageForm() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
+  const { streamingId } = useChatStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    sendChatCommand('chat.typing', {
+      timestamp: new Date().toISOString().split('.')[0],
+    });
     setMessage(e.target.value);
   };
 
@@ -14,7 +20,10 @@ export default function useMessageForm() {
     if (!message.trim() || loading) return;
     try {
       setLoading(true);
-      //await 메시지 전송 api 제출
+      sendChatCommand('chat.send', {
+        content: message,
+        timestamp: new Date().toISOString().split('.')[0],
+      });
       setMessage('');
     } catch (e: any) {
       if (e.response.data.error === 'invalid_format') {
@@ -28,7 +37,10 @@ export default function useMessageForm() {
   function handleStop() {
     if (loading) {
       try {
-        //응답 받기 stop
+        sendChatCommand('chat.stop', {
+          stream_id: streamingId,
+          timestamp: new Date().toISOString().split('.')[0],
+        });
         setLoading(false);
       } catch (e: any) {
         showToast('문제 발생! 자동으로 응답 생성이 중단되었습니다. 😭');

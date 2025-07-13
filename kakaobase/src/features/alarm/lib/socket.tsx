@@ -1,3 +1,4 @@
+import { ChatPublishingEvent } from '@/features/chat/types/ChatPublishingEvent';
 import api from '@/shared/api/api';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
@@ -52,6 +53,14 @@ export const connectStomp = async (onMessage: (msg: IMessage) => void) => {
           console.error('메시지 파싱 오류:', err);
         }
       });
+      stompClient.subscribe('/user/queue/chatbot', (message: IMessage) => {
+        try {
+          const parsed = message;
+          onMessage(parsed);
+        } catch (err) {
+          console.error('메시지 파싱 오류:', err);
+        }
+      });
       stompClient.subscribe('/user/queue/error', (message: IMessage) => {
         try {
           const parsed = JSON.parse(message.body);
@@ -81,6 +90,18 @@ export const sendNotificationCommand = (event: string, data: any) => {
     event === 'notification.read'
       ? '/pub/notification.read' //알림 읽기
       : '/pub/notification.remove'; //알림 삭제
+
+  stompClient.publish({
+    destination: pubPath,
+    body: payload,
+  });
+};
+
+export const sendChatCommand = (event: ChatPublishingEvent, data: any) => {
+  if (!stompClient || !stompClient.connected) return;
+
+  const payload = JSON.stringify({ event, data });
+  const pubPath = '/pub/chat';
 
   stompClient.publish({
     destination: pubPath,
