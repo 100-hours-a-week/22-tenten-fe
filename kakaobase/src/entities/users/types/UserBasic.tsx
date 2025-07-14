@@ -1,6 +1,7 @@
 export interface UserBasic {
   id: number;
-  image_url: string;
-  name: string;
+  name?: string;
   nickname: string;
+  image_url: string | null;
+  is_followed?: boolean;
 }

@@ -5,6 +5,7 @@ import { useAlarmStore } from '../stores/alarmStore';
 
 export default function AlarmList() {
   const { alarmList } = useAlarmStore();
+  console.log(alarmList);
 
   if (!alarmList || alarmList === null)
     return (

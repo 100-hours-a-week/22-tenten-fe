@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { UserBasic } from '@/entities/users/types/UserBasic';
 
-export default function AlarmProfile({ sender }: { sender: any }) {
+export default function AlarmProfile({ sender }: { sender: UserBasic }) {
   const imageUrl = sender.image_url;
 
   if (imageUrl === null)

@@ -1,7 +1,8 @@
 import { useRouter } from 'next/navigation';
-import { sendNotificationCommand } from '../lib/socket';
+import { sendNotificationCommand } from '../../socket/lib/socket';
+import { AlarmItemData } from '../types/AlarmResponse';
 
-export default function useAlarmRouting({ data }: { data: any }) {
+export default function useAlarmRouting({ data }: { data: AlarmItemData }) {
   const router = useRouter();
 
   function goToPost() {
