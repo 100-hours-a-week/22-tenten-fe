@@ -1,4 +1,4 @@
-import { sendChatCommand } from '@/features/alarm/lib/socket';
+import { sendChatCommand } from '@/features/socket/lib/socket';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useState } from 'react';
 import { useChatStore } from '../stores/chatStore';
@@ -19,7 +19,6 @@ export default function useMessageForm() {
   const handleSubmit = async () => {
     if (!message.trim() || isStreaming || isLoading) return;
     try {
-      console.log('보낼 때 : ', message);
       sendChatCommand('chat.send', {
         content: message,
         timestamp: new Date().toISOString().split('.')[0],

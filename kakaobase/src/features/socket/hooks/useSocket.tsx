@@ -1,14 +1,22 @@
 import { useEffect } from 'react';
 import { connectStomp, disconnectStomp, sendChatCommand } from '../lib/socket';
 import { IMessage } from '@stomp/stompjs';
-import { useAlarmStore } from '../stores/alarmStore';
+import { useAlarmStore } from '../../alarm/stores/alarmStore';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { queryClient } from '@/shared/api/queryClient';
 import { chatQueries } from '@/features/chat/api/chatQueries';
 import { useChatStore } from '@/features/chat/stores/chatStore';
 
-export default function useAlarm() {
-  const { setAlarmInfo } = useAlarmStore();
+export default function useSocket() {
+  const {
+    setAlarmList,
+    setCnt,
+    removeAlarm,
+    cntDecrement,
+    cntIncrement,
+    readAlarm,
+    addAlarm,
+  } = useAlarmStore();
   const {
     startLoading,
     startStreaming,
@@ -28,35 +36,15 @@ export default function useAlarm() {
 
       switch (parsed.event) {
         case 'notification.fetch':
-          setAlarmInfo({ alarmList: parsed.data.notifications });
-          setAlarmInfo({ cnt: parsed.data.unread_count });
+          setAlarmList(parsed.data.notifications);
+          setCnt(parsed.data.unread_count);
           break;
         case 'notification.remove.ack':
-          setAlarmInfo((prev) => {
-            const removed = prev.alarmList.find(
-              (n) => n.data.id === parsed.data.id
-            );
-            const isUnread = removed && !removed.data.is_read;
-            return {
-              cnt: isUnread ? Math.max(0, prev.cnt - 1) : prev.cnt,
-            };
-          });
+          removeAlarm(parsed.data);
           break;
         case 'notification.read.ack':
-          setAlarmInfo((prev) => ({
-            alarmList: prev.alarmList.map((n) =>
-              n.data.id === parsed.data.id
-                ? {
-                    ...n,
-                    data: {
-                      ...n.data,
-                      is_read: true,
-                    },
-                  }
-                : n
-            ),
-            cnt: Math.max(0, prev.cnt - 1),
-          }));
+          readAlarm(parsed.data);
+          cntDecrement();
           break;
         case 'comment.created':
         case 'recomment.created':
@@ -70,10 +58,8 @@ export default function useAlarm() {
             data: parsed.data,
           };
 
-          setAlarmInfo((prev) => ({
-            alarmList: [newAlarm, ...prev.alarmList],
-            cnt: prev.cnt + 1,
-          }));
+          addAlarm(newAlarm);
+          cntIncrement();
           break;
         case 'chat.loading':
           startLoading();

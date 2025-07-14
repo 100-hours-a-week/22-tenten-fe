@@ -5,7 +5,7 @@ import BotChat from './BotChat';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { chatQueries } from '../api/chatQueries';
-import { Chat } from '../types/Chats';
+import { Chat } from '../types/Chat';
 import Image from 'next/image';
 
 export default function ChatList() {

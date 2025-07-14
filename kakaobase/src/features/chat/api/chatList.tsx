@@ -1,5 +1,5 @@
 import { PostsParams } from '@/features/feeds/posts/api/postList';
-import { Chat, ChatList } from '../types/Chats';
+import { Chat } from '../types/Chat';
 import api from '@/shared/api/api';
 
 export default async function getChatList({
