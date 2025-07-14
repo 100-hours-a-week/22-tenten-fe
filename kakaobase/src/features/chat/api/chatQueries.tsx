@@ -9,7 +9,7 @@ export const chatQueries = {
       queryKey: chatQueries.chatsKey(),
       queryFn: ({ pageParam }: { pageParam?: number }) =>
         getChatList({ limit: 22, cursor: pageParam }),
-      getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
+      getNextPageParam: (lastPage) => lastPage.at(-1)?.chat_id,
       initialPageParam: undefined,
     }),
 };

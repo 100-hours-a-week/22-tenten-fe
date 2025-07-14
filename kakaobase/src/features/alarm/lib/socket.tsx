@@ -4,7 +4,7 @@ import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
-const reconnectTime = 5000; //5초
+const reconnectTime = 100; //0.1초
 
 async function tryRefreshAndReconnect(onMessage: (msg: IMessage) => void) {
   try {
@@ -22,10 +22,6 @@ export const connectStomp = async (onMessage: (msg: IMessage) => void) => {
   if (stompClient && stompClient.active) {
     console.warn('[STOMP] 이미 연결 중입니다.');
     return;
-  }
-
-  if (stompClient) {
-    await stompClient.deactivate();
   }
 
   const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
@@ -108,10 +104,3 @@ export const sendChatCommand = (event: ChatPublishingEvent, data: any) => {
     body: payload,
   });
 };
-
-// data 형식
-// data {
-//   Long id;
-//   LocalDateTime timestamp;
-// }
-//pub = publish
