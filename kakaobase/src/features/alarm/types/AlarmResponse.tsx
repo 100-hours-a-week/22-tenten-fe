@@ -1,20 +1,22 @@
-import { AlarmEvent } from './AlarmEvent';
-import { AlarmFetchData } from './AlarmFetchResponse';
+import { UserBasic } from '@/entities/users/types/UserBasic';
+import { AlarmDetailEvent } from './AlarmEvent';
 
-export type AlarmResponse =
-  | {
-      type: string;
-      event: 'notification.fetch';
-      data: AlarmFetchData;
-    }
-  | {
-      type: string;
-      event: Exclude<AlarmEvent, 'notification.fetch'>;
-      data: AlarmDefaultData;
-    };
+export interface AlarmFetchData {
+  unread_count: number;
+  notifications: AlarmItem[];
+}
 
-export interface AlarmDefaultData {
+export interface AlarmItem {
+  type: string;
+  event: AlarmDetailEvent;
+  data: AlarmItemData;
+}
+
+export interface AlarmItemData {
   id: number;
-  message: string;
+  sender: UserBasic;
+  target_id: number;
+  content?: string;
+  is_read: boolean;
   timestamp: string;
 }

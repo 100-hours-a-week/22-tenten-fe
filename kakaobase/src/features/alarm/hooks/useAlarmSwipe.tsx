@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
-import { sendNotificationCommand } from '../lib/socket';
+import { sendNotificationCommand } from '../../socket/lib/socket';
+import { AlarmItemData } from '../types/AlarmResponse';
 
-export default function useAlarmSwipe({ data }: { data: any }) {
+export default function useAlarmSwipe({ data }: { data: AlarmItemData }) {
   const [isRead, setRead] = useState<boolean>(data.is_read);
   const [showActions, setShowActions] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
