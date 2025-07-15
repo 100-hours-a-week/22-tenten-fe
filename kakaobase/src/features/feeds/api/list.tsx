@@ -1,14 +1,19 @@
 import api from '@/shared/api/api';
 import { mapToPostEntity } from '@/features/feeds/lib/mapPost';
-import { PostsParams } from '../types/postParams';
 import { Post } from '../types/post';
+
+interface FeedsParams {
+  limit?: number;
+  cursor?: number;
+  course?: string;
+}
 
 //게시글 목록 조회
 export async function getPosts({
   limit,
   cursor,
   course,
-}: PostsParams): Promise<Post[]> {
+}: FeedsParams): Promise<Post[]> {
   try {
     const params: Record<string, any> = {};
     if (limit !== undefined) params.limit = limit;
@@ -28,7 +33,7 @@ export async function getPosts({
 //댓글 목록 조회
 export async function getComments(
   id: number,
-  { limit, cursor }: PostsParams
+  { limit, cursor }: FeedsParams
 ): Promise<Post[]> {
   try {
     const params: Record<string, any> = {};
@@ -49,7 +54,7 @@ export async function getComments(
 //대댓글 목록 조회
 export async function getRecomments(
   commentId: number,
-  { limit, cursor }: PostsParams
+  { limit, cursor }: FeedsParams
 ): Promise<Post[]> {
   try {
     const params: Record<string, any> = {};
