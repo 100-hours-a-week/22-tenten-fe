@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import clsx from 'clsx';
 import Linkify from 'react-linkify';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import summaryCondition from '../posts/lib/summaryCondition';
@@ -11,9 +11,10 @@ import { Comment, PostEntity } from '@/features/feeds/types/post';
 import RecommentList from '../comments/ui/RecommentList';
 import YoutubeFrame from './YoutubeFrame';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function PostCard({ post }: { post: PostEntity }) {
-  const router = useRouter();
+  const { goPostDetail } = useRoutings();
   const path = usePathname();
 
   function isComment(post: PostEntity): post is Comment {
@@ -23,10 +24,10 @@ export default function PostCard({ post }: { post: PostEntity }) {
   function navDetail() {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
-      router.push(`/post/${post.id}`);
+      goPostDetail(post.id);
     }
     if (isComment(post) && path.includes('profile')) {
-      router.push(`/post/${post.postId}`);
+      goPostDetail(post.postId);
     }
   }
 

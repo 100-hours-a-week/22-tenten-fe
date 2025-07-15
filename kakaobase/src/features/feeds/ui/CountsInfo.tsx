@@ -1,8 +1,9 @@
 import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/features/feeds/types/post';
 import { Heart, MessageCircle } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import RecommentHandler from './RecommentHandler';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 const iconSize = 16;
 
@@ -63,14 +64,14 @@ export default function CountsInfo({ post }: { post: PostEntity }) {
     post.type
   );
 
+  const { goLikes } = useRoutings();
   const path = usePathname();
-  const router = useRouter();
   function navLikeList(e: React.MouseEvent<HTMLElement>) {
     if (post.type === 'post') {
       sessionStorage.setItem('scrollToPostId', String(post.id));
     }
     e.stopPropagation();
-    router.push(`/likes/${post.type}/${post.id}`);
+    goLikes(post.type, post.id);
   }
 
   return (

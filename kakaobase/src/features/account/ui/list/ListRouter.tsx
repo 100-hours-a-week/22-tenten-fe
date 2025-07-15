@@ -5,6 +5,12 @@ import { profileListType } from './Toggle';
 import PostList from './PostList';
 import CommentList from './CommentList';
 
+const profileListMap = {
+  게시글: PostList,
+  댓글: CommentList,
+  좋아요: LikeList,
+};
+
 export default function ListRouter({
   type,
   userId,
@@ -12,11 +18,6 @@ export default function ListRouter({
   type: profileListType;
   userId: number;
 }) {
-  if (type === '게시글') {
-    return <PostList userId={userId} />;
-  } else if (type === '댓글') {
-    return <CommentList userId={userId} />;
-  } else {
-    return <LikeList userId={userId} />;
-  }
+  const SelectedList = profileListMap[type];
+  return <SelectedList userId={userId} />;
 }

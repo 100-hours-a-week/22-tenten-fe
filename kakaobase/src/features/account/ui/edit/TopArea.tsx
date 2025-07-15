@@ -1,7 +1,7 @@
 'use client';
 
 import ReadOnlyUserInfo from './ReadOnlyUserInfo';
-import ImageInput from './ImageInput';
+import ImageInput from './ImageInputContainer';
 import useImageEditHook from '../../hooks/useImageEditHook';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { courseMapEngToKor } from '@/shared/lib/courseMap';
