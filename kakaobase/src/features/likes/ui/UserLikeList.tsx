@@ -1,16 +1,18 @@
 'use client';
 
 import UserItem from '../../../entities/users/ui/UserItem';
-import useLikeListHook from '../hooks/useLikeListHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
+import { PostType } from '@/features/feeds/types/post';
+import { likeQueries } from '../api/likeQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function UserLikeList({
-  postId,
-  postType,
+  feedId,
+  feedType,
 }: {
-  postId: number;
-  postType: string;
+  feedId: number;
+  feedType: PostType;
 }) {
   const {
     data,
@@ -19,10 +21,8 @@ export default function UserLikeList({
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = useLikeListHook({
-    postId,
-    postType,
-  });
+  } = useInfiniteQuery(likeQueries.likes(feedId, feedType));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

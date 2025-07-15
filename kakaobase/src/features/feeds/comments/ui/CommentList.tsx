@@ -3,8 +3,9 @@
 import PostCard from '../../ui/PostCard';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
-import useCommentList from '../hooks/useCommentList';
 import { useParams } from 'next/navigation';
+import { feedQueries } from '../../api/feedQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function CommentList() {
   const params = useParams();
@@ -16,7 +17,7 @@ export default function CommentList() {
     hasNextPage,
     isFetchingNextPage,
     refetch,
-  } = useCommentList({ postId });
+  } = useInfiniteQuery(feedQueries.comments(postId));
 
   const { observerRef } = useScrollHook({
     hasNextPage,

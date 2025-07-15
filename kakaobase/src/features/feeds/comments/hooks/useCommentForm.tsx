@@ -1,15 +1,19 @@
-import { postComment } from '../api/comment';
+import { postComment } from '../../api/comment';
 import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { recommentFormStateStore } from '../stores/recommentFormStateStore';
+import { feedQueries } from '../../api/feedQueries';
+import { useUserStore } from '@/entities/users/stores/userStore';
+import { accountQueries } from '@/features/account/api/accountQueries';
 
 export default function useCommentForm() {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const { isWritingRecomment, commentId, stopRecomment } =
     recommentFormStateStore();
+  const { selectedCourse } = useUserStore();
   const param = useParams();
   const postId = Number(param.postId);
   const { showToast, hideToast } = useToast();
@@ -28,16 +32,29 @@ export default function useCommentForm() {
           content: comment,
           parent_id: commentId,
         });
+        queryClient.invalidateQueries({
+          queryKey: feedQueries.recommentsKey(commentId),
+        });
+        queryClient.invalidateQueries({
+          queryKey: feedQueries.commentsKey(postId),
+        });
         stopRecomment();
         hideToast();
         showToast('대댓글 달기 성공! ✌️');
       } else {
         await postComment({ postId, content: comment });
         showToast('댓글 달기 성공! ✌️');
-        queryClient.invalidateQueries({ queryKey: ['post', postId] });
+        queryClient.invalidateQueries({
+          queryKey: feedQueries.postKey(postId),
+        });
+        queryClient.invalidateQueries({
+          queryKey: feedQueries.postsKey(selectedCourse),
+        });
+        queryClient.invalidateQueries({ queryKey: accountQueries.all() });
       }
-      queryClient.invalidateQueries({ queryKey: ['comments'] });
-      queryClient.invalidateQueries({ queryKey: ['recomments'] });
+      queryClient.invalidateQueries({
+        queryKey: feedQueries.commentsKey(postId),
+      });
       setComment('');
     } catch (e: any) {
       if (e.response.data.error === 'invalid_format') {
