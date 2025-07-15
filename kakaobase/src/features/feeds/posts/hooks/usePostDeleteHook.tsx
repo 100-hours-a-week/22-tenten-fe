@@ -1,20 +1,30 @@
-import { deletePost } from '../api/post';
+import { deletePost } from '../../api/post';
 import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { usePathname } from 'next/navigation';
+import { feedQueries } from '../../api/feedQueries';
+import { accountQueries } from '@/features/account/api/accountQueries';
 import useRoutings from '@/shared/hooks/useRoutings';
 
 export function usePostDeleteHook({ id }: { id: number }) {
   const path = usePathname();
   const { showToast } = useToast();
-  const { selectedCourse } = useUserStore();
+  const { selectedCourse, userId } = useUserStore();
   const { goMain } = useRoutings();
 
   async function deletePostExecute() {
     try {
       await deletePost({ postType: selectedCourse, id });
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      queryClient.invalidateQueries({
+        queryKey: feedQueries.postsKey(selectedCourse),
+      });
+      queryClient.invalidateQueries({
+        queryKey: accountQueries.myLikesKey(userId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: accountQueries.myPostsKey(userId),
+      });
       showToast('삭제 완료! ✌️');
       if (path.includes('post')) goMain(); //게시글 상세에서 게시글 지우기
     } catch (e: any) {

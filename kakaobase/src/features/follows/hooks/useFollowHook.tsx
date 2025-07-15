@@ -1,7 +1,10 @@
+import { feedQueries } from '@/features/feeds/api/feedQueries';
 import { deleteFollow, postFollow } from '../api/follow';
 import { queryClient } from '@/shared/api/queryClient';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useEffect, useState } from 'react';
+import { accountQueries } from '@/features/account/api/accountQueries';
+import { followQueries } from '../api/followQueries';
 
 export function useFollowToggle(initial: boolean, id: number) {
   const [following, setFollowing] = useState(initial);
@@ -23,9 +26,9 @@ export function useFollowToggle(initial: boolean, id: number) {
         showToast('팔로우 성공! ✌️');
       }
       setFollowing((prev) => !prev);
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-      queryClient.invalidateQueries({ queryKey: ['comments'] });
-      queryClient.invalidateQueries({ queryKey: ['recomments'] });
+      queryClient.invalidateQueries({ queryKey: feedQueries.all() });
+      queryClient.invalidateQueries({ queryKey: accountQueries.all() });
+      queryClient.invalidateQueries({ queryKey: followQueries.all() });
     } catch (e) {
       if (following) showToast('언팔로우 실패 😭');
       else showToast('팔로우 실패 😭');

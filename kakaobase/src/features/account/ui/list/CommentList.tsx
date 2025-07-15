@@ -3,7 +3,8 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyCommentsHook from '../../hooks/list/useMyCommentsHook';
+import { accountQueries } from '../../api/accountQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function CommentList({ userId }: { userId: number }) {
   const {
@@ -13,7 +14,8 @@ export default function CommentList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyCommentsHook({ userId });
+  } = useInfiniteQuery(accountQueries.myComments(userId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

@@ -1,12 +1,11 @@
 'use client';
 import useMessageForm from '../hooks/useMessageForm';
 import { CircleStop, Send } from 'lucide-react';
+import { useChatStore } from '../stores/chatStore';
 
 export default function MessageInput() {
-  const { message, handleSubmit, handleChange, loading, handleStop } =
-    useMessageForm();
-  //임시로 댓글 작성 훅 가져옴
-  //추후 비즈니스 로직 구현 시 메시지로 변경 예정
+  const { message, handleSubmit, handleChange, handleStop } = useMessageForm();
+  const { isStreaming, isLoading } = useChatStore();
 
   return (
     <form
@@ -32,7 +31,9 @@ export default function MessageInput() {
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                handleSubmit();
+                setTimeout(() => {
+                  handleSubmit();
+                }, 0);
               }
             }}
           />
@@ -43,7 +44,7 @@ export default function MessageInput() {
           message.trim() && 'hover:bg-containerColor'
         }`}
       >
-        {loading ? (
+        {isLoading || isStreaming ? (
           <CircleStop
             size={20}
             className="transition text-myBlue cursor-pointer"

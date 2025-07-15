@@ -1,6 +1,7 @@
 import { AlarmDetailEvent } from '../types/AlarmEvent';
+import { AlarmItem } from '../types/AlarmResponse';
 
-export default function AlarmContent({ data }: { data: any }) {
+export default function AlarmContent({ data }: { data: AlarmItem }) {
   const event = data.event as AlarmDetailEvent;
   if (event === 'comment.created' || event === 'recomment.created')
     return data.data.content;

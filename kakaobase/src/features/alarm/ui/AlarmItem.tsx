@@ -10,7 +10,7 @@ import AlarmAction from './AlarmAction';
 import AlarmNameParticle from './AlarmNameParticle';
 import useAlarmSwipe from '../hooks/useAlarmSwipe';
 import useAlarmRouting from '../hooks/useAlarmRouting';
-import { AlarmItem as AlarmItemType } from '../types/AlarmFetchResponse';
+import { AlarmItem as AlarmItemType } from '../types/AlarmResponse';
 
 export default function AlarmItem({ data }: { data: AlarmItemType }) {
   const alarm = data.data;

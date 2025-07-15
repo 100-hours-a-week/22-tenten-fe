@@ -1,34 +1,35 @@
 import { create } from 'zustand';
-import { Chat } from '../types/Chats';
+
+const initialChatState = {
+  isLoading: false,
+  isStreaming: false,
+  streamingChat: '',
+  streamId: 0,
+};
 
 export interface ChatState {
   isLoading: boolean;
   isStreaming: boolean;
-  chatList: Chat[];
   streamingChat: string;
-  streamingId: string;
-  setChatState: (
-    updater: Partial<ChatState> | ((prev: ChatState) => Partial<ChatState>)
-  ) => void;
+  streamId: number;
+  startLoading: () => void;
+  startStreaming: (id: number) => void;
+  setStreamingChat: (chunk: string) => void;
+  stopStreaming: () => void;
   clear: () => void;
 }
+
 export const useChatStore = create<ChatState>()((set) => ({
-  isLoading: false,
-  isStreaming: false,
-  chatList: [],
-  streamingChat: '',
-  streamingId: '',
-  setChatState: (updater) =>
-    set((state) => {
-      const updates = typeof updater === 'function' ? updater(state) : updater;
-      return { ...state, ...updates };
-    }),
-  clear: () =>
+  ...initialChatState,
+  startLoading: () => set({ isLoading: true }),
+  startStreaming: (id) =>
     set({
       isLoading: false,
-      isStreaming: false,
-      streamingChat: '',
-      chatList: [],
-      streamingId: '',
+      isStreaming: true,
+      streamId: id,
     }),
+  setStreamingChat: (chunk) =>
+    set((prev) => ({ streamingChat: prev.streamingChat + chunk })),
+  stopStreaming: () => set({ isStreaming: false, streamingChat: '' }),
+  clear: () => set({ ...initialChatState }),
 }));

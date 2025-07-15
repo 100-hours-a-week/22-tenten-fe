@@ -5,7 +5,3 @@ export interface Chat {
   timestimap: string;
   is_read: boolean;
 }
-
-export interface ChatList {
-  data: Chat[];
-}

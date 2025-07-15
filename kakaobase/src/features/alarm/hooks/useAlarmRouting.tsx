@@ -1,4 +1,4 @@
-import { sendNotificationCommand } from '../lib/socket';
+import { sendNotificationCommand } from '@/features/socket/lib/socket';
 import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function useAlarmRouting({ data }: { data: any }) {

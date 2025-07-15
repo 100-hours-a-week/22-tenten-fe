@@ -3,7 +3,8 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyPostsHook from '../../hooks/list/useMyPostsHook';
+import { accountQueries } from '../../api/accountQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function PostList({ userId }: { userId: number }) {
   const {
@@ -13,7 +14,8 @@ export default function PostList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyPostsHook({ userId });
+  } = useInfiniteQuery(accountQueries.myPosts(userId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,

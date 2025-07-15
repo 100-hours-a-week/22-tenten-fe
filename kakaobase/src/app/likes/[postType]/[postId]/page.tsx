@@ -1,11 +1,12 @@
 import Header from '@/widgets/header/Header';
 import NavBar from '@/widgets/navbar/NavBar';
 import UserLikeList from '@/features/likes/ui/UserLikeList';
+import { PostType } from '@/features/feeds/types/post';
 
 export default function Page({
   params,
 }: {
-  params: { postId: number; postType: string };
+  params: { postId: number; postType: PostType };
 }) {
   return (
     <div className="flex flex-col h-screen scroll-none">
@@ -14,7 +15,7 @@ export default function Page({
         className="flex overflow-y-auto flex-grow flex-col my-8 mx-6 rounded-lg bg-containerColor"
         data-scroll-area
       >
-        <UserLikeList postId={params.postId} postType={params.postType} />
+        <UserLikeList feedId={params.postId} feedType={params.postType} />
       </div>
       <NavBar />
     </div>

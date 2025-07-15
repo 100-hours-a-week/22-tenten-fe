@@ -4,17 +4,19 @@ import UserInfo from './UserInfo';
 import Toggle, { profileListType } from './list/Toggle';
 import ListRouter from './list/ListRouter';
 import ProfileModal from './QR/ProfileModal';
-import useUserInfoHook from '../hooks/useUserInfoHook';
 import FollowButtonLarge from '@/features/follows/ui/FollowButtonLarge';
 import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 import useRoutings from '@/shared/hooks/useRoutings';
+import useUserInfo from '../hooks/useUserInfo';
 
 export default function MyPageWrapper({ userId }: { userId: number }) {
-  const { data, isPending, handleModal, isOpen } = useUserInfoHook({
+  const { data, isPending, handleModal, navEdit, isOpen } = useUserInfo({
     userId,
   });
+
+  console.log(data);
   const { following, toggleFollow } = useFollowToggle(
     data?.is_followed ?? false,
     userId

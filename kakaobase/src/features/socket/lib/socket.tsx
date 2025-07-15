@@ -1,16 +1,16 @@
-import { ChatPublishingEvent } from '@/features/chat/types/ChatPublishingEvent';
+import { ChatClientEvent } from '@/features/chat/types/ChatEvent';
 import api from '@/shared/api/api';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
-const reconnectTime = 5000; //5초
+const reconnectTime = 100; //0.1초
 
-async function tryRefreshAndReconnect(onMessage: (msg: IMessage) => void) {
+async function tryRefreshAndReconnect() {
   try {
     await api.post(`/auth/tokens/refresh`);
     console.log('[STOMP] 토큰 재발급 성공, 소켓 재연결 시도');
-    if (onMessage) await connectStomp(onMessage);
+    if (stompClient) stompClient.activate();
     return true;
   } catch (err) {
     console.error('[STOMP] 토큰 재발급 실패', err);
@@ -24,16 +24,12 @@ export const connectStomp = async (onMessage: (msg: IMessage) => void) => {
     return;
   }
 
-  if (stompClient) {
-    await stompClient.deactivate();
-  }
-
   const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
 
   socket.onclose = async () => {
     console.warn('[SockJS onclose]');
 
-    const shouldReconnect = await tryRefreshAndReconnect(onMessage);
+    const shouldReconnect = await tryRefreshAndReconnect();
     if (!shouldReconnect) {
       console.warn('토큰 재발급 실패. 소켓 재연결 불가');
     }
@@ -97,7 +93,7 @@ export const sendNotificationCommand = (event: string, data: any) => {
   });
 };
 
-export const sendChatCommand = (event: ChatPublishingEvent, data: any) => {
+export const sendChatCommand = (event: ChatClientEvent, data: any) => {
   if (!stompClient || !stompClient.connected) return;
 
   const payload = JSON.stringify({ event, data });
@@ -108,10 +104,3 @@ export const sendChatCommand = (event: ChatPublishingEvent, data: any) => {
     body: payload,
   });
 };
-
-// data 형식
-// data {
-//   Long id;
-//   LocalDateTime timestamp;
-// }
-//pub = publish
