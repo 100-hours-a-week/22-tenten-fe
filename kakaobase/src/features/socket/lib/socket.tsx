@@ -82,10 +82,7 @@ export const sendNotificationCommand = (event: string, data: any) => {
   if (!stompClient || !stompClient.connected) return;
 
   const payload = JSON.stringify({ event, data });
-  const pubPath =
-    event === 'notification.read'
-      ? '/pub/notification.read' //알림 읽기
-      : '/pub/notification.remove'; //알림 삭제
+  const pubPath = `/pub/${event}`;
 
   stompClient.publish({
     destination: pubPath,
@@ -97,7 +94,7 @@ export const sendChatCommand = (event: ChatClientEvent, data: any) => {
   if (!stompClient || !stompClient.connected) return;
 
   const payload = JSON.stringify({ event, data });
-  const pubPath = '/pub/chat';
+  const pubPath = `/pub/${event}`;
 
   stompClient.publish({
     destination: pubPath,
