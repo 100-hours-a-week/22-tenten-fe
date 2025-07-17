@@ -7,13 +7,19 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { chatQueries } from '../api/chatQueries';
 import { Chat } from '../types/Chat';
 import Image from 'next/image';
+import { useChatStore } from '../stores/chatStore';
 
 export default function ChatList() {
   const { data, isPending } = useInfiniteQuery(chatQueries.chat());
+  const { isStreaming, isLoading, streamingChat } = useChatStore();
+  useEffect(() => {
+    console.log(streamingChat);
+  }, [streamingChat]);
+
   useEffect(() => {
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     sc?.scrollTo({ top: sc.scrollHeight, behavior: 'auto' });
-  }, []);
+  }, [data]);
 
   if (!data || data.pages.flat().length === 0)
     return (
@@ -36,11 +42,25 @@ export default function ChatList() {
         .flat()
         .map((chat: Chat) =>
           chat.sender_id === 1213 ? (
-            <BotChat key={chat.chat_id} />
+            <BotChat
+              key={chat.chat_id}
+              text={chat.content}
+              time={chat.timestamp}
+            />
           ) : (
-            <MyChat key={chat.chat_id} />
+            <MyChat
+              key={chat.chat_id}
+              text={chat.content}
+              time={chat.timestamp}
+            />
           )
         )}
+      {isStreaming && (
+        <BotChat text="로딩 중..." time={new Date().toISOString()} />
+      )}
+      {isStreaming && (
+        <BotChat text={streamingChat} time={new Date().toISOString()} />
+      )}
     </div>
   );
 }

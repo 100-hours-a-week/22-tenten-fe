@@ -2,6 +2,6 @@ export interface Chat {
   chat_id: number;
   sender_id: number;
   content: string;
-  timestimap: string;
+  timestamp: string;
   is_read: boolean;
 }
