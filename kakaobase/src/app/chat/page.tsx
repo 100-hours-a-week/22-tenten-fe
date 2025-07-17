@@ -6,9 +6,11 @@ import ChatInput from '@/features/chat/ui/ChatInput';
 export default function Page() {
   return (
     <div className="flex flex-col h-screen scroll-none">
-      <Header label="로로 CHAT" />
-      <ChatList />
-      <ChatInput />
+      <div className="flex flex-col h-screen pb-16">
+        <Header label="로로 CHAT" />
+        <ChatList />
+        <ChatInput />
+      </div>
       <NavBar />
     </div>
   );

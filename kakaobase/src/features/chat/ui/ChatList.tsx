@@ -50,7 +50,7 @@ export default function ChatList() {
 
     prevPageCountRef.current = currentPageCount;
     prevScrollHeightRef.current = newScrollHeight;
-  }, [data]);
+  }, [data, isStreaming, isLoading]);
 
   if (!data || data.pages.flat().length === 0)
     return (
