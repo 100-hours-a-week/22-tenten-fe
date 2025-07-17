@@ -1,7 +1,7 @@
 import ChatList from '@/features/chat/ui/ChatList';
-import MessageInput from '@/features/chat/ui/MessageInput';
 import Header from '@/widgets/header/Header';
 import NavBar from '@/widgets/navbar/NavBar';
+import ChatInput from '@/features/chat/ui/ChatInput';
 
 export default function Page() {
   return (
@@ -13,7 +13,7 @@ export default function Page() {
       >
         <ChatList />
       </div>
-      <MessageInput />
+      <ChatInput />
       <NavBar />
     </div>
   );

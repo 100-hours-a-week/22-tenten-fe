@@ -8,13 +8,8 @@ import { useChatStore } from '@/features/chat/stores/chatStore';
 import { alarmQueries } from '@/features/alarm/api/alarmQueries';
 
 export default function useSocket() {
-  const {
-    startLoading,
-    startStreaming,
-    setStreamingChat,
-    stopStreaming,
-    clear,
-  } = useChatStore();
+  const { startLoading, startStreaming, setStreamingChat, clear } =
+    useChatStore();
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -44,19 +39,19 @@ export default function useSocket() {
           startLoading();
           break;
         case 'chat.stream.start':
-          startStreaming(parsed.data.data.stream_id);
+          startStreaming(parsed.data.stream_id);
           break;
         case 'chat.stream':
-          setStreamingChat(parsed.data.data.content);
+          setStreamingChat(parsed.data.content);
           break;
         case 'chat.stream.end':
-          stopStreaming();
+          clear();
+          queryClient.invalidateQueries({ queryKey: chatQueries.all() });
           sendChatCommand('chat.stream.end.ack', {
-            chat_id: parsed.data.data.chat_id,
+            chat_id: parsed.data.chat_id,
             message: '스트리밍 수신 성공',
             timestamp: new Date().toISOString().split('.')[0],
           });
-          queryClient.invalidateQueries({ queryKey: chatQueries.all() });
           break;
         case 'chat.stream.error':
           clear();
@@ -66,6 +61,7 @@ export default function useSocket() {
               '백엔드에서 에러 관련 이벤트를 전송해서 nack을 보내주는 상황입니다',
             timestamp: new Date().toISOString().split('.')[0],
           });
+          showToast('문제 발생! 답변에 실패했습니다.😭');
           break;
         default:
           showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');

@@ -2,12 +2,14 @@ import { sendChatCommand } from '@/features/socket/lib/socket';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useState } from 'react';
 import { useChatStore } from '../stores/chatStore';
+import { queryClient } from '@/shared/api/queryClient';
+import { chatQueries } from '../api/chatQueries';
 
 export default function useMessageForm() {
   const [message, setMessage] = useState('');
+  const [sending, setSending] = useState(false);
   const { showToast } = useToast();
-  const { streamId, isStreaming, isLoading, startLoading, clear } =
-    useChatStore();
+  const { streamId, isStreaming, isLoading, clear } = useChatStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     sendChatCommand('chat.typing', {
@@ -17,18 +19,21 @@ export default function useMessageForm() {
   };
 
   const handleSubmit = async () => {
-    if (!message.trim() || isStreaming || isLoading) return;
+    if (!message.trim() || isStreaming || isLoading || sending) return;
     try {
+      setSending(true);
       sendChatCommand('chat.send', {
         content: message,
         timestamp: new Date().toISOString().split('.')[0],
       });
       setMessage('');
-      startLoading();
+      queryClient.invalidateQueries({ queryKey: chatQueries.all() });
     } catch (e: any) {
       if (e.response.data.error === 'invalid_format') {
         showToast('댓글은 최대 2000자까지 작성할 수 있습니다. 😭');
       } else showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -46,5 +51,5 @@ export default function useMessageForm() {
     }
   }
 
-  return { message, handleChange, handleSubmit, handleStop };
+  return { message, sending, handleChange, handleSubmit, handleStop };
 }

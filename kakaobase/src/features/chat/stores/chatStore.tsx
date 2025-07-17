@@ -28,8 +28,11 @@ export const useChatStore = create<ChatState>()((set) => ({
       isStreaming: true,
       streamId: id,
     }),
-  setStreamingChat: (chunk) =>
-    set((prev) => ({ streamingChat: prev.streamingChat + chunk })),
+  setStreamingChat: (chunk) => {
+    setTimeout(() => {
+      set((prev) => ({ streamingChat: prev.streamingChat + chunk }));
+    }, 1000);
+  },
   stopStreaming: () => set({ isStreaming: false, streamingChat: '' }),
   clear: () => set({ ...initialChatState }),
 }));

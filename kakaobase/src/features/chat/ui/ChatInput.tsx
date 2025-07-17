@@ -3,8 +3,9 @@ import useMessageForm from '../hooks/useMessageForm';
 import { CircleStop, Send } from 'lucide-react';
 import { useChatStore } from '../stores/chatStore';
 
-export default function MessageInput() {
-  const { message, handleSubmit, handleChange, handleStop } = useMessageForm();
+export default function ChatInput() {
+  const { message, sending, handleSubmit, handleChange, handleStop } =
+    useMessageForm();
   const { isStreaming, isLoading } = useChatStore();
 
   return (
@@ -29,11 +30,9 @@ export default function MessageInput() {
               ta.style.height = `${ta.scrollHeight}px`;
             }}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
+              if (e.key === 'Enter' && !e.shiftKey && !sending) {
                 e.preventDefault();
-                setTimeout(() => {
-                  handleSubmit();
-                }, 0);
+                handleSubmit();
               }
             }}
           />
