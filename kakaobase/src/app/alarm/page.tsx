@@ -7,7 +7,7 @@ export default function Page() {
     <div className="flex flex-col h-screen w-full scroll-none">
       <Header label="알림 목록" />
       <div
-        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto"
+        className="flex-grow flex flex-col h-screen items-center w-full overflow-y-auto pb-16"
         data-scroll-area
       >
         <AlarmList />

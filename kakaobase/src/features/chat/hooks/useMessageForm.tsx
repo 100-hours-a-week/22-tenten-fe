@@ -9,8 +9,7 @@ export default function useMessageForm() {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const { showToast } = useToast();
-  const { streamId, isStreaming, isLoading, startLoading, clear } =
-    useChatStore();
+  const { streamId, isStreaming, isLoading, clear } = useChatStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     sendChatCommand('chat.typing', {
