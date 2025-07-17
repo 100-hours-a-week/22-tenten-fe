@@ -55,7 +55,7 @@ api.interceptors.response.use(
         return api(origReq); //기존 api 요청 재시도
       } catch (refreshError) {
         processQueue(refreshError);
-        window.location.href = '/unauthorized';
+        Router.push('unauthorized');
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
