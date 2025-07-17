@@ -3,6 +3,7 @@ import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
+import AlarmContainer from '@/features/alarm/ui/AlarmContainer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kakaobase.com'),
@@ -73,6 +74,7 @@ export default async function RootLayout({
         <Providers>
           <div className="flex w-screen">
             <div className="hidden lg:flex flex-col items-center justify-start mt-40 w-[48%] animate-float">
+              <AlarmContainer />
               <Image
                 src="/logo_square.svg"
                 alt="로고"

@@ -1,22 +1,13 @@
 import { useEffect } from 'react';
 import { connectStomp, disconnectStomp, sendChatCommand } from '../lib/socket';
 import { IMessage } from '@stomp/stompjs';
-import { useAlarmStore } from '../../alarm/stores/alarmStore';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { queryClient } from '@/shared/api/queryClient';
 import { chatQueries } from '@/features/chat/api/chatQueries';
 import { useChatStore } from '@/features/chat/stores/chatStore';
+import { alarmQueries } from '@/features/alarm/api/alarmQueries';
 
 export default function useSocket() {
-  const {
-    setAlarmList,
-    setCnt,
-    removeAlarm,
-    cntDecrement,
-    cntIncrement,
-    readAlarm,
-    addAlarm,
-  } = useAlarmStore();
   const {
     startLoading,
     startStreaming,
@@ -35,16 +26,9 @@ export default function useSocket() {
       };
 
       switch (parsed.event) {
-        case 'notification.fetch':
-          setAlarmList(parsed.data.notifications);
-          setCnt(parsed.data.unread_count);
-          break;
         case 'notification.remove.ack':
-          removeAlarm(parsed.data);
-          break;
         case 'notification.read.ack':
-          readAlarm(parsed.data);
-          cntDecrement();
+          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
           break;
         case 'comment.created':
         case 'recomment.created':
@@ -52,14 +36,9 @@ export default function useSocket() {
         case 'comment.like.created':
         case 'recomment.like.created':
         case 'following.created':
-          const newAlarm = {
-            type: parsed.type,
-            event: parsed.event,
-            data: parsed.data,
-          };
-
-          addAlarm(newAlarm);
-          cntIncrement();
+          showToast('알림 도착! 🔔');
+          console.log('알림 도착');
+          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
           break;
         case 'chat.loading':
           startLoading();
