@@ -9,7 +9,8 @@ export default function useMessageForm() {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const { showToast } = useToast();
-  const { streamId, isStreaming, isLoading, clear } = useChatStore();
+  const { streamId, isStreaming, isLoading, startLoading, clear } =
+    useChatStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     sendChatCommand('chat.typing', {
@@ -45,6 +46,7 @@ export default function useMessageForm() {
           timestamp: new Date().toISOString().split('.')[0],
         });
         clear();
+        showToast('응답 생성을 중단했습니다.');
       } catch (e: any) {
         showToast('문제 발생! 자동으로 응답 생성이 중단되었습니다. 😭');
       }

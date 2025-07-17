@@ -2,11 +2,13 @@
 import useMessageForm from '../hooks/useMessageForm';
 import { CircleStop, Send } from 'lucide-react';
 import { useChatStore } from '../stores/chatStore';
+import { useState } from 'react';
 
 export default function ChatInput() {
   const { message, sending, handleSubmit, handleChange, handleStop } =
     useMessageForm();
   const { isStreaming, isLoading } = useChatStore();
+  const [isComposing, setIsComposing] = useState(false);
 
   return (
     <form
@@ -24,13 +26,20 @@ export default function ChatInput() {
             rows={1}
             value={message}
             onChange={handleChange}
+            onCompositionStart={() => setIsComposing(true)}
+            onCompositionEnd={() => setIsComposing(false)}
             onInput={(e) => {
               const ta = e.currentTarget;
               ta.style.height = 'auto';
               ta.style.height = `${ta.scrollHeight}px`;
             }}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !sending) {
+              if (
+                e.key === 'Enter' &&
+                !e.shiftKey &&
+                !sending &&
+                !isComposing
+              ) {
                 e.preventDefault();
                 handleSubmit();
               }
@@ -40,7 +49,8 @@ export default function ChatInput() {
       </div>
       <div
         className={`mr-4 rounded-full p-2 flex justify-center items-center ${
-          message.trim() && 'hover:bg-containerColor'
+          (message.trim() || isLoading || isStreaming) &&
+          'hover:bg-containerColor'
         }`}
       >
         {isLoading || isStreaming ? (

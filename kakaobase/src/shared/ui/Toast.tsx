@@ -32,7 +32,7 @@ export default function Toast() {
             </div>
             <div className="h-1 w-full px-2 rounded-full">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-green-400 via-blue-500 to-pink-500 transition-all duration-100 linear"
+                className="h-full rounded-full bg-gradient-to-r from-green-100 via-yellow-200 via-blue-400 via-purple-600 to-pink-800 transition-all duration-100 linear"
                 style={{ width: `${progress}%` }}
               />
             </div>
