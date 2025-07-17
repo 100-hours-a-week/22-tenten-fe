@@ -2,7 +2,8 @@ const fs = require('fs');
 const https = require('https');
 const next = require('next');
 
-const app = next({ dev: true });
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {
