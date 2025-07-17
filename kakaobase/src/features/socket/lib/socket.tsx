@@ -1,103 +1,64 @@
 import { ChatClientEvent } from '@/features/chat/types/ChatEvent';
-import api from '@/shared/api/api';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
-const reconnectTime = 100; //0.1초
 
-async function tryRefreshAndReconnect() {
-  try {
-    await api.post(`/auth/tokens/refresh`);
-    console.log('[STOMP] 토큰 재발급 성공, 소켓 재연결 시도');
-    if (stompClient) stompClient.activate();
-    return true;
-  } catch (err) {
-    console.error('[STOMP] 토큰 재발급 실패', err);
-    return false;
-  }
-}
-
-export const connectStomp = async (onMessage: (msg: IMessage) => void) => {
-  if (stompClient && stompClient.active) {
-    console.warn('[STOMP] 이미 연결 중입니다.');
-    return;
+// 새 STOMP+SockJS 클라이언트 생성 및 연결
+function initClient(onMessage: (msg: IMessage) => void) {
+  // 기존 연결 정리
+  if (stompClient) {
+    stompClient.deactivate();
+    stompClient = null;
   }
 
-  const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
-
-  socket.onclose = async () => {
-    console.warn('[SockJS onclose]');
-
-    const shouldReconnect = await tryRefreshAndReconnect();
-    if (!shouldReconnect) {
-      console.warn('토큰 재발급 실패. 소켓 재연결 불가');
-    }
-  };
-
-  stompClient = new Client({
-    webSocketFactory: () => socket,
-    reconnectDelay: reconnectTime,
+  const client = new Client({
+    webSocketFactory: () => new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`),
+    reconnectDelay: 1000, // 1초마다 자동 재연결 시도
     onConnect: () => {
-      if (!stompClient || !stompClient.connected) return;
-
-      stompClient.subscribe('/user/queue/notification', (message: IMessage) => {
-        try {
-          const parsed = message;
-          onMessage(parsed);
-        } catch (err) {
-          console.error('메시지 파싱 오류:', err);
-        }
-      });
-      stompClient.subscribe('/user/queue/chatbot', (message: IMessage) => {
-        try {
-          const parsed = message;
-          onMessage(parsed);
-        } catch (err) {
-          console.error('메시지 파싱 오류:', err);
-        }
-      });
-      stompClient.subscribe('/user/queue/error', (message: IMessage) => {
-        try {
-          const parsed = JSON.parse(message.body);
-          console.log('[알림 에러]', parsed.message || parsed.error);
-        } catch (e) {
-          console.error('에러 패킷 파싱 실패:', e);
-        }
+      // 구독 등록
+      client.subscribe('/user/queue/notification', onMessage);
+      client.subscribe('/user/queue/chatbot', onMessage);
+      client.subscribe('/user/queue/error', () => {
+        /* … */
       });
     },
+    onWebSocketClose: () => {
+      console.warn('[STOMP] 소켓 닫힘 — 강제 재연결');
+      // 토큰 재발급 없이 바로 재연결
+      initClient(onMessage);
+    },
     onStompError: (frame) => {
-      console.error('STOMP 오류:', frame.headers['message']);
+      console.error('[STOMP] 오류:', frame.headers['message']);
     },
   });
 
-  stompClient.activate();
+  stompClient = client;
+  client.activate();
+}
+
+export const connectStomp = (onMessage: (msg: IMessage) => void) => {
+  // active 여부와 상관없이 initClient 호출 → 무조건 새 연결
+  initClient(onMessage);
 };
 
 export const disconnectStomp = () => {
   stompClient?.deactivate();
+  stompClient = null;
 };
 
 export const sendNotificationCommand = (event: string, data: any) => {
-  if (!stompClient || !stompClient.connected) return;
-
-  const payload = JSON.stringify({ event, data });
-  const pubPath = `/pub/${event}`;
-
+  if (!stompClient?.connected) return;
   stompClient.publish({
-    destination: pubPath,
-    body: payload,
+    destination: `/pub/${event}`,
+    body: JSON.stringify({ event, data }),
   });
 };
 
 export const sendChatCommand = (event: ChatClientEvent, data: any) => {
-  if (!stompClient || !stompClient.connected) return;
-
-  const payload = JSON.stringify({ event, data });
-  const pubPath = `/pub/${event}`;
-
+  if (!stompClient?.connected) return;
   stompClient.publish({
-    destination: pubPath,
-    body: payload,
+    destination: `/pub/${event}`,
+    body: JSON.stringify({ event, data }),
   });
 };
