@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
     "type-check": "tsc --noEmit",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
+    "start:local": "NODE_ENV=production FORCE_HTTPS=true node server.js",
     "lint": "next lint"
   },
   "dependencies": {
