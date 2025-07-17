@@ -7,7 +7,6 @@ html {
 }
 
 /* 애니메이션 키프레임 정의 */
-
 @keyframes wave {
   2% {
     transform: translateX(1);
@@ -92,7 +91,6 @@ html {
 .bg-animated-gradient {
   position: relative;
   overflow: hidden;
-  background-color: white;
 }
 
 .bg-animated-gradient::before,
@@ -107,12 +105,7 @@ html {
 }
 
 .bg-animated-gradient::before {
-  background: linear-gradient(
-    0deg,
-    #3abef920 24%,
-    #a7e6ff60 58%,
-    #3572ef30 82%
-  );
+  background: linear-gradient(0deg, #d8f2fe 24%, #caf0ff 58%, #c2d5fa 82%);
   animation-delay: 0s;
 }
 
@@ -121,9 +114,9 @@ html {
   background: linear-gradient(
     0deg,
     #ffffff 0%,
-    #fef3e240 24%,
-    #ffb22c40 70%,
-    #f3c62340 88%
+    #fffaf3 24%,
+    #ffe0ab 70%,
+    #fae8a7 88%
   );
   animation-delay: 4s;
 }
