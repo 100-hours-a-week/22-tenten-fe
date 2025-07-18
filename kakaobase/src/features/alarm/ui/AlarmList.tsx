@@ -6,7 +6,7 @@ export default function AlarmList() {
   const { alarmList } = useAlarmStore();
 
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="flex flex-col w-full h-screen pb-16">
       {alarmList.map((alarm) => (
         <AlarmItem data={alarm} key={alarm.data.id} />
       ))}
