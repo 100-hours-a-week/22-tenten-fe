@@ -43,7 +43,7 @@ export default function useLoginForm() {
       });
       router.push('/');
     } catch (e: any) {
-      const errorCode = e?.response?.data?.error;
+      const errorCode = e?.error;
       if (errorCode === 'invalid_password') {
         setError('password', {
           type: 'manual',

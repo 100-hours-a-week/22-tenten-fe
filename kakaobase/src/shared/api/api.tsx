@@ -31,6 +31,13 @@ api.interceptors.response.use(
   ) => {
     const origReq = error.config!;
 
+    if (
+      (!origReq.url?.includes('refresh') &&
+        origReq.url?.includes('/auth/tokens')) ||
+      origReq.url?.endsWith('/users')
+    ) {
+      return Promise.reject(error);
+    }
     if (origReq.url?.includes('/auth/tokens/refresh')) {
       // 리프레시 실패 시 바로 로그인 페이지로 이동
       Router.replace('/unauthorized');
