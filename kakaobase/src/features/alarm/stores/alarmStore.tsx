@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 import { AlarmItem } from '../types/AlarmResponse';
 
 const initialAlarmState = {
@@ -15,21 +14,9 @@ export interface AlarmState {
   clear: () => void;
 }
 
-export const useAlarmStore = create<AlarmState>()(
-  persist(
-    (set) => ({
-      ...initialAlarmState,
-      setCnt: (cnt) => set({ cnt: cnt }),
-      setAlarmList: (alarmList) => set({ alarmList: alarmList }),
-      clear: () => set({ cnt: 0 }),
-    }),
-    {
-      name: 'alarm-storage',
-      storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({
-        cnt: state.cnt,
-        alarmList: state.alarmList,
-      }),
-    }
-  )
-);
+export const useAlarmStore = create<AlarmState>()((set) => ({
+  ...initialAlarmState,
+  setCnt: (cnt) => set({ cnt: cnt }),
+  setAlarmList: (alarmList) => set({ alarmList: alarmList }),
+  clear: () => set({ cnt: 0 }),
+}));
