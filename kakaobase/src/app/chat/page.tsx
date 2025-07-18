@@ -9,8 +9,8 @@ export default function Page() {
       <div className="flex flex-col h-screen pb-16">
         <Header label="로로 CHAT" />
         <ChatList />
-        <ChatInput />
       </div>
+      <ChatInput />
       <NavBar />
     </div>
   );
