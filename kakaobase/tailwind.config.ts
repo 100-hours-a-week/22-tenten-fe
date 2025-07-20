@@ -45,7 +45,7 @@ const config: Config = {
         textOpacity50: 'var(--textOpacity50)',
       },
       fontFamily: {
-        sans: ['Noto Sans KR', 'sans-serif'],
+        sans: ['Pretendard', 'Noto Sans KR', 'sans-serif'],
       },
     },
   },

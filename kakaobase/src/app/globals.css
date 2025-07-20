@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  font-family: 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+  display: 'swap';
 }
 
 /* 애니메이션 키프레임 정의 */
@@ -11,19 +13,15 @@ html {
   2% {
     transform: translateX(1);
   }
-
   25% {
     transform: translateX(-25%);
   }
-
   50% {
     transform: translateX(-50%);
   }
-
   75% {
     transform: translateX(-25%);
   }
-
   100% {
     transform: translateX(1);
   }
@@ -83,34 +81,17 @@ html {
 .surfing {
   position: fixed;
   bottom: 10rem;
-  animation: move-horizontal 3s linear reverse infinite;
+  animation: move-horizontal 4.4s linear reverse infinite;
   z-index: -1;
 }
 
 /* 그라데이션 배경 */
 .bg-animated-gradient {
   position: relative;
-  overflow: hidden;
-}
-
-.bg-animated-gradient::before,
-.bg-animated-gradient::after {
   content: '';
-  position: absolute;
   inset: 0;
   z-index: -100;
-  transition: opacity 2s ease-in-out;
   background-size: 200% 200%;
-  animation: gradient-flow 8s ease-in-out infinite;
-}
-
-.bg-animated-gradient::before {
-  background: linear-gradient(0deg, #d8f2fe 24%, #caf0ff 58%, #c2d5fa 82%);
-  animation-delay: 0s;
-}
-
-/* 그라데이션 배경 */
-.bg-animated-gradient::after {
   background: linear-gradient(
     0deg,
     #ffffff 0%,
@@ -118,7 +99,6 @@ html {
     #ffe0ab 70%,
     #fae8a7 88%
   );
-  animation-delay: 4s;
 }
 
 /* 애니메이션으로 opacity 전환 반복 */
