@@ -34,12 +34,12 @@ export default function Banner() {
                 />
               </div>
               <div className="mt-2 text-sm flex flex-col">
-                <span className="font-bold">[{item.id}조]</span>
+                <span className="font-bold">[{item.name}]</span>
                 <a
                   href={item.url}
                   className="underline break-all whitespace-pre-wrap"
                 >
-                  {item.name} 바로가기
+                  {item.description}
                 </a>
               </div>
             </div>

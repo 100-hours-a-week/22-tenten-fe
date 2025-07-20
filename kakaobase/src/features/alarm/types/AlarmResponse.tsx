@@ -3,11 +3,11 @@ import { AlarmDetailEvent } from './AlarmEvent';
 
 export interface AlarmFetchData {
   unread_count: number;
+  has_next: boolean;
   notifications: AlarmItem[];
 }
 
 export interface AlarmItem {
-  type: string;
   event: AlarmDetailEvent;
   data: AlarmItemData;
 }

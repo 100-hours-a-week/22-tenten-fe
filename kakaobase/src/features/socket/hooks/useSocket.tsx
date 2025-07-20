@@ -1,29 +1,15 @@
 import { useEffect } from 'react';
 import { connectStomp, disconnectStomp, sendChatCommand } from '../lib/socket';
 import { IMessage } from '@stomp/stompjs';
-import { useAlarmStore } from '../../alarm/stores/alarmStore';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { queryClient } from '@/shared/api/queryClient';
 import { chatQueries } from '@/features/chat/api/chatQueries';
 import { useChatStore } from '@/features/chat/stores/chatStore';
+import { alarmQueries } from '@/features/alarm/api/alarmQueries';
 
 export default function useSocket() {
-  const {
-    setAlarmList,
-    setCnt,
-    removeAlarm,
-    cntDecrement,
-    cntIncrement,
-    readAlarm,
-    addAlarm,
-  } = useAlarmStore();
-  const {
-    startLoading,
-    startStreaming,
-    setStreamingChat,
-    stopStreaming,
-    clear,
-  } = useChatStore();
+  const { startLoading, startStreaming, setStreamingChat, clear } =
+    useChatStore();
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -35,16 +21,9 @@ export default function useSocket() {
       };
 
       switch (parsed.event) {
-        case 'notification.fetch':
-          setAlarmList(parsed.data.notifications);
-          setCnt(parsed.data.unread_count);
-          break;
         case 'notification.remove.ack':
-          removeAlarm(parsed.data);
-          break;
         case 'notification.read.ack':
-          readAlarm(parsed.data);
-          cntDecrement();
+          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
           break;
         case 'comment.created':
         case 'recomment.created':
@@ -52,32 +31,27 @@ export default function useSocket() {
         case 'comment.like.created':
         case 'recomment.like.created':
         case 'following.created':
-          const newAlarm = {
-            type: parsed.type,
-            event: parsed.event,
-            data: parsed.data,
-          };
-
-          addAlarm(newAlarm);
-          cntIncrement();
+          showToast('알림 도착! 🔔');
+          console.log('알림 도착');
+          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
           break;
         case 'chat.loading':
           startLoading();
           break;
         case 'chat.stream.start':
-          startStreaming(parsed.data.data.stream_id);
+          startStreaming(parsed.data.stream_id);
           break;
         case 'chat.stream':
-          setStreamingChat(parsed.data.data.content);
+          setStreamingChat(parsed.data.content);
           break;
         case 'chat.stream.end':
-          stopStreaming();
+          clear();
+          queryClient.invalidateQueries({ queryKey: chatQueries.all() });
           sendChatCommand('chat.stream.end.ack', {
-            chat_id: parsed.data.data.chat_id,
+            chat_id: parsed.data.chat_id,
             message: '스트리밍 수신 성공',
             timestamp: new Date().toISOString().split('.')[0],
           });
-          queryClient.invalidateQueries({ queryKey: chatQueries.all() });
           break;
         case 'chat.stream.error':
           clear();
@@ -87,6 +61,7 @@ export default function useSocket() {
               '백엔드에서 에러 관련 이벤트를 전송해서 nack을 보내주는 상황입니다',
             timestamp: new Date().toISOString().split('.')[0],
           });
+          showToast('문제 발생! 답변에 실패했습니다.😭');
           break;
         default:
           showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');

@@ -1,21 +1,34 @@
 const fs = require('fs');
+const http = require('http');
 const https = require('https');
 const next = require('next');
 
-const app = next({ dev: true });
+const dev = process.env.NODE_ENV !== 'production';
+const forceHttps = process.env.FORCE_HTTPS === 'true';
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const httpsOptions = {
-  key: fs.readFileSync('./cert/localhost-key.pem'),
-  cert: fs.readFileSync('./cert/localhost.pem'),
+const certPath = {
+  key: './cert/localhost-key.pem',
+  cert: './cert/localhost.pem',
 };
 
 app.prepare().then(() => {
-  https
-    .createServer(httpsOptions, (req, res) => {
-      handle(req, res);
-    })
-    .listen(3000, () => {
-      console.log('HTTPS 개발 서버 시작됨: https://localhost:3000');
+  if (
+    (dev || forceHttps) &&
+    fs.existsSync(certPath.key) &&
+    fs.existsSync(certPath.cert)
+  ) {
+    const options = {
+      key: fs.readFileSync(certPath.key),
+      cert: fs.readFileSync(certPath.cert),
+    };
+    https.createServer(options, handle).listen(3000, () => {
+      console.log(`HTTPS Server: https://localhost:3000`);
     });
+  } else {
+    http.createServer(handle).listen(3000, () => {
+      console.log(`HTTP Server:  http://localhost:3000`);
+    });
+  }
 });

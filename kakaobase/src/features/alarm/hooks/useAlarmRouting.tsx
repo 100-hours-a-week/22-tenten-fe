@@ -1,4 +1,6 @@
-import { sendNotificationCommand } from '@/features/socket/lib/socket';
+import { queryClient } from '@/shared/api/queryClient';
+import { sendNotificationCommand } from '../../socket/lib/socket';
+import { alarmQueries } from '../api/alarmQueries';
 import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function useAlarmRouting({ data }: { data: any }) {
@@ -10,6 +12,7 @@ export default function useAlarmRouting({ data }: { data: any }) {
         id: data.id,
         timestamp: new Date().toISOString().split('.')[0],
       });
+      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
     }
     goPostDetail(data.target_id);
   }
@@ -19,6 +22,7 @@ export default function useAlarmRouting({ data }: { data: any }) {
         id: data.id,
         timestamp: new Date().toISOString().split('.')[0],
       });
+      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
     }
     goProfile(data.sender_id);
   }

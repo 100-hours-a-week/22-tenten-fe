@@ -2,14 +2,17 @@
 import useMessageForm from '../hooks/useMessageForm';
 import { CircleStop, Send } from 'lucide-react';
 import { useChatStore } from '../stores/chatStore';
+import { useState } from 'react';
 
-export default function MessageInput() {
-  const { message, handleSubmit, handleChange, handleStop } = useMessageForm();
+export default function ChatInput() {
+  const { message, sending, handleSubmit, handleChange, handleStop } =
+    useMessageForm();
   const { isStreaming, isLoading } = useChatStore();
+  const [isComposing, setIsComposing] = useState(false);
 
   return (
     <form
-      className="flex gap-2 sticky w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
+      className="flex gap-2 sticky w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-16 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
@@ -23,17 +26,22 @@ export default function MessageInput() {
             rows={1}
             value={message}
             onChange={handleChange}
+            onCompositionStart={() => setIsComposing(true)}
+            onCompositionEnd={() => setIsComposing(false)}
             onInput={(e) => {
               const ta = e.currentTarget;
               ta.style.height = 'auto';
               ta.style.height = `${ta.scrollHeight}px`;
             }}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
+              if (
+                e.key === 'Enter' &&
+                !e.shiftKey &&
+                !sending &&
+                !isComposing
+              ) {
                 e.preventDefault();
-                setTimeout(() => {
-                  handleSubmit();
-                }, 0);
+                handleSubmit();
               }
             }}
           />
@@ -41,7 +49,8 @@ export default function MessageInput() {
       </div>
       <div
         className={`mr-4 rounded-full p-2 flex justify-center items-center ${
-          message.trim() && 'hover:bg-containerColor'
+          (message.trim() || isLoading || isStreaming) &&
+          'hover:bg-containerColor'
         }`}
       >
         {isLoading || isStreaming ? (
