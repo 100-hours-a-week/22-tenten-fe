@@ -8,7 +8,6 @@ import CountsInfo from './CountsInfo';
 import { UserProfile, UserInfo } from './UserInfo';
 import summaryCondition from '../posts/lib/summaryCondition';
 import { Comment, PostEntity } from '@/features/feeds/types/post';
-import { useState } from 'react';
 import RecommentList from '../comments/ui/RecommentList';
 import YoutubeFrame from './YoutubeFrame';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
@@ -16,11 +15,6 @@ import LoadingSmall from '@/shared/ui/LoadingSmall';
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();
   const path = usePathname();
-
-  const [isOpen, setOpen] = useState<boolean>(false);
-  function handleRecommentVisibility() {
-    setOpen((prev) => !prev);
-  }
 
   function isComment(post: PostEntity): post is Comment {
     return post.type === 'comment';
@@ -42,7 +36,7 @@ export default function PostCard({ post }: { post: PostEntity }) {
         <div
           className={clsx(
             'flex w-full bg-containerColor p-4 gap-2 cursor-pointer rounded-2xl',
-            path === '/' &&
+            path === '/main' &&
               'hover:-translate-y-1 hover:shadow-md transition-transform duration-100'
           )}
           onClick={navDetail}
@@ -102,15 +96,11 @@ export default function PostCard({ post }: { post: PostEntity }) {
               ) : (
                 <LoadingSmall />
               ))}
-            <CountsInfo
-              post={post}
-              handleRecommentVisibility={handleRecommentVisibility}
-              isOpen={isOpen}
-            />
+            <CountsInfo post={post} />
           </div>
         </div>
       </div>
-      {isOpen && <RecommentList commentId={post.id} />}
+      <RecommentList commentId={post.id} />
     </div>
   );
 }

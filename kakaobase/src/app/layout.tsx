@@ -3,26 +3,15 @@ import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
+import AlarmContainer from '@/features/alarm/ui/AlarmContainer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kakaobase.com'),
   title: '카카오베이스',
   description: '카카오테크 부트캠프 커뮤니티',
   keywords: [
-    // '카카오테크 부트캠프 2기',
-    // '카카오테크 부트캠프',
     'kakaobase',
-    // '카카오테크 부트캠프 커뮤니티',
-    // '카카오테크 부트캠프 지원',
-    // '카카오테크 부트캠프 접수',
-    // '카카오테크 부트캠프 3기 모집',
-    // '카카오테크 부트캠프 후기',
-    // '카테부 후기',
     '수강생들만의 진짜 커뮤니티',
-    // 'kakaotech bootcamp',
-    // '카카오테크',
-    // '카카오 부트캠프',
-    // '카카오테크 부트캠프 프로젝트',
     '카카오테크 부트캠프 2기 텐텐',
     '카카오 베이스',
   ],
@@ -58,9 +47,22 @@ export default async function RootLayout({
             googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
           />
         )}
+        <Image
+          src="/chunsik.png"
+          alt="surfing"
+          width={100}
+          height={100}
+          className="surfing hidden lg:block"
+        />
+        <div className="box hidden lg:block">
+          <div className="wave -one"></div>
+          <div className="wave -two"></div>
+          <div className="wave -three"></div>
+        </div>
         <Providers>
           <div className="flex w-screen">
-            <div className="hidden lg:flex flex-col items-center justify-center w-[48%] active:animate-bounce">
+            <div className="hidden lg:flex flex-col items-center justify-start mt-40 w-[48%] animate-float">
+              <AlarmContainer />
               <Image
                 src="/logo_square.svg"
                 alt="로고"

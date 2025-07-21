@@ -1,6 +1,34 @@
 import { BannerItem } from '../types/Banner';
 
 export const banners: BannerItem[] = [
+  {
+    id: 1,
+    url: 'https://www.wanted.co.kr/wd/290207',
+    imageUrl: '/job/RIDI.webp',
+    name: 'RIDI',
+    description: 'Frontend Engineer 지원하러 가기',
+  },
+  {
+    id: 2,
+    url: 'https://www.wanted.co.kr/wd/290259',
+    imageUrl: '/job/RIDI.webp',
+    name: 'RIDI',
+    description: 'Backend Engineer 지원하러 가기',
+  },
+  {
+    id: 3,
+    url: 'https://www.wanted.co.kr/wd/208423',
+    imageUrl: '/job/elice.webp',
+    name: '엘리스',
+    description: '클라우드 시스템 엔지니어 지원하러 가기',
+  },
+  {
+    id: 4,
+    url: 'https://www.wanted.co.kr/wd/288052',
+    imageUrl: '/job/visang.webp',
+    name: '비상교육',
+    description: 'AI ML 엔지니어 지원하러 가기',
+  },
   // {
   //   id: 1,
   //   url: 'https://youtil.co.kr/',
@@ -43,12 +71,12 @@ export const banners: BannerItem[] = [
   //   imageUrl: '/teams/07.jpeg',
   //   name: 'Dolpin',
   // },
-  {
-    id: 8,
-    url: 'https://tebutebu.com/',
-    imageUrl: '/teams/08.webp',
-    name: 'Pumati 품앗이',
-  },
+  // {
+  //   id: 8,
+  //   url: 'https://tebutebu.com/',
+  //   imageUrl: '/teams/08.webp',
+  //   name: 'Pumati 품앗이',
+  // },
   // {
   //   id: 9,
   //   url: 'https://www.meowng.com/',

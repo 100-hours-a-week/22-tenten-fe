@@ -1,29 +1,119 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: 'Pretendard Variable', sans-serif;
+}
+
 /* 애니메이션 키프레임 정의 */
-@keyframes gradient-move {
-  0% {
-    background-position: 0% 50%;
+@keyframes wave {
+  2% {
+    transform: translateX(1);
+  }
+  25% {
+    transform: translateX(-25%);
   }
   50% {
-    background-position: 100% 50%;
+    transform: translateX(-50%);
+  }
+  75% {
+    transform: translateX(-25%);
   }
   100% {
-    background-position: 0% 50%;
+    transform: translateX(1);
   }
 }
 
-html {
-  font-family: 'Pretendard-Regular', 'Pretendard-Bold', sans-serif;
+@keyframes move-horizontal {
+  0% {
+    transform: translate(-4vw, 10px);
+  }
+  25% {
+    transform: translate(25vw, -20px); /* 위로 */
+  }
+  50% {
+    transform: translate(50vw, 0);
+  }
+  80% {
+    transform: translate(80vw, 32px); /* 아래로 */
+  }
+  100% {
+    transform: translate(100vw, 0);
+  }
+}
+
+.box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.wave {
+  background: #4880ee20;
+  border-radius: 2000% 2000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 8s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wave.-three {
+  bottom: -2.5em;
+  animation: wave 10s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+.wave.-two {
+  bottom: -1.25em;
+  animation: wave 12s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.surfing {
+  position: fixed;
+  bottom: 10rem;
+  animation: move-horizontal 4.4s linear reverse infinite;
+  z-index: -1;
 }
 
 /* 그라데이션 배경 */
 .bg-animated-gradient {
-  background: linear-gradient(32deg, #e5e5fd 24%, #edfcfb 58%, #f8f6fc 76%);
+  position: relative;
+  content: '';
+  inset: 0;
+  z-index: -100;
   background-size: 200% 200%;
-  animation: gradient-move 2s linear infinite;
+  background: linear-gradient(
+    0deg,
+    #ffffff 0%,
+    #fffaf3 24%,
+    #ffe0ab 70%,
+    #fae8a7 88%
+  );
+}
+
+/* 애니메이션으로 opacity 전환 반복 */
+@keyframes gradient-flow {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* 라이트 모드 색상 세팅 */

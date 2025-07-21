@@ -1,10 +1,14 @@
 'use client';
 
+import { useUserStore } from '@/entities/users/stores/userStore';
+import { feedQueries } from '@/features/feeds/api/feedQueries';
+import { queryClient } from '@/shared/api/queryClient';
 import { CircleArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function GoUp() {
   const [isVisible, setIsVisible] = useState(false);
+  const { selectedCourse } = useUserStore();
 
   useEffect(() => {
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
@@ -24,6 +28,9 @@ export default function GoUp() {
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     if (sc && sc.scrollTop > 0) {
       sc.scrollTo({ top: 0, behavior: 'smooth' });
+      queryClient.invalidateQueries({
+        queryKey: feedQueries.postsKey(selectedCourse),
+      });
     }
   }
 
@@ -32,7 +39,7 @@ export default function GoUp() {
   return (
     <div
       onClick={goUp}
-      className="pointer-events-auto rounded-full cursor-pointer animate-slide-in duration-100 hover:-translate-y-[0.125rem] hover:shadow-md duration-100"
+      className="flex pointer-events-auto rounded-full cursor-pointer animate-slide-in duration-100 hover:-translate-y-[0.125rem] hover:shadow-md duration-100"
     >
       <div className="w-8 h-8 bg-textColor text-bgColor rounded-full flex items-center justify-center">
         <CircleArrowUp />

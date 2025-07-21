@@ -3,7 +3,8 @@
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import PostCard from '../../../feeds/ui/PostCard';
-import useMyLikesHook from '../../hooks/list/useMyLikesHook';
+import { accountQueries } from '../../api/accountQueries';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function LikeList({ userId }: { userId: number }) {
   const {
@@ -13,7 +14,8 @@ export default function LikeList({ userId }: { userId: number }) {
     fetchNextPage,
     refetch,
     isPending,
-  } = useMyLikesHook({ userId });
+  } = useInfiniteQuery(accountQueries.myLikes(userId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
@@ -32,7 +34,7 @@ export default function LikeList({ userId }: { userId: number }) {
 
       {hasNextPage && <div ref={observerRef} className="h-1px" />}
       {!hasNextPage && !isPending && (
-        <div className="text-center text-xs font-bold mb-8">
+        <div className="text-center text-xs font-bold">
           마지막 게시글입니다.
         </div>
       )}

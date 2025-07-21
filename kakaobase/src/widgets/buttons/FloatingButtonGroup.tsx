@@ -5,11 +5,11 @@ import GoUp from './GoUp';
 
 export default function FloatingButtonGroup() {
   return (
-    <div className="sticky inset-0 pointer-events-none">
-      <div className="flex">
-        <div className="hidden lg:flex flex-col w-[48%]"></div>
-        <div className="flex justify-center max-w-[480px] w-full mx-auto lg:ml-12 lg:self-start">
-          <div className="absolute flex flex-col bottom-8 right-8">
+    <div className="fixed inset-0 pointer-events-none">
+      <div className="flex h-screen items-end">
+        <div className="hidden lg:flex h-4 flex-col w-[48%]"></div>
+        <div className="flex justify-center max-w-[480px] w-full mx-auto lg:ml-12 sm:mb-24 mb-36">
+          <div className="flex flex-col gap-3 w-full items-end mr-8">
             <GoUp />
             <GoNewPost />
           </div>

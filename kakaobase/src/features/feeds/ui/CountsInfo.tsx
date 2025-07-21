@@ -2,9 +2,7 @@ import { useLikeToggle } from '@/features/likes/hooks/useLikeHook';
 import { PostEntity } from '@/features/feeds/types/post';
 import { Heart, MessageCircle } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useRef } from 'react';
-import { commentFormStateStore } from '../comments/stores/commentFormStateStore';
-import useCommentOrRecomment from '../comments/hooks/useCommentOrRecomment';
+import RecommentHandler from './RecommentHandler';
 
 const iconSize = 16;
 
@@ -57,29 +55,13 @@ function LikeInfo({
   );
 }
 
-export default function CountsInfo({
-  post,
-  handleRecommentVisibility,
-  isOpen,
-}: {
-  post: PostEntity;
-  handleRecommentVisibility?: () => void;
-  isOpen?: boolean;
-}) {
+export default function CountsInfo({ post }: { post: PostEntity }) {
   const { isLiked, likeCount, toggleLike } = useLikeToggle(
     post.isLiked,
     post.likeCount,
     post.id,
     post.type
   );
-
-  const { handleRecomment } = useCommentOrRecomment({
-    post,
-    handleRecommentVisibility,
-    isOpen,
-  });
-
-  const { isWritingRecomment, commentId } = commentFormStateStore();
 
   const path = usePathname();
   const router = useRouter();
@@ -90,14 +72,6 @@ export default function CountsInfo({
     e.stopPropagation();
     router.push(`/likes/${post.type}/${post.id}`);
   }
-
-  useEffect(() => {
-    return () => {
-      if (isWritingRecomment) {
-        handleRecomment();
-      }
-    };
-  }, []);
 
   return (
     <div className="flex text-sm items-center">
@@ -113,18 +87,7 @@ export default function CountsInfo({
         />
       )}
       {post.type === 'comment' && !path.includes('profile') && (
-        <div className="text-xs flex gap-4 ">
-          <div onClick={handleRecomment}>
-            {isWritingRecomment && commentId === post.id ? '취소' : '답글 달기'}
-          </div>
-          <div
-            onClick={() => {
-              handleRecommentVisibility?.();
-            }}
-          >
-            {isOpen ? '숨기기' : '대댓글 보기'}
-          </div>
-        </div>
+        <RecommentHandler post={post} />
       )}
     </div>
   );

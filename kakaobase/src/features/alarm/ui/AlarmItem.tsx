@@ -1,52 +1,114 @@
 'use client';
 
 import FollowButtonSmall from '@/features/follows/ui/FollowButtonSmall';
-import Image from 'next/image';
-import { Alarm } from '../types/Alarm';
 import formatDate from '@/features/feeds/lib/formatDate';
+import { CircleCheck, CircleX, Trash2 } from 'lucide-react';
+import clsx from 'clsx';
+import AlarmContent from './AlarmContent';
+import AlarmProfile from './AlarmProfile';
+import AlarmAction from './AlarmAction';
+import AlarmNameParticle from './AlarmNameParticle';
+import useAlarmSwipe from '../hooks/useAlarmSwipe';
+import useAlarmRouting from '../hooks/useAlarmRouting';
+import { AlarmItem as AlarmItemType } from '../types/AlarmResponse';
 
-export default function AlarmItem() {
-  const alarm = 'follow' as Alarm;
-  const userName = 'hazel.kim';
-  const content = '너무 귀엽다..! 진짜ㅜㅜ';
+export default function AlarmItem({ data }: { data: AlarmItemType }) {
+  const alarm = data.data;
+  const sender = data.data.sender;
+  const event = data.event;
+
+  const {
+    isRead,
+    showActions,
+    isDeleted,
+    offsetX,
+    wasDragged,
+    handleClose,
+    handleDelete,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleRead,
+    handleTouchEnd,
+    handleTouchMove,
+    handleTouchStart,
+  } = useAlarmSwipe({ data: alarm });
+
+  const { goToPost, goToProfile } = useAlarmRouting({ data: alarm });
+
+  if (data === null || alarm === null || sender === null) return null;
+  if (isDeleted) return null;
 
   return (
-    <div className="text-sm flex justify-between items-center w-full gap-4">
-      <div className="flex gap-2 items-center min-w-0">
-        <div className="relative w-10 h-10 rounded-xl shrink-0">
-          <Image
-            src="/logo_square.svg"
-            alt="프로필"
-            fill
-            className="object-fit flex"
-          />
-        </div>
-        <div>
-          <div className="flex gap-1">
-            <div className="font-bold">{userName}</div>
-            {alarm === 'comment' || alarm === 'recomment' ? (
-              <div>
-                님이 {alarm === 'comment' ? '댓글' : '대댓글'}을 남겼습니다.
+    <div
+      className={clsx(
+        'relative transition-transform duration-200 cursor-pointer',
+        isRead ? 'bg-transparent' : 'bg-containerColor',
+        showActions && 'translate-x-[-60px]'
+      )}
+      style={{ transform: `translateX(${offsetX}px)` }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
+      <div
+        className="flex px-6 py-4 justify-between gap-2 w-full items-center"
+        onClick={(e) => {
+          if (wasDragged.current) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+
+          if (event === 'following.created') {
+            goToProfile();
+          } else {
+            goToPost();
+          }
+        }}
+      >
+        <div className="flex gap-2 items-center min-w-0">
+          <div
+            className={`w-2 h-2 rounded-full ${!isRead && 'bg-myBlue'}`}
+          ></div>
+          <div className="relative w-10 h-10 rounded-xl shrink-0">
+            <AlarmProfile sender={sender} />
+          </div>
+          <div>
+            <div className="flex gap-1 items-center">
+              <div className="font-bold">
+                {sender.nickname === null ? '알수 없음' : sender.nickname}
               </div>
-            ) : (
-              <div>님이</div>
-            )}
-          </div>
-          <div className="flex items-center gap-2 w-full text-xs">
-            <div className="'w-full text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis'">
-              {alarm === 'comment' || alarm === 'recomment'
-                ? content
-                : alarm === 'follow'
-                ? '회원님을 팔로우하기 시작했습니다.'
-                : '회원님의 게시글을 좋아합니다.'}
+              <div className="text-xs overflow-hidden whitespace-pre-wrap break-all line-clamp-1 text-ellipsis">
+                <AlarmNameParticle event={event} />
+              </div>
             </div>
-            <div className="shrink-0 text-textOpacity50">
-              {formatDate('2025.06.30', false)}
+            <div className="flex items-center gap-2 w-full text-xs">
+              <div className="text-xs overflow-hidden break-all whitespace-pre-wrap line-clamp-1 text-ellipsis">
+                <AlarmContent data={data} />
+              </div>
+              <div className="shrink-0 text-textOpacity50">
+                {formatDate(alarm.timestamp, false)}
+              </div>
             </div>
           </div>
         </div>
+
+        {event === 'following.created' && sender.is_followed && (
+          <FollowButtonSmall isFollowing={sender.is_followed} id={sender.id} />
+        )}
+
+        {showActions && (
+          <div className="flex gap-1">
+            {!isRead && <AlarmAction icon={CircleCheck} fn={handleRead} />}
+            <AlarmAction icon={Trash2} fn={handleDelete} />
+            <AlarmAction icon={CircleX} fn={handleClose} />
+          </div>
+        )}
       </div>
-      {alarm === 'follow' && <FollowButtonSmall isFollowing={false} id={1} />}
     </div>
   );
 }

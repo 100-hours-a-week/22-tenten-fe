@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AxiosError, AxiosRequestConfig } from 'axios';
+import Router from 'next/router';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -30,9 +31,16 @@ api.interceptors.response.use(
   ) => {
     const origReq = error.config!;
 
+    if (
+      (!origReq.url?.includes('refresh') &&
+        origReq.url?.includes('/auth/tokens')) ||
+      origReq.url?.endsWith('/users')
+    ) {
+      return Promise.reject(error);
+    }
     if (origReq.url?.includes('/auth/tokens/refresh')) {
       // 리프레시 실패 시 바로 로그인 페이지로 이동
-      window.location.href = '/unauthorized';
+      Router.replace('/unauthorized');
       return new Promise(() => {});
     }
 
@@ -54,7 +62,7 @@ api.interceptors.response.use(
         return api(origReq); //기존 api 요청 재시도
       } catch (refreshError) {
         processQueue(refreshError);
-        window.location.href = '/unauthorized';
+        Router.push('unauthorized');
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

@@ -1,5 +1,6 @@
 import { Course } from '@/shared/types/Course';
 import api from '@/shared/api/api';
+import { AxiosError } from 'axios';
 
 interface LoginRequest {
   email: string;
@@ -17,6 +18,11 @@ interface LoginResponse {
 }
 
 export async function login(payload: LoginRequest): Promise<LoginResponse> {
-  const response = await api.post('/auth/tokens', payload);
-  return response.data;
+  try {
+    const response = await api.post('/auth/tokens', payload);
+    return response.data;
+  } catch (e: unknown) {
+    if (e instanceof AxiosError) throw e.response?.data;
+    throw e;
+  }
 }

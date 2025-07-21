@@ -10,7 +10,7 @@ export default function RoutingButtons() {
     router.push('edit/withdraw');
   }
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-4 flex-col sm:flex-row">
       <SubmitButton text="비밀번호 변경하기" onClick={navPasswordEdit} />
       <SubmitButton text="회원 탈퇴하기" onClick={navWithdraw} />
     </div>

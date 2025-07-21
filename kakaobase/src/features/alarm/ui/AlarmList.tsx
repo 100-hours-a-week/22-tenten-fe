@@ -1,28 +1,15 @@
+'use client';
 import AlarmItem from './AlarmItem';
+import { useAlarmStore } from '../stores/alarmStore';
 
 export default function AlarmList() {
+  const { alarmList } = useAlarmStore();
+
   return (
-    <div className="flex flex-col gap-6 w-full">
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
-      <AlarmItem />
+    <div className="flex flex-col w-full h-screen pb-16">
+      {alarmList.map((alarm) => (
+        <AlarmItem data={alarm} key={alarm.data.id} />
+      ))}
     </div>
   );
 }

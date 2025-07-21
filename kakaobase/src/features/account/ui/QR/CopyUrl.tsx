@@ -19,7 +19,7 @@ export default function CopyUrl({ url }: { url: string }) {
         {url}
       </div>
       <button
-        className="text-xs text-myLightBlue hover:underline"
+        className="text-[0.625rem] text-textColor hover:underline"
         onClick={handleCopy}
       >
         복사

@@ -1,9 +1,10 @@
 'use client';
 
-import useFollowersHook from '../hooks/useFollowersHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import UserItem from '@/entities/users/ui/UserItem';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { followQueries } from '../api/followQueries';
 
 export default function UserFollowerList({ userId }: { userId: number }) {
   const {
@@ -13,7 +14,8 @@ export default function UserFollowerList({ userId }: { userId: number }) {
     isFetchingNextPage,
     fetchNextPage,
     refetch,
-  } = useFollowersHook({ userId });
+  } = useInfiniteQuery(followQueries.followers(userId));
+
   const { observerRef } = useScrollHook({
     hasNextPage,
     isFetchingNextPage,
