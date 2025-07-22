@@ -10,7 +10,6 @@ import summaryCondition from '../posts/lib/summaryCondition';
 import { Comment, PostEntity } from '@/features/feeds/types/post';
 import RecommentList from '../comments/ui/RecommentList';
 import YoutubeFrame from './YoutubeFrame';
-import LoadingSmall from '@/shared/ui/LoadingSmall';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const router = useRouter();

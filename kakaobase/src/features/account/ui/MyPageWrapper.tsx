@@ -1,6 +1,5 @@
 'use client';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
-import CountInfo from './CountInfo';
 import UserInfo from './UserInfo';
 import Toggle, { profileListType } from './list/Toggle';
 import ListRouter from './list/ListRouter';

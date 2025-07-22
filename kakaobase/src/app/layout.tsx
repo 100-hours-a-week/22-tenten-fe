@@ -3,7 +3,6 @@ import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
-import AlarmContainer from '@/features/alarm/ui/AlarmContainer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kakaobase.com'),
