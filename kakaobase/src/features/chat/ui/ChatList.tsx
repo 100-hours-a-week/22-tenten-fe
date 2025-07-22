@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import MyChat from './MyChat';
 import BotChat from './BotChat';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
