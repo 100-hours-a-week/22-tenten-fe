@@ -16,7 +16,6 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
     userId,
   });
 
-  console.log(data);
   const { following, toggleFollow } = useFollowToggle(
     data?.is_followed ?? false,
     userId

@@ -94,7 +94,9 @@ export default function PostCard({ post }: { post: PostEntity }) {
                   {summaryCondition({ summary: post.youtubeSummary })}
                 </div>
               ) : (
-                <LoadingSmall />
+                <div className="text-xs text-textColor">
+                  유튜브 요약본이 아직 생성되지 않았거나 없습니다.
+                </div>
               ))}
             <CountsInfo post={post} />
           </div>
