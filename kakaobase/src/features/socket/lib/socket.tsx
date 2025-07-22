@@ -5,6 +5,9 @@ import SockJS from 'sockjs-client';
 let stompClient: Client | null = null;
 
 function initClient(onMessage: (msg: IMessage) => void) {
+  if (stompClient && stompClient.active) {
+    return;
+  }
   if (stompClient) {
     stompClient.deactivate();
     stompClient = null;
@@ -23,7 +26,7 @@ function initClient(onMessage: (msg: IMessage) => void) {
       initClient(onMessage);
     },
     onStompError: (frame) => {
-      console.error('[STOMP] 오류:', frame.headers['message']);
+      console.error('[STOMP] 오류:', frame.headers.message);
     },
   });
 

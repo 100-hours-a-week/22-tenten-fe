@@ -40,7 +40,7 @@ api.interceptors.response.use(
     }
     if (origReq.url?.includes('/auth/tokens/refresh')) {
       // 리프레시 실패 시 바로 로그인 페이지로 이동
-      Router.replace('/unauthorized');
+      window.location.href = '/unauthorized';
       return new Promise(() => {});
     }
 
@@ -62,7 +62,7 @@ api.interceptors.response.use(
         return api(origReq); //기존 api 요청 재시도
       } catch (refreshError) {
         processQueue(refreshError);
-        Router.push('unauthorized');
+        window.location.href = '/unauthorized';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
