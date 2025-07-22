@@ -1,5 +1,4 @@
 import { useAlarmStore } from '@/features/alarm/stores/alarmStore';
-import { cn } from '@/shared/lib/utils';
 import clsx from 'clsx';
 import { Bell, LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';

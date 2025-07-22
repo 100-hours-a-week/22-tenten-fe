@@ -1,16 +1,16 @@
 'use client';
 
 import { useUserStore } from '@/entities/users/stores/userStore';
+import useRoutings from '@/shared/hooks/useRoutings';
 import { courseMapEngToKor } from '@/shared/lib/courseMap';
 import { Course, CourseList } from '@/shared/types/Course';
-import { useRouter } from 'next/navigation';
 
 export default function PostByCourse() {
   const { setUserInfo } = useUserStore();
-  const router = useRouter();
+  const { goMain } = useRoutings();
   function navMain({ course }: { course: string }) {
     setUserInfo({ selectedCourse: course as Course });
-    router.push('/main');
+    goMain();
   }
   return (
     <div className="w-full">

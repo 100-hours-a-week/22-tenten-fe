@@ -3,6 +3,7 @@
 import UserInput from '../../../entities/users/ui/UserInput';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import useLoginForm from '../hooks/useLoginForm';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function LoginForm() {
   const {
@@ -10,8 +11,8 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isValid },
     onSubmit,
-    goToSignup,
   } = useLoginForm();
+  const { goSignupStep1 } = useRoutings();
 
   return (
     <form
@@ -40,7 +41,7 @@ export default function LoginForm() {
           <SubmitButton text="로그인" disabled={!isValid} type="submit" />
           <SubmitButton
             text="회원가입하러 가기"
-            onClick={goToSignup}
+            onClick={goSignupStep1}
             type="button"
           />
         </div>

@@ -1,5 +1,5 @@
+import useRoutings from '@/shared/hooks/useRoutings';
 import { Profile } from '../types/Profile';
-import { useRouter } from 'next/navigation';
 
 function CountItem({
   label,
@@ -21,25 +21,19 @@ function CountItem({
 }
 
 export default function CountInfo({ data }: { data: Profile }) {
-  const router = useRouter();
-  function navFollowers() {
-    router.push(`${data.id}/followers`);
-  }
-  function navFollowings() {
-    router.push(`${data.id}/followings`);
-  }
+  const { goFollowers, goFollowings } = useRoutings();
   return (
     <div className="flex gap-8">
       <CountItem label="게시글" count={data.post_count} />
       <CountItem
         label="팔로워"
         count={data.follower_count}
-        onClick={navFollowers}
+        onClick={() => goFollowers(data.id)}
       />
       <CountItem
         label="팔로잉"
         count={data.following_count}
-        onClick={navFollowings}
+        onClick={() => goFollowings(data.id)}
       />
     </div>
   );
