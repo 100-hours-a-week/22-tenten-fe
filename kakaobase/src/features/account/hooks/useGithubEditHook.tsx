@@ -6,6 +6,8 @@ import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { githubSchema } from '../schemas/profileSchema';
 import { editGithub } from '@/features/account/api/editProfile';
+import { queryClient } from '@/shared/api/queryClient';
+import { accountQueries } from '../api/accountQueries';
 
 export type githubData = z.infer<typeof githubSchema>;
 
@@ -28,6 +30,7 @@ export default function useGithubEditHook() {
       setLoading(true);
       await editGithub({ url: data.githubUrl });
       setUserInfo({ githubUrl: data.githubUrl });
+      queryClient.invalidateQueries({ queryKey: accountQueries.all() });
       showToast('깃허브 링크 변경 완료! ✌️');
     } catch (e: any) {
       showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');
