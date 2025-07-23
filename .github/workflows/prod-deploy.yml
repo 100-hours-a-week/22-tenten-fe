@@ -41,7 +41,6 @@ jobs:
     name: CD
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    needs: ci
     defaults:
       run:
         working-directory: ./kakaobase
