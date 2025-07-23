@@ -11,6 +11,7 @@ on:
 jobs:
   ci:
     name: CI
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     defaults:
       run:
