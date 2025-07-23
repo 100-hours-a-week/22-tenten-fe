@@ -67,15 +67,11 @@
 
 ---
 
-# 구현 영상
-
----
-
-# 구성원
+# 📌 구성원
 |이름|역할|Github 프로필|
 |---|---|---|
-|hazel.kim(김희재)|팀장<br>클라우드|[김희재 깃허브 바로가기](https://github.com/1026hz)|
-|marcello.lee(이정민)|클라우드|[이정민 깃허브 바로가기](https://github.com/JungMinLee)|
+|hazel.kim(김희재)|팀장 / 인프라|[김희재 깃허브 바로가기](https://github.com/1026hz)|
+|marcello.lee(이정민)|인프라|[이정민 깃허브 바로가기](https://github.com/JungMinLee)|
 |dobby.choi(최우성)|인공지능|[최우성 깃허브 바로가기](https://github.com/WooSungChoi99)|
 |astra.ka(가을)|인공지능|[가을 깃허브 바로가기](https://github.com/kaeul1020)|
 |rick.lee(이강협)|백엔드|[이강협 깃허브 바로가기](https://github.com/hyup98)|
