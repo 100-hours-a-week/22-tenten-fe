@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export default function UserItem({ data }: { data: UserBasic }) {
-  const userId = 1;
   const router = useRouter();
   function navProfile() {
     router.push(`/profile/${data.id}`);
@@ -16,13 +15,16 @@ export default function UserItem({ data }: { data: UserBasic }) {
       onClick={navProfile}
     >
       {data.image_url !== null ? (
-        <Image
-          width={28}
-          height={28}
-          src={data.image_url}
-          alt="프로필 이미지"
-          className="aspect-square rounded-md"
-        />
+        <div className="relative w-7 h-7">
+          <Image
+            src={data.image_url}
+            alt="프로필 이미지"
+            className="aspect-square rounded-md object-cover"
+            fill
+            sizes="(max-width:480px) 48px, 10vw"
+            priority
+          />
+        </div>
       ) : (
         <User
           width={28}

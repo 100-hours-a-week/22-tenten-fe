@@ -25,8 +25,15 @@ export default function YoutubeFrame({ post }: { post: PostEntity }) {
       post.youtubeSummary === 'INVALID_YOUTUBE_URL'
     ) {
       return (
-        <div className="w-full h-full aspect-video relative object-fit">
-          <Image src="/youtube_not_found.png" alt="이미지 없음" fill priority />
+        <div className="w-full h-full aspect-video relative">
+          <Image
+            src="/youtube_not_found.png"
+            alt="이미지 없음"
+            fill
+            sizes="(max-width : 480px) 384px, 100vw"
+            className="object-cover"
+            priority
+          />
         </div>
       );
     }

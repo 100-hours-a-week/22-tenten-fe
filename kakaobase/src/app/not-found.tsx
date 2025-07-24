@@ -11,8 +11,14 @@ export default function NotFound() {
 
   return (
     <div className="flex w-full h-screen flex-col items-center justify-center gap-6">
-      <div className="w-40 h-40 relative object-fit">
-        <Image src="/sad_logo.png" alt="로고" fill />
+      <div className="w-40 h-40 relative flex">
+        <Image
+          src="/sad_logo.png"
+          alt="not-found"
+          fill
+          className="object-contain"
+          sizes="(max-width:480px) 160px, 40vw"
+        />
       </div>
       <div className="text-lg font-bold text-center flex flex-col">
         <div>404 NOT FOUND</div>
