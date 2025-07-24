@@ -21,7 +21,7 @@ export default function UserInfo({ data }: { data: Profile }) {
               fill
               src={data.image_url}
               sizes="(max-width : 480px) 64px, 13vw"
-              className="object-contain rounded-xl"
+              className="object-cover rounded-xl"
             />
           )}
         </div>
