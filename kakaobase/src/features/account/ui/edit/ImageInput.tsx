@@ -36,15 +36,17 @@ export default function ImageInput({
         {!image || image === 'null' ? (
           <div className="w-16 h-16 block bg-textOpacity50 rounded-lg"></div>
         ) : (
-          <Image
-            src={image}
-            width={64}
-            height={64}
-            alt="프로필 이미지"
-            className="block rounded-lg aspect-square"
-          />
+          <div className="relative aspect-square w-16 h-16">
+            <Image
+              src={image}
+              alt="프로필 이미지"
+              className="rounded-lg object-cover"
+              fill
+              sizes="(max-width : 480px) 64px, 13vw"
+            />
+          </div>
         )}
-        <div className="w-full aspect-[1/1] bg-textOpacity50 absolute flex rounded-lg justify-center">
+        <div className="w-16 h-16 aspect-square bg-textOpacity50 absolute flex rounded-lg justify-center">
           {loading ? (
             <LoadingSmall />
           ) : (
@@ -56,7 +58,7 @@ export default function ImageInput({
       <input
         id="image-upload"
         type="file"
-        accept="image/png, image/jpeg, image/jpg, image/webp"
+        accept="image/png, image/jpeg, image/jpg, image/webp, image/avif"
         className="hidden"
         onChange={handleImage}
       />

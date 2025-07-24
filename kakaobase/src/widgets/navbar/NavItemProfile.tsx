@@ -34,16 +34,15 @@ export default function NavItemProfile() {
       {imageUrl === '' || imageUrl === null ? (
         <NavItem icon={User} path={path} />
       ) : (
-        <Image
-          src={imageUrl}
-          width={12}
-          height={12}
-          alt="profile"
-          className={clsx(
-            'w-6 h-6 transition-colors rounded-md',
-            isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
-          )}
-        />
+        <div className="w-6 h-6 relative">
+          <Image
+            src={imageUrl}
+            fill
+            sizes="(max-width : 480px) 24px, 10vw"
+            alt="profile"
+            className="object-cover rounded-md"
+          />
+        </div>
       )}
     </div>
   );

@@ -9,18 +9,19 @@ export default function UserInfo({ data }: { data: Profile }) {
   return (
     <div className="flex flex-col gap-4 mt-4 px-9 pt-6 pb-4 rounded-xl bg-containerColor items-center w-full">
       <div className="flex gap-4 w-full">
-        <div className="relative w-16 h-16 object-fit rounded-xl aspect-square border-innerContainerColor border-2">
+        <div className="relative w-16 h-16 rounded-xl aspect-square border-innerContainerColor border-2">
           {data.image_url === '' || data.image_url === null ? (
             <User
               height={60}
-              className="flex object-cover justify-self-center"
+              className="flex object-contain justify-self-center"
             />
           ) : (
             <Image
               alt="프로필 이미지"
               fill
               src={data.image_url}
-              className="object-cover"
+              sizes="(max-width : 480px) 64px, 13vw"
+              className="object-contain rounded-xl"
             />
           )}
         </div>

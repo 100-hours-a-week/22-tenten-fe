@@ -24,14 +24,16 @@ export function UserProfile({ post }: { post: PostEntity }) {
       }}
     >
       {post.userProfileUrl ? (
-        <Image
-          src={post.userProfileUrl}
-          width={32}
-          height={32}
-          alt="프로필"
-          className="rounded-lg aspect-square"
-          priority
-        />
+        <div className="relative w-8 h-8">
+          <Image
+            src={post.userProfileUrl}
+            alt="프로필"
+            className="rounded-lg object-cover aspect-square"
+            priority
+            fill
+            sizes="(max-width:480px) 32px, 10vw"
+          />
+        </div>
       ) : (
         <User className="text-textColor" width={20} height={20} />
       )}

@@ -15,9 +15,9 @@ export default function BotChat({
           <Image
             src="/roro.png"
             fill
-            sizes="0"
+            sizes="(max-width : 480px) 24px, 10vw"
             alt="roro"
-            className="rounded-md"
+            className="rounded-md object-cover"
           />
         </div>
         <div className="text-sm px-3 py-2 rounded-xl max-w-[64%] flex bg-myLightBlue text-textOnLight whitespace-pre-wrap break-all">
