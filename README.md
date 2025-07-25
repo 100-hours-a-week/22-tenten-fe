@@ -4,6 +4,7 @@
 
 ### 🔗 [카카오베이스 서비스 바로가기](https://www.kakaobase.com)
 **[🔗 카카오베이스 디스콰이엇 바로가기](https://disquiet.io/product/kakao-base)** <br>
+**[🎬 카카오베이스 최종 시연 영상 보러가기](https://www.youtube.com/shorts/bwsSPIH15pU)** <br>
 **[🔗 백엔드 레포지토리 바로가기](https://github.com/100-hours-a-week/22-tenten-be)** <br>
 **[🔗 AI 레포지토리 바로가기](https://github.com/100-hours-a-week/22-tenten-ai)** <br><br>
 
@@ -63,7 +64,6 @@
 |회원 탈퇴 페이지|회원가입 1단계 페이지|회원가입 2단계 페이지|로그인 페이지|
 |---|---|---|---|
 |<img width="1771" height="3574" alt="image" src="https://github.com/user-attachments/assets/7c09b118-d60d-4b4e-9d6b-12e4ddff8072" />|<img width="1771" height="3574" alt="image" src="https://github.com/user-attachments/assets/5886bc07-c3f2-4190-b5df-8889286e0a4d" />|<img width="1771" height="3574" alt="image" src="https://github.com/user-attachments/assets/1c0d9f04-26a4-4455-b5fa-faf0b1b299c0" />|<img width="1771" height="3574" alt="image" src="https://github.com/user-attachments/assets/6d768486-2545-4b3e-aaf6-038d61895e19" />|
-
 
 ---
 
