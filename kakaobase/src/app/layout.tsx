@@ -3,7 +3,6 @@ import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
-import AlarmContainer from '@/features/alarm/ui/AlarmContainer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kakaobase.com'),
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: '/logo_square.svg',
+    icon: '/logo_square.png',
   },
 };
 
@@ -47,13 +46,18 @@ export default async function RootLayout({
             googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
           />
         )}
-        <Image
-          src="/chunsik.png"
-          alt="surfing"
-          width={100}
-          height={100}
-          className="surfing hidden lg:block"
-        />
+        <div className="absolute flex items-end bottom-40">
+          <div className="relative h-24 w-24">
+            <Image
+              src="/chunsik.png"
+              alt="surfing"
+              fill
+              sizes="(max-width : 1024px) 10vw, 96px"
+              priority
+              className="surfing object-contain hidden lg:block"
+            />
+          </div>
+        </div>
         <div className="box hidden lg:block">
           <div className="wave -one"></div>
           <div className="wave -two"></div>
@@ -62,21 +66,26 @@ export default async function RootLayout({
         <Providers>
           <div className="flex w-screen">
             <div className="hidden lg:flex flex-col items-center justify-start mt-40 w-[48%] animate-float">
-              <Image
-                src="/logo_square.svg"
-                alt="로고"
-                width={0}
-                height={0}
-                className="w-[20rem] h-auto"
-                priority
-              />
-              <Image
-                src="/logo_title.svg"
-                alt="로고"
-                width={0}
-                height={0}
-                className="w-[24rem] h-auto"
-              />
+              <div className="relative w-72 h-72">
+                <Image
+                  src="/logo_square.png"
+                  alt="로고"
+                  fill
+                  sizes="(max-width: 1024px) 20vw, 288px"
+                  priority
+                  className="object-contain"
+                />
+              </div>
+              <div className="relative w-96 h-20">
+                <Image
+                  src="/logo_title.png"
+                  alt="로고"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 1024px) 20vw, 384px"
+                  priority
+                />
+              </div>
             </div>
             <div className="flex flex-col h-screen justify-center scrollbar-hide w-full max-w-[480px] mx-auto lg:ml-12 lg:self-start bg-bgColor text-textColor shadow-md">
               {children}

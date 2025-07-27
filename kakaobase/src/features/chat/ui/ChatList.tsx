@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import MyChat from './MyChat';
 import BotChat from './BotChat';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
@@ -55,8 +55,14 @@ export default function ChatList() {
   if (!data || data.pages.flat().length === 0)
     return (
       <div className="flex flex-col w-full h-screen items-center text-sm justify-center gap-4">
-        <div className="relative flex w-24 h-24 object-fit">
-          <Image src="/roro.png" alt="로로프로필" fill className="rounded-xl" />
+        <div className="relative flex w-24 h-24">
+          <Image
+            src="/roro.png"
+            alt="로로 프로필"
+            fill
+            sizes="(max-width:480px) 96px, 20vw"
+            className="rounded-xl object-cover"
+          />
         </div>
         로로와 채팅을 시작하세요.
       </div>

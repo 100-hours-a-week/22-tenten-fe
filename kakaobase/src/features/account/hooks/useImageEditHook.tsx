@@ -7,6 +7,8 @@ import postToS3 from '@/entities/images/api/imageS3';
 import { editProfile } from '@/features/account/api/editProfile';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
+import { queryClient } from '@/shared/api/queryClient';
+import { accountQueries } from '../api/accountQueries';
 
 export type imageData = z.infer<typeof profileImageSchema>;
 
@@ -40,6 +42,7 @@ export default function useImageEditHook() {
       setUserInfo({ imageUrl: imageUrl });
 
       await editProfile({ imageUrl });
+      queryClient.invalidateQueries({ queryKey: accountQueries.all() });
       showToast('프로필 이미지 저장 완료! ✌️');
     } catch (e: any) {
       if (e.response?.data.error === 'unauthorized') {

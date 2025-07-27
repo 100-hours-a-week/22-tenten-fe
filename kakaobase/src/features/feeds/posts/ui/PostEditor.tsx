@@ -1,7 +1,6 @@
 'use client';
 
 import { Image as ImageIcon, Youtube } from 'lucide-react';
-import Image from 'next/image';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import { NewPostData, usePostEditorForm } from '../hooks/usePostEditorForm';
 import { useEffect, useState } from 'react';
@@ -116,12 +115,10 @@ function ImageInput({
       {/* 이미지 미리보기 */}
       {previewUrl && (
         <div className="mt-2 flex flex-col gap-2">
-          <Image
+          <img
             src={previewUrl}
             alt="미리보기"
-            className="rounded-sm w-full"
-            width={0}
-            height={0}
+            className="rounded-sm w-full h-auto object-cover"
           />
           <button
             type="button"
