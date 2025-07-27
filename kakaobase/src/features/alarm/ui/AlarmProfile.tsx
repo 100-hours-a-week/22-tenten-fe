@@ -6,23 +6,25 @@ export default function AlarmProfile({ sender }: { sender: UserBasic }) {
 
   if (imageUrl === null)
     return (
-      <div>
+      <div className="relative w-10 h-10">
         <Image
-          src="/logo_square.svg"
+          src="/logo_square.png"
           alt="프로필"
           fill
-          className="object-fit flex rounded-xl border-innerContainerColor border-2 p-1"
+          sizes="(max-width : 480px) 40px, 10vw"
+          className="flex rounded-xl border-innerContainerColor border-2 p-1"
         />
       </div>
     );
   else
     return (
-      <div>
+      <div className="relative w-10 h-10">
         <Image
           src={imageUrl}
           alt="프로필"
           fill
-          className="object-fit flex rounded-xl"
+          sizes="(max-width : 480px) 40px, 10vw"
+          className="object-cover flex rounded-xl"
         />
       </div>
     );
