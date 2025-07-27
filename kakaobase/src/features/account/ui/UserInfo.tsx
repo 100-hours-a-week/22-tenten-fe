@@ -22,6 +22,7 @@ export default function UserInfo({ data }: { data: Profile }) {
               src={data.image_url}
               sizes="(max-width : 480px) 64px, 13vw"
               className="object-cover rounded-xl"
+              priority
             />
           )}
         </div>

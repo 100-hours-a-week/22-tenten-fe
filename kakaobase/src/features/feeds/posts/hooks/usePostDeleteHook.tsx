@@ -10,7 +10,7 @@ import useRoutings from '@/shared/hooks/useRoutings';
 export function usePostDeleteHook({ id }: { id: number }) {
   const path = usePathname();
   const { showToast } = useToast();
-  const { selectedCourse, userId } = useUserStore();
+  const { selectedCourse } = useUserStore();
   const { goMain } = useRoutings();
 
   async function deletePostExecute() {
@@ -20,10 +20,7 @@ export function usePostDeleteHook({ id }: { id: number }) {
         queryKey: feedQueries.postsKey(selectedCourse),
       });
       queryClient.invalidateQueries({
-        queryKey: accountQueries.myLikesKey(userId),
-      });
-      queryClient.invalidateQueries({
-        queryKey: accountQueries.myPostsKey(userId),
+        queryKey: accountQueries.all(),
       });
       showToast('삭제 완료! ✌️');
       if (path.includes('post')) goMain(); //게시글 상세에서 게시글 지우기
