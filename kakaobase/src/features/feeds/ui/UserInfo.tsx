@@ -1,7 +1,6 @@
 import { Trash2, User } from 'lucide-react';
 import FollowButtonSmall from '@/features/follows/ui/FollowButtonSmall';
 import formatDate from '../lib/formatDate';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { usePostDeleteHook } from '../posts/hooks/usePostDeleteHook';
 import { useCommentDeleteHook } from '../comments/hooks/useCommentDeleteHook';
@@ -9,18 +8,17 @@ import { useRecommentDeleteHook } from '../comments/hooks/useRecommentDeleteHook
 import DeleteModal from './DeleteModal';
 import { useEffect, useState } from 'react';
 import { PostEntity } from '../types/post';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export function UserProfile({ post }: { post: PostEntity }) {
-  const router = useRouter();
-  function navProfile() {
-    router.push(`/profile/${post.userId}`);
-  }
+  const { goProfile } = useRoutings();
+
   return (
     <div
       className="flex w-8 h-7 rounded-lg bg-innerContainerColor justify-center items-center cursor-pointer"
       onClick={(e) => {
         e.stopPropagation();
-        navProfile();
+        goProfile(post.userId);
       }}
     >
       {post.userProfileUrl ? (
@@ -43,16 +41,13 @@ export function UserProfile({ post }: { post: PostEntity }) {
 
 export function UserInfo({ post }: { post: PostEntity }) {
   const id = Number(post.id);
-  const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [isNarrow, setIsNarrow] = useState(false);
   const { deletePostExecute } = usePostDeleteHook({ id });
   const { deleteCommentExecute } = useCommentDeleteHook({ id });
   const { deleteRecommentExecute } = useRecommentDeleteHook({ id });
+  const { goProfile } = useRoutings();
 
-  function navProfile() {
-    router.push(`/profile/${post.userId}`);
-  }
   function closeModal() {
     setOpen(false);
   }
@@ -83,7 +78,7 @@ export function UserInfo({ post }: { post: PostEntity }) {
           className="cursor-pointer font-bold text-sm overflow-hidden text-ellipsis whitespace-nowrap"
           onClick={(e) => {
             e.stopPropagation();
-            navProfile();
+            goProfile(post.userId);
           }}
         >
           {post.nickname}

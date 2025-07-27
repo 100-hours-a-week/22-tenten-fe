@@ -1,11 +1,19 @@
+'use client';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import useCommentForm from '../hooks/useCommentForm';
 import { Send } from 'lucide-react';
 import RecommentStateBar from './RecommentStateBar';
+import { recommentFormStateStore } from '../stores/recommentFormStateStore';
+import { useEffect } from 'react';
 
 export default function CommentInput() {
   const { comment, handleSubmit, handleChange } = useCommentForm();
   const { course, selectedCourse } = useUserStore();
+  const { clear } = recommentFormStateStore();
+
+  useEffect(() => {
+    return () => clear();
+  }, []);
 
   if (selectedCourse !== 'ALL' && selectedCourse !== course) return null;
   return (
