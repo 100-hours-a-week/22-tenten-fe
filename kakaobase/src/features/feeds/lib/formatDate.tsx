@@ -1,7 +1,4 @@
-export default function formatDate(
-  createdAt: string,
-  isNarrow: boolean
-): string {
+export default function formatDate(createdAt: string): string {
   const date = new Date(createdAt);
   const now = new Date();
 
@@ -23,7 +20,6 @@ export default function formatDate(
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    if (isNarrow) return `${month}월 ${day}일`;
-    else return `${year}년 ${month}월 ${day}일`;
+    return `${year}년 ${month}월 ${day}일`;
   }
 }

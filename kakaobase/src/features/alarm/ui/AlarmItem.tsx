@@ -91,7 +91,7 @@ export default function AlarmItem({ data }: { data: AlarmItemType }) {
                 <AlarmContent data={data} />
               </div>
               <div className="shrink-0 text-textOpacity50">
-                {formatDate(alarm.timestamp, false)}
+                {formatDate(alarm.timestamp)}
               </div>
             </div>
           </div>
