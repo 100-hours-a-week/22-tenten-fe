@@ -5,12 +5,13 @@ import clsx from 'clsx';
 import Linkify from 'react-linkify';
 import { usePathname } from 'next/navigation';
 import CountsInfo from './CountsInfo';
-import { UserProfile, UserInfo } from './UserInfo';
 import summaryCondition from '../posts/lib/summaryCondition';
 import { Comment, PostEntity } from '@/features/feeds/types/post';
 import RecommentList from '../comments/ui/RecommentList';
 import YoutubeFrame from './YoutubeFrame';
 import useRoutings from '@/shared/hooks/useRoutings';
+import UserProfileImage from './UserProfileImage';
+import UserInfo from './UserInfo';
 
 export default function PostCard({ post }: { post: PostEntity }) {
   const { goPostDetail } = useRoutings();
@@ -41,7 +42,7 @@ export default function PostCard({ post }: { post: PostEntity }) {
           )}
           onClick={navDetail}
         >
-          <UserProfile post={post} />
+          <UserProfileImage post={post} />
           <div className="w-full flex flex-col gap-2 text-textColor">
             <UserInfo post={post} />
             <div>
