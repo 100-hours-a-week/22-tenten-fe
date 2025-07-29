@@ -12,7 +12,7 @@ import useRoutings from '@/shared/hooks/useRoutings';
 import useUserInfo from '../hooks/useUserInfo';
 
 export default function MyPageWrapper({ userId }: { userId: number }) {
-  const { data, isPending, handleModal, navEdit, isOpen } = useUserInfo({
+  const { data, isPending, handleModal, isOpen } = useUserInfo({
     userId,
   });
 
