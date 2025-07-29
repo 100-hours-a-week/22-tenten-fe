@@ -1,9 +1,14 @@
 import useRoutings from '@/shared/hooks/useRoutings';
-import { PostEntity } from '../types/post';
 import Image from 'next/image';
 import { User } from 'lucide-react';
 
-export default function UserProfileImage({ post }: { post: PostEntity }) {
+export default function UserProfileImage({
+  id,
+  profileUrl,
+}: {
+  id: number;
+  profileUrl?: string;
+}) {
   const { goProfile } = useRoutings();
 
   return (
@@ -11,13 +16,13 @@ export default function UserProfileImage({ post }: { post: PostEntity }) {
       className="flex w-8 h-7 rounded-lg bg-innerContainerColor justify-center items-center cursor-pointer"
       onClick={(e) => {
         e.stopPropagation();
-        goProfile(post.userId);
+        goProfile(id);
       }}
     >
-      {post.userProfileUrl ? (
+      {profileUrl ? (
         <div className="relative w-8 h-8">
           <Image
-            src={post.userProfileUrl}
+            src={profileUrl}
             alt="프로필"
             className="rounded-lg object-cover aspect-square"
             priority

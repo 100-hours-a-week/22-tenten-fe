@@ -12,8 +12,9 @@ import YoutubeFrame from './YoutubeFrame';
 import useRoutings from '@/shared/hooks/useRoutings';
 import UserProfileImage from './UserProfileImage';
 import UserInfo from './UserInfo';
+import { memo } from 'react';
 
-export default function PostCard({ post }: { post: PostEntity }) {
+const PostCard = memo(function PostCard({ post }: { post: PostEntity }) {
   const { goPostDetail } = useRoutings();
   const path = usePathname();
 
@@ -42,7 +43,7 @@ export default function PostCard({ post }: { post: PostEntity }) {
           )}
           onClick={navDetail}
         >
-          <UserProfileImage post={post} />
+          <UserProfileImage id={post.userId} profileUrl={post.userProfileUrl} />
           <div className="w-full flex flex-col gap-2 text-textColor">
             <UserInfo post={post} />
             <div>
@@ -106,4 +107,6 @@ export default function PostCard({ post }: { post: PostEntity }) {
       <RecommentList commentId={post.id} />
     </div>
   );
-}
+});
+
+export default PostCard;

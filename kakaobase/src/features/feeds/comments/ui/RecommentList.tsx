@@ -6,8 +6,13 @@ import useScrollHook from '@/shared/hooks/useScrollHook';
 import { recommentFormStateStore } from '../stores/recommentFormStateStore';
 import { feedQueries } from '../../api/feedQueries';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { memo } from 'react';
 
-export default function RecommentList({ commentId }: { commentId: number }) {
+const RecommentList = memo(function RecommentList({
+  commentId,
+}: {
+  commentId: number;
+}) {
   const {
     data,
     isPending,
@@ -37,4 +42,6 @@ export default function RecommentList({ commentId }: { commentId: number }) {
       {!hasNextPage && isPending && <LoadingSmall />}
     </div>
   );
-}
+});
+
+export default RecommentList;
