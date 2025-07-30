@@ -23,7 +23,7 @@ export default function BotChat({
         <div className="text-sm px-3 py-2 rounded-xl max-w-[64%] flex bg-myLightBlue text-textOnLight whitespace-pre-wrap break-all">
           {text}
         </div>
-        <div className="text-xs opacity-40">{formatDate(time, false)}</div>
+        <div className="text-xs opacity-40">{formatDate(time)}</div>
       </div>
     </div>
   );

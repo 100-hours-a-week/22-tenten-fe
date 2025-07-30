@@ -8,10 +8,11 @@ import FollowButtonLarge from '@/features/follows/ui/FollowButtonLarge';
 import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
+import useRoutings from '@/shared/hooks/useRoutings';
 import useUserInfo from '../hooks/useUserInfo';
 
 export default function MyPageWrapper({ userId }: { userId: number }) {
-  const { data, isPending, handleModal, navEdit, isOpen } = useUserInfo({
+  const { data, isPending, handleModal, isOpen } = useUserInfo({
     userId,
   });
 
@@ -19,6 +20,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
     data?.is_followed ?? false,
     userId
   );
+  const { goProfileEdit } = useRoutings();
   const [type, setType] = useState<profileListType>('게시글');
 
   if (isPending) {
@@ -46,7 +48,10 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
 
         {data.is_me ? (
           <div className="flex gap-4">
-            <SubmitButton text="프로필 편집" onClick={navEdit} />
+            <SubmitButton
+              text="프로필 편집"
+              onClick={() => goProfileEdit(userId)}
+            />
             <SubmitButton text="프로필 공유" onClick={handleModal} />
           </div>
         ) : (

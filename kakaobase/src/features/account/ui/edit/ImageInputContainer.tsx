@@ -3,6 +3,7 @@ import { imageData } from '../../hooks/useImageEditHook';
 import { CirclePlus } from 'lucide-react';
 import Image from 'next/image';
 import { UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
+import ImageLabel from './ImageLabel';
 
 interface ImageInputProps {
   setValue: UseFormSetValue<imageData>;
@@ -29,31 +30,7 @@ export default function ImageInput({
 
   return (
     <div>
-      <label
-        htmlFor="image-upload"
-        className="flex relative gap-2 items-center justify-center cursor-pointer"
-      >
-        {!image || image === 'null' ? (
-          <div className="w-16 h-16 block bg-textOpacity50 rounded-lg"></div>
-        ) : (
-          <div className="relative aspect-square w-16 h-16">
-            <Image
-              src={image}
-              alt="프로필 이미지"
-              className="rounded-lg object-cover"
-              fill
-              sizes="(max-width : 480px) 64px, 13vw"
-            />
-          </div>
-        )}
-        <div className="w-16 h-16 aspect-square bg-textOpacity50 absolute flex rounded-lg justify-center">
-          {loading ? (
-            <LoadingSmall />
-          ) : (
-            <CirclePlus className="w-4 text-textColor self-center" />
-          )}
-        </div>
-      </label>
+      <ImageLabel image={image} loading={loading} />
 
       <input
         id="image-upload"

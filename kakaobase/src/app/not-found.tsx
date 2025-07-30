@@ -1,13 +1,10 @@
 'use client';
+import useRoutings from '@/shared/hooks/useRoutings';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 export default function NotFound() {
-  const router = useRouter();
-  function goHome() {
-    router.push('/');
-  }
+  const { goHome } = useRoutings();
 
   return (
     <div className="flex w-full h-screen flex-col items-center justify-center gap-6">

@@ -1,22 +1,22 @@
 import Image from 'next/image';
 import NavItem from './NavItem';
 import { User } from 'lucide-react';
-import clsx from 'clsx';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useUserStore } from '@/entities/users/stores/userStore';
+import useRoutings from '@/shared/hooks/useRoutings';
 
 export default function NavItemProfile() {
   const pathName = usePathname();
-  const router = useRouter();
+  const { goPath, goUnauthorized } = useRoutings();
   const { userId, imageUrl } = useUserStore();
   const isActive = pathName.includes('/profile');
   const path = `/profile/${userId}`;
 
   function navMyProfile() {
     if (userId === 0 || !userId) {
-      router.push('/unauthorized');
+      goUnauthorized();
     } else {
-      router.push(path);
+      goPath(path);
     }
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     sc?.scrollTo({ top: 0, behavior: 'smooth' });

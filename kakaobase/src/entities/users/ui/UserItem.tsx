@@ -1,18 +1,16 @@
 'use client';
 import { UserBasic } from '@/entities/users/types/UserBasic';
+import useRoutings from '@/shared/hooks/useRoutings';
 import { User } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 export default function UserItem({ data }: { data: UserBasic }) {
-  const router = useRouter();
-  function navProfile() {
-    router.push(`/profile/${data.id}`);
-  }
+  const { goProfile } = useRoutings();
+
   return (
     <div
       className="flex text-textColor bg-innerContainerColor w-full items-center p-2 rounded-lg gap-2 cursor-pointer"
-      onClick={navProfile}
+      onClick={() => goProfile(data.id)}
     >
       {data.image_url !== null ? (
         <div className="relative w-7 h-7">

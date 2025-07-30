@@ -49,7 +49,8 @@ export const useEmailAuth = () => {
       setSignupStep1Info({ email: email });
     } catch (e: any) {
       timer.stop();
-      if (e.response.data.error === 'resource_alread_exists') {
+      if (!e.response) showToast('알 수 없는 문제가 발생했습니다. 😭');
+      else if (e.response.data.error === 'resource_alread_exists') {
         setError('*이미 가입된 이메일입니다.');
       } else if (e.response.data.error === 'resource_not_found') {
         setError('*가입되지 않은 이메일입니다.');
