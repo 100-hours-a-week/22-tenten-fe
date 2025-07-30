@@ -1,8 +1,8 @@
 import { useAlarmStore } from '@/features/alarm/stores/alarmStore';
+import useRoutings from '@/shared/hooks/useRoutings';
 import clsx from 'clsx';
 import { Bell, LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 
 export default function NavItem({
   icon: Icon,
@@ -12,12 +12,12 @@ export default function NavItem({
   path: string;
 }) {
   const pathName = usePathname();
-  const router = useRouter();
   const isActive = pathName === path;
   const { cnt } = useAlarmStore();
+  const { goPath } = useRoutings();
 
   const handleClick = () => {
-    if (path) router.push(path);
+    if (path) goPath(path);
     const sc = document.querySelector<HTMLElement>('[data-scroll-area]');
     if (path.includes('chat')) {
       sc?.scrollTo({ top: sc.scrollHeight, behavior: 'smooth' });

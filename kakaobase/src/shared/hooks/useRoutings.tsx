@@ -48,6 +48,12 @@ export default function useRoutings() {
   function goEditor() {
     router.push('/post/new');
   }
+  function goUnauthorized() {
+    router.push('/unauthorized');
+  }
+  function goPath(path: string) {
+    router.push(path);
+  }
   return {
     goLogin,
     goHome,
@@ -64,5 +70,7 @@ export default function useRoutings() {
     goMain,
     goLikes,
     goEditor,
+    goUnauthorized,
+    goPath,
   };
 }

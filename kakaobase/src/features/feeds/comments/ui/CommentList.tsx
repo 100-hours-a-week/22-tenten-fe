@@ -27,7 +27,7 @@ export default function CommentList() {
   });
 
   return (
-    <div className="flex flex-col py-4">
+    <div className="flex flex-col pt-4 pb-20">
       {data?.pages.flat().map((post) => (
         <PostCard key={post.id} post={post} />
       ))}

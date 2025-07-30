@@ -3,6 +3,7 @@ import './globals.css';
 import { Providers } from './providers';
 import Image from 'next/image';
 import GoogleAnalytics from '@/shared/lib/GoogleAnalytics';
+import Surfing from '@/widgets/background/Surfing';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kakaobase.com'),
@@ -48,14 +49,7 @@ export default async function RootLayout({
         )}
         <div className="absolute flex items-end bottom-40">
           <div className="relative h-24 w-24">
-            <Image
-              src="/chunsik.png"
-              alt="surfing"
-              fill
-              sizes="(max-width : 1024px) 10vw, 96px"
-              priority
-              className="surfing object-contain hidden lg:block"
-            />
+            <Surfing />
           </div>
         </div>
         <div className="box hidden lg:block">
@@ -72,7 +66,6 @@ export default async function RootLayout({
                   alt="로고"
                   fill
                   sizes="(max-width: 1024px) 20vw, 288px"
-                  priority
                   className="object-contain"
                 />
               </div>
