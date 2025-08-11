@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import NavItem from './NavItem';
 import { User } from 'lucide-react';

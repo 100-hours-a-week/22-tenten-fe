@@ -1,5 +1,3 @@
-'use client';
-
 import { useAlarmStore } from '@/features/alarm/stores/alarmStore';
 import useRoutings from '@/shared/hooks/useRoutings';
 import clsx from 'clsx';

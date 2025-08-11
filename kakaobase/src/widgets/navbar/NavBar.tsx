@@ -1,3 +1,4 @@
+'use client';
 import { House, MessageCircle, Bell } from 'lucide-react';
 import NavItem from './NavItem';
 import NavItemProfile from './NavItemProfile';
