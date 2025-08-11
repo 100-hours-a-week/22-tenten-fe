@@ -29,7 +29,7 @@ export default function UserFollowerList({ userId }: { userId: number }) {
         <UserItem key={item.id} data={item} />
       ))}
       {isPending && <LoadingSmall />}
-      {isFetchingNextPage && <div className="h-[1px]" ref={observerRef} />}
+      {hasNextPage && !isFetchingNextPage && <div ref={observerRef} />}
       {!hasNextPage && (
         <div className="flex justify-center text-xs">
           더이상 표시할 유저가 없습니다.
