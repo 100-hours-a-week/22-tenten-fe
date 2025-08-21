@@ -11,7 +11,7 @@ const nextConfig = {
 };
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: true,
+  enabled: false,
 });
 
 export default withBundleAnalyzer(nextConfig);
