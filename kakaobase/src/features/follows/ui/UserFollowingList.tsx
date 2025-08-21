@@ -27,8 +27,8 @@ export default function UserFollowingList({ userId }: { userId: number }) {
       {data?.pages.flat().map((item) => (
         <UserItem key={item.id} data={item} />
       ))}
-      {hasNextPage && <div ref={observerRef} className="h-[1px]" />}
       {isPending && <LoadingSmall />}
+      {hasNextPage && !isFetchingNextPage && <div ref={observerRef} />}
       {!hasNextPage && (
         <div className="flex justify-center text-xs">
           더이상 표시할 유저가 없습니다.

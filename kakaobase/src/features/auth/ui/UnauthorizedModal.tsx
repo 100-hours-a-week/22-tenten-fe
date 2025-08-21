@@ -1,4 +1,4 @@
-import RoutingButtons from './RoutingButtons';
+import RoutingButton from '@/shared/ui/button/RoutingButton';
 
 export default function UnauthorizedModal() {
   return (
@@ -10,7 +10,10 @@ export default function UnauthorizedModal() {
             <br />
             다시 로그인 해주세요.
           </div>
-          <RoutingButtons />
+          <div className="flex flex-col items-center md:flex-row gap-4">
+            <RoutingButton path="/login" text="로그인 하러 가기" />
+            <RoutingButton path="/" text="메인 페이지로 가기" />
+          </div>
         </div>
       </div>
     </div>
