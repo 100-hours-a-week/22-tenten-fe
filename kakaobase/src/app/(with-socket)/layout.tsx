@@ -1,4 +1,4 @@
-import AlarmContainer from '@/features/alarm/ui/AlarmContainer';
+import SocketContainer from '@/features/socket/container/SocketContainer';
 
 export default async function Layout({
   children,
@@ -7,7 +7,7 @@ export default async function Layout({
 }) {
   return (
     <>
-      <AlarmContainer />
+      <SocketContainer />
       {children}
     </>
   );
