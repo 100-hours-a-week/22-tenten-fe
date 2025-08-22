@@ -8,7 +8,7 @@ export const alarmQueries = {
     infiniteQueryOptions({
       queryKey: alarmQueries.alarmsKey(),
       queryFn: ({ pageParam }: { pageParam?: number }) =>
-        getAlarms({ limit, cursor: pageParam }),
+        getAlarms({ limit: 22, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.notifications?.at(-1)?.data.id,
       initialPageParam: undefined,
     }),
