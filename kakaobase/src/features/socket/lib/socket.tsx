@@ -14,7 +14,10 @@ function initClient(onMessage: (msg: IMessage) => void) {
   }
 
   const client = new Client({
-    webSocketFactory: () => new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`),
+    webSocketFactory: () =>
+      new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`, null, {
+        transports: ['websocket'],
+      }),
     reconnectDelay: 1000,
     onConnect: () => {
       client.subscribe('/user/queue/notification', onMessage);

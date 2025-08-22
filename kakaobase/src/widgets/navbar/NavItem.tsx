@@ -1,5 +1,6 @@
-import { useAlarmStore } from '@/features/alarm/stores/alarmStore';
+import { alarmQueries } from '@/features/alarm/api/alarmQueries';
 import useRoutings from '@/shared/hooks/useRoutings';
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { Bell, LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -13,7 +14,7 @@ export default function NavItem({
 }) {
   const pathName = usePathname();
   const isActive = pathName === path;
-  const { cnt } = useAlarmStore();
+  // const { data: cnt } = useQuery(alarmQueries.alarmCnt());
   const { goPath } = useRoutings();
 
   const handleClick = () => {
@@ -37,11 +38,11 @@ export default function NavItem({
           isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
         )}
       />
-      {Icon === Bell && cnt > 0 && (
+      {/* {Icon === Bell && cnt > 0 && (
         <div className="w-4 h-4 absolute rounded-full bg-myBlue text-textOnBlue text-[0.625rem] mb-5 ml-4">
           {cnt}
         </div>
-      )}
+      )} */}
     </button>
   );
 }

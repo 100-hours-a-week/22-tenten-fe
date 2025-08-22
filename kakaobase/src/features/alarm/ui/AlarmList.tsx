@@ -27,7 +27,7 @@ export default function AlarmList() {
     );
 
   return (
-    <div className="flex flex-col w-full h-screen pb-16">
+    <div className="flex flex-col w-full h-screen">
       {flatNotifications.map((alarm) => (
         <AlarmItem data={alarm} key={alarm.data.id} />
       ))}

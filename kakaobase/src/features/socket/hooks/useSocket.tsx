@@ -23,7 +23,7 @@ export default function useSocket() {
       switch (parsed.event) {
         case 'notification.remove.ack':
         case 'notification.read.ack':
-          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
+          queryClient.invalidateQueries({ queryKey: alarmQueries.all() });
           break;
         case 'comment.created':
         case 'recomment.created':
@@ -32,8 +32,7 @@ export default function useSocket() {
         case 'recomment.like.created':
         case 'following.created':
           showToast('알림 도착! 🔔');
-          console.log('알림 도착');
-          queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
+          queryClient.invalidateQueries({ queryKey: alarmQueries.all() });
           break;
         case 'chat.loading':
           startLoading();

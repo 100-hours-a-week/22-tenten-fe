@@ -12,7 +12,7 @@ export default function useAlarmRouting({ data }: { data: any }) {
         id: data.id,
         timestamp: new Date().toISOString().split('.')[0],
       });
-      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
+      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmCountKey() });
     }
     goPostDetail(data.target_id);
   }
@@ -22,9 +22,9 @@ export default function useAlarmRouting({ data }: { data: any }) {
         id: data.id,
         timestamp: new Date().toISOString().split('.')[0],
       });
-      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmsKey() });
+      queryClient.invalidateQueries({ queryKey: alarmQueries.alarmCountKey() });
     }
-    goProfile(data.sender_id);
+    goProfile(data.id);
   }
   return { goToPost, goToProfile };
 }
