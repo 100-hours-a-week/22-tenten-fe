@@ -4,6 +4,22 @@ import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
 
+let refreshing = false;
+async function refreshOnFinished() {
+  if (refreshing) return;
+  refreshing = true;
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/tokens/refresh`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+  } catch {
+    window.location.href = '/unauthorized';
+  } finally {
+    refreshing = false;
+  }
+}
+
 function initClient(onMessage: (msg: IMessage) => void) {
   if (stompClient && stompClient.active) {
     return;
@@ -25,11 +41,7 @@ function initClient(onMessage: (msg: IMessage) => void) {
       client.subscribe('/user/queue/error', () => {});
     },
     onWebSocketClose: () => {
-      console.warn('[STOMP] 소켓 닫힘 — 강제 재연결');
-      initClient(onMessage);
-    },
-    onStompError: (frame) => {
-      console.error('[STOMP] 오류:', frame.headers.message);
+      refreshOnFinished();
     },
   });
 
