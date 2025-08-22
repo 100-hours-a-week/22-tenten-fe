@@ -14,7 +14,7 @@ export default function NavItem({
 }) {
   const pathName = usePathname();
   const isActive = pathName === path;
-  // const { data: cnt } = useQuery(alarmQueries.alarmCnt());
+  const { data: cnt } = useQuery(alarmQueries.alarmCnt());
   const { goPath } = useRoutings();
 
   const handleClick = () => {
@@ -38,11 +38,11 @@ export default function NavItem({
           isActive ? 'text-myBlue' : 'text-iconColor hover:text-textColor'
         )}
       />
-      {/* {Icon === Bell && cnt > 0 && (
+      {Icon === Bell && cnt > 0 && (
         <div className="w-4 h-4 absolute rounded-full bg-myBlue text-textOnBlue text-[0.625rem] mb-5 ml-4">
           {cnt}
         </div>
-      )} */}
+      )}
     </button>
   );
 }
