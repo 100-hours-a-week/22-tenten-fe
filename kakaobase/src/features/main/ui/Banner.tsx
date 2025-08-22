@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import useBannerHook from '../hooks/ useBannerHook';
+import useBannerHook from '../hooks/useBannerHook';
 
 export default function Banner() {
   const { extended, withTransition, onTransitionEnd, current } =

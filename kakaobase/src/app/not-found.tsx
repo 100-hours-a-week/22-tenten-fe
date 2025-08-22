@@ -1,11 +1,7 @@
-'use client';
-import useRoutings from '@/shared/hooks/useRoutings';
-import SubmitButton from '@/shared/ui/button/SubmitButton';
+import RoutingButton from '@/shared/ui/button/RoutingButton';
 import Image from 'next/image';
 
 export default function NotFound() {
-  const { goHome } = useRoutings();
-
   return (
     <div className="flex w-full h-screen flex-col items-center justify-center gap-6">
       <div className="w-40 h-40 relative flex">
@@ -21,7 +17,7 @@ export default function NotFound() {
         <div>404 NOT FOUND</div>
         <div>해당 페이지를 찾을 수 없습니다</div>
       </div>
-      <SubmitButton text="메인 페이지로 가기" onClick={goHome} />
+      <RoutingButton path="/" text="메인 페이지로 가기" />
     </div>
   );
 }

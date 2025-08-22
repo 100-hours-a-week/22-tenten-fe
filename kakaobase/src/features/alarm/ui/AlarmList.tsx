@@ -3,7 +3,7 @@ import AlarmItem from './AlarmItem';
 import { alarmQueries } from '../api/alarmQueries';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { AlarmItem as AlarmItemType } from '../types/AlarmResponse';
-import LoadingSmall from '@/shared/ui/LoadingSmall';
+import Loading from '@/shared/ui/Loading';
 
 export default function AlarmList() {
   const { data, isPending } = useInfiniteQuery(alarmQueries.alarms());
@@ -12,6 +12,13 @@ export default function AlarmList() {
     ? data.pages.flatMap((page) => page.notifications)
     : [];
 
+  if (isPending)
+    return (
+      <div className="flex flex-col w-full h-screen">
+        <Loading />
+      </div>
+    );
+
   if (flatNotifications.length === 0)
     return (
       <div className="flex flex-col w-full h-screen items-center text-sm justify-center gap-4">
@@ -19,15 +26,8 @@ export default function AlarmList() {
       </div>
     );
 
-  if (isPending)
-    return (
-      <div className="flex flex-col w-full h-screen">
-        <LoadingSmall />
-      </div>
-    );
-
   return (
-    <div className="flex flex-col w-full h-screen pb-16">
+    <div className="flex flex-col w-full h-screen">
       {flatNotifications.map((alarm) => (
         <AlarmItem data={alarm} key={alarm.data.id} />
       ))}
