@@ -8,13 +8,13 @@ import PostCard from './PostCard';
 export default function PostDetail({ postId }: { postId: number }) {
   const { data, isPending } = usePostDetail({ id: postId });
 
-  if (!data) return <div className="h-screen">게시글을 찾을 수 없습니다.</div>;
   if (isPending)
     return (
       <div className="h-screen">
         <Loading />
       </div>
     );
+  if (!data) return <div className="h-screen">게시글을 찾을 수 없습니다.</div>;
 
   return (
     <div
