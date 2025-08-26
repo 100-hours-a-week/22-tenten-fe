@@ -12,20 +12,11 @@ export default function useRoutings() {
   function goProfile(userId: number) {
     router.push(`/profile/${userId}`);
   }
-  function goProfileEdit(userId: number) {
-    router.push(`/profile/${userId}/edit`);
-  }
   function goFollowers(userId: number) {
     router.push(`${userId}/followers`);
   }
   function goFollowings(userId: number) {
     router.push(`${userId}/followings`);
-  }
-  function goPasswordEdit(userId: number) {
-    router.push(`/profile//${userId}/edit/password`);
-  }
-  function goWithdraw(userId: number) {
-    router.push(`/profile//${userId}/edit/withdraw`);
   }
   function goPostDetail(postId: number) {
     router.push(`/post/${postId}`);
@@ -58,11 +49,8 @@ export default function useRoutings() {
     goLogin,
     goHome,
     goProfile,
-    goProfileEdit,
     goFollowers,
     goFollowings,
-    goPasswordEdit,
-    goWithdraw,
     goPostDetail,
     goSignupStep1,
     goSignupStep2,

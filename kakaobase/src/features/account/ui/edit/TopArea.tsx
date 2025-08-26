@@ -5,6 +5,8 @@ import ImageInput from './ImageInputContainer';
 import useImageEditHook from '../../hooks/useImageEditHook';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { courseMapEngToKor } from '@/shared/lib/courseMap';
+import useUserInfo from '../../hooks/useUserInfo';
+import LoadingSmall from '@/shared/ui/LoadingSmall';
 
 export default function TopArea() {
   const {
@@ -15,7 +17,8 @@ export default function TopArea() {
     setValue,
     previewUrl,
   } = useImageEditHook();
-  const { name, nickname, course } = useUserStore();
+  const { userId, course } = useUserStore();
+  const { data, isPending } = useUserInfo({ userId });
 
   return (
     <div className="flex flex-col w-full">
@@ -31,8 +34,20 @@ export default function TopArea() {
           image={previewUrl}
         />
         <div className="flex flex-col gap-3">
-          <ReadOnlyUserInfo label="이름" value={`${nickname} / ${name}`} />
-          <ReadOnlyUserInfo label="과정명" value={courseMapEngToKor[course]} />
+          {isPending ? (
+            <LoadingSmall />
+          ) : (
+            <>
+              <ReadOnlyUserInfo
+                label="이름"
+                value={`${data.nickname} / ${data.name}`}
+              />
+              <ReadOnlyUserInfo
+                label="과정명"
+                value={courseMapEngToKor[course]}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

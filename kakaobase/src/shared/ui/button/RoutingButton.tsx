@@ -9,9 +9,9 @@ export default function RoutingButton({
 }) {
   return (
     <Link href={path}>
-      <div className="flex items-center justify-center w-[9rem] h-[1.75rem] rounded-lg bg-myBlue text-textOnBlue">
+      <button className="flex items-center justify-center w-[9rem] h-[1.75rem] rounded-lg bg-myBlue text-textOnBlue">
         <div className="text-sm">{text}</div>
-      </div>
+      </button>
     </Link>
   );
 }
