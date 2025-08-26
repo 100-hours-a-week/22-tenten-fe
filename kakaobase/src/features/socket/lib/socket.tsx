@@ -1,8 +1,9 @@
 import { ChatClientEvent } from '@/features/chat/types/ChatEvent';
 import { Client, IMessage } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 
 let stompClient: Client | null = null;
+let _ClientCtor: typeof import('@stomp/stompjs').Client | null = null;
+let _SockJSCtor: any | null = null;
 
 let refreshing = false;
 async function refreshOnFinished() {
@@ -21,6 +22,8 @@ async function refreshOnFinished() {
 }
 
 function initClient(onMessage: (msg: IMessage) => void) {
+  if (!_ClientCtor || !_SockJSCtor) return;
+
   if (stompClient && stompClient.active) {
     return;
   }
@@ -29,9 +32,9 @@ function initClient(onMessage: (msg: IMessage) => void) {
     stompClient = null;
   }
 
-  const client = new Client({
+  const client = new _ClientCtor!({
     webSocketFactory: () =>
-      new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`, null, {
+      new _SockJSCtor!(`${process.env.NEXT_PUBLIC_API_URL}/ws`, null, {
         transports: ['websocket'],
       }),
     reconnectDelay: 1000,
