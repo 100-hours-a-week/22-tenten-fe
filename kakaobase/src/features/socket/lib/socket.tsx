@@ -1,9 +1,20 @@
 import { ChatClientEvent } from '@/features/chat/types/ChatEvent';
-import { Client, IMessage } from '@stomp/stompjs';
+import type { Client, IMessage } from '@stomp/stompjs';
 
 let stompClient: Client | null = null;
 let _ClientCtor: typeof import('@stomp/stompjs').Client | null = null;
 let _SockJSCtor: any | null = null;
+
+async function ensureDepsLoaded() {
+  if (!_ClientCtor) {
+    const di = await import('@stomp/stompjs');
+    _ClientCtor = di.Client;
+  }
+  if (!_SockJSCtor) {
+    const sock = await import('sockjs-client');
+    _SockJSCtor = (sock as any).default ?? sock;
+  }
+}
 
 let refreshing = false;
 async function refreshOnFinished() {
@@ -24,9 +35,7 @@ async function refreshOnFinished() {
 function initClient(onMessage: (msg: IMessage) => void) {
   if (!_ClientCtor || !_SockJSCtor) return;
 
-  if (stompClient && stompClient.active) {
-    return;
-  }
+  if (stompClient && stompClient.active) return;
   if (stompClient) {
     stompClient.deactivate();
     stompClient = null;
@@ -53,7 +62,7 @@ function initClient(onMessage: (msg: IMessage) => void) {
 }
 
 export const connectStomp = (onMessage: (msg: IMessage) => void) => {
-  initClient(onMessage);
+  ensureDepsLoaded().then(() => initClient(onMessage));
 };
 
 export const disconnectStomp = () => {
