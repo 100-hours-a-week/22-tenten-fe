@@ -20,6 +20,7 @@ export const accountQueries = {
     queryOptions({
       queryKey: accountQueries.userInfoKey(userId),
       queryFn: () => getUserInfo({ userId }),
+      enabled: userId > 0,
     }),
 
   myPosts: (userId: number, limit = 6) =>

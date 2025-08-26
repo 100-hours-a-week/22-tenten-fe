@@ -1,11 +1,11 @@
 'use client';
 import SubmitButtonSmall from '@/shared/ui/button/SubmitButtonSmall';
 import UserInput from '@/entities/users/ui/UserInput';
-import RoutingButtons from './RoutingButtons';
 import TopArea from './TopArea';
 import useGithubEditHook from '../../hooks/useGithubEditHook';
+import RoutingButton from '@/shared/ui/button/RoutingButton';
 
-export default function EditWrapper({ userId }: { userId: number }) {
+export default function EditWrapper() {
   const {
     githubUrl,
     onSubmit,
@@ -31,7 +31,13 @@ export default function EditWrapper({ userId }: { userId: number }) {
             onClick={handleSubmit(onSubmit)}
           />
         </div>
-        <RoutingButtons userId={userId} />
+        <div className="flex gap-4 flex-col sm:flex-row">
+          <RoutingButton
+            text="비밀번호 변경하기"
+            path="/profile/edit/password"
+          />
+          <RoutingButton text="회원 탈퇴하기" path="/profile/edit/withdraw" />
+        </div>
       </div>
     </div>
   );

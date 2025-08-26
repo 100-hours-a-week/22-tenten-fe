@@ -20,7 +20,7 @@ export default function useImageEditHook() {
 
   useEffect(() => {
     setPreviewUrl(imageUrl);
-  }, []);
+  }, [imageUrl]);
 
   const methods = useForm<imageData>({
     resolver: zodResolver(profileImageSchema),

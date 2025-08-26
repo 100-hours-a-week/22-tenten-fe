@@ -4,7 +4,6 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 export interface UserState {
   userId: number;
-  name: string;
   nickname: string;
   course: Course;
   selectedCourse: Course;
@@ -27,7 +26,6 @@ export const useUserStore = create<UserState>()(
       reset: () =>
         set({
           userId: 0,
-          name: '',
           nickname: '',
           course: 'ALL',
           selectedCourse: 'ALL',
@@ -40,7 +38,6 @@ export const useUserStore = create<UserState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         userId: state.userId,
-        name: state.name,
         nickname: state.nickname,
         course: state.course,
         selectedCourse: state.selectedCourse,
