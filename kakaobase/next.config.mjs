@@ -8,10 +8,19 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     domains: ['s3-kakaobase-bucket.s3.ap-northeast-2.amazonaws.com'],
   },
+  // webpack: (config) => {
+  //   config.optimization.splitChunks = {
+  //     ...config.optimization.splitChunks,
+  //     chunks: 'all',
+  //     minSize: 100,
+  //     minChunks: 2,
+  //   };
+  //   return config;
+  // },
 };
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: true,
+  enabled: process.env.ANALYZE === 'true',
 });
 
 export default withBundleAnalyzer(nextConfig);
