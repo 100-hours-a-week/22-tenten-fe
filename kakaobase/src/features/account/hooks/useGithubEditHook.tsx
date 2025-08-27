@@ -1,15 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useState } from 'react';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
-import { githubSchema } from '../schemas/profileSchema';
 import { editGithub } from '@/features/account/api/editProfile';
 import { queryClient } from '@/shared/api/queryClient';
 import { accountInfoQueries } from '../api/accountInfoQueries';
 
-export type githubData = z.infer<typeof githubSchema>;
+export type githubData = { githubUrl: string };
 
 export default function useGithubEditHook() {
   const [loading, setLoading] = useState(false);
@@ -17,7 +14,15 @@ export default function useGithubEditHook() {
   const { githubUrl, setUserInfo } = useUserStore();
 
   const methods = useForm<githubData>({
-    resolver: zodResolver(githubSchema),
+    resolver: async (...args) => {
+      const [{ z }, { zodResolver }, { githubUrlSchema }] = await Promise.all([
+        import('zod'),
+        import('@hookform/resolvers/zod'),
+        import('@/entities/users/schemas/githubSchema'),
+      ]);
+      const schema = z.object({ githubUrl: githubUrlSchema });
+      return zodResolver(schema)(...args);
+    },
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
