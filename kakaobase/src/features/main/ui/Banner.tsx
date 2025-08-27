@@ -1,7 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import useBannerHook from '../hooks/useBannerHook';
+import dynamic from 'next/dynamic';
+
+const BannerItem = dynamic(() => import('./BannerItem'));
 
 export default function Banner() {
   const { extended, withTransition, onTransitionEnd, current } =
@@ -20,29 +22,7 @@ export default function Banner() {
           onTransitionEnd={onTransitionEnd}
         >
           {extended.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex-shrink-0 w-full flex items-center p-4 gap-6"
-            >
-              <div className="relative w-40 aspect-video">
-                <Image
-                  src={item.imageUrl}
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 160px"
-                  className="object-cover rounded"
-                />
-              </div>
-              <div className="mt-2 text-sm flex flex-col">
-                <span className="font-bold">[{item.name}]</span>
-                <a
-                  href={item.url}
-                  className="underline break-all whitespace-pre-wrap"
-                >
-                  {item.description}
-                </a>
-              </div>
-            </div>
+            <BannerItem item={item} key={idx} />
           ))}
         </div>
       </div>
