@@ -1,6 +1,5 @@
 import ChatList from '@/features/chat/ui/ChatList';
 import Header from '@/widgets/header/Header';
-import NavBar from '@/widgets/navbar/NavBar';
 import ChatInput from '@/features/chat/ui/ChatInput';
 
 export default function Page() {
@@ -9,7 +8,6 @@ export default function Page() {
       <Header label="로로 CHAT" />
       <ChatList />
       <ChatInput />
-      <NavBar />
     </div>
   );
 }

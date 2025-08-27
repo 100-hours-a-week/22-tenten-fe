@@ -8,7 +8,12 @@ export default function Page({ params }: { params: { postId: number } }) {
   return (
     <div className="flex flex-col h-screen scroll-none">
       <Header label="게시글 상세" />
-      <PostDetail postId={id} />
+      <div
+        className="flex-grow flex flex-col items-center w-full overflow-y-auto mb-16"
+        data-scroll-area
+      >
+        <PostDetail postId={id} />
+      </div>
       <CommentInput />
     </div>
   );

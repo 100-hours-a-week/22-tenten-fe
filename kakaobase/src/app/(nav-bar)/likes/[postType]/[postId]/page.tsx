@@ -1,5 +1,4 @@
 import Header from '@/widgets/header/Header';
-import NavBar from '@/widgets/navbar/NavBar';
 import UserLikeList from '@/features/likes/ui/UserLikeList';
 import { PostType } from '@/features/feeds/types/post';
 
@@ -12,12 +11,11 @@ export default function Page({
     <div className="flex flex-col h-screen scroll-none">
       <Header label="좋아요 목록" />
       <div
-        className="flex overflow-y-auto flex-grow flex-col my-8 mx-6 rounded-lg bg-containerColor"
+        className="flex overflow-y-auto flex-grow flex-col mt-8 mx-6 rounded-lg bg-containerColor"
         data-scroll-area
       >
         <UserLikeList feedId={params.postId} feedType={params.postType} />
       </div>
-      <NavBar />
     </div>
   );
 }
