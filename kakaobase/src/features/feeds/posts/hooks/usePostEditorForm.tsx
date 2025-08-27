@@ -29,8 +29,7 @@ export const usePostEditorForm = () => {
         import('@hookform/resolvers/zod'),
         import('../schemas/postSchema'),
       ]);
-      const schema = z.object({ postSchema });
-      return zodResolver(schema)(...args);
+      return zodResolver(postSchema)(...args);
     },
     mode: 'all',
     reValidateMode: 'onChange',
