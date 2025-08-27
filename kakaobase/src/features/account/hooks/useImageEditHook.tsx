@@ -8,7 +8,8 @@ import { editProfile } from '@/features/account/api/editProfile';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { queryClient } from '@/shared/api/queryClient';
-import { accountQueries } from '../api/accountQueries';
+import { accountInfoQueries } from '../api/accountInfoQueries';
+import { feedQueries } from '@/features/feeds/api/feedQueries';
 
 export type imageData = z.infer<typeof profileImageSchema>;
 
@@ -42,7 +43,8 @@ export default function useImageEditHook() {
       setUserInfo({ imageUrl: imageUrl });
 
       await editProfile({ imageUrl });
-      queryClient.invalidateQueries({ queryKey: accountQueries.all() });
+      queryClient.invalidateQueries({ queryKey: accountInfoQueries.all() });
+      queryClient.invalidateQueries({ queryKey: feedQueries.all() });
       showToast('프로필 이미지 저장 완료! ✌️');
     } catch (e: any) {
       if (e.response?.data.error === 'unauthorized') {

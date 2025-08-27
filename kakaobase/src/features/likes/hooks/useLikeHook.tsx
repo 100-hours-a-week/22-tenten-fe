@@ -5,7 +5,7 @@ import { likeQueries } from '../api/likeQueries';
 import { PostType } from '@/features/feeds/types/post';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { feedQueries } from '@/features/feeds/api/feedQueries';
-import { accountQueries } from '@/features/account/api/accountQueries';
+import { accountListQueries } from '@/features/account/api/accountListQueries';
 
 export function useLikeToggle(
   initial: boolean,
@@ -41,7 +41,7 @@ export function useLikeToggle(
         queryKey: feedQueries.all(),
       });
       queryClient.invalidateQueries({
-        queryKey: accountQueries.all(),
+        queryKey: accountListQueries.all(),
       });
       setLiked(!isLiked);
     } catch (e) {

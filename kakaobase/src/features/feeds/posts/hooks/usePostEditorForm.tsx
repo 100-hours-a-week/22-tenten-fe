@@ -9,8 +9,9 @@ import { z } from 'zod';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { feedQueries } from '../../api/feedQueries';
-import { accountQueries } from '@/features/account/api/accountQueries';
 import useRoutings from '@/shared/hooks/useRoutings';
+import { accountListQueries } from '@/features/account/api/accountListQueries';
+import { accountInfoQueries } from '@/features/account/api/accountInfoQueries';
 
 export type NewPostData = z.infer<typeof postSchema>;
 
@@ -51,7 +52,10 @@ export const usePostEditorForm = () => {
         queryKey: feedQueries.postsKey(selectedCourse),
       });
       queryClient.invalidateQueries({
-        queryKey: accountQueries.myPostsKey(userId),
+        queryKey: accountListQueries.myPostsKey(userId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: accountInfoQueries.all(),
       });
       showToast('게시글 등록 성공! ✌️');
     } catch (e: any) {

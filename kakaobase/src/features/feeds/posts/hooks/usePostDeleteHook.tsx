@@ -4,8 +4,8 @@ import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { usePathname } from 'next/navigation';
 import { feedQueries } from '../../api/feedQueries';
-import { accountQueries } from '@/features/account/api/accountQueries';
 import useRoutings from '@/shared/hooks/useRoutings';
+import { accountListQueries } from '@/features/account/api/accountListQueries';
 
 export function usePostDeleteHook({ id }: { id: number }) {
   const path = usePathname();
@@ -20,7 +20,7 @@ export function usePostDeleteHook({ id }: { id: number }) {
         queryKey: feedQueries.postsKey(selectedCourse),
       });
       queryClient.invalidateQueries({
-        queryKey: accountQueries.all(),
+        queryKey: accountListQueries.all(),
       });
       showToast('삭제 완료! ✌️');
       if (path.includes('post')) goMain(); //게시글 상세에서 게시글 지우기

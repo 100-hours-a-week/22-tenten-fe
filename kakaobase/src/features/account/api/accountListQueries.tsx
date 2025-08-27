@@ -1,31 +1,27 @@
-import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
+import { infiniteQueryOptions } from '@tanstack/react-query';
 import { getUserInfo, getMyPosts, getMyComments, getMyLikes } from './profile';
 
-export const accountQueries = {
+export const accountListQueries = {
   all: () => ['user'],
-  userInfoKey: (userId: number) => [
-    ...accountQueries.all(),
-    'userInfo',
+  myPostsKey: (userId: number) => [
+    ...accountListQueries.all(),
+    'myPosts',
     userId,
   ],
-  myPostsKey: (userId: number) => [...accountQueries.all(), 'myPosts', userId],
   myCommentsKey: (userId: number) => [
-    ...accountQueries.all(),
+    ...accountListQueries.all(),
     'myComments',
     userId,
   ],
-  myLikesKey: (userId: number) => [...accountQueries.all(), 'myLikes', userId],
-
-  userInfo: (userId: number) =>
-    queryOptions({
-      queryKey: accountQueries.userInfoKey(userId),
-      queryFn: () => getUserInfo({ userId }),
-      enabled: userId > 0,
-    }),
+  myLikesKey: (userId: number) => [
+    ...accountListQueries.all(),
+    'myLikes',
+    userId,
+  ],
 
   myPosts: (userId: number, limit = 6) =>
     infiniteQueryOptions({
-      queryKey: accountQueries.myPostsKey(userId),
+      queryKey: accountListQueries.myPostsKey(userId),
       queryFn: ({ pageParam }: { pageParam?: number }) =>
         getMyPosts({ userId, limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
@@ -34,7 +30,7 @@ export const accountQueries = {
 
   myComments: (userId: number, limit = 6) =>
     infiniteQueryOptions({
-      queryKey: accountQueries.myCommentsKey(userId),
+      queryKey: accountListQueries.myCommentsKey(userId),
       queryFn: ({ pageParam }: { pageParam?: number }) =>
         getMyComments({ userId, limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
@@ -43,7 +39,7 @@ export const accountQueries = {
 
   myLikes: (userId: number, limit = 6) =>
     infiniteQueryOptions({
-      queryKey: accountQueries.myLikesKey(userId),
+      queryKey: accountListQueries.myLikesKey(userId),
       queryFn: ({ pageParam }: { pageParam?: number }) =>
         getMyLikes({ userId, limit, cursor: pageParam }),
       getNextPageParam: (lastPage) => lastPage.at(-1)?.id,
