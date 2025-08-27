@@ -1,4 +1,3 @@
-'use client';
 import { courseMapEngToKor } from '@/shared/lib/courseMap';
 import { Profile } from '../types/Profile';
 import { User } from 'lucide-react';
