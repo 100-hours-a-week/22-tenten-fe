@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import clsx from 'clsx';
-import Linkify from 'react-linkify';
 import { usePathname } from 'next/navigation';
 import CountsInfo from './CountsInfo';
 import summaryCondition from '../posts/lib/summaryCondition';
@@ -13,6 +12,8 @@ import useRoutings from '@/shared/hooks/useRoutings';
 import UserProfileImage from './UserProfileImage';
 import UserInfo from './UserInfo';
 import { memo } from 'react';
+import dynamic from 'next/dynamic';
+const Linkify = dynamic(() => import('react-linkify'), { ssr: false });
 
 const PostCard = memo(function PostCard({ post }: { post: PostEntity }) {
   const { goPostDetail } = useRoutings();
@@ -54,21 +55,25 @@ const PostCard = memo(function PostCard({ post }: { post: PostEntity }) {
                     !path.includes('post') && 'line-clamp-2 text-ellipsis'
                   )}
                 >
-                  <Linkify
-                    componentDecorator={(href, text, key) => (
-                      <a
-                        key={key}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline text-myBlue"
-                      >
-                        {text}
-                      </a>
-                    )}
-                  >
-                    {post.content}
-                  </Linkify>
+                  {/(https?:\/\/|www\.|@)/i.test(post.content) ? (
+                    <Linkify
+                      componentDecorator={(href, text) => (
+                        <a
+                          href={href}
+                          className="underline text-myBlue"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {text}
+                        </a>
+                      )}
+                    >
+                      {post.content}
+                    </Linkify>
+                  ) : (
+                    <span className="whitespace-pre-wrap break-all">
+                      {post.content}
+                    </span>
+                  )}
                 </div>
               )}
               <div className="flex w-full overflow-hidden rounded-lg">

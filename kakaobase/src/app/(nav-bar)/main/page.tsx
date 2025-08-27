@@ -1,7 +1,7 @@
 import HeaderMain from '@/widgets/header/HeaderMain';
-import ListRouter from '@/features/feeds/ui/ListRouter';
 import PostCourseSelector from '@/features/feeds/posts/ui/PostCourseSelector';
 import FloatingButtonGroup from '@/widgets/buttons/FloatingButtonGroup';
+import PostList from '@/features/feeds/posts/ui/PostList';
 
 export default function Page() {
   return (
@@ -9,7 +9,7 @@ export default function Page() {
       <HeaderMain />
       <div className="flex overflow-y-auto flex-grow flex-col" data-scroll-area>
         <PostCourseSelector />
-        <ListRouter />
+        <PostList />
       </div>
       <FloatingButtonGroup />
     </main>
