@@ -1,7 +1,4 @@
-import { profileImageSchema } from '@/features/account/schemas/profileSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useEffect, useState } from 'react';
 import postToS3 from '@/entities/images/api/imageS3';
 import { editProfile } from '@/features/account/api/editProfile';
@@ -11,7 +8,7 @@ import { queryClient } from '@/shared/api/queryClient';
 import { accountInfoQueries } from '../api/accountInfoQueries';
 import { feedQueries } from '@/features/feeds/api/feedQueries';
 
-export type imageData = z.infer<typeof profileImageSchema>;
+export type imageData = { imageFile?: File };
 
 export default function useImageEditHook() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +21,15 @@ export default function useImageEditHook() {
   }, [imageUrl]);
 
   const methods = useForm<imageData>({
-    resolver: zodResolver(profileImageSchema),
+    resolver: async (...args) => {
+      const [{ z }, { zodResolver }, { imageSchema }] = await Promise.all([
+        import('zod'),
+        import('@hookform/resolvers/zod'),
+        import('@/entities/images/schemas/imageSchema'),
+      ]);
+      const schema = z.object({ imageFile: imageSchema });
+      return zodResolver(schema)(...args);
+    },
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {

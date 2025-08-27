@@ -6,3 +6,7 @@ export const githubUrlSchema = z
   .startsWith('https://github.com/', {
     message: '*깃허브 url 형식이 올바르지 않습니다.',
   });
+
+export const githubSchema = z.object({
+  githubUrl: githubUrlSchema,
+});
