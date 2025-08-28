@@ -7,7 +7,10 @@ export default function Page() {
   return (
     <main className="flex flex-col h-screen scroll-none">
       <HeaderMain />
-      <div className="flex overflow-y-auto flex-grow flex-col" data-scroll-area>
+      <div
+        className="flex overflow-y-auto flex-grow flex-col pb-16"
+        data-scroll-area
+      >
         <PostCourseSelector />
         <PostList />
       </div>
