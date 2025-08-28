@@ -2,7 +2,8 @@
 import { House, MessageCircle, Bell } from 'lucide-react';
 import NavItem from './NavItem';
 import NavItemProfile from './NavItemProfile';
-import AlarmBadgeClient from './AlarmBadgeClient';
+import dynamic from 'next/dynamic';
+const AlarmBadgeClient = dynamic(() => import('./AlarmBadgeClient'));
 
 export default function NavBar() {
   return (

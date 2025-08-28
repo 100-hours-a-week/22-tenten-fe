@@ -2,6 +2,11 @@
 import useRoutings from '@/shared/hooks/useRoutings';
 import SubmitButton from '@/shared/ui/button/SubmitButton';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const RoutingButton = dynamic(
+  () => import('@/shared/ui/button/RoutingButton'),
+  { ssr: false }
+);
 
 export default function Error({
   error,
@@ -27,7 +32,7 @@ export default function Error({
         <div>이용에 불편을 끼쳐드려 죄송합니다. 😭</div>
       </div>
       <div className="flex flex-col items-center md:flex-row gap-4">
-        <SubmitButton text="메인 페이지로 가기" onClick={goMain} />
+        <RoutingButton text="메인 페이지로 가기" path="/main" />
         <SubmitButton text="다시 시도하기" onClick={reset} />
       </div>
     </div>

@@ -8,9 +8,11 @@ import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 import useUserInfo from '../hooks/useUserInfo';
-import RoutingButton from '@/shared/ui/button/RoutingButton';
 import dynamic from 'next/dynamic';
-
+const RoutingButton = dynamic(
+  () => import('@/shared/ui/button/RoutingButton'),
+  { ssr: false }
+);
 const ProfileModal = dynamic(() => import('./QR/ProfileModal'), { ssr: false });
 
 export default function MyPageWrapper({ userId }: { userId: number }) {

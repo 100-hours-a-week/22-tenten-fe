@@ -1,11 +1,14 @@
 'use client';
 import SubmitButtonSmall from '@/shared/ui/button/SubmitButtonSmall';
-import UserInput from '@/entities/users/ui/UserInput';
 import useGithubEditHook from '../../hooks/useGithubEditHook';
-import RoutingButton from '@/shared/ui/button/RoutingButton';
+import UserInput from '@/entities/users/ui/UserInput';
 import dynamic from 'next/dynamic';
 
 const TopArea = dynamic(() => import('./TopArea'), { ssr: false });
+const RoutingButton = dynamic(
+  () => import('@/shared/ui/button/RoutingButton'),
+  { ssr: false }
+);
 
 export default function EditWrapper() {
   const {
