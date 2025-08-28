@@ -1,18 +1,21 @@
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { passwordConfirmSchema } from '@/features/auth/schemas/passwordConfirmSchema';
-import { z } from 'zod';
 import changePassword from '@/features/account/api/changePassword';
 import { useState } from 'react';
 import { useToast } from '@/shared/hooks/ToastContext';
 
-export type PasswordFormData = z.infer<typeof passwordConfirmSchema>;
+export type PasswordFormData = { password: string; confirm: string };
 
 export const usePasswordStep = () => {
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
   const methods = useForm<PasswordFormData>({
-    resolver: zodResolver(passwordConfirmSchema),
+    resolver: async (...args) => {
+      const [{ zodResolver }, { passwordConfirmSchema }] = await Promise.all([
+        import('@hookform/resolvers/zod'),
+        import('../schemas/passwordConfirmSchema'),
+      ]);
+      return zodResolver(passwordConfirmSchema)(...args);
+    },
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {

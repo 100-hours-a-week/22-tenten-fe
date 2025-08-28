@@ -9,6 +9,8 @@ export const courseEnum = z.enum([
   '기타 사용자',
 ]);
 
+export type Course = z.infer<typeof courseEnum>;
+
 export const signupStep2Schema = z.object({
   name: z
     .string()

@@ -1,13 +1,10 @@
-import { z } from 'zod';
-import { loginSchema } from '@/features/auth/schemas/loginSchema';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { login } from '@/features/auth/api/login';
 import { useUserStore } from '@/entities/users/stores/userStore';
 import { useToast } from '@/shared/hooks/ToastContext';
 import useRoutings from '@/shared/hooks/useRoutings';
 
-type LoginFormData = z.infer<typeof loginSchema>;
+type LoginFormData = { email: string; password: string };
 
 export default function useLoginForm() {
   const { setUserInfo } = useUserStore();
@@ -15,7 +12,13 @@ export default function useLoginForm() {
   const { goHome } = useRoutings();
 
   const loginForm = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: async (...args) => {
+      const [{ zodResolver }, { loginSchema }] = await Promise.all([
+        import('@hookform/resolvers/zod'),
+        import('../schemas/loginSchema'),
+      ]);
+      return zodResolver(loginSchema)(...args);
+    },
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
