@@ -1,9 +1,12 @@
 'use client';
 import Loading from '@/shared/ui/Loading';
 import usePostDetail from '../posts/hooks/usePostDetailHook';
-import ListRouter from './ListRouter';
 import MiddleBar from './MiddleBar';
-import PostCard from './PostCard';
+import dynamic from 'next/dynamic';
+const PostCard = dynamic(() => import('./PostCard'));
+const CommentList = dynamic(() => import('../comments/ui/CommentList'));
+// import PostCard from './PostCard';
+// import CommentList from '../comments/ui/CommentList';
 
 export default function PostDetail({ postId }: { postId: number }) {
   const { data, isPending } = usePostDetail({ id: postId });
@@ -25,7 +28,7 @@ export default function PostDetail({ postId }: { postId: number }) {
         <PostCard post={data} />
       </div>
       <MiddleBar />
-      <ListRouter />
+      <CommentList />
     </div>
   );
 }

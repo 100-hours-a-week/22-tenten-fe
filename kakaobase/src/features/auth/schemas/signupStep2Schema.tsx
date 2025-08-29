@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { githubUrlSchema } from '../../../entities/users/schemas/githubSchema';
+import { githubUrlSchema } from '@/entities/users/schemas/githubSchema';
 
 export const courseEnum = z.enum([
   '클라우드 네이티브 제주 1기',
@@ -8,6 +8,8 @@ export const courseEnum = z.enum([
   '카카오테크 부트캠프 2기',
   '기타 사용자',
 ]);
+
+export type Course = z.infer<typeof courseEnum>;
 
 export const signupStep2Schema = z.object({
   name: z

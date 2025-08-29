@@ -1,7 +1,4 @@
-import LoadingSmall from '@/shared/ui/LoadingSmall';
 import { imageData } from '../../hooks/useImageEditHook';
-import { CirclePlus } from 'lucide-react';
-import Image from 'next/image';
 import { UseFormHandleSubmit, UseFormSetValue } from 'react-hook-form';
 import ImageLabel from './ImageLabel';
 

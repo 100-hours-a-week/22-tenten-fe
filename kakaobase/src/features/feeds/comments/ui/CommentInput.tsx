@@ -17,10 +17,10 @@ export default function CommentInput() {
 
   if (selectedCourse !== 'ALL' && selectedCourse !== course) return null;
   return (
-    <div className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center">
+    <div className="flex flex-col absolute w-full max-w-[480px] mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center bottom-16">
       <RecommentStateBar />
       <form
-        className="flex fixed w-full max-w-[480px] border-t-[1px] border-textOpacity50 bottom-0 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
+        className="flex w-full max-w-[480px] border-t-[1px] border-textOpacity50 mx-auto lg:self-start bg-bgColor text-textColor shadow-md items-center"
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();

@@ -1,17 +1,24 @@
 import signup from '@/features/auth/api/signup';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { courseMap } from '@/shared/lib/courseMap';
-import { signupStep2Schema } from '@/features/auth/schemas/signupStep2Schema';
+import {
+  Course,
+  signupStep2Schema,
+} from '@/features/auth/schemas/signupStep2Schema';
 import { useSignupStore } from '@/features/auth/stores/signupStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import useRoutings from '@/shared/hooks/useRoutings';
 
-export type SignupStep2Data = z.infer<typeof signupStep2Schema>;
+export type SignupStep2Data = {
+  name: string;
+  nickname: string;
+  course: Course;
+  githubUrl: string;
+};
 
 export default function useSignupForm() {
-  const { goLogin, goSignupStep1 } = useRoutings();
+  const { goLogin } = useRoutings();
   const { email, password, clear } = useSignupStore();
   const { showToast } = useToast();
 
@@ -22,7 +29,7 @@ export default function useSignupForm() {
     defaultValues: {
       name: '',
       nickname: '',
-      course: '' as unknown as SignupStep2Data['course'],
+      course: '' as Course,
       githubUrl: '',
     },
   });

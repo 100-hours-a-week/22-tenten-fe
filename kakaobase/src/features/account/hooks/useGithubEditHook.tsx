@@ -1,15 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useState } from 'react';
 import { useToast } from '@/shared/hooks/ToastContext';
 import { useUserStore } from '@/entities/users/stores/userStore';
-import { githubSchema } from '../schemas/profileSchema';
 import { editGithub } from '@/features/account/api/editProfile';
 import { queryClient } from '@/shared/api/queryClient';
-import { accountQueries } from '../api/accountQueries';
+import { accountInfoQueries } from '../api/accountInfoQueries';
 
-export type githubData = z.infer<typeof githubSchema>;
+export type githubData = { githubUrl: string };
 
 export default function useGithubEditHook() {
   const [loading, setLoading] = useState(false);
@@ -17,7 +14,15 @@ export default function useGithubEditHook() {
   const { githubUrl, setUserInfo } = useUserStore();
 
   const methods = useForm<githubData>({
-    resolver: zodResolver(githubSchema),
+    resolver: async (...args) => {
+      const [{ z }, { zodResolver }, { githubUrlSchema }] = await Promise.all([
+        import('zod'),
+        import('@hookform/resolvers/zod'),
+        import('@/entities/users/schemas/githubSchema'),
+      ]);
+      const schema = z.object({ githubUrl: githubUrlSchema });
+      return zodResolver(schema)(...args);
+    },
     mode: 'all',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -30,7 +35,7 @@ export default function useGithubEditHook() {
       setLoading(true);
       await editGithub({ url: data.githubUrl });
       setUserInfo({ githubUrl: data.githubUrl });
-      queryClient.invalidateQueries({ queryKey: accountQueries.all() });
+      queryClient.invalidateQueries({ queryKey: accountInfoQueries.all() });
       showToast('깃허브 링크 변경 완료! ✌️');
     } catch (e: any) {
       showToast('문제 발생! 잠시 후 다시 시도해 주세요. 😭');

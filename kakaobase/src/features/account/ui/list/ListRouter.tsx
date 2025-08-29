@@ -1,9 +1,11 @@
 'use client';
 
-import LikeList from './LikeList';
+import dynamic from 'next/dynamic';
 import { profileListType } from './Toggle';
-import PostList from './PostList';
-import CommentList from './CommentList';
+
+const PostList = dynamic(() => import('./PostList'), { ssr: false });
+const CommentList = dynamic(() => import('./CommentList'), { ssr: false });
+const LikeList = dynamic(() => import('./LikeList'), { ssr: false });
 
 const profileListMap = {
   게시글: PostList,

@@ -1,10 +1,11 @@
 'use client';
 
 import { memo } from 'react';
-import PostCard from '../../ui/PostCard';
 import usePostList from '../hooks/usePostList';
 import useScrollHook from '@/shared/hooks/useScrollHook';
 import LoadingSmall from '@/shared/ui/LoadingSmall';
+import dynamic from 'next/dynamic';
+const PostCard = dynamic(() => import('../../ui/PostCard'));
 
 const PostList = memo(function PostList() {
   const {

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { recommentFormStateStore } from '../stores/recommentFormStateStore';
 import { feedQueries } from '../../api/feedQueries';
 import { useUserStore } from '@/entities/users/stores/userStore';
-import { accountQueries } from '@/features/account/api/accountQueries';
+import { accountListQueries } from '@/features/account/api/accountListQueries';
 
 export default function useCommentForm() {
   const [comment, setComment] = useState('');
@@ -50,7 +50,7 @@ export default function useCommentForm() {
         queryClient.invalidateQueries({
           queryKey: feedQueries.postsKey(selectedCourse),
         });
-        queryClient.invalidateQueries({ queryKey: accountQueries.all() });
+        queryClient.invalidateQueries({ queryKey: accountListQueries.all() });
       }
       queryClient.invalidateQueries({
         queryKey: feedQueries.commentsKey(postId),

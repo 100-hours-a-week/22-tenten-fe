@@ -3,13 +3,17 @@ import SubmitButton from '@/shared/ui/button/SubmitButton';
 import UserInfo from './UserInfo';
 import Toggle, { profileListType } from './list/Toggle';
 import ListRouter from './list/ListRouter';
-import ProfileModal from './QR/ProfileModal';
 import FollowButtonLarge from '@/features/follows/ui/FollowButtonLarge';
 import Loading from '@/shared/ui/Loading';
 import { useFollowToggle } from '@/features/follows/hooks/useFollowHook';
 import { useState } from 'react';
 import useUserInfo from '../hooks/useUserInfo';
-import RoutingButton from '@/shared/ui/button/RoutingButton';
+import dynamic from 'next/dynamic';
+const RoutingButton = dynamic(
+  () => import('@/shared/ui/button/RoutingButton'),
+  { ssr: false }
+);
+const ProfileModal = dynamic(() => import('./QR/ProfileModal'), { ssr: false });
 
 export default function MyPageWrapper({ userId }: { userId: number }) {
   const { data, isPending, handleModal, isOpen } = useUserInfo({
@@ -36,7 +40,7 @@ export default function MyPageWrapper({ userId }: { userId: number }) {
   return (
     <div
       data-scroll-area
-      className="flex w-full overflow-y-auto flex-grow flex-col w-full"
+      className="flex w-full overflow-y-auto flex-grow flex-col w-full pb-16"
     >
       <div className="flex flex-col items-center text-textColor gap-4">
         <div className="w-full">

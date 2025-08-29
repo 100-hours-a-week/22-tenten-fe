@@ -5,7 +5,7 @@ import useRoutings from '@/shared/hooks/useRoutings';
 import { useParams, usePathname } from 'next/navigation';
 import { feedQueries } from '../../api/feedQueries';
 import { useUserStore } from '@/entities/users/stores/userStore';
-import { accountQueries } from '@/features/account/api/accountQueries';
+import { accountListQueries } from '@/features/account/api/accountListQueries';
 
 export function useCommentDeleteHook({ id }: { id: number }) {
   const path = usePathname();
@@ -26,7 +26,7 @@ export function useCommentDeleteHook({ id }: { id: number }) {
         queryKey: feedQueries.commentsKey(postId),
       });
       queryClient.invalidateQueries({
-        queryKey: accountQueries.myCommentsKey(userId),
+        queryKey: accountListQueries.all(),
       });
       showToast('삭제 완료! ✌️');
       if (path.includes('comment')) goBack(); //댓글 상세에서 댓글 지우기
